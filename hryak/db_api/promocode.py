@@ -21,6 +21,7 @@ class PromoCode:
         if code is None:
             code = ''.join([random.choice(string.ascii_letters +
                                           string.digits) for _ in range(12)])
+        print(get_schema('promocodes_schema'))
         Connection.make_request(
             f"INSERT INTO {get_schema('promocodes_schema')} (id, created, max_uses, users_used, prise, expires_in) "
             f"VALUES (%s, %s, %s, %s, %s, %s)",
