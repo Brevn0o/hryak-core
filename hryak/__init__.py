@@ -1,1 +1,1 @@
-import post_requests
+from . import post_requests
