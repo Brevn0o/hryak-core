@@ -23,7 +23,7 @@ class PromoCode:
                                           string.digits) for _ in range(12)])
         Connection.make_request(
             f"INSERT INTO {get_schema('promocodes_schema')} (id, created, max_uses, users_used, prise, expires_in) "
-            f"VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            f"VALUES (%s, %s, %s, %s, %s, %s)",
             params=(code, Func.generate_current_timestamp(), max_uses, json.dumps([]), json.dumps(prise), lifespan)
         )
         return code
