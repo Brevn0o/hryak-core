@@ -16,7 +16,7 @@ class PromoCode:
         return bool(result)
 
     @staticmethod
-    def create(max_uses, prise, lifespan: int = None, code: str = None):
+    def create(max_uses: int, prise: dict, lifespan: int = None, code: str = None):
         prise = json.dumps(prise)
         if code is None:
             code = ''.join([random.choice(string.ascii_letters +
@@ -24,7 +24,7 @@ class PromoCode:
         Connection.make_request(
             f"INSERT INTO {get_schema('promocodes_schema')} (id, created, max_uses, users_used, prise, expires_in) "
             f"VALUES (%s, %s, %s, %s, %s, %s, %s)",
-            params=(code, Func.generate_current_timestamp(), max_uses, [], prise, lifespan)
+            params=(code, Func.generate_current_timestamp(), max_uses, json.dumps([]), json.dumps(prise), lifespan)
         )
         return code
 
