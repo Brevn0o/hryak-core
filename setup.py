@@ -8,5 +8,5 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
-    python_requires='3.12',
+    python_requires='~=3.12.0',
 )
