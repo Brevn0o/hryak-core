@@ -8,5 +8,8 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
+    install_requires=[
+        'mysql-connector-python==9.1.0',
+    ],
     python_requires='~=3.12.0',
 )
