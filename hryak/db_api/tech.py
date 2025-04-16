@@ -31,6 +31,7 @@ class Tech:
             query += f" ORDER BY {order_by}"
         if limit is not None and guild is None:
             query += f" LIMIT {limit}"
+        print(query)
         with connection.cursor() as cursor:
             cursor.execute(query)
             results = cursor.fetchall()
