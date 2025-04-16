@@ -4,7 +4,7 @@ from cachetools import TTLCache
 
 logs_path = None
 test = False
-github_version = True
+github_version = False
 pig_feed_cooldown = 4 * 3600
 pig_butcher_cooldown = 40 * 3600
 streak_timeout = 24.5 * 3600
