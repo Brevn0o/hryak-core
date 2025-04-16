@@ -30,6 +30,7 @@ def trade(user1_id, user2_id, trade_id):
                 Trade.add_tax_to_pay(trade_id, user1_id, item_id, amount // 2)
                 amount //= 2
                 Trade.add_tax_to_pay(trade_id, user2_id, item_id, amount)
+        print(Trade.get_tax_splitting(trade_id), GameFunc.get_trade_total_tax(trade_id))
         if Trade.get_tax_splitting(trade_id) is not None or not GameFunc.get_trade_total_tax(trade_id):
             Trade.set_status(trade_id, 'tax_processing_success')
             return {'status': 'success', 'trade_status': 'tax_processing_success'}
