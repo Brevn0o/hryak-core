@@ -98,13 +98,13 @@ class User:
             SET inventory = JSON_SET(
                 inventory,
                 %s,
-                JSON_OBJECT(
+                ROUND(JSON_OBJECT(
                     'amount',
-                    ROUND(COALESCE(
+                    COALESCE(
                         JSON_EXTRACT(inventory, %s),
                         0
-                    ) + %s)
-                )
+                    ) + %s
+                ))
             )
             WHERE id = %s;
             """
