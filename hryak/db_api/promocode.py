@@ -44,6 +44,7 @@ class PromoCode:
             commit=False,
             fetch=True
         )
+        print(type(result), result)
         return json.loads(result)
 
     @staticmethod
