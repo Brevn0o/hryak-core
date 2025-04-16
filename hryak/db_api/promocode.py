@@ -18,7 +18,6 @@ class PromoCode:
 
     @staticmethod
     def create(max_uses: int, rewards: dict, lifespan: int = None, code: str = None):
-        rewards = json.dumps(rewards)
         if code is None:
             code = ''.join([random.choice(string.ascii_letters +
                                           string.digits) for _ in range(12)])
@@ -44,8 +43,7 @@ class PromoCode:
             commit=False,
             fetch=True
         )
-        print(type(result), result)
-        return json.loads(json.loads(result))
+        return json.loads(result)
 
     @staticmethod
     def used_times(code: str):
