@@ -14,7 +14,7 @@ class Tech:
 
     @staticmethod
     def get_all_users(order_by: str = None, include_where: str = None, exclude_users: list = None, limit: int = None,
-                      guild: discord.Guild = None):
+                      guild = None):
         """
         :type order_by: object
             Example: JSON_EXTRACT(inventory, '$.coins.amount')
@@ -53,7 +53,7 @@ class Tech:
 
     @staticmethod
     def get_user_position(user_id, order_by: str = None, include_where: str = None, exclude_users: list = None,
-                          guild: discord.Guild = None):
+                          guild = None):
         users = Tech.get_all_users(order_by=order_by, include_where=include_where, exclude_users=exclude_users,
                                    guild=guild)
         if str(user_id) in users:
