@@ -19,7 +19,9 @@ def top_weight_users(user_id: int, lang: str, exclude_users: list = None, guild=
     :return: list of tuples (user_id, weight, unit) and user_position
     """
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) DESC"
-    where = f"id NOT IN {tuple(exclude_users) if exclude_users else tuple()}"
+    where = None
+    if exclude_users is not None:
+        where = f"id NOT IN {tuple(exclude_users)}"
     return __top_users(user_id, order_by, where, translate(Locale.Global.kg, lang), guild=guild)
 
 def top_amount_of_items_users(user_id: int, item_id: str, exclude_users: list = None, guild=None):
@@ -28,7 +30,9 @@ def top_amount_of_items_users(user_id: int, item_id: str, exclude_users: list = 
     :return: list of tuples (user_id, amount, unit) and user_position
     """
     order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')) DESC"
-    where = f"id NOT IN {tuple(exclude_users) if exclude_users else tuple()}"
+    where = None
+    if exclude_users is not None:
+        where = f"id NOT IN {tuple(exclude_users)}"
     return __top_users(user_id, order_by, where, Item.get_emoji(item_id), guild=guild)
 
 def top_streak_users(user_id: int, exclude_users: list = None, guild=None):
@@ -37,5 +41,7 @@ def top_streak_users(user_id: int, exclude_users: list = None, guild=None):
     :return: list of tuples (user_id, streak, unit) and user_position
     """
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC"
-    where = f"id NOT IN {tuple(exclude_users) if exclude_users else tuple()}"
+    where = None
+    if exclude_users is not None:
+        where = f"id NOT IN {tuple(exclude_users)}"
     return __top_users(user_id, order_by, where, '🔥', guild=guild)
