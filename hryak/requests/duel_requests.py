@@ -18,4 +18,4 @@ def duel(user_id: int, opponent_id: int, bet: int):
     User.remove_item(winner_id, 'coins', bet)
     User.remove_item(loser_id, 'coins', bet)
     User.add_item(winner_id, 'coins', money_earned)
-    return {'status': 'success', 'winner': winner_id, 'loser': loser_id, 'money_earned': money_earned, 'chances': chances}
+    return {'status': 'success', 'winner_id': winner_id, 'loser': loser_id, 'money_earned': money_earned, 'chances': chances}
