@@ -30,7 +30,6 @@ class Tech:
             query += f" ORDER BY {order_by}"
         if limit is not None and guild is None:
             query += f" LIMIT {limit}"
-        print(query)
         res = Connection.make_request(query, commit=False, fetch=True, fetchall=True)
         if guild is not None:
             members_ids = [str(m.id) for m in guild.members]
