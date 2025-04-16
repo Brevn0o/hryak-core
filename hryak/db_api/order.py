@@ -59,7 +59,7 @@ class Order:
     @staticmethod
     def get_order(order_id: str):
         orders = Connection.make_request(
-            f"SELECT JSON_EXTRACT(orders, '$.\"%s\"') FROM {config.users_schema} WHERE JSON_CONTAINS_PATH(orders, 'one', '$.\"%s\"') = 1",
+            f"SELECT JSON_EXTRACT(orders, CONCAT('$.', %s)) FROM {config.users_schema} WHERE JSON_CONTAINS_PATH(orders, 'one', '$.\"%s\"') = 1",
             params=(order_id, order_id),
             commit=False,
             fetch=True,

@@ -382,7 +382,7 @@ class Item:
         if Item.get_props(item_id):
             return int(Item.get_props(item_id)['a'])
         if user_id is not None:
-            query = f"SELECT JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.%s.amount')) AS amount FROM {config.users_schema} WHERE id = %s"
+            query = f"SELECT JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) AS amount FROM {config.users_schema} WHERE id = %s"
             amount = Connection.make_request(query, params=(item_id, user_id,), commit=False, fetch=True)
             return amount
         return 0
