@@ -35,13 +35,13 @@ class GameFunc:
         return res
 
     @staticmethod
-    def get_all_pig_buffs(user_id, client = None):
+    def get_all_pig_buffs(user_id, client=None, bot_guilds=None):
         buffs = {}
         for buff in Pig.get_buffs(user_id):
             if Pig.get_buff_amount(user_id, buff) > 0 or not Pig.buff_expired(user_id, buff):
                 buffs[buff] = Item.get_buffs(buff)
             if client is not None:
-                for i in config.BOT_GUILDS:
+                for i in bot_guilds:
                     bot_guild = client.get_guild(i)
                     if bot_guild is not None:
                         if bot_guild.get_member(user_id) is not None:

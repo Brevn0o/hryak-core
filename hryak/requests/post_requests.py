@@ -113,3 +113,7 @@ def wear_skin(user_id: int, item_id: str, parts: list = None):
             return {'status': 'pending;choose_parts'}
         else:
             Pig.set_skin(user_id, item_id)
+
+def skin_remove(user_id: int, item_id: str):
+    Pig.remove_skin(user_id, item_id)
+    return {"status": 'success'}
