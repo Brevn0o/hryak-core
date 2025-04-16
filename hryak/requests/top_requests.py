@@ -4,48 +4,38 @@ from hryak.game_functions import GameFunc
 from hryak import config
 from hryak.locale import Locale
 
-def top_weight_users(lang: str):
+
+def __top_users(user_id: int, order_by: str, where: str, units: str, guild=None):
+    r = Tech.get_all_users('weight', order_by=order_by, where=where, limit=10, guild=guild)
+    top_users = []
+    for i, weight in r:
+        top_users.append((i, weight, units))
+    user_position = Tech.get_user_position(user_id, order_by=order_by, where=where, guild=guild)
+    return {'status': 'success', 'users': top_users, 'user_position': user_position}
+
+def top_weight_users(user_id: int, lang: str, exclude_users: list = None, guild=None):
     """
     Get the top users by weight.
-    :return: list of tuples (user_id, weight, unit)
+    :return: list of tuples (user_id, weight, unit) and user_position
     """
-    r = Connection.make_request(
-        f"SELECT user_id, weight FROM {config.users_schema} ORDER BY JSON_UNQUOTE(JSON_EXTRACT(pig, $.weight)) DESC LIMIT 10",
-        commit=False,
-        fetch=True
-    )
-    result = []
-    for user_id, weight in r:
-        result.append((user_id, weight, translate(Locale.Global.kg, lang)))
-    return {'status': 'success', 'result': result}
+    order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) DESC"
+    where = f"id NOT IN {tuple(exclude_users) if exclude_users else tuple()}"
+    return __top_users(user_id, order_by, where, translate(Locale.Global.kg, lang), guild=guild)
 
-def top_amount_of_items_users(item_id):
+def top_amount_of_items_users(user_id: int, item_id: str, exclude_users: list = None, guild=None):
     """
     Get the top users by amount of item.
-    :return: list of tuples (user_id, amount, unit)
+    :return: list of tuples (user_id, amount, unit) and user_position
     """
-    r = Connection.make_request(
-        f"SELECT user_id, amount FROM {config.users_schema} ORDER BY JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) DESC LIMIT 10",
-        params=(item_id,),
-        commit=False,
-        fetch=True
-    )
-    result = []
-    for user_id, amount in r:
-        result.append((user_id, amount, Item.get_emoji(item_id)))
-    return {'status': 'success', 'result': result}
+    order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')) DESC"
+    where = f"id NOT IN {tuple(exclude_users) if exclude_users else tuple()}"
+    return __top_users(user_id, order_by, where, Item.get_emoji(item_id), guild=guild)
 
-def top_streak_users():
+def top_streak_users(user_id: int, exclude_users: list = None, guild=None):
     """
     Get the top users by streak.
-    :return: list of tuples (user_id, streak, unit)
+    :return: list of tuples (user_id, streak, unit) and user_position
     """
-    r = Connection.make_request(
-        f"SELECT user_id, streak FROM {config.users_schema} ORDER BY JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC LIMIT 10",
-        commit=False,
-        fetch=True
-    )
-    result = []
-    for user_id, streak in r:
-        result.append((user_id, streak, '🔥'))
-    return {'status': 'success', 'result': result}
+    order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC"
+    where = f"id NOT IN {tuple(exclude_users) if exclude_users else tuple()}"
+    return __top_users(user_id, order_by, where, '🔥', guild=guild)

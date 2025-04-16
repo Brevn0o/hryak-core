@@ -13,28 +13,20 @@ class Tech:
 
 
     @staticmethod
-    def get_all_users(order_by: str = None, include_where: str = None, exclude_users: list = None, limit: int = None,
-                      guild = None):
+    def get_all_users(extra_select: str, order_by: str = None, where: str = None, limit: int = None, guild = None):
         """
+        :type extra_select: object
+            Example: JSON_EXTRACT(inventory, '$.coins.amount')
         :type order_by: object
             Example: JSON_EXTRACT(inventory, '$.coins.amount')
-        :param include_where:
+        :param where:
             Example: JSON_EXTRACT(inventory, '$.coins.amount') > 0
         """
-        if exclude_users is None:
-            exclude_users = []
-        exclude_users = [str(i) for i in exclude_users]
         id_list = []
         connection = Connection.connect()
-        query = f'SELECT id FROM {config.users_schema}'
-        if include_where is not None:
-            query += f" WHERE {include_where}"
-        if exclude_users is not None and exclude_users:
-            if include_where is not None:
-                query += ' AND'
-            else:
-                query += f' WHERE'
-            query += f" id NOT IN {tuple(exclude_users if len(exclude_users) > 1 else exclude_users[0])}"
+        query = f'SELECT id, {extra_select} FROM {config.users_schema}'
+        if where is not None:
+            query += f" WHERE {where}"
         if order_by is not None:
             query += f" ORDER BY {order_by} DESC"
         if limit is not None and guild is None:
@@ -52,10 +44,8 @@ class Tech:
         return id_list
 
     @staticmethod
-    def get_user_position(user_id, order_by: str = None, include_where: str = None, exclude_users: list = None,
-                          guild = None):
-        users = Tech.get_all_users(order_by=order_by, include_where=include_where, exclude_users=exclude_users,
-                                   guild=guild)
+    def get_user_position(user_id, order_by: str = None, where: str = None, guild=None):
+        users = Tech.get_all_users(order_by=order_by, where=where, guild=guild)
         if str(user_id) in users:
             return users.index(str(user_id))
 
