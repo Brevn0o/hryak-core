@@ -3,6 +3,8 @@ from ..game_functions import GameFunc
 from ..functions import Func
 
 def duel(user_id: int, opponent_id: int, bet: int):
+    User.register_user_if_not_exists(user_id)
+    User.register_user_if_not_exists(opponent_id)
     if Item.get_amount('coins', user_id) < bet:
         return {'status': '400;no_money', 'user_id': user_id}
     if Item.get_amount('coins', opponent_id) < bet:
@@ -16,4 +18,4 @@ def duel(user_id: int, opponent_id: int, bet: int):
     User.remove_item(winner_id, 'coins', bet)
     User.remove_item(loser_id, 'coins', bet)
     User.add_item(winner_id, 'coins', money_earned)
-    return {'status': 'success', 'winner': winner_id, 'loser': loser_id, 'money_earned': money_earned}
+    return {'status': 'success', 'winner': winner_id, 'loser': loser_id, 'money_earned': money_earned, 'chances': chances}
