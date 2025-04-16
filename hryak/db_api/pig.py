@@ -229,6 +229,7 @@ class Pig:
         last_feed = History.get_last_feed(user_id)
         if last_feed is None:
             return -1
+        print(123434, config.pig_feed_cooldown)
         next_feed = last_feed + config.pig_feed_cooldown - Func.generate_current_timestamp()
         return next_feed if next_feed > 0 else -1
 
