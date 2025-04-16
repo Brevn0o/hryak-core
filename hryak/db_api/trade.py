@@ -163,7 +163,7 @@ class Trade:
         return data['message']
 
     @staticmethod
-    async def get_agree_number(trade_id):
+    def get_agree_number(trade_id):
         res = 0
         for i in Trade.get_users(trade_id):
             if Trade.is_agree(trade_id, i):

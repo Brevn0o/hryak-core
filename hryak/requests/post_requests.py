@@ -66,13 +66,11 @@ def use_promocode(user_id: int, code: str):
         return {'status': '400;not_exist'}
     if PromoCode.used_times(code) >= PromoCode.max_uses(code):
         return {'status': '400;used_too_many_times'}
-    print(PromoCode.created(code) + PromoCode.expires_in(code), Func.generate_current_timestamp(), PromoCode.created(code), PromoCode.expires_in(code))
     if PromoCode.created(code) + PromoCode.expires_in(code) < Func.generate_current_timestamp() and PromoCode.expires_in(code) != -1:
         return {'status': '400;expired'}
     if PromoCode.get_user_used_times(code, user_id) > 0:
         return {'status': '400;already_used'}
     rewards = PromoCode.get_rewards(code)
-    print(type(rewards), rewards)
     for item in rewards:
         if item == 'weight':
             Pig.add_weight(user_id, rewards[item])
