@@ -23,7 +23,7 @@ class PromoCode:
             code = ''.join([random.choice(string.ascii_letters +
                                           string.digits) for _ in range(12)])
         Connection.make_request(
-            f"INSERT INTO {config.promocodes_schema} (id, created, max_uses, users_used, {json.dumps(rewards)}, expires_in) "
+            f"INSERT INTO {config.promocodes_schema} (id, created, max_uses, users_used, '{json.dumps(rewards)}', expires_in) "
             f"VALUES (%s, %s, %s, %s, %s)",
             params=(code, Func.generate_current_timestamp(), max_uses, json.dumps([]), lifespan)
         )
