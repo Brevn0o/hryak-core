@@ -1,4 +1,4 @@
-logs_path = True
+logs_path = None
 
 def set_logs_path(path):
     global logs_path
