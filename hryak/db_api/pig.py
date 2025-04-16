@@ -35,10 +35,12 @@ class Pig:
     def get(user_id) -> dict:
         if type(user_id) is not list:
             result = Connection.make_request(
-                f"SELECT pig FROM {config.users_schema} WHERE id = {user_id}",
+                f"SELECT pig FROM {config.users_schema} WHERE id = %s",
+                params=(user_id,),
                 commit=False,
                 fetch=True,
             )
+            print(111, result)
             if result is not None:
                 return json.loads(result)
             else:

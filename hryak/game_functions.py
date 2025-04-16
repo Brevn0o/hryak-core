@@ -10,7 +10,7 @@ class GameFunc:
     @staticmethod
     def calculate_buff_multipliers(user_id, use_buffs: bool = False, client=None):
         res = config.base_buff_multipliers.copy()
-        pig_buffs = GameFunc.get_all_pig_buffs(client, user_id)
+        pig_buffs = GameFunc.get_all_pig_buffs(user_id, client)
         pig_buffs_raw = {i: [] for i in res.copy()}
         for buff in pig_buffs:
             if use_buffs and buff in ['laxative', 'compound_feed']:
