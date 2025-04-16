@@ -93,22 +93,30 @@ class User:
 
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
-        query = """
-        UPDATE users
-        SET inventory = JSON_SET(
-            inventory,
-            CONCAT('$.\"', %s, '\".amount'),
-            CAST(
-                COALESCE(
-                    CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.\"', %s, '\".amount'))) AS UNSIGNED),
-                    0
-                ) + %s
-                AS UNSIGNED
-            )
-        )
+        query = f"""
+        UPDATE {config.users_schema}
+        SET inventory = CASE
+            WHEN JSON_CONTAINS_PATH(inventory, 'one', CONCAT('$.\"', %s, '\".amount')) THEN
+                JSON_SET(
+                    inventory,
+                    CONCAT('$.\"', %s, '\".amount'),
+                    CAST(
+                        COALESCE(
+                            CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.\"', %s, '\".amount'))) AS UNSIGNED),
+                            0
+                        ) + %s AS UNSIGNED
+                    )
+                )
+            ELSE
+                JSON_SET(
+                    inventory,
+                    CONCAT('$.\"', %s, '\"'),
+                    JSON_OBJECT('amount', %s)
+                )
+        END
         WHERE id = %s
         """
-        Connection.make_request(query, (item_id, item_id, amount, user_id))
+        Connection.make_request(query, (item_id, item_id, item_id, amount, item_id, amount, user_id))
         if log:
             Func.add_log('item_generated',
                          user_id=user_id,
@@ -356,5 +364,3 @@ class User:
         if order_id in orders:
             orders.pop(order_id)
         User.set_new_orders(user_id, orders)
-
-
