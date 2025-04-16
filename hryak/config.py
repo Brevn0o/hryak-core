@@ -119,7 +119,7 @@ skin_layers_rules = {
     }}
 
 
-with open(os.path.join(os.path.dirname(__file__), 'items.json'), 'r', encoding='utf-8') as f:
+with open(os.path.join(os.path.dirname(__file__), 'items_config.json'), 'r', encoding='utf-8') as f:
     items = json.loads(f.read())
 
 daily_shop_items_types = {
