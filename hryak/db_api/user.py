@@ -120,6 +120,7 @@ class User:
             amount  # for + %s in UPDATE
         )
         Connection.make_request(query, params=params)
+        print(1234567869)
         User.clear_get_inventory_cache(user_id)
         if log:
             Func.add_log('item_generated',
