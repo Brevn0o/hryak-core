@@ -4,7 +4,7 @@ import os
 from cachetools import cached
 
 from .connection import Connection
-from .. import config
+from hryak import config
 from .user import User
 from .item import Item
 

@@ -2,7 +2,7 @@ import json
 
 from cachetools import TTLCache
 
-from . import setters
+from hryak import setters
 
 logs_path = setters.logs_path
 test = setters.test

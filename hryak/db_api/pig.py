@@ -3,7 +3,7 @@ import json, random
 from .connection import Connection
 from ..functions import Func, translate
 from ..locale import Locale
-from .. import config
+from hryak import config
 from .item import Item
 from .history import History
 

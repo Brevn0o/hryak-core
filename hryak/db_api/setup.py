@@ -1,7 +1,7 @@
 import mysql.connector
 
 from .connection import Connection
-from .. import config
+from hryak import config
 
 
 class Setup:
