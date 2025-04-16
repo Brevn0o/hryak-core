@@ -1,1 +1,1 @@
-include hryak/items.json
+recursive-include hryak *.json
