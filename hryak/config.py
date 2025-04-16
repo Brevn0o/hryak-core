@@ -111,11 +111,11 @@ skin_layers_rules = {
 with open(f'pig_code/core/items_config.json', 'r', encoding='utf-8') as f:
     items = json.loads(f.read())
 
-pig_feed_cooldown = 4 * 3600
+pig_feed_cooldown = 4 * 3600 if not test else 5  # seconds
 
-pig_butcher_cooldown = 40 * 3600
+pig_butcher_cooldown = 40 * 3600 if not test else 15  # seconds
 
-streak_timeout = 24.5 * 3600
+streak_timeout = 24.5 * 3600 if not test else 15
 
 daily_shop_items_types = {
     'hat': 1,
