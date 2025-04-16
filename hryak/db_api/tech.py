@@ -13,7 +13,7 @@ class Tech:
 
 
     @staticmethod
-    def get_all_users(extra_select: str, order_by: str = None, where: str = None, limit: int = None, guild = None):
+    def get_all_users(extra_select: str = None, order_by: str = None, where: str = None, limit: int = None, guild = None):
         """
         :type extra_select: object
             Example: JSON_EXTRACT(inventory, '$.coins.amount')
