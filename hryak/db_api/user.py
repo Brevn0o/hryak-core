@@ -95,12 +95,30 @@ class User:
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
         query = f"""
         INSERT INTO {config.users_schema} (id, inventory)
-        VALUES (%s, JSON_SET(IFNULL(inventory, '{{}}'), CONCAT('$.', %s), JSON_OBJECT('item_id', %s, 'amount', %s)))
+        VALUES (
+          %s,
+          JSON_SET(
+            IFNULL(inventory, '{{}}'),
+            CONCAT('$.', %s),
+            JSON_OBJECT('item_id', %s, 'amount', %s)
+          )
+        )
         ON DUPLICATE KEY UPDATE
-        inventory = JSON_SET(inventory, CONCAT('$.', %s, '.amount'),
-                             JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount')) + %s)
+        inventory = JSON_SET(
+          inventory,
+          CONCAT('$.', %s, '.amount'),
+          JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount')) + %s
+        )
         """
-        params = (user_id, item_id, item_id, amount, item_id, item_id, amount)
+        params = (
+            user_id,  # for %s in VALUES (the id)
+            item_id,  # for CONCAT('$.', %s) in VALUES (the path for the new object)
+            item_id,  # 'item_id' field in JSON_OBJECT
+            amount,  # 'amount' field in JSON_OBJECT
+            item_id,  # for CONCAT('$.', %s, '.amount') in UPDATE
+            item_id,  # for JSON_EXTRACT(..., CONCAT(...)) in UPDATE
+            amount  # for + %s in UPDATE
+        )
         Connection.make_request(query, params=params)
         User.clear_get_inventory_cache(user_id)
         if log:
