@@ -4,6 +4,8 @@ from cachetools import TTLCache
 
 from .setters import *
 
+print(11111, test)
+
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
 shop_schema = 'shop'
