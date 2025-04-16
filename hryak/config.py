@@ -2,7 +2,7 @@ import json
 
 from cachetools import TTLCache
 
-from .setters import *
+from hryak.setters import *
 
 print(11111, pig_feed_cooldown)
 
