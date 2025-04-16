@@ -71,6 +71,7 @@ def use_promocode(user_id: int, code: str):
     if PromoCode.get_user_used_times(code, user_id) > 0:
         return {'status': '400;already_used'}
     rewards = PromoCode.get_rewards(code)
+    print(rewards)
     for item in rewards:
         if item == 'weight':
             Pig.add_weight(user_id, rewards[item])
