@@ -6,7 +6,7 @@ from .item import Item
 from .tech import Tech
 from .user import User
 from ..functions import Func
-from hryak import config
+from .. import config
 
 
 class Shop:

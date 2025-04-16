@@ -2,7 +2,7 @@ import json
 
 from .connection import Connection
 from ..functions import Func
-from hryak import config
+from .. import config
 
 
 class History:

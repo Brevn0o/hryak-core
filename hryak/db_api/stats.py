@@ -2,7 +2,7 @@ import json
 import time
 
 from .connection import Connection
-from hryak import config
+from .. import config
 
 
 class Stats:

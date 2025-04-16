@@ -7,7 +7,7 @@ from cachetools import cached
 from .connection import Connection
 from ..functions import Func, translate
 from .history import History
-from hryak import config
+from .. import config
 
 
 

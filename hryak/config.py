@@ -2,9 +2,13 @@ import json
 
 from cachetools import TTLCache
 
-from hryak.setters import *
+from . import setters
 
-print(11111, pig_feed_cooldown)
+logs_path = setters.logs_path
+test = setters.test
+pig_feed_cooldown = setters.pig_feed_cooldown
+pig_butcher_cooldown = setters.pig_butcher_cooldown
+streak_timeout = setters.streak_timeout
 
 users_schema = 'users'
 promocodes_schema = 'promo_codes'

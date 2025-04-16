@@ -3,7 +3,7 @@ import asyncio, json
 from .connection import Connection
 from .tech import Tech
 from ..functions import Func
-from hryak import config
+from .. import config
 
 
 class Guild:
