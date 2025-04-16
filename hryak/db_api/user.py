@@ -101,6 +101,7 @@ class User:
         """
         params = (user_id, item_id, amount, amount)
         Connection.make_request(query, params=params)
+        User.clear_get_inventory_cache(user_id)
         if log:
             Func.add_log('item_generated',
                          user_id=user_id,
