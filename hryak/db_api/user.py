@@ -93,22 +93,14 @@ class User:
 
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
-        query_update = f"""
-            UPDATE {config.users_schema}
-            SET inventory = JSON_SET(
-                IFNULL(inventory, '{{}}'),
-                CONCAT('$.', %s, '.amount'),
-                COALESCE(
-                    CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) AS SIGNED),
-                    0
-                ) + %s
-            )
-            WHERE id = %s
-            """
-
-        params_update = (item_id, item_id, amount, user_id)
-        Connection.make_request(query_update, params=params_update)
-        User.clear_get_inventory_cache(user_id)
+        inventory = User.get_inventory(str(user_id))
+        amount = round(amount)
+        if item_id in inventory:
+            inventory[item_id]['amount'] += amount
+        else:
+            inventory[item_id] = {}
+            inventory[item_id]['amount'] = amount
+        User.set_new_inventory(user_id, inventory)
         if log:
             Func.add_log('item_generated',
                          user_id=user_id,
