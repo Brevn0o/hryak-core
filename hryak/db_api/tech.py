@@ -28,7 +28,7 @@ class Tech:
         if where is not None:
             query += f" WHERE {where}"
         if order_by is not None:
-            query += f" ORDER BY {order_by} DESC"
+            query += f" ORDER BY {order_by}"
         if limit is not None and guild is None:
             query += f" LIMIT {limit}"
         with connection.cursor() as cursor:
