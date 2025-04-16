@@ -16,15 +16,15 @@ class PromoCode:
         return bool(result)
 
     @staticmethod
-    def create(max_uses: int, prise: dict, lifespan: int = None, code: str = None):
-        prise = json.dumps(prise)
+    def create(max_uses: int, rewards: dict, lifespan: int = None, code: str = None):
+        rewards = json.dumps(rewards)
         if code is None:
             code = ''.join([random.choice(string.ascii_letters +
                                           string.digits) for _ in range(12)])
         Connection.make_request(
             f"INSERT INTO {config.promocodes_schema} (id, created, max_uses, users_used, prise, expires_in) "
             f"VALUES (%s, %s, %s, %s, %s, %s)",
-            params=(code, Func.generate_current_timestamp(), max_uses, json.dumps([]), json.dumps(prise), lifespan)
+            params=(code, Func.generate_current_timestamp(), max_uses, json.dumps([]), json.dumps(rewards), lifespan)
         )
         return code
 
@@ -35,7 +35,7 @@ class PromoCode:
         )
 
     @staticmethod
-    def get_prise(code: str):
+    def get_rewards(code: str):
         result = Connection.make_request(
             f"SELECT prise FROM {config.promocodes_schema} WHERE id = '{code}'",
             commit=False,

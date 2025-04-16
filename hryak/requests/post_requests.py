@@ -60,3 +60,43 @@ def rename(user_id: int, name: str):
         name = 'Hryak'
     Pig.rename(user_id, name)
     return {"status": 'success'}
+
+def use_promocode(user_id: int, code: str):
+    if not PromoCode.exists(code):
+        return {'status': '400;not_exist'}
+    if PromoCode.used_times(code) >= PromoCode.max_uses(code):
+        return {'status': '400;used_too_many_times'}
+    if PromoCode.created(code) + PromoCode.expires_in(code) < Func.generate_current_timestamp() and PromoCode.expires_in(code) != -1:
+        return {'status': '400;expired'}
+    if PromoCode.get_user_used_times(code, user_id) > 0:
+        return {'status': '400;already_used'}
+    rewards = PromoCode.get_rewards(code)
+    for item in rewards:
+        if item == 'weight':
+            Pig.add_weight(user_id, rewards[item])
+        else:
+            User.add_item(user_id, item, rewards[item])
+    PromoCode.add_users_used(code, user_id)
+
+def send_money(user_id: int, receiver_id, amount: int, currency: str, confirmed: bool = True):
+    User.register_user_if_not_exists(receiver_id)
+    amount = abs(amount)
+    tax = GameFunc.get_user_tax_percent(user_id, currency)
+    amount_with_tax = GameFunc.get_transfer_amount_with_tax(amount, tax)
+    if amount_with_tax > Item.get_amount(currency, user_id):
+        return {'status': '400;no_money', "tax": tax, "amount_with_tax": amount_with_tax}
+    if confirmed:
+        User.transfer_item(user_id, receiver_id, currency, amount)
+        User.remove_item(user_id, currency, amount_with_tax - amount)
+        return {"status": 'success', "tax": tax, "amount_with_tax": amount_with_tax}
+    else:
+        return {"status": "pending", "tax": tax, "amount_with_tax": amount_with_tax}
+
+def set_language(user_id: int, lang: str):
+    User.set_language(user_id, lang)
+    Stats.set_language_changed(user_id, True)
+    return {"status": 'success'}
+
+def settings_say(guild_id: int, allow: bool):
+    Guild.allow_say(guild_id, allow)
+    return {"status": 'success'}

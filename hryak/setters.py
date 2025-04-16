@@ -15,3 +15,6 @@ def set_pig_butcher_cooldown(cooldown: int):
 
 def set_streak_timeout(timeout: int):
     config.streak_timeout = timeout
+
+def set_github_version(version: bool):
+    config.github_version = version

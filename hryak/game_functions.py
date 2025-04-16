@@ -1,8 +1,11 @@
+import math
+
 import numpy as np
 from scipy.interpolate import PchipInterpolator
 
 from . import config
-from .db_api import Pig, Item
+from .db_api import Pig, Item, User
+from .hidden import Hidden
 
 
 class GameFunc:
@@ -51,3 +54,43 @@ class GameFunc:
                                            np.array([0, 0, 1, 1.5, 2, 10]))
         buffs['pig_weight']['vomit_chance'] = f'x{round(float(pchip_function(Pig.get_weight(user_id))), 2)}'
         return buffs
+
+    @staticmethod
+    def get_user_tax_percent(user_id, currency: str):
+        """The actual code is hidden due to security reasons"""
+        if config.github_version:
+            return 5
+        else:
+            return Hidden.get_user_tax_percent(user_id, currency, GameFunc.get_user_wealth(user_id))
+
+    @staticmethod
+    def get_user_wealth(user_id):
+        wealth = {}
+        for item_id in User.get_inventory(user_id):
+            if Item.get_wealth_impact(item_id) is not None and Item.get_market_price(item_id) is not None:
+                if Item.get_market_price_currency(item_id) not in wealth:
+                    wealth[Item.get_market_price_currency(item_id)] = 0
+                wealth[Item.get_market_price_currency(item_id)] += Item.get_amount(item_id,
+                                                                                   user_id) * Item.get_market_price(
+                    item_id) * Item.get_wealth_impact(item_id)
+        return wealth
+
+    @staticmethod
+    def calculate_item_tax(item_id, user_id):
+        tax = Item._get_tax(item_id)
+        if tax is None:
+            return [0, "coins"]
+        elif isinstance(tax, list):
+            return tax
+        elif tax == 'auto':
+            return [round(Item.get_market_price(item_id) * (
+                    GameFunc.get_user_tax_percent(user_id, Item.get_market_price_currency(item_id)) / 100), 3),
+                    Item.get_market_price_currency(item_id)]
+        elif tax.endswith('%'):
+            return [round(Item.get_market_price(item_id) * (float(tax[:-1]) / 100), 3),
+                    Item.get_market_price_currency(item_id)]
+
+    @staticmethod
+    def get_transfer_amount_with_tax(amount, tax):
+        amount_with_tax = math.ceil(amount + amount * (tax / 100))
+        return amount_with_tax
