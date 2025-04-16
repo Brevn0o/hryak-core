@@ -144,11 +144,12 @@ class GameFunc:
             return Hidden.get_user_tax_percent(user_id, currency, GameFunc.get_user_wealth(user_id))
 
     @staticmethod
-    def get_duel_winning_chances(user1, user2):
-        """The actual code is hidden due to security reasons"""
+    def get_duel_winning_chances(user1_id: int, user2_id: int):
+        """The actual code is hidden due to security reasons
+        Well, actually not really, but whatever"""
         if config.github_version:
-            return {user1: 50, user2: 50}
+            return {user1_id: 50, user2_id: 50}
         else:
             from .hidden import Hidden
-            return Hidden.get_duel_winning_chances(user1, user2)
+            return Hidden.get_duel_winning_chances(user1_id, user2_id)
 

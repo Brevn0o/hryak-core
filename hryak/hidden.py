@@ -30,13 +30,13 @@ class Hidden:
         return round(float(tax), 1)
 
     @staticmethod
-    def get_duel_winning_chances(user1, user2):
+    def get_duel_winning_chances(user1_id: int, user2_id: int):
         chances = {}
-        for user in [user1, user2]:
-            chances[user] = 100
-            chances[user] += Pig.get_weight(user.id) / 2
-            if Pig.get_time_to_next_feed(user.id) != -1:
-                chances[user] += 20
+        for user_id in [user1_id, user2_id]:
+            chances[user_id] = 100
+            chances[user_id] += Pig.get_weight(user_id) / 2
+            if Pig.get_time_to_next_feed(user_id) != -1:
+                chances[user_id] += 20
         chances = Func.calculate_probabilities(chances, 1)
         return chances
 
