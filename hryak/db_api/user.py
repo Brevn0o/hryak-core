@@ -93,15 +93,22 @@ class User:
 
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
-        inventory = User.get_inventory(str(user_id))
-        amount = round(amount)
-        if item_id in inventory:
-            inventory[item_id]['amount'] += amount
-        else:
-            inventory[item_id] = {}
-            inventory[item_id]['amount'] = amount
-        inventory[item_id]['amount'] = round(inventory[item_id]['amount'])
-        User.set_new_inventory(user_id, inventory)
+        query = """
+        UPDATE users
+        SET inventory = JSON_SET(
+            inventory,
+            CONCAT('$.\"', %s, '\".amount'),
+            CAST(
+                COALESCE(
+                    CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.\"', %s, '\".amount'))) AS UNSIGNED),
+                    0
+                ) + %s
+                AS UNSIGNED
+            )
+        )
+        WHERE id = %s
+        """
+        Connection.make_request(query, (item_id, item_id, amount, user_id))
         if log:
             Func.add_log('item_generated',
                          user_id=user_id,
