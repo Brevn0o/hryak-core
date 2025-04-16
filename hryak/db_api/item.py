@@ -385,5 +385,7 @@ class Item:
             query = f"SELECT JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) AS amount FROM {config.users_schema} WHERE id = %s"
             amount = Connection.make_request(query, params=(item_id, user_id,), commit=False, fetch=True)
             print(type(amount), amount)
+            if amount is None:
+                return 0
             return int(amount)
         return 0
