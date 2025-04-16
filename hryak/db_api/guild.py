@@ -56,7 +56,7 @@ class Guild:
     # @cached(TTLCache(maxsize=utils_config.db_api_cash_size, ttl=utils_config.db_api_cash_ttl))
     def get_settings(guild_id):
         result = Connection.make_request(
-            f"SELECT settings FROM {config.guilds_schema} WHERE id = $s",
+            f"SELECT settings FROM {config.guilds_schema} WHERE id = %s",
             params=(guild_id,),
             commit=False,
             fetch=True,
