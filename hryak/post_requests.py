@@ -1,7 +1,8 @@
 import random
 
 from .db_api import *
-from .functions import Func, GameFunc
+from .functions import Func
+from .game_functions import GameFunc
 from . import config
 
 def feed(user_id: int, client = None):
