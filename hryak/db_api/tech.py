@@ -23,7 +23,7 @@ class Tech:
             Example: JSON_EXTRACT(inventory, '$.coins.amount') > 0
         """
         res = []
-        query = f'SELECT id, {extra_select} FROM {config.users_schema}'
+        query = f'SELECT id{f" , {extra_select}" if extra_select else ""} FROM {config.users_schema}'
         if where is not None:
             query += f" WHERE {where}"
         if order_by is not None:
