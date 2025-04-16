@@ -14,7 +14,8 @@ class Pig:
     def fix_pig_structure_for_all_users(nested_key_path: str = '', standard_values: dict = None):
         if standard_values is None:
             standard_values = config.default_pig
-        Connection.make_request(f"UPDATE {config.users_schema} SET pig = '{'{}'}' WHERE pig IS NULL")
+        Connection.make_request(f"UPDATE {config.users_schema} SET pig = %s WHERE pig IS NULL",
+                                params=(json.dumps({}),))
         for k, v in standard_values.items():
             new_key_path = f"{nested_key_path}.{k}" if nested_key_path else k
             if type(v) in [dict]:
