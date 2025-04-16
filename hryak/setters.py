@@ -1,8 +1,5 @@
-logs_path = None
-test = False
-pig_feed_cooldown = 4 * 3600
-pig_butcher_cooldown = 40 * 3600
-streak_timeout = 24.5 * 3600
+from .config import (logs_path, test, pig_feed_cooldown,
+                     pig_butcher_cooldown, streak_timeout)
 
 
 def set_logs_path(path: str):
