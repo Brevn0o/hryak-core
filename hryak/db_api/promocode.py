@@ -2,7 +2,7 @@ import json, string, random
 
 from .connection import Connection
 from ..functions import Func
-from .. import config
+from hryak import config
 
 class PromoCode:
 
