@@ -40,7 +40,7 @@ class GameFunc:
         for buff in Pig.get_buffs(user_id):
             if Pig.get_buff_amount(user_id, buff) > 0 or not Pig.buff_expired(user_id, buff):
                 buffs[buff] = Item.get_buffs(buff)
-            if client is not None:
+            if client is not None and bot_guilds is not None:
                 for i in bot_guilds:
                     bot_guild = client.get_guild(i)
                     if bot_guild is not None:
