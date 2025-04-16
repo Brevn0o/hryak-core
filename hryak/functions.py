@@ -63,6 +63,17 @@ class Func:
                 return key
 
     @staticmethod
+    def calculate_probabilities(dictionary, round_to: int = 2):
+        total = sum(dictionary.values())
+        probabilities = {}
+
+        for key, value in dictionary.items():
+            probability = (value / total) * 100
+            probabilities[key] = round(probability, round_to)
+
+        return probabilities
+
+    @staticmethod
     def clear_db_cache(cache_id, params: tuple = None):
         if cache_id not in config.db_caches:
             return
@@ -85,7 +96,7 @@ class Func:
         if len(link.split('.')) > 1:
             if link.split('.')[-1] in ['png', 'webp', 'gif', 'jpg']:
                 file_extension = link.split('.')[-1]
-        path = Func.generate_temp_path(folder_path, name, file_extension=file_extension)
+        path = Func.generate_temp_path(name, file_extension=file_extension)
         for i in range(3):
             try:
                 if file_extension in ['gif']:
@@ -100,9 +111,9 @@ class Func:
         return path
 
     @staticmethod
-    def generate_temp_path(temp_folder_path: str, key_word: str, file_extension: str = None):
+    def generate_temp_path(key_word: str, file_extension: str = None):
         for _ in range(100):
-            path = f'{temp_folder_path}/{key_word}_{Func.generate_current_timestamp()}_{random.randrange(10000)}{f'.{file_extension}' if file_extension is not None else ''}'
+            path = f'{config.temp_folder_path}/{key_word}_{Func.generate_current_timestamp()}_{random.randrange(10000)}{f'.{file_extension}' if file_extension is not None else ''}'
             if not os.path.exists(path):
                 return path
 

@@ -1,9 +1,11 @@
 import math
 
+import aiocache
 import numpy as np
 from scipy.interpolate import PchipInterpolator
 
 from . import config
+from .functions import Func
 from .db_api import Pig, Item, User, Trade
 from .hidden import Hidden
 
@@ -54,14 +56,6 @@ class GameFunc:
                                            np.array([0, 0, 1, 1.5, 2, 10]))
         buffs['pig_weight']['vomit_chance'] = f'x{round(float(pchip_function(Pig.get_weight(user_id))), 2)}'
         return buffs
-
-    @staticmethod
-    def get_user_tax_percent(user_id, currency: str):
-        """The actual code is hidden due to security reasons"""
-        if config.github_version:
-            return 5
-        else:
-            return Hidden.get_user_tax_percent(user_id, currency, GameFunc.get_user_wealth(user_id))
 
     @staticmethod
     def get_user_wealth(user_id):
@@ -124,3 +118,30 @@ class GameFunc:
                 item_id) or _skin in Item.get_not_compatible_skins(item_id)):
                 not_compatible_skins.append(_skin)
         return not_compatible_skins
+
+    # ---------- private -------------
+    @staticmethod
+    @aiocache.cached(ttl=86400)
+    async def build_pig(skins: tuple, genetic: tuple = None, eye_emotion: str = None, remove_transparency: bool = True):
+        """The actual code is hidden due to security reasons"""
+        if config.github_version:
+            return await Func.get_image_path_from_link(config.image_links['image_is_blocked'])
+        else:
+            return await Hidden.build_pig(skins, genetic, eye_emotion, remove_transparency)
+
+    @staticmethod
+    def get_user_tax_percent(user_id, currency: str):
+        """The actual code is hidden due to security reasons"""
+        if config.github_version:
+            return 5
+        else:
+            return Hidden.get_user_tax_percent(user_id, currency, GameFunc.get_user_wealth(user_id))
+
+    @staticmethod
+    def get_duel_winning_chances(user1, user2):
+        """The actual code is hidden due to security reasons"""
+        if config.github_version:
+            return {user1: 50, user2: 50}
+        else:
+            return Hidden.get_duel_winning_chances(user1, user2)
+

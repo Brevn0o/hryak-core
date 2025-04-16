@@ -4,11 +4,12 @@ from cachetools import TTLCache
 
 logs_path = None
 test = False
-github_version = False
+github_version = True
 pig_feed_cooldown = 4 * 3600
 pig_butcher_cooldown = 40 * 3600
 streak_timeout = 24.5 * 3600
 bot_guilds = []
+temp_folder_path = None
 
 users_schema = 'users'
 promocodes_schema = 'promo_codes'

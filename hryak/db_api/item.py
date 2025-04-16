@@ -219,7 +219,7 @@ class Item:
     @staticmethod
     @aiocache.cached(ttl=86400)
     async def get_image_path(item_id: str, folder_path: str):
-        path = Func.generate_temp_path(folder_path, 'img', file_extension='png')
+        path = Func.generate_temp_path('img', file_extension='png')
         if Item.get_data(item_id, 'image') is not None:
             async with aiofiles.open(path, 'wb') as file:
                 await file.write(open(Item.get_data(item_id, 'image'), 'rb').read())

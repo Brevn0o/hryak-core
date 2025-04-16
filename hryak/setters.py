@@ -21,3 +21,6 @@ def set_github_version(version: bool):
 
 def set_bot_guilds(guilds: dict):
     config.bot_guilds = guilds
+
+def set_temp_folder_path(path: str):
+    config.temp_folder_path = path
