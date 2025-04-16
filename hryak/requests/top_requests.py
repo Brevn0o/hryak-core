@@ -8,6 +8,7 @@ from hryak.locale import Locale
 def __top_users(user_id: int, extra_select: str, order_by: str, where: str, units: str, guild=None):
     r = Tech.get_all_users(extra_select=extra_select, order_by=order_by, where=where, limit=10, guild=guild)
     top_users = []
+    print(r)
     for i, weight in r:
         top_users.append((i, weight, units))
     user_position = Tech.get_user_position(user_id, order_by=order_by, where=where, guild=guild)
