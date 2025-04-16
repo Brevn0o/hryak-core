@@ -22,8 +22,7 @@ class Tech:
         :param where:
             Example: JSON_EXTRACT(inventory, '$.coins.amount') > 0
         """
-        id_list = []
-        connection = Connection.connect()
+        res = []
         query = f'SELECT id, {extra_select} FROM {config.users_schema}'
         if where is not None:
             query += f" WHERE {where}"
@@ -32,17 +31,13 @@ class Tech:
         if limit is not None and guild is None:
             query += f" LIMIT {limit}"
         print(query)
-        with connection.cursor() as cursor:
-            cursor.execute(query)
-            results = cursor.fetchall()
-            for i in results:
-                id_list.append(i[0])
+        res = Connection.make_request(query, commit=False, fetch=True, fetchall=True)
         if guild is not None:
             members_ids = [str(m.id) for m in guild.members]
-            id_list = [i for i in id_list if i in members_ids]
+            res = [i for i in res if i[0] in members_ids]
             if limit is not None:
-                id_list = id_list[:limit]
-        return id_list
+                res = res[:limit]
+        return res
 
     @staticmethod
     def get_user_position(user_id, order_by: str = None, where: str = None, guild=None):
