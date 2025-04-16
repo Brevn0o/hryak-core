@@ -13,7 +13,9 @@ setup(
         'cachetools == 5.5.0',
         'aiocache == 0.12.3',
         'aiofiles == 24.1.0',
-        'requests == 2.32.3'
+        'requests == 2.32.3',
+        'numpy == 2.2.1',
+        'scipy == 1.14.1',
     ],
     python_requires='~=3.12.0',
 )

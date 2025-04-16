@@ -2,6 +2,8 @@ import json
 
 from cachetools import TTLCache
 
+from .setters import *
+
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
 shop_schema = 'shop'

@@ -1,6 +1,4 @@
-import json, string, random
-
-from cachetools import cached, TTLCache
+import json, random
 
 from .connection import Connection
 from ..functions import Func, translate
