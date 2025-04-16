@@ -93,28 +93,22 @@ class User:
 
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
-        query = f"""
-        UPDATE users
-        SET inventory = JSON_SET(
-            inventory,
-            %s,
-            JSON_OBJECT(
-                'amount',
-                CAST(
-                    COALESCE(
-                        JSON_EXTRACT(inventory, %s),
-                        0
-                    ) + %s AS UNSIGNED
+        query = """
+                UPDATE users
+                SET inventory = JSON_SET(
+                    inventory,
+                    CONCAT('$.', %s, '.amount'),
+                    CAST(
+                        COALESCE(
+                            CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) AS UNSIGNED),
+                            0
+                        ) + %s
+                    AS UNSIGNED)
                 )
-            )
-        )
-        WHERE id = %s;
-        """
+                WHERE id = %s
+            """
 
-        path_item = f"$.{item_id}"
-        path_amount = f"$.{item_id}.amount"
-
-        Connection.make_request(query, (path_item, path_amount, amount, user_id))
+        Connection.make_request(query, (item_id, item_id, amount, user_id))
         if log:
             Func.add_log('item_generated',
                          user_id=user_id,
