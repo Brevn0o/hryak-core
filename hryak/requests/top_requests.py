@@ -19,7 +19,7 @@ def top_weight_users(user_id: int, lang: str, exclude_users: list = None, guild=
     Get the top users by weight.
     :return: list of tuples (user_id, weight, unit) and user_position
     """
-    extra_select = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight'))"
+    extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')), '0')"
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) DESC"
     where = None
     if exclude_users is not None:
@@ -31,7 +31,7 @@ def top_amount_of_items_users(user_id: int, item_id: str, exclude_users: list = 
     Get the top users by amount of item.
     :return: list of tuples (user_id, amount, unit) and user_position
     """
-    extra_select = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount'))"
+    extra_select = f"IFNULL(JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')), '0')"
     order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')) DESC"
     where = None
     if exclude_users is not None:
@@ -43,7 +43,7 @@ def top_streak_users(user_id: int, exclude_users: list = None, guild=None):
     Get the top users by streak.
     :return: list of tuples (user_id, streak, unit) and user_position
     """
-    extra_select = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak'))"
+    extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')), '0')"
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC"
     where = None
     if exclude_users is not None:
