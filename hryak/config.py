@@ -234,12 +234,6 @@ ignore_users_in_top = [715575898388037676]
 
 trade_data = {}
 
-# embed colors
-main_color = 0xc7604c
-error_color = 0xc94312
-warn_color = 0xe0bb36
-success_color = 0x2fc256
-premium_color = 0x61dfff
 
 pig_ages = {
     0: '1',
