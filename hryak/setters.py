@@ -18,3 +18,6 @@ def set_streak_timeout(timeout: int):
 
 def set_github_version(version: bool):
     config.github_version = version
+
+def set_bot_guilds(guilds: list):
+    config.bot_guilds = guilds

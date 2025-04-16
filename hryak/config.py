@@ -8,6 +8,7 @@ github_version = False
 pig_feed_cooldown = 4 * 3600
 pig_butcher_cooldown = 40 * 3600
 streak_timeout = 24.5 * 3600
+bot_guilds = []
 
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
