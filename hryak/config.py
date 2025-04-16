@@ -4,7 +4,7 @@ from cachetools import TTLCache
 
 from .setters import *
 
-print(11111, test)
+print(11111, pig_feed_cooldown)
 
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
