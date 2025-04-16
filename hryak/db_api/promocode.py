@@ -23,9 +23,9 @@ class PromoCode:
             code = ''.join([random.choice(string.ascii_letters +
                                           string.digits) for _ in range(12)])
         Connection.make_request(
-            f"INSERT INTO {config.promocodes_schema} (id, created, max_uses, users_used, '{json.dumps(rewards)}', expires_in) "
-            f"VALUES (%s, %s, %s, %s, %s)",
-            params=(code, Func.generate_current_timestamp(), max_uses, json.dumps([]), lifespan)
+            f"INSERT INTO {config.promocodes_schema} (id, created, max_uses, users_used, prise, expires_in) "
+            f"VALUES (%s, %s, %s, %s, %s, %s)",
+            params=(code, Func.generate_current_timestamp(), max_uses, [], rewards, lifespan)
         )
         return code
 
@@ -45,7 +45,7 @@ class PromoCode:
             fetch=True
         )
         print(type(result), result)
-        return json.loads(result)
+        return json.loads(json.loads(result))
 
     @staticmethod
     def used_times(code: str):
