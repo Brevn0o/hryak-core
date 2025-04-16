@@ -6,8 +6,7 @@ from scipy.interpolate import PchipInterpolator
 
 from . import config
 from .functions import Func
-from .db_api import Pig, Item, User, Trade
-from .hidden import Hidden
+from .db_api import *
 
 
 class GameFunc:
@@ -101,6 +100,11 @@ class GameFunc:
         return {k: math.ceil(v) for k, v in total_tax.items() if v > 0}
 
     @staticmethod
+    def calculate_missed_streak_days(user_id):
+        return (Func.generate_current_timestamp() - History.get_last_streak_timestamp(
+            user_id)) // config.streak_timeout
+
+    @staticmethod
     def get_not_compatible_active_skins(user_id, item_id):
         """Returns skins worn by the user that are not compatible with item_id"""
         pig = Pig.get(user_id)
@@ -127,6 +131,7 @@ class GameFunc:
         if config.github_version:
             return await Func.get_image_path_from_link(config.image_links['image_is_blocked'])
         else:
+            from .hidden import Hidden
             return await Hidden.build_pig(skins, genetic, eye_emotion, remove_transparency)
 
     @staticmethod
@@ -135,6 +140,7 @@ class GameFunc:
         if config.github_version:
             return 5
         else:
+            from .hidden import Hidden
             return Hidden.get_user_tax_percent(user_id, currency, GameFunc.get_user_wealth(user_id))
 
     @staticmethod
@@ -143,5 +149,6 @@ class GameFunc:
         if config.github_version:
             return {user1: 50, user2: 50}
         else:
+            from .hidden import Hidden
             return Hidden.get_duel_winning_chances(user1, user2)
 
