@@ -1,4 +1,5 @@
 import json
+import os
 
 from cachetools import TTLCache
 
@@ -117,7 +118,9 @@ skin_layers_rules = {
         'hide': ['middle_ear']
     }}
 
-with open(f'pig_code/core/items_config.json', 'r', encoding='utf-8') as f:
+
+print(os.curdir)
+with open(os.path.join(os.curdir, 'items.json'), 'r', encoding='utf-8') as f:
     items = json.loads(f.read())
 
 daily_shop_items_types = {
