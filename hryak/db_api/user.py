@@ -93,34 +93,26 @@ class User:
 
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
-        query = f"""
-        INSERT INTO {config.users_schema} (id, inventory)
-        VALUES (
-          %s,
-          JSON_SET(
-            IFNULL(inventory, '{{}}'),
-            CONCAT('$.', %s),
-            JSON_OBJECT('item_id', %s, 'amount', %s)
-          )
-        )
-        ON DUPLICATE KEY UPDATE
-        inventory = JSON_SET(
-          inventory,
-          CONCAT('$.', %s, '.amount'),
-          JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount')) + %s
-        )
-        """
-        params = (
-            user_id,  # for %s in VALUES (the id)
-            item_id,  # for CONCAT('$.', %s) in VALUES (the path for the new object)
-            item_id,  # 'item_id' field in JSON_OBJECT
-            amount,  # 'amount' field in JSON_OBJECT
-            item_id,  # for CONCAT('$.', %s, '.amount') in UPDATE
-            item_id,  # for JSON_EXTRACT(..., CONCAT(...)) in UPDATE
-            amount  # for + %s in UPDATE
-        )
-        Connection.make_request(query, params=params)
-        print(1234567869)
+        query_update = f"""
+            UPDATE {config.users_schema}
+            SET inventory = JSON_SET(
+                IFNULL(inventory, '{{}}'), 
+                CONCAT('$.', %s, '.amount'),
+                COALESCE(
+                    JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount')),
+                    0
+                ) + %s
+            )
+            WHERE id = %s
+            """
+        # Explanation:
+        # IFNULL(inventory, '{}')   → ensure we have a JSON object if inventory is NULL
+        # CONCAT('$.', %s, '.amount') → build dynamic path like '$.coins.amount'
+        # COALESCE(JSON_EXTRACT(...), 0) → if doesn't exist, treat as 0
+        # + %s → add the passed amount
+
+        params_update = (item_id, item_id, amount, user_id)
+        Connection.make_request(query_update, params=params_update)
         User.clear_get_inventory_cache(user_id)
         if log:
             Func.add_log('item_generated',
