@@ -1,5 +1,5 @@
 from . import requests
-from . import functions
+from .functions import Func
 from . import game_functions
 from . import config
 from . import db_api

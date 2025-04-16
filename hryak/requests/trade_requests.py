@@ -5,8 +5,6 @@ from ..game_functions import GameFunc
 def trade(user1_id, user2_id, trade_id):
     User.register_user_if_not_exists(user1_id)
     User.register_user_if_not_exists(user2_id)
-    if user1_id == user2_id:
-        return {'status': '400;same_user'}
     if trade_id is None:
         return {'status': '400;no_trade_id'}
     agree_number = Trade.get_agree_number(trade_id)
