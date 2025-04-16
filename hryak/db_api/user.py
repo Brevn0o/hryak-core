@@ -94,12 +94,13 @@ class User:
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
         query = f"""
-            INSERT INTO {config.users_schema} (id, inventory)
-            VALUES (%s, JSON_SET(IFNULL(inventory, '{{}}'), '$.{item_id}', JSON_OBJECT('item_id', %s, 'amount', %s)))
-            ON DUPLICATE KEY UPDATE
-            inventory = JSON_SET(inventory, '$.{item_id}.amount', JSON_EXTRACT(inventory, '$.{item_id}.amount') + %s)
+        INSERT INTO {config.users_schema} (id, inventory)
+        VALUES (%s, JSON_SET(IFNULL(inventory, '{{}}'), CONCAT('$.', %s), JSON_OBJECT('item_id', %s, 'amount', %s)))
+        ON DUPLICATE KEY UPDATE
+        inventory = JSON_SET(inventory, CONCAT('$.', %s, '.amount'),
+                             JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount')) + %s)
         """
-        params = (user_id, item_id, amount, amount)
+        params = (user_id, item_id, item_id, amount, item_id, item_id, amount)
         Connection.make_request(query, params=params)
         User.clear_get_inventory_cache(user_id)
         if log:
