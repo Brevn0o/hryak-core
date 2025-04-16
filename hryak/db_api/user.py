@@ -94,19 +94,20 @@ class User:
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
         query = """
-                UPDATE users
-                SET inventory = JSON_SET(
-                    inventory,
-                    CONCAT('$.', %s, '.amount'),
-                    CAST(
-                        COALESCE(
-                            CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) AS UNSIGNED),
-                            0
-                        ) + %s
-                    AS UNSIGNED)
-                )
-                WHERE id = %s
-            """
+        UPDATE users
+        SET inventory = JSON_SET(
+            inventory,
+            CONCAT('$.\"', %s, '\".amount'),
+            CAST(
+                COALESCE(
+                    CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.\"', %s, '\".amount'))) AS UNSIGNED),
+                    0
+                ) + %s
+                AS UNSIGNED
+            )
+        )
+        WHERE id = %s
+        """
 
         Connection.make_request(query, (item_id, item_id, amount, user_id))
         if log:
