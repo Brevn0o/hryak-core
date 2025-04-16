@@ -94,20 +94,22 @@ class User:
     @staticmethod
     def add_item(user_id, item_id, amount: int = 1, log: bool = True):
         query = f"""
-            UPDATE users
-            SET inventory = JSON_SET(
-                inventory,
-                %s,
-                JSON_OBJECT(
-                    'amount',
+        UPDATE users
+        SET inventory = JSON_SET(
+            inventory,
+            %s,
+            JSON_OBJECT(
+                'amount',
+                CAST(
                     COALESCE(
                         JSON_EXTRACT(inventory, %s),
                         0
-                    ) + %s
+                    ) + %s AS UNSIGNED
                 )
             )
-            WHERE id = %s;
-            """
+        )
+        WHERE id = %s;
+        """
 
         path_item = f"$.{item_id}"
         path_amount = f"$.{item_id}.amount"
