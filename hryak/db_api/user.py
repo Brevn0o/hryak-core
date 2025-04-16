@@ -96,20 +96,15 @@ class User:
         query_update = f"""
             UPDATE {config.users_schema}
             SET inventory = JSON_SET(
-                IFNULL(inventory, '{{}}'), 
+                IFNULL(inventory, '{{}}'),
                 CONCAT('$.', %s, '.amount'),
                 COALESCE(
-                    JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount')),
+                    CAST(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))) AS SIGNED),
                     0
                 ) + %s
             )
             WHERE id = %s
             """
-        # Explanation:
-        # IFNULL(inventory, '{}')   → ensure we have a JSON object if inventory is NULL
-        # CONCAT('$.', %s, '.amount') → build dynamic path like '$.coins.amount'
-        # COALESCE(JSON_EXTRACT(...), 0) → if doesn't exist, treat as 0
-        # + %s → add the passed amount
 
         params_update = (item_id, item_id, amount, user_id)
         Connection.make_request(query_update, params=params_update)
