@@ -13,6 +13,8 @@ promocodes_schema = 'promo_codes'
 shop_schema = 'shop'
 guilds_schema = 'guilds'
 
+trade_data = {}
+
 default_pig = {'name': 'Hryak',
                'weight': 1,
                'feed_history': [],

@@ -51,3 +51,12 @@ def butcher(user_id: int):
     Pig.add_weight(user_id, -weight_lost)
     History.add_butcher_to_history(user_id, Func.generate_current_timestamp())
     return {"status": 'success', "lard_added": lard_add, "weight_lost": weight_lost}
+
+def rename(user_id: int, name: str):
+    Pig.rename(user_id, name)
+    for i in ['*', '`']:
+        name = name.replace(i, '')
+    if not name:
+        name = 'Hryak'
+    Pig.rename(user_id, name)
+    return {"status": 'success'}
