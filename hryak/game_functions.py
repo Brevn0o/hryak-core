@@ -105,3 +105,22 @@ class GameFunc:
                     total_tax[item_tax[1]] = 0
                 total_tax[item_tax[1]] += Trade.get_item_amount(trade_id, user_id, item_id) * item_tax[0]
         return {k: math.ceil(v) for k, v in total_tax.items() if v > 0}
+
+    @staticmethod
+    def get_not_compatible_active_skins(user_id, item_id):
+        """Returns skins worn by the user that are not compatible with item_id"""
+        pig = Pig.get(user_id)
+        not_compatible_skins = []
+        for _skin in pig['skins']:
+            _skin = pig['skins'][_skin]
+            if _skin is None:
+                continue
+            if Item.get_not_compatible_skins(item_id) is not None and (
+                    item_id in Item.get_not_compatible_skins(_skin) or Item.get_skin_type(
+                item_id) in Item.get_not_compatible_skins(_skin)):
+                not_compatible_skins.append(_skin)
+            elif Item.get_not_compatible_skins(item_id) is not None and (
+                    Item.get_skin_type(_skin) in Item.get_not_compatible_skins(
+                item_id) or _skin in Item.get_not_compatible_skins(item_id)):
+                not_compatible_skins.append(_skin)
+        return not_compatible_skins

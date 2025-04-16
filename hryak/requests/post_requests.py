@@ -93,11 +93,23 @@ def send_money(user_id: int, receiver_id, amount: int, currency: str, confirmed:
     else:
         return {"status": "pending", "tax": tax, "amount_with_tax": amount_with_tax}
 
-def set_language(user_id: int, lang: str):
-    User.set_language(user_id, lang)
-    Stats.set_language_changed(user_id, True)
-    return {"status": 'success'}
-
-def settings_say(guild_id: int, allow: bool):
-    Guild.allow_say(guild_id, allow)
-    return {"status": 'success'}
+def wear_skin(user_id: int, item_id: str, parts: list = None):
+    not_compatible_skins = GameFunc.get_not_compatible_active_skins(user_id, item_id)
+    if not_compatible_skins:
+        return {'status': '400;not_compatible_skins', 'skins': not_compatible_skins}
+    if parts is not None:
+        if 'all' not in parts:
+            for i in parts:
+                Pig.set_skin(user_id, item_id, i)
+        else:
+            Pig.set_skin(user_id, item_id)
+    else:
+        choose_parts = False
+        if Item.get_skin_type(item_id) in ['eyes', 'pupils']:
+            choose_parts = True
+        if Item.get_skin_type(item_id) in ['body'] and Item.get_amount('body_combiner', user_id) > 0:
+            choose_parts = True
+        if choose_parts:
+            return {'status': 'pending;choose_parts'}
+        else:
+            Pig.set_skin(user_id, item_id)
