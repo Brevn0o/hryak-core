@@ -79,6 +79,7 @@ def use_promocode(user_id: int, code: str):
         else:
             User.add_item(user_id, item, rewards[item])
     PromoCode.add_users_used(code, user_id)
+    return {"status": 'success', "rewards": rewards}
 
 def send_money(user_id: int, receiver_id, amount: int, currency: str, confirmed: bool = True):
     User.register_user_if_not_exists(receiver_id)
