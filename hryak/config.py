@@ -119,8 +119,7 @@ skin_layers_rules = {
     }}
 
 
-print(os.path.abspath(os.curdir))
-with open(os.path.join(os.path.abspath(os.curdir), 'hryak/items.json'), 'r', encoding='utf-8') as f:
+with open(os.path.join(os.path.dirname(__file__), 'items.json'), 'r', encoding='utf-8') as f:
     items = json.loads(f.read())
 
 daily_shop_items_types = {
