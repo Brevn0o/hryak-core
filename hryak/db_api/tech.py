@@ -36,6 +36,8 @@ class Tech:
             res = [i for i in res if i[0] in members_ids]
             if limit is not None:
                 res = res[:limit]
+        if extra_select is None:
+            res = [i[0] for i in res]
         return res
 
     @staticmethod

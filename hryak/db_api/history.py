@@ -30,7 +30,7 @@ class History:
 
     @staticmethod
     def get(user_id) -> dict:
-        if type(user_id) is not list:
+        if type(user_id) not in [list, tuple]:
             print(user_id)
             result = Connection.make_request(
                 f"SELECT history FROM {config.users_schema} WHERE id = %s",
