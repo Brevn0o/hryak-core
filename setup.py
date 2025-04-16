@@ -8,6 +8,7 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
+    include_package_data=True,
     install_requires=[
         'mysql-connector-python==9.2.0',
         'cachetools == 5.5.0',
