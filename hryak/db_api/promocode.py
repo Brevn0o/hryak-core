@@ -9,7 +9,8 @@ class PromoCode:
     @staticmethod
     def exists(code: str):
         result = Connection.make_request(
-            f"SELECT EXISTS(SELECT 1 FROM {config.promocodes_schema} WHERE id = '{code}')",
+            f"SELECT EXISTS(SELECT 1 FROM {config.promocodes_schema} WHERE id = %s)",
+            params=(code,),
             commit=False,
             fetch=True
         )
@@ -31,13 +32,15 @@ class PromoCode:
     @staticmethod
     def delete(code: str):
         Connection.make_request(
-            f"DELETE FROM {config.promocodes_schema} WHERE id = '{code}'"
+            f"DELETE FROM {config.promocodes_schema} WHERE id = %s",
+            params=(code,),
         )
 
     @staticmethod
     def get_rewards(code: str):
         result = Connection.make_request(
-            f"SELECT prise FROM {config.promocodes_schema} WHERE id = '{code}'",
+            f"SELECT prise FROM {config.promocodes_schema} WHERE id = %s",
+            params=(code,),
             commit=False,
             fetch=True
         )
