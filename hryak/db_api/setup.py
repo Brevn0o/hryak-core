@@ -37,7 +37,7 @@ class Setup:
             "settings json",
             "orders json"
         ]
-        Tech.create_table(columns, config.users_schema)
+        Setup.create_table(columns, config.users_schema)
 
     @staticmethod
     def create_shop_table():
@@ -45,7 +45,7 @@ class Setup:
                    'timestamp varchar(32)',
                    'data json',
                    ]
-        Tech.create_table(columns, config.shop_schema)
+        Setup.create_table(columns, config.shop_schema)
 
     @staticmethod
     def create_promo_code_table():
@@ -56,7 +56,7 @@ class Setup:
                    'prise json',
                    'expires_in int'
                    ]
-        Tech.create_table(columns, config.promocodes_schema)
+        Setup.create_table(columns, config.promocodes_schema)
 
     @staticmethod
     def create_guild_table():
@@ -64,4 +64,4 @@ class Setup:
                    'joined int',
                    'settings json',
                    ]
-        Tech.create_table(columns, config.guilds_schema)
+        Setup.create_table(columns, config.guilds_schema)

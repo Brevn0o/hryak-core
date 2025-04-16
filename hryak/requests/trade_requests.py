@@ -3,6 +3,8 @@ from ..game_functions import GameFunc
 
 
 def trade(user1_id, user2_id, trade_id):
+    User.register_user_if_not_exists(user1_id)
+    User.register_user_if_not_exists(user2_id)
     if user1_id == user2_id:
         return {'status': '400;same_user'}
     if trade_id is None:
@@ -11,6 +13,8 @@ def trade(user1_id, user2_id, trade_id):
     if agree_number == 2 and Trade.get_status(trade_id) == 'in_process':
         Trade.set_status(trade_id, 'tax_processing')
         return {'status': 'success', 'trade_status': 'tax_processing'}
+    elif agree_number < 2 and Trade.get_status(trade_id) == 'in_process':
+        return {'status': 'success', 'trade_status': 'in_process'}
     if Trade.get_status(trade_id) == 'tax_processing':
         if Trade.get_tax_splitting_vote(trade_id, user1_id) == 'tax_split_1':
             Trade.set_tax_splitting(trade_id, 'tax_split_1')

@@ -4,7 +4,7 @@ import numpy as np
 from scipy.interpolate import PchipInterpolator
 
 from . import config
-from .db_api import Pig, Item, User
+from .db_api import Pig, Item, User, Trade
 from .hidden import Hidden
 
 
@@ -94,3 +94,14 @@ class GameFunc:
     def get_transfer_amount_with_tax(amount, tax):
         amount_with_tax = math.ceil(amount + amount * (tax / 100))
         return amount_with_tax
+
+    @staticmethod
+    def get_trade_total_tax(trade_id):
+        total_tax = {}
+        for user_id in Trade.get_users(trade_id):
+            for item_id in Trade.get_items(trade_id, user_id):
+                item_tax = GameFunc.calculate_item_tax(item_id, user_id)
+                if item_tax[1] not in total_tax:
+                    total_tax[item_tax[1]] = 0
+                total_tax[item_tax[1]] += Trade.get_item_amount(trade_id, user_id, item_id) * item_tax[0]
+        return {k: math.ceil(v) for k, v in total_tax.items() if v > 0}
