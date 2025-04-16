@@ -1,4 +1,4 @@
-from . import post_requests
+from .requests import post_requests
 from . import functions
 from . import game_functions
 from . import config

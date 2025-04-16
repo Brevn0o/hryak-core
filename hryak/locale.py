@@ -101,3 +101,7 @@ class Locale:
         'pig_weight': {'en': 'Pig Weight',
                        'ru': 'Вес Хряка'}
     }
+
+    class Global:
+        kg = {'en': 'kg',
+                'ru': 'кг'}

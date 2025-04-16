@@ -1,9 +1,9 @@
 import random
 
-from .db_api import *
-from .functions import Func
-from .game_functions import GameFunc
-from . import config
+from hryak.db_api import *
+from hryak.functions import Func
+from hryak.game_functions import GameFunc
+from hryak import config
 
 def feed(user_id: int, client = None):
     ready_to_feed = Pig.is_ready_to_feed(user_id)
