@@ -19,7 +19,7 @@ class User:
             Connection.make_request(
                 f"UPDATE {config.users_schema} SET settings = JSON_INSERT(settings, '$.{key}', %s) "
                 f"WHERE JSON_EXTRACT(settings, '$.{key}') IS NULL",
-                params=(json.dumps(value),)
+                params=(value,)
             )
 
     @staticmethod
