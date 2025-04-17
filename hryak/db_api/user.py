@@ -271,7 +271,7 @@ class User:
         SELECT SUM(j.rate) AS total_rate
         FROM {config.users_schema}
         JOIN JSON_TABLE(
-            users.reputation,
+            users.rating,
             '$.*'
             COLUMNS (
                 user_id VARCHAR(30) PATH '$key',
