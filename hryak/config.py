@@ -129,15 +129,6 @@ daily_shop_items_types = {
     'pupils': 1,
     'other': 3
 }
-shops_emojis = {
-    'daily_shop': '🎨',
-    'case_shop': '📦',
-    'consumables_shop': '💊',
-    'tools_shop': '🔪',
-    'premium_skins_shop': '💵',
-    'coins_shop': '🪙',
-    'donation_shop': '🍩',
-}
 
 base_buff_multipliers = {
     'weight': 1,
@@ -207,15 +198,7 @@ win_gifs = ['https://thumbsnap.com/i/wMCKTND2.gif',
             'https://thumbsnap.com/i/i5EZi4mk.gif',
             'https://thumbsnap.com/i/hKJoXUqJ.gif',
             'https://thumbsnap.com/i/WptnXC5A.gif']
-image_links = {'inventory': 'https://thumbsnap.com/i/4EBKi23j.png',
-               'invite': 'https://thumbsnap.com/i/JQ3RPzX1.png',
-               'trade': 'https://thumbsnap.com/i/Hm1iX2Mj.png',
-               'shop': 'https://thumbsnap.com/i/JkjRGKx2.png',
-               'top': 'https://thumbsnap.com/i/2QLNAtCR.png',
-               'coins_ru_ruble_prices': 'https://i.postimg.cc/yxCJCCcB/IMG-7540.png',
-               'image_is_blocked': 'https://thumbsnap.com/i/EQ1EaKmW.png',
-               'buffs': 'https://i.ibb.co/5Kq79Sp/26a1.webp',
-               'quests': 'https://i.ibb.co/Htmxmxj/Quest-Main-Available-Icon-001.png'}
+image_links = {'image_is_blocked': 'https://thumbsnap.com/i/EQ1EaKmW.png'}
 db_api_cash_size = 10
 db_api_cash_ttl = 1
 

@@ -57,6 +57,29 @@ class Locale:
                  'ru': 'Спина'},
     }
 
+    SkinLayers = {
+        'left_eye': {'en': 'Left eye',
+                     'ru': 'Левый глаз'},
+        'right_eye': {'en': 'Right eye',
+                      'ru': 'Правый глаз'},
+        'left_pupil': {'en': 'Left pupil',
+                       'ru': 'Левый зрачок'},
+        'right_pupil': {'en': 'Right pupil',
+                        'ru': 'Правый зрачок'},
+        'left_ear': {'en': 'Left ear',
+                     'ru': 'Левое ухо'},
+        'right_ear': {'en': 'Right ear',
+                      'ru': 'Правое ухо'},
+        'body': {'en': 'Body',
+                 'ru': 'Тело'},
+        'nose': {'en': 'Nose',
+                 'ru': 'Нос'},
+        'tail': {'en': 'Tail',
+                 'ru': 'Хвост'},
+        'middle_ear': {'en': 'Middle ear',
+                       'ru': 'Среднее ухо'}
+    }
+
     ItemRarities = {
         '1': {'en': 'Common',
               'ru': 'Обычный'},
@@ -94,6 +117,7 @@ class Locale:
         '7': {'en': 'Ancient',
               'ru': 'Вечный'},
     }
+
 
     BuffsNames = {
         'support_server': {'en': 'Support server',

@@ -173,6 +173,17 @@ class User:
         return settings['language']
 
     @staticmethod
+    def set_top_participation(user_id, participate: bool):
+        settings = User.get_settings(str(user_id))
+        settings['top_participate'] = participate
+        User.set_new_settings(user_id, settings)
+
+    @staticmethod
+    def get_top_participation(user_id):
+        settings = User.get_settings(str(user_id))
+        return settings['top_participate']
+
+    @staticmethod
     def get_registration_timestamp(user_id):
         result = Connection.make_request(
             f"SELECT created FROM {config.users_schema} WHERE id = {user_id}",

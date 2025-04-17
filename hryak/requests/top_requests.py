@@ -14,38 +14,32 @@ def __top_users(user_id: int, extra_select: str, order_by: str, where: str, unit
     user_position = Tech.get_user_position(user_id, order_by=order_by, where=where, guild=guild)
     return {'status': 'success', 'users': top_users, 'user_position': user_position}
 
-def top_weight_users(user_id: int, lang: str, exclude_users: list = None, guild=None):
+def top_weight_users(user_id: int, lang: str, guild=None):
     """
     Get the top users by weight.
     :return: list of tuples (user_id, weight, unit) and user_position
     """
     extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')), '0')"
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) DESC"
-    where = None
-    if exclude_users is not None:
-        where = f"id NOT IN ({', '.join(str(u) for u in exclude_users)})"
+    where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return __top_users(user_id, extra_select, order_by, where, translate(Locale.Global.kg, lang), guild=guild)
 
-def top_amount_of_items_users(user_id: int, item_id: str, exclude_users: list = None, guild=None):
+def top_amount_of_items_users(user_id: int, item_id: str, guild=None):
     """
     Get the top users by amount of item.
     :return: list of tuples (user_id, amount, unit) and user_position
     """
     extra_select = f"IFNULL(JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')), '0')"
     order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')) DESC"
-    where = None
-    if exclude_users is not None:
-        where = f"id NOT IN ({', '.join(str(u) for u in exclude_users)})"
+    where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return __top_users(user_id, extra_select, order_by, where, Item.get_emoji(item_id), guild=guild)
 
-def top_streak_users(user_id: int, exclude_users: list = None, guild=None):
+def top_streak_users(user_id: int, guild=None):
     """
     Get the top users by streak.
     :return: list of tuples (user_id, streak, unit) and user_position
     """
     extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')), '0')"
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC"
-    where = None
-    if exclude_users is not None:
-        where = f"id NOT IN ({', '.join(str(u) for u in exclude_users)})"
+    where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return __top_users(user_id, extra_select, order_by, where, '🔥', guild=guild)
