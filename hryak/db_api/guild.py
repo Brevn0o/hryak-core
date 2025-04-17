@@ -6,6 +6,7 @@ from ..functions import Func
 from hryak import config
 
 
+
 class Guild:
 
     @staticmethod
