@@ -203,7 +203,7 @@ db_api_cash_size = 10
 db_api_cash_ttl = 1
 
 guild_settings = {'allow_say': False}
-user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'isolated': False, 'isolation_level': 0}
+user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True}
 emotions_erase_cords = {'sad': [(668, 904, 855, 849, 734, 740),
                                 (917, 842, 1150, 917, 1085, 734)],
                         'happy': [(695, 970, 865, 970, 865, 1030, 695, 1030),
