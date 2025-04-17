@@ -243,6 +243,7 @@ rarity_colors = {
 db_caches = {
     'user.get_inventory': TTLCache(maxsize=1000, ttl=600000),
     'user.get_settings': TTLCache(maxsize=1000, ttl=600000),
+    'user.get_rating': TTLCache(maxsize=1000, ttl=600000),
     'item.get_data': TTLCache(maxsize=1000, ttl=600000),
     'item.get_emoji': TTLCache(maxsize=1000, ttl=600000),
     'tech.__get_all_items': TTLCache(maxsize=1000, ttl=600000),

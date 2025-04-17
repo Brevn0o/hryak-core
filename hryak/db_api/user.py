@@ -229,6 +229,7 @@ class User:
         return settings['block_reason']
 
     @staticmethod
+    @cached(config.db_caches['user.get_rating'])
     def get_rating(user_id):
         result = Connection.make_request(
             f"SELECT rating FROM {config.users_schema} WHERE id = {user_id}",
@@ -241,11 +242,16 @@ class User:
             return {}
 
     @staticmethod
+    def clear_get_rating_cache(user_id):
+        Func.clear_db_cache('user.get_rating', (str(user_id),))
+
+    @staticmethod
     def set_new_rating(user_id, new_rating):
         new_rating = json.dumps(new_rating, ensure_ascii=False)
         Connection.make_request(
             f"UPDATE {config.users_schema} SET rating = '{new_rating}' WHERE id = {user_id}"
         )
+        User.clear_get_rating_cache(user_id)
 
     @staticmethod
     def append_rate(user_id, rated_by_id, rate):
@@ -267,20 +273,11 @@ class User:
 
     @staticmethod
     def get_rating_total_number(user_id):
-        query = f"""
-        SELECT SUM(j.rate) AS total_rate
-        FROM {config.users_schema}
-        JOIN JSON_TABLE(
-            users.rating,
-            '$.*'
-            COLUMNS (
-                user_id VARCHAR(30) PATH '$key',
-                rate INT PATH '$.rate'
-            )
-        ) AS j
-        WHERE id = %s
-        """
-        return Connection.make_request(query, params=(user_id,), fetch=True, fetch_first=True)
+        rating = User.get_rating(user_id)
+        number = 0
+        for rater_id in rating:
+            number += User.get_rate_number(user_id, rater_id)
+        return number
 
     @staticmethod
     def get_recent_bought_items(user_id, seconds):
