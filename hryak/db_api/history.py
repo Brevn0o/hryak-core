@@ -1,5 +1,7 @@
 import json
 
+from cachetools import cached
+
 from .connection import Connection
 from ..functions import Func
 from hryak import config
@@ -29,45 +31,30 @@ class History:
                 """, params=(json.dumps(v) if isinstance(v, list) else v,))
 
     @staticmethod
-    def get(user_id) -> dict:
-        if type(user_id) not in [list, tuple]:
-            print(user_id)
-            result = Connection.make_request(
-                f"SELECT history FROM {config.users_schema} WHERE id = %s",
-                params=(user_id,),
-                commit=False,
-                fetch=True,
-            )
-            if result is not None:
-                return json.loads(result)
-            else:
-                return {}
+    @cached(config.db_caches['history.get'])
+    def get(user_id: int) -> dict:
+        result = Connection.make_request(
+            f"SELECT history FROM {config.users_schema} WHERE id = %s",
+            params=(user_id,),
+            commit=False,
+            fetch=True,
+        )
+        if result is not None:
+            return json.loads(result)
         else:
-            user_ids = []
-            for i in user_id:
-                user_ids.append(int(i))
-            result = Connection.make_request(
-                f"SELECT history FROM {config.users_schema} WHERE id IN %s",
-                params=(tuple(user_ids)),
-                commit=False,
-                fetch=True,
-                fetchall=True,
-                fetch_first=False
-            )
-            if result is not None:
-                final_result = {}
-                for i, j in enumerate(result):
-                    final_result[user_ids[i]] = json.loads(j[0])
-                return final_result
-            else:
-                return {}
+            return {}
 
     @staticmethod
-    def update_history(user_id: int, new_history):
+    def update_history(user_id: int, new_history: dict):
         new_history = json.dumps(new_history, ensure_ascii=False)
         Connection.make_request(
             f"UPDATE {config.users_schema} SET history = %s WHERE id = %s", (new_history, user_id)
         )
+        History.clear_get_history_cache(user_id)
+
+    @staticmethod
+    def clear_get_history_cache(user_id: int):
+        Func.clear_db_cache('history.get', (str(user_id),))
 
     @staticmethod
     def get_feed_history(user_id: int):

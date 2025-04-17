@@ -246,6 +246,9 @@ db_caches = {
     'user.get_rating': TTLCache(maxsize=1000, ttl=600000),
     'item.get_data': TTLCache(maxsize=1000, ttl=600000),
     'item.get_emoji': TTLCache(maxsize=1000, ttl=600000),
+    'pig.get': TTLCache(maxsize=1000, ttl=600000),
+    'shop.get_data': TTLCache(maxsize=1000, ttl=600000),
+    'history.get': TTLCache(maxsize=1000, ttl=600000),
     'tech.__get_all_items': TTLCache(maxsize=1000, ttl=600000),
     'tech.get_all_items': TTLCache(maxsize=1000, ttl=600000)
 }

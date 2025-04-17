@@ -1,5 +1,7 @@
 import json, random
 
+from cachetools import cached
+
 from .connection import Connection
 from ..functions import Func, translate
 from ..locale import Locale
@@ -33,43 +35,30 @@ class Pig:
                 """, params=(json.dumps(v) if isinstance(v, list) else v,))
 
     @staticmethod
+    @cached(config.db_caches['pig.get'])
     def get(user_id) -> dict:
-        if type(user_id) is not list:
-            result = Connection.make_request(
-                f"SELECT pig FROM {config.users_schema} WHERE id = %s",
-                params=(user_id,),
-                commit=False,
-                fetch=True,
-            )
-            if result is not None:
-                return json.loads(result)
-            else:
-                return {}
+        result = Connection.make_request(
+            f"SELECT pig FROM {config.users_schema} WHERE id = %s",
+            params=(user_id,),
+            commit=False,
+            fetch=True,
+        )
+        if result is not None:
+            return json.loads(result)
         else:
-            user_ids = []
-            for i in user_id:
-                user_ids.append(int(i))
-            result = Connection.make_request(
-                f"SELECT pig FROM {config.users_schema} WHERE id IN {tuple(user_ids)}",
-                commit=False,
-                fetch=True,
-                fetchall=True,
-                fetch_first=False
-            )
-            if result is not None:
-                final_result = {}
-                for i, j in enumerate(result):
-                    final_result[user_ids[i]] = json.loads(j[0])
-                return final_result
-            else:
-                return {}
+            return {}
 
     @staticmethod
-    def update_pig(user_id, new_pig):
+    def clear_get_pig_cache(user_id: int):
+        Func.clear_db_cache('pig.get', (str(user_id),))
+
+    @staticmethod
+    def update_pig(user_id: int, new_pig: dict):
         new_pig = json.dumps(new_pig, ensure_ascii=False)
         Connection.make_request(
             f"UPDATE {config.users_schema} SET pig = %s WHERE id = {user_id}", (new_pig,)
         )
+        Pig.clear_get_pig_cache(user_id)
 
     @staticmethod
     def set_buffs(user_id, new_buffs):

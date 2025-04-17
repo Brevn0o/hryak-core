@@ -1,6 +1,8 @@
 import json
 import random
 
+from cachetools import cached
+
 from .connection import Connection
 from .item import Item
 from .tech import Tech
@@ -12,26 +14,7 @@ from hryak import config
 class Shop:
 
     @staticmethod
-    def get_last_static_shop():
-        result = Connection.make_request(
-            f"SELECT static_shop FROM {config.shop_schema} ORDER BY id DESC LIMIT 1",
-            commit=False,
-            fetch=True
-        )
-        if result is not None:
-            return json.loads(result)
-
-    @staticmethod
-    def get_last_daily_shop():
-        result = Connection.make_request(
-            f"SELECT daily_shop FROM {config.shop_schema} ORDER BY id DESC LIMIT 1",
-            commit=False,
-            fetch=True
-        )
-        if result is not None:
-            return json.loads(result)
-
-    @staticmethod
+    @cached(config.db_caches['shop.get_data'])
     def get_data(shop_id=None):
         if shop_id is None:
             query = f"SELECT data FROM {config.shop_schema} ORDER BY id DESC LIMIT 1"
@@ -44,6 +27,13 @@ class Shop:
         )
         if result is not None:
             return json.loads(result)
+
+    @staticmethod
+    def clear_get_data_cache(shop_id=None):
+        if shop_id is None:
+            Func.clear_db_cache('shop.get_data', ())
+        else:
+            Func.clear_db_cache('shop.get_data', (str(shop_id),))
 
     @staticmethod
     def is_item_in_shop(item_id, shop_id=None):
@@ -123,6 +113,7 @@ class Shop:
             f"VALUES ('{Func.generate_current_timestamp()}', %s)",
             params=(json.dumps(data),)
         )
+        Shop.clear_get_data_cache()
 
     @staticmethod
     def generate_shop_daily_items():
