@@ -91,6 +91,7 @@ class User:
     @staticmethod
     def clear_get_inventory_cache(user_id):
         Func.clear_db_cache('user.get_inventory', (str(user_id),))
+        Func.clear_db_cache('user.get_inventory', (int(user_id),))
 
     @staticmethod
     def set_item_amount(user_id, item_id, amount: int = 1):
@@ -160,6 +161,7 @@ class User:
     @staticmethod
     def clear_get_settings_cache(user_id):
         Func.clear_db_cache('user.get_settings', (str(user_id),))
+        Func.clear_db_cache('user.get_settings', (int(user_id),))
 
     @staticmethod
     def set_new_settings(user_id, new_settings):
@@ -243,9 +245,8 @@ class User:
 
     @staticmethod
     def clear_get_rating_cache(user_id):
-        print(config.db_caches['user.get_rating'])
         Func.clear_db_cache('user.get_rating', (str(user_id),))
-        print(config.db_caches['user.get_rating'])
+        Func.clear_db_cache('user.get_rating', (int(user_id),))
 
     @staticmethod
     def set_new_rating(user_id, new_rating):

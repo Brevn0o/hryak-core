@@ -55,6 +55,7 @@ class History:
     @staticmethod
     def clear_get_history_cache(user_id: int):
         Func.clear_db_cache('history.get', (str(user_id),))
+        Func.clear_db_cache('history.get', (int(user_id),))
 
     @staticmethod
     def get_feed_history(user_id: int):

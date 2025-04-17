@@ -51,6 +51,7 @@ class Pig:
     @staticmethod
     def clear_get_pig_cache(user_id: int):
         Func.clear_db_cache('pig.get', (str(user_id),))
+        Func.clear_db_cache('pig.get', (int(user_id),))
 
     @staticmethod
     def update_pig(user_id: int, new_pig: dict):
