@@ -21,7 +21,7 @@ def top_weight_users(user_id: int, lang: str, guild=None):
     """
     extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')), '0')"
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) DESC"
-    where = "JSON_EXTRACT(settings, '$.top_participate') = true"
+    where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return __top_users(user_id, extra_select, order_by, where, translate(Locale.Global.kg, lang), guild=guild)
 
 def top_amount_of_items_users(user_id: int, item_id: str, guild=None):
@@ -31,7 +31,7 @@ def top_amount_of_items_users(user_id: int, item_id: str, guild=None):
     """
     extra_select = f"IFNULL(JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')), '0')"
     order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')) DESC"
-    where = "JSON_EXTRACT(settings, '$.top_participate') = true"
+    where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return __top_users(user_id, extra_select, order_by, where, Item.get_emoji(item_id), guild=guild)
 
 def top_streak_users(user_id: int, guild=None):
@@ -41,5 +41,5 @@ def top_streak_users(user_id: int, guild=None):
     """
     extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')), '0')"
     order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC"
-    where = "JSON_EXTRACT(settings, '$.top_participate') = true"
+    where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return __top_users(user_id, extra_select, order_by, where, '🔥', guild=guild)

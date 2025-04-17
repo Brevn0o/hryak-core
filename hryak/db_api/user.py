@@ -14,6 +14,15 @@ from hryak import config
 class User:
 
     @staticmethod
+    def fix_settings_structure_for_all_users():
+        for key, value in config.user_settings.items():
+            Connection.make_request(
+                f"UPDATE {config.users_schema} SET settings = JSON_INSERT(settings, '$.{key}', %s) "
+                f"WHERE JSON_EXTRACT(settings, '$.{key}') IS NULL",
+                params=(json.dumps(value),)
+            )
+
+    @staticmethod
     def register_user_if_not_exists(user_id):
         if not User.exists(user_id):
             User.register(user_id)
