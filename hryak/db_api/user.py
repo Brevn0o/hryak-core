@@ -229,7 +229,7 @@ class User:
         return settings['block_reason']
 
     @staticmethod
-    @cached(config.db_caches['user.get_rating'])
+    # @cached(config.db_caches['user.get_rating'])
     def get_rating(user_id):
         result = Connection.make_request(
             f"SELECT rating FROM {config.users_schema} WHERE id = {user_id}",
