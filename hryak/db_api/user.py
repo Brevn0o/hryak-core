@@ -267,18 +267,18 @@ class User:
 
     @staticmethod
     def get_rating_total_number(user_id):
-        query = """
+        query = f"""
         SELECT SUM(j.rate) AS total_rate
-        FROM users
+        FROM {config.users_schema}
         JOIN JSON_TABLE(
-            users.reputation_json,
+            users.reputation,
             '$.*'
             COLUMNS (
                 user_id VARCHAR(30) PATH '$key',
                 rate INT PATH '$.rate'
             )
         ) AS j
-        WHERE users.id = %s
+        WHERE id = %s
         """
         return Connection.make_request(query, params=(user_id,), fetch=True, fetch_first=True)
 
