@@ -267,11 +267,20 @@ class User:
 
     @staticmethod
     def get_rating_total_number(user_id):
-        rating = User.get_rating(user_id)
-        number = 0
-        for rater_id in rating:
-            number += User.get_rate_number(user_id, rater_id)
-        return number
+        query = """
+        SELECT SUM(j.rate) AS total_rate
+        FROM users
+        JOIN JSON_TABLE(
+            users.reputation_json,
+            '$.*'
+            COLUMNS (
+                user_id VARCHAR(30) PATH '$key',
+                rate INT PATH '$.rate'
+            )
+        ) AS j
+        WHERE users.id = %s
+        """
+        return Connection.make_request(query, params=(user_id,), fetch=True, fetch_first=True)
 
     @staticmethod
     def get_recent_bought_items(user_id, seconds):
