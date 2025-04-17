@@ -1,4 +1,5 @@
 import datetime, random, json, os
+import shutil
 
 import aiocache
 import aiofiles
@@ -84,6 +85,20 @@ class Func:
             config.db_caches[cache_id].pop(params)
         except KeyError:
             pass
+
+    @staticmethod
+    async def get_image_temp_path_from_path_or_link(p: str):
+        if p.startswith('http'):
+            return await Func.get_image_path_from_link(p)
+        else:
+            return await Func.get_image_temp_path_from_path(p)
+
+    @staticmethod
+    @aiocache.cached(ttl=86400)
+    async def get_image_temp_path_from_path(init_path: str):
+        dest_path = Func.generate_temp_path(f'{random.randrange(1, 10000)}{os.path.basename(init_path)}')
+        shutil.copy2(init_path, dest_path)
+        return dest_path
 
     @staticmethod
     @aiocache.cached(ttl=86400)
