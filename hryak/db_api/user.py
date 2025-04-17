@@ -257,7 +257,7 @@ class User:
         User.clear_get_rating_cache(user_id)
 
     @staticmethod
-    def append_rate(user_id, rated_by_id, rate):
+    def append_rate(user_id: int, rated_by_id: int, rate: int):
         rating = User.get_rating(user_id)
         if str(rated_by_id) not in rating:
             rating[str(rated_by_id)] = {}
@@ -266,7 +266,7 @@ class User:
         User.set_new_rating(user_id, rating)
 
     @staticmethod
-    def get_rate_number(user_id, rater_id):
+    def get_rate_number(user_id: int, rater_id: int):
         rating = User.get_rating(user_id)
         rate = 0
         if str(rater_id) in rating:
@@ -275,7 +275,25 @@ class User:
         return rate
 
     @staticmethod
-    def get_rating_total_number(user_id):
+    def get_amount_of_positive_ratings(user_id: int):
+        rating = User.get_rating(user_id)
+        amount = 0
+        for rater_id in rating:
+            if User.get_rate_number(user_id, rater_id) == 1:
+                amount += 1
+        return amount
+
+    @staticmethod
+    def get_amount_of_negative_ratings(user_id: int):
+        rating = User.get_rating(user_id)
+        amount = 0
+        for rater_id in rating:
+            if User.get_rate_number(user_id, rater_id) == -1:
+                amount += 1
+        return amount
+
+    @staticmethod
+    def get_rating_total_number(user_id: int):
         rating = User.get_rating(user_id)
         number = 0
         for rater_id in rating:
@@ -283,7 +301,7 @@ class User:
         return number
 
     @staticmethod
-    def get_recent_bought_items(user_id, seconds):
+    def get_recent_bought_items(user_id: int, seconds: float):
         current_time = datetime.datetime.now()
         recent_items = []
         for item in History.get_shop_history(user_id):
