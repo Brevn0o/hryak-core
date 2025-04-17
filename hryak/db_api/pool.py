@@ -26,14 +26,18 @@ class MySQLPool:
         ))
 
     def get_connection(self):
-        for pool in self.pools:
+        for i in range(len(self.pools)):
             try:
-                return pool.get_connection()
+                return self.pools[i].get_connection()
             except:
                 continue
-        # if all failed, try recreating pool
-        raise Exception("All connection pools failed.")
-
+        else:
+            self.create_pool()
+            for i in range(len(self.pools)):
+                try:
+                    return self.pools[i].get_connection()
+                except:
+                    continue
 
 # singleton instance
 pool = MySQLPool()

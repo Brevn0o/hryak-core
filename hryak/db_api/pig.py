@@ -41,7 +41,6 @@ class Pig:
                 commit=False,
                 fetch=True,
             )
-            print(111, result)
             if result is not None:
                 return json.loads(result)
             else:
