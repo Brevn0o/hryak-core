@@ -1,31 +1,94 @@
-from .pool import pool
+import aiomysql
+from hryak import config
+
+class ConnectionPool:
+    def __init__(self):
+        self.pool = None
+        self.host = None
+        self.port = None
+        self.user = None
+        self.password = None
+        self.db = None
+
+    def set_config(self, **db_config):
+        self.host = db_config['host']
+        self.port = db_config['port']
+        self.user = db_config['user']
+        self.password = db_config['password']
+        self.db = db_config['database']
+
+    async def create_pool(self):
+        self.pool = await aiomysql.create_pool(
+            host=self.host,
+            port=self.port,
+            user=self.user,
+            password=self.password,
+            db=self.db,
+            autocommit=False,
+            maxsize=100,
+            ssl=False
+        )
+
+    async def close(self):
+        if self.pool is not None:
+            self.pool.close()
+            await self.pool.wait_closed()
+
+    async def get_connection(self):
+        if self.pool is None:
+            raise RuntimeError("Connection pool not initialized.")
+        if self.pool._loop.is_closed():
+            raise RuntimeError("Event loop is closed.")
+        return await self.pool.acquire()
+
+    async def release_connection(self, conn):
+        if self.pool is None or conn is None:
+            return
+        try:
+            self.pool.release(conn)
+        except Exception as e:
+            print(f"[Release Error] {e}")
+
+
+pool = ConnectionPool()
+
 
 class Connection:
 
     @staticmethod
-    def connect():
-        return pool.get_instance().get_connection()
-
-    @staticmethod
-    def make_request(query, params: tuple = None, commit: bool = True, executemany: bool = False,
-                     fetch: bool = False, fetch_first: bool = True, fetchall=False):
-        connection = Connection.connect()
-        fetch = True if fetchall else fetch
+    async def make_request(query, params=None, commit=True, fetch=False, fetch_first=True, fetchall=False,
+                           executemany=False):
+        conn = None
+        cur = None
         try:
-            with connection.cursor() as cursor:
-                if not executemany:
-                    cursor.execute(query, params)
-                else:
-                    cursor.executemany(query, params)
-                if commit:
-                    connection.commit()
-                if fetch:
-                    if fetchall:
-                        return cursor.fetchall()
-                    result = cursor.fetchone()
-                    if fetch_first:
-                        return result[0]
-                    else:
-                        return result
+            conn = await pool.get_connection()
+            cur = await conn.cursor()
+
+            if executemany:
+                await cur.executemany(query, params)
+            else:
+                await cur.execute(query, params)
+
+            result = None
+            if fetch:
+                result = await cur.fetchall() if fetchall or not fetch_first else await cur.fetchone()
+                print(query, result)
+
+            if fetch_first and not fetchall:
+                result = result[0] if result else None
+
+            if commit:
+                await conn.commit()
+
+            return result
+
+        except Exception as e:
+            if conn:
+                await conn.rollback()
+            raise e
+
         finally:
-            connection.close()
+            if cur:
+                await cur.close()
+            if conn:
+                await pool.release_connection(conn)

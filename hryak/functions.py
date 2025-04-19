@@ -3,6 +3,7 @@ import shutil
 
 import aiocache
 import aiofiles
+import aiohttp
 import requests
 from scipy.interpolate import PchipInterpolator
 import numpy as np
@@ -75,16 +76,25 @@ class Func:
         return probabilities
 
     @staticmethod
-    def clear_db_cache(cache_id, params: tuple = None):
-        if cache_id not in config.db_caches:
+    async def clear_db_cache(cache_id: str, func, *args):
+        if cache_id not in aiocache.caches._config:
             return
-        if params is None:
-            config.db_caches[cache_id].clear()
+
+        cache = aiocache.caches.get(cache_id)
+        key = Func.cache_key_builder(func, args)
+
+        if args is None:
+            await cache.clear()
             return
+
         try:
-            config.db_caches[cache_id].pop(params)
-        except KeyError:
+            await cache.delete(key)
+        except Exception:
             pass
+
+    @staticmethod
+    def cache_key_builder(func, *args, **kwargs):
+        return f"{func.__module__}.{func.__name__}:{':'.join([str(i) for i in args])}:{':'.join([f'{k}={v}' for k, v in kwargs.items()])}"
 
     @staticmethod
     async def get_image_temp_path_from_path_or_link(p: str):
@@ -102,7 +112,7 @@ class Func:
 
     @staticmethod
     @aiocache.cached(ttl=86400)
-    async def get_image_path_from_link(link: str, folder_path: str = None, name: str = None):
+    async def get_image_path_from_link(link: str, name: str = None):
         if name is None:
             name = random.randrange(10000, 99999)
         if not link.startswith('http'):
@@ -115,12 +125,14 @@ class Func:
         for i in range(3):
             try:
                 if file_extension in ['gif']:
-                    async with aiofiles.open(path, 'wb') as file:
-                        for chunk in requests.get(link, stream=True).iter_content(1024):
-                            await file.write(chunk)
-                else:
+                    content = await (await aiohttp.ClientSession().get(link)).read()
                     async with aiofiles.open(path, 'wb') as f:
-                        await f.write(requests.get(link).content)
+                        await f.write(content)
+                else:
+                    content = await (await aiohttp.ClientSession().get(link)).read()
+                    print(file_extension, content)
+                    async with aiofiles.open(path, 'wb') as f:
+                        await f.write(content)
             except requests.exceptions.ConnectionError:
                 continue
         return path
@@ -133,7 +145,7 @@ class Func:
                 return path
 
     @staticmethod
-    def add_log(log_type, **kwargs):
+    async def add_log(log_type, **kwargs):
         current_time = datetime.datetime.now().isoformat()
         log_entry = {
             'timestamp': current_time,

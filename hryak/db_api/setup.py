@@ -1,4 +1,4 @@
-import mysql.connector
+import aiomysql
 
 from .connection import Connection
 from hryak import config
@@ -7,24 +7,24 @@ from hryak import config
 class Setup:
 
     @staticmethod
-    def create_table(columns, schema):
+    async def create_table(columns, schema):
         try:
-            Connection.make_request(f"CREATE TABLE {schema} ({columns[0]})", commit=False)
-        except mysql.connector.errors.ProgrammingError:
+            await Connection.make_request(f"CREATE TABLE {schema} ({columns[0]})", commit=False)
+        except Exception as e:
             pass
         try:
-            Connection.make_request(
+            await Connection.make_request(
                 f"ALTER TABLE {schema} CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;", commit=False)
-        except mysql.connector.errors.ProgrammingError:
+        except Exception as e:
             pass
         for column in columns[1:]:
             try:
-                Connection.make_request(f"ALTER TABLE {schema} ADD COLUMN {column}", commit=False)
+                await Connection.make_request(f"ALTER TABLE {schema} ADD COLUMN {column}", commit=False)
             except Exception as e:
                 pass
 
     @staticmethod
-    def create_user_table():
+    async def create_user_table():
         columns = [
             'id varchar(32) PRIMARY KEY UNIQUE',
             'created int DEFAULT 0',
@@ -37,18 +37,18 @@ class Setup:
             "settings json",
             "orders json"
         ]
-        Setup.create_table(columns, config.users_schema)
+        await Setup.create_table(columns, config.users_schema)
 
     @staticmethod
-    def create_shop_table():
+    async def create_shop_table():
         columns = ['id int AUTO_INCREMENT PRIMARY KEY UNIQUE',
                    'timestamp varchar(32)',
                    'data json',
                    ]
-        Setup.create_table(columns, config.shop_schema)
+        await Setup.create_table(columns, config.shop_schema)
 
     @staticmethod
-    def create_promo_code_table():
+    async def create_promo_code_table():
         columns = ['id varchar(128) PRIMARY KEY UNIQUE',
                    'created varchar(32)',
                    'users_used json',
@@ -56,12 +56,12 @@ class Setup:
                    'prise json',
                    'expires_in int'
                    ]
-        Setup.create_table(columns, config.promocodes_schema)
+        await Setup.create_table(columns, config.promocodes_schema)
 
     @staticmethod
-    def create_guild_table():
+    async def create_guild_table():
         columns = ['id varchar(32) PRIMARY KEY UNIQUE',
                    'joined int',
                    'settings json',
                    ]
-        Setup.create_table(columns, config.guilds_schema)
+        await Setup.create_table(columns, config.guilds_schema)

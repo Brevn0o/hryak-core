@@ -2,6 +2,7 @@ import json
 import os
 
 from cachetools import TTLCache
+from aiocache import cached, caches
 
 logs_path = None
 test = False
@@ -252,6 +253,52 @@ db_caches = {
     'tech.__get_all_items': TTLCache(maxsize=1000, ttl=600000),
     'tech.get_all_items': TTLCache(maxsize=1000, ttl=600000)
 }
+caches.set_config({
+    'default': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'user.get_inventory': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'user.get_settings': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'user.get_rating': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'item.get_data': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'item.get_emoji': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'pig.get': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'shop.get_data': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'history.get': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'tech.__get_all_items': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    },
+    'tech.get_all_items': {
+        'cache': "aiocache.SimpleMemoryCache",
+        'ttl': 600000,
+    }
+})
 
 pig_names = [
     {'en': ['Sleepy', 'Angry', 'Kind', 'Crazy', 'Drunk', 'High', 'Big', 'Stinky', 'Fat', 'Thin', 'Funny', 'Smart',

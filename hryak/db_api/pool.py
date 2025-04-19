@@ -4,7 +4,7 @@ class MySQLPool:
     __instance = None
 
     @staticmethod
-    def get_instance():
+    async def get_instance():
         if MySQLPool.__instance is None:
             raise Exception("Pool not initialized. Call create_pool() first.")
         return MySQLPool.__instance

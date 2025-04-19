@@ -30,12 +30,12 @@ class Hidden:
         return round(float(tax), 1)
 
     @staticmethod
-    def get_duel_winning_chances(user1_id: int, user2_id: int):
+    async def get_duel_winning_chances(user1_id: int, user2_id: int):
         chances = {}
         for user_id in [user1_id, user2_id]:
             chances[user_id] = 100
-            chances[user_id] += Pig.get_weight(user_id) / 2
-            if Pig.get_time_to_next_feed(user_id) != -1:
+            chances[user_id] += await Pig.get_weight(user_id) / 2
+            if await Pig.get_time_to_next_feed(user_id) != -1:
                 chances[user_id] += 20
         chances = Func.calculate_probabilities(chances, 1)
         return chances
@@ -61,8 +61,8 @@ class Hidden:
             hide_skins = []
             hide_skins_raw = {}
             for item_id in skins.values():
-                if Item.exists(item_id) and Item.get_skins_to_hide(item_id) is not None:
-                    hide_skins_raw[Item.get_skin_type(item_id)] = Item.get_skins_to_hide(item_id)
+                if await Item.exists(item_id) and await Item.get_skins_to_hide(item_id) is not None:
+                    hide_skins_raw[await Item.get_skin_type(item_id)] = await Item.get_skins_to_hide(item_id)
             for i in config.skin_layers_rules:
                 if skins[i] is not None:
                     if 'hide' in config.skin_layers_rules[i]:
@@ -72,11 +72,11 @@ class Hidden:
                             hide_skins_raw[i] = config.skin_layers_rules[i]['hide']
             for k, v in hide_skins_raw.copy().items():
                 for i in v:
-                    if i not in config.default_pig['skins'] and not Item.exists(i):
+                    if i not in config.default_pig['skins'] and not await Item.exists(i):
                         continue
                     skin_type = i
-                    if i in Tech.get_all_items():
-                        skin_type = Item.get_skin_type(i)
+                    if i in await Tech.get_all_items():
+                        skin_type = await Item.get_skin_type(i)
                     if skin_type in hide_skins_raw and list(config.default_pig['skins']).index(skin_type) < list(
                             config.default_pig['skins']).index(k):
                         hide_skins_raw.pop(skin_type)
@@ -92,14 +92,14 @@ class Hidden:
                 if skin_type in ['body', 'tail', 'left_ear', 'right_ear', 'nose', 'left_eye', 'right_eye', 'left_pupil',
                                  'right_pupil', 'middle_ear']:
 
-                    for element in Item.get_skin_layer(skin, skin_type):
+                    for element in await Item.get_skin_layer(skin, skin_type):
                         if element == 'image':
                             ordered_layers.append(f'{skin}.{skin_type}.{element}')
                         elif element == 'shadow':
                             ordered_layers.insert(0, f'{skin}.{skin_type}.{element}')
                 else:
-                    for layer in Item.get_skin_layers(skin):
-                        for element in Item.get_skin_layer(skin, layer):
+                    for layer in await Item.get_skin_layers(skin):
+                        for element in await Item.get_skin_layer(skin, layer):
                             if element == 'image':
                                 ordered_layers.append(f'{skin}.{layer}.{element}')
                             elif element == 'shadow':
@@ -107,7 +107,7 @@ class Hidden:
             ordered_layers = [[i] for i in ordered_layers]
             moved_layers = {}
 
-            def find_skin_type_from_ordered_layers_list(skin_type):
+            async def find_skin_type_from_ordered_layers_list(skin_type):
                 for group in ordered_layers:
                     for skin in group:
                         layer_props = skin.split('.')
@@ -118,7 +118,7 @@ class Hidden:
                             continue
                         if layer in config.default_pig['skins'] and layer == skin_type:
                             return skin
-                        elif Item.get_skin_type(item_id) == skin_type:
+                        elif await Item.get_skin_type(item_id) == skin_type:
                             return skin
                 else:
                     for i in list(config.default_pig['skins'])[
@@ -128,7 +128,7 @@ class Hidden:
                             layer_props = skin.split('.')
                             item_id = layer_props[0]
                             layer = layer_props[1]
-                            if Item.get_skin_type(item_id) == i or layer == i:
+                            if await Item.get_skin_type(item_id) == i or layer == i:
                                 return skin
 
             def find_layer_in_grouped_layers(layer, return_index=True):
@@ -163,25 +163,25 @@ class Hidden:
                         if layer in config.default_pig['skins']:
                             skin_type = layer
                         else:
-                            skin_type = Item.get_skin_type(item_id)
-                        if Item.get_skin_right_ear_line_type(item_id) == '1' and right_ear_line in [None, 2]:
+                            skin_type = await Item.get_skin_type(item_id)
+                        if await Item.get_skin_right_ear_line_type(item_id) == '1' and right_ear_line in [None, 2]:
                             right_ear_line = '1'
-                        elif Item.get_skin_right_ear_line_type(item_id) == '2' and right_ear_line is None:
+                        elif await Item.get_skin_right_ear_line_type(item_id) == '2' and right_ear_line is None:
                             right_ear_line = '2'
-                        if Item.get_skin_right_eye_outline(item_id) is not None and right_eye_outline is None:
-                            right_eye_outline = Item.get_skin_right_eye_outline(item_id)
-                        if Item.get_skin_left_eye_outline(item_id) is not None and left_eye_outline is None:
-                            left_eye_outline = Item.get_skin_left_eye_outline(item_id)
+                        if await Item.get_skin_right_eye_outline(item_id) is not None and right_eye_outline is None:
+                            right_eye_outline = await Item.get_skin_right_eye_outline(item_id)
+                        if await Item.get_skin_left_eye_outline(item_id) is not None and left_eye_outline is None:
+                            left_eye_outline = await Item.get_skin_left_eye_outline(item_id)
                         if type_ == 'shadow':
                             continue
-                        if Item.get_skin_layer_before(item_id, layer) is not None:
-                            before_list += [Item.get_skin_layer_before(item_id, layer)] if isinstance(
-                                Item.get_skin_layer_before(item_id, layer), str) else Item.get_skin_layer_before(
+                        if await Item.get_skin_layer_before(item_id, layer) is not None:
+                            before_list += [await Item.get_skin_layer_before(item_id, layer)] if isinstance(
+                                await Item.get_skin_layer_before(item_id, layer), str) else await Item.get_skin_layer_before(
                                 item_id,
                                 layer)
-                        if Item.get_skin_layer_after(item_id, layer) is not None:
-                            after_list += [Item.get_skin_layer_after(item_id, layer)] if isinstance(
-                                Item.get_skin_layer_after(item_id, layer), str) else Item.get_skin_layer_after(item_id,
+                        if await Item.get_skin_layer_after(item_id, layer) is not None:
+                            after_list += [await Item.get_skin_layer_after(item_id, layer)] if isinstance(
+                                await Item.get_skin_layer_after(item_id, layer), str) else await Item.get_skin_layer_after(item_id,
                                                                                                                layer)
                         if skin_type in config.skin_layers_rules:
                             if 'before' in config.skin_layers_rules[skin_type]:
@@ -194,12 +194,12 @@ class Hidden:
                         layer_props = i.split('.')
                         item_id = layer_props[0]
                         layer = layer_props[1]
-                        if Item.get_skin_type(item_id) in before_list:
-                            before_list.remove(Item.get_skin_type(item_id))
+                        if await Item.get_skin_type(item_id) in before_list:
+                            before_list.remove(await Item.get_skin_type(item_id))
                         if layer in before_list:
                             before_list.remove(layer)
-                        if Item.get_skin_type(item_id) in after_list:
-                            after_list.remove(Item.get_skin_type(item_id))
+                        if await Item.get_skin_type(item_id) in after_list:
+                            after_list.remove(await Item.get_skin_type(item_id))
                         if layer in after_list:
                             after_list.remove(layer)
 
@@ -207,7 +207,7 @@ class Hidden:
                     if before_list:
                         layer_with_needed_before_type = None
                         for before in before_list:
-                            layer_with_needed_before_type = find_skin_type_from_ordered_layers_list(before)
+                            layer_with_needed_before_type = await find_skin_type_from_ordered_layers_list(before)
                             if layer_with_needed_before_type is None:
                                 continue
                             before_index = find_layer_in_grouped_layers(layer_with_needed_before_type)
@@ -230,7 +230,7 @@ class Hidden:
                     if after_list:
                         layer_with_needed_after_type = None
                         for after in after_list:
-                            layer_with_needed_after_type = find_skin_type_from_ordered_layers_list(after)
+                            layer_with_needed_after_type = await find_skin_type_from_ordered_layers_list(after)
                             if layer_with_needed_after_type is None:
                                 continue
                             after_index = find_layer_in_grouped_layers(layer_with_needed_after_type)
@@ -263,7 +263,7 @@ class Hidden:
             ordered_layers = [i for j in ordered_layers for i in j]
             new_ordered_layers = []
             for layer in ordered_layers:
-                if Item.get_skin_type(layer) in hide_skins or layer.split('.')[1] in hide_skins:
+                if await Item.get_skin_type(layer) in hide_skins or layer.split('.')[1] in hide_skins:
                     continue
                 new_ordered_layers.append(layer)
             ordered_layers = new_ordered_layers
@@ -319,7 +319,7 @@ class Hidden:
         async def fix_img_to_paste(img):
             if layer == 'right_ear' and type_ != 'shadow' and right_ear_line is not None:
                 right_ear_img = Image.open(
-                    await Func.get_image_path_from_link(Item.get_skin_right_ear_line(item_id, right_ear_line)))
+                    await Func.get_image_path_from_link(await Item.get_skin_right_ear_line(item_id, right_ear_line)))
                 img = Image.alpha_composite(img, right_ear_img)
             if layer == 'body' and left_eye_outline is not None:
                 left_eye_outline_img = Image.open(await Func.get_image_path_from_link(left_eye_outline))

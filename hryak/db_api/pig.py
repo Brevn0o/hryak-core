@@ -1,5 +1,6 @@
 import json, random
 
+import aiocache
 from cachetools import cached
 
 from .connection import Connection
@@ -13,31 +14,31 @@ from .history import History
 class Pig:
 
     @staticmethod
-    def fix_pig_structure_for_all_users(nested_key_path: str = '', standard_values: dict = None):
+    async def fix_pig_structure_for_all_users(nested_key_path: str = '', standard_values: dict = None):
         if standard_values is None:
             standard_values = config.default_pig
-        Connection.make_request(f"UPDATE {config.users_schema} SET pig = %s WHERE pig IS NULL",
+        await Connection.make_request(f"UPDATE {config.users_schema} SET pig = %s WHERE pig IS NULL",
                                 params=(json.dumps({}),))
         for k, v in standard_values.items():
             new_key_path = f"{nested_key_path}.{k}" if nested_key_path else k
             if type(v) in [dict]:
-                Connection.make_request(f"""
+                await Connection.make_request(f"""
                 UPDATE {config.users_schema}
                 SET pig = JSON_SET(pig, '$.{new_key_path}', CAST(%s AS JSON))
                 WHERE JSON_EXTRACT(pig, '$.{new_key_path}') IS NULL;
                 """, params=(json.dumps(v),))
-                Pig.fix_pig_structure_for_all_users(new_key_path, standard_values[k])
+                await Pig.fix_pig_structure_for_all_users(new_key_path, standard_values[k])
             else:
-                Connection.make_request(f"""
+                await Connection.make_request(f"""
                 UPDATE {config.users_schema}
                 SET pig = JSON_SET(pig, '$.{new_key_path}', {'CAST(%s AS JSON)' if isinstance(v, list) else '%s'})
                 WHERE JSON_EXTRACT(pig, '$.{new_key_path}') IS NULL;
                 """, params=(json.dumps(v) if isinstance(v, list) else v,))
 
     @staticmethod
-    @cached(config.db_caches['pig.get'])
-    def get(user_id) -> dict:
-        result = Connection.make_request(
+    @aiocache.cached(key_builder=Func.cache_key_builder, alias="pig.get")
+    async def get(user_id) -> dict:
+        result = await Connection.make_request(
             f"SELECT pig FROM {config.users_schema} WHERE id = %s",
             params=(user_id,),
             commit=False,
@@ -49,91 +50,93 @@ class Pig:
             return {}
 
     @staticmethod
-    def clear_get_pig_cache(user_id: int):
-        Func.clear_db_cache('pig.get', (str(user_id),))
-        Func.clear_db_cache('pig.get', (int(user_id),))
+    async def clear_get_pig_cache(user_id: int):
+        await Func.clear_db_cache('pig.get', Pig.get, user_id)
+
 
     @staticmethod
-    def update_pig(user_id: int, new_pig: dict):
+    async def update_pig(user_id: int, new_pig: dict):
         new_pig = json.dumps(new_pig, ensure_ascii=False)
-        Connection.make_request(
+        await Connection.make_request(
             f"UPDATE {config.users_schema} SET pig = %s WHERE id = {user_id}", (new_pig,)
         )
-        Pig.clear_get_pig_cache(user_id)
+        await Pig.clear_get_pig_cache(user_id)
 
     @staticmethod
-    def set_buffs(user_id, new_buffs):
-        pig = Pig.get(user_id)
+    async def set_buffs(user_id, new_buffs):
+        pig = await Pig.get(user_id)
         pig['buffs'] = new_buffs
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def get_buffs(user_id):
-        pig = Pig.get(user_id)
+    async def get_buffs(user_id):
+        pig = await Pig.get(user_id)
         return pig['buffs']
 
     @staticmethod
-    def add_buff(user_id, buff, amount):
-        pig = Pig.get(user_id)
+    async def add_buff(user_id, buff, amount):
+        pig = await Pig.get(user_id)
         if buff not in pig['buffs']:
             pig['buffs'][buff] = {}
         if buff == 'activated_charcoal':
             if 'expires' not in pig['buffs'][buff]:
                 pig['buffs'][buff]['expires'] = 0
-            if Pig.buff_expired(user_id, buff):
-                pig['buffs'][buff]['expires'] = Func.generate_current_timestamp() + Item.get_buff_duration(buff)
+            if await Pig.buff_expired(user_id, buff):
+                pig['buffs'][buff]['expires'] = Func.generate_current_timestamp() + await Item.get_buff_duration(buff)
             else:
-                pig['buffs'][buff]['expires'] += Item.get_buff_duration(buff)
+                pig['buffs'][buff]['expires'] += await Item.get_buff_duration(buff)
         else:
             if 'amount' not in pig['buffs'][buff]:
                 pig['buffs'][buff]['amount'] = 0
             pig['buffs'][buff]['amount'] += amount
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def buff_expired(user_id, buff):
-        return Func.generate_current_timestamp() > Pig.get_buff_expiration_timestamp(user_id, buff)
+    async def buff_expired(user_id, buff):
+        return Func.generate_current_timestamp() > await Pig.get_buff_expiration_timestamp(user_id, buff)
 
     @staticmethod
-    def remove_buff(user_id, buff, amount: int = 1):
-        pig = Pig.get(user_id)
+    async def remove_buff(user_id, buff, amount: int = 1):
+        pig = await Pig.get(user_id)
         if buff == 'activated_charcoal':
             return
         else:
             if buff in pig['buffs'] and pig['buffs'][buff]['amount'] > 0:
                 pig['buffs'][buff]['amount'] -= amount
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def get_buff_data(user_id, buff):
-        pig = Pig.get(user_id)
+    async def get_buff_data(user_id, buff):
+        pig = await Pig.get(user_id)
         if buff in pig['buffs']:
             return pig['buffs'][buff]
 
     @staticmethod
-    def get_buff_amount(user_id, buff):
-        if Pig.get_buff_data(user_id, buff) is not None and 'amount' in Pig.get_buff_data(user_id, buff):
-            return Pig.get_buff_data(user_id, buff)['amount']
-        elif 'expires' in Pig.get_buff_data(user_id, buff):
-            if not Pig.buff_expired(user_id, buff):
-                return (Pig.get_buff_data(user_id, buff)['expires'] - Func.generate_current_timestamp()) // Item.get_buff_duration(buff) + 1
+    async def get_buff_amount(user_id, buff):
+        buff_data = await Pig.get_buff_data(user_id, buff)
+        if buff_data is not None and 'amount' in buff_data:
+            return buff_data['amount']
+        elif 'expires' in buff_data:
+            if not await Pig.buff_expired(user_id, buff):
+                return (buff_data['expires'] - Func.generate_current_timestamp()) // await Item.get_buff_duration(buff) + 1
         return 0
 
     @staticmethod
-    def get_buff_expiration_timestamp(user_id, buff):
-        if Pig.get_buff_data(user_id, buff) is not None and 'expires' in Pig.get_buff_data(user_id, buff):
-            return Pig.get_buff_data(user_id, buff)['expires']
+    async def get_buff_expiration_timestamp(user_id, buff):
+        buff_data = await Pig.get_buff_data(user_id, buff)
+        if await Pig.get_buff_data(user_id, buff) is not None and 'expires' in await Pig.get_buff_data(user_id, buff):
+            return buff_data['expires']
         return 0
 
     @staticmethod
-    def get_buff_name(buff, lang):
-        if Item.exists(buff):
-            return Item.get_name(buff, lang)
+    async def get_buff_name(buff, lang):
+        if await Item.exists(buff):
+            return await Item.get_name(buff, lang)
         else:
             return translate(Locale.BuffsNames[buff], lang)
 
     @staticmethod
-    def create(user_id, name: str = None):
+    async def create(user_id, name: str = None):
         pig = config.default_pig.copy()
         pig['genetic']['body'] = random.choice(config.default_pig_body_genetic)
         pig['genetic']['eyes'] = random.choice(config.default_pig_eyes_genetic)
@@ -142,72 +145,72 @@ class Pig:
             pig['name'] = random.choice(config.pig_names)
         else:
             pig['name'] = name
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def rename(user_id, name: str):
-        pig = Pig.get(user_id)
+    async def rename(user_id, name: str):
+        pig = await Pig.get(user_id)
         pig['name'] = name
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def set_genetic(user_id, key, value):
-        pig = Pig.get(user_id)
+    async def set_genetic(user_id, key, value):
+        pig = await Pig.get(user_id)
         pig['genetic'][key] = value
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def get_genetic(user_id, key):
-        pig = Pig.get(user_id)
+    async def get_genetic(user_id, key):
+        pig = await Pig.get(user_id)
         if key == 'all':
             return pig['genetic']
         if key in pig['genetic']:
             return pig['genetic'][key]
 
     @staticmethod
-    def get_name(user_id):
-        pig = Pig.get(user_id)
+    async def get_name(user_id):
+        pig = await Pig.get(user_id)
         return pig['name']
 
     @staticmethod
-    def set_skin(user_id, item_id, layer=None):
-        pig = Pig.get(user_id)
-        pig['skins'] = Pig.set_skin_to_options(pig['skins'], item_id, layer)
-        Pig.update_pig(user_id, pig)
+    async def set_skin(user_id, item_id, layer=None):
+        pig = await Pig.get(user_id)
+        pig['skins'] = await Pig.set_skin_to_options(pig['skins'], item_id, layer)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def set_skin_to_options(skins, item_id, layer=None):
+    async def set_skin_to_options(skins, item_id, layer=None):
         skins = skins.copy()
         if layer is None:
-            for layer in Item.get_skin_layers(item_id):
+            for layer in await Item.get_skin_layers(item_id):
                 if layer in config.default_pig['skins']:
                     skins[layer] = item_id
-            skins[Item.get_skin_type(item_id)] = item_id
+            skins[await Item.get_skin_type(item_id)] = item_id
         else:
             skins[layer] = item_id
         return skins
 
     @staticmethod
-    def remove_skin(user_id, item_id, layer=None):
-        pig = Pig.get(user_id)
-        pig['skins'] = Pig.remove_skin_from_options(pig['skins'], item_id, layer)
-        Pig.update_pig(user_id, pig)
+    async def remove_skin(user_id, item_id, layer=None):
+        pig = await Pig.get(user_id)
+        pig['skins'] = await Pig.remove_skin_from_options(pig['skins'], item_id, layer)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def remove_skin_from_options(skins, item_id, layer=None):
+    async def remove_skin_from_options(skins, item_id, layer=None):
         if layer is None:
-            for layer in Item.get_skin_layers(item_id):
+            for layer in await Item.get_skin_layers(item_id):
                 if layer in config.default_pig['skins'] and skins[layer] == item_id:
                     skins[layer] = None
-            if skins.get(Item.get_skin_type(item_id)) == item_id:
-                skins[Item.get_skin_type(item_id)] = None
+            if skins.get(await Item.get_skin_type(item_id)) == item_id:
+                skins[await Item.get_skin_type(item_id)] = None
         else:
             skins[layer] = None
         return skins
 
     @staticmethod
-    def get_skin(user_id, key):
-        pig = Pig.get(user_id)
+    async def get_skin(user_id, key):
+        pig = await Pig.get(user_id)
         if key == 'all':
             return pig['skins']
         if key in pig['skins']:
@@ -215,8 +218,8 @@ class Pig:
 
 
     @staticmethod
-    def get_time_to_next_feed(user_id):
-        last_feed = History.get_last_feed(user_id)
+    async def get_time_to_next_feed(user_id):
+        last_feed = await History.get_last_feed(user_id)
         if last_feed is None:
             return -1
         print(123434, config.pig_feed_cooldown)
@@ -224,63 +227,63 @@ class Pig:
         return next_feed if next_feed > 0 else -1
 
     @staticmethod
-    def get_time_of_next_feed(user_id):
-        if Pig.get_time_to_next_feed(user_id) == -1:
+    async def get_time_of_next_feed(user_id):
+        if await Pig.get_time_to_next_feed(user_id) == -1:
             return Func.generate_current_timestamp()
-        return Func.generate_current_timestamp() + Pig.get_time_to_next_feed(user_id)
+        return Func.generate_current_timestamp() + await Pig.get_time_to_next_feed(user_id)
 
     @staticmethod
-    def is_ready_to_feed(user_id):
-        if History.get_last_feed(user_id) is not None:
-            if Func.generate_current_timestamp() < Pig.get_time_of_next_feed(user_id):
+    async def is_ready_to_feed(user_id):
+        if await History.get_last_feed(user_id) is not None:
+            if Func.generate_current_timestamp() < await Pig.get_time_of_next_feed(user_id):
                 return False
         return True
 
     @staticmethod
-    def is_ready_to_butcher(user_id):
-        if History.get_last_butcher(user_id) is not None:
-            if Func.generate_current_timestamp() < Pig.get_time_of_next_butcher(user_id):
+    async def is_ready_to_butcher(user_id):
+        if await History.get_last_butcher(user_id) is not None:
+            if Func.generate_current_timestamp() < await Pig.get_time_of_next_butcher(user_id):
                 return False
         return True
 
     @staticmethod
-    def get_time_to_next_butcher(user_id):
-        last_butcher = History.get_last_butcher(user_id)
+    async def get_time_to_next_butcher(user_id):
+        last_butcher = await History.get_last_butcher(user_id)
         if last_butcher is None:
             return -1
         next_butcher = last_butcher + config.pig_butcher_cooldown - Func.generate_current_timestamp()
         return next_butcher if next_butcher > 0 else -1
 
     @staticmethod
-    def get_time_of_next_butcher(user_id):
-        if Pig.get_time_to_next_butcher(user_id) == -1:
+    async def get_time_of_next_butcher(user_id):
+        if await Pig.get_time_to_next_butcher(user_id) == -1:
             return Func.generate_current_timestamp()
-        return Func.generate_current_timestamp() + Pig.get_time_to_next_butcher(user_id)
+        return Func.generate_current_timestamp() + await Pig.get_time_to_next_butcher(user_id)
 
     @staticmethod
-    def add_weight(user_id, weight: float):
-        pig = Pig.get(user_id)
+    async def add_weight(user_id, weight: float):
+        pig = await Pig.get(user_id)
         pig['weight'] += weight
         pig['weight'] = round(pig['weight'], 1)
         if pig['weight'] <= .1:
             pig['weight'] = .1
-        Pig.update_pig(user_id, pig)
+        await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    def get_weight(user_id):
+    async def get_weight(user_id):
         if type(user_id) != list:
-            pig = Pig.get(user_id)
+            pig = await Pig.get(user_id)
             return pig['weight']
         else:
             weight = 0
-            pigs = Pig.get(user_id)
+            pigs = await Pig.get(user_id)
             for pig in pigs.values():
                 weight += pig['weight']
             return weight
 
     @staticmethod
-    def age(user_id, lang=None):
-        weight = Pig.get_weight(user_id)
+    async def age(user_id, lang=None):
+        weight = await Pig.get_weight(user_id)
         max_age = '1'
         for age in config.pig_ages:
             if weight >= age:

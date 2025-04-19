@@ -13,9 +13,8 @@ from .. import config
 class Events:
 
     @staticmethod
-    # @cached(TTLCache(maxsize=utils_config.db_api_cash_size, ttl=utils_config.db_api_cash_ttl))
-    def get_events(user_id):
-        result = Connection.make_request(
+    async def get_events(user_id):
+        result = await Connection.make_request(
             f"SELECT events FROM {config.users_schema} WHERE id = {user_id}",
             commit=False,
             fetch=True,
@@ -26,26 +25,26 @@ class Events:
             return {}
 
     @staticmethod
-    def update_events(user_id, new_events):
+    async def update_events(user_id, new_events):
         new_events = json.dumps(new_events, ensure_ascii=False)
-        Connection.make_request(
+        await Connection.make_request(
             f"UPDATE {config.users_schema} SET events = %s WHERE id = {user_id}",
             (new_events,)
         )
 
     @staticmethod
     # @cached(TTLCache(maxsize=utils_config.db_api_cash_size, ttl=utils_config.db_api_cash_ttl))
-    def get_event(user_id, event_id):
-        events = Events.get_events(user_id)
+    async def get_event(user_id, event_id):
+        events = await Events.get_events(user_id)
         if event_id in events:
             return events[event_id]
 
     @staticmethod
-    def add(user_id, title,
+    async def add(user_id, title,
             description,
             description_format: dict = None,
             event_id: str = None, expires_in: int = None):
-        events = Events.get_events(user_id)
+        events = await Events.get_events(user_id)
         if type(title) == dict:
             title = title.copy()
         if type(description) == dict:
@@ -63,11 +62,11 @@ class Events:
             'expires_in': expires_in,
             'created': Func.generate_current_timestamp()
         }
-        Events.update_events(user_id, events)
+        await Events.update_events(user_id, events)
 
     @staticmethod
-    def remove(user_id, event_id):
-        events = Events.get_events(user_id)
+    async def remove(user_id, event_id):
+        events = await Events.get_events(user_id)
         events.pop(event_id)
-        Events.update_events(user_id, events)
+        await Events.update_events(user_id, events)
 
