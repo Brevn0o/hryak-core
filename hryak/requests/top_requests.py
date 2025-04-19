@@ -20,7 +20,7 @@ async def top_weight_users(user_id: int, lang: str, guild=None):
     :return: list of tuples (user_id, weight, unit) and user_position
     """
     extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')), '0')"
-    order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight'))"
+    order_by = "JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) DESC"
     where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return await __top_users(user_id, extra_select, order_by, where, translate(Locale.Global.kg, lang), guild=guild)
 
@@ -30,7 +30,7 @@ async def top_amount_of_items_users(user_id: int, item_id: str, guild=None):
     :return: list of tuples (user_id, amount, unit) and user_position
     """
     extra_select = f"IFNULL(JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')), '0')"
-    order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount'))"
+    order_by = f"JSON_UNQUOTE(JSON_EXTRACT(inventory, '$.{item_id}.amount')) DESC"
     where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return await __top_users(user_id, extra_select, order_by, where, await Item.get_emoji(item_id), guild=guild)
 
@@ -40,6 +40,6 @@ async def top_streak_users(user_id: int, guild=None):
     :return: list of tuples (user_id, streak, unit) and user_position
     """
     extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')), '0')"
-    order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak'))"
+    order_by = "JSON_UNQUOTE(JSON_EXTRACT(stats, '$.streak')) DESC"
     where = "JSON_UNQUOTE(JSON_EXTRACT(settings, '$.top_participate')) = 'true'"
     return await __top_users(user_id, extra_select, order_by, where, '🔥', guild=guild)
