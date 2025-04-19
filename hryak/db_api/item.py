@@ -329,5 +329,7 @@ class Item:
         if user_id is not None:
             query = f"SELECT IFNULL(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))), '0') AS amount FROM {config.users_schema} WHERE id = %s"
             amount = await Connection.make_request(query, params=(item_id, user_id,), commit=False, fetch=True)
+            if amount is None:
+                return 0
             return int(float(amount))
         return 0

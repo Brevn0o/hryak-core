@@ -24,9 +24,8 @@ class ConnectionPool:
             user=self.user,
             password=self.password,
             db=self.db,
-            autocommit=False,
-            maxsize=100,
-            ssl=False
+            autocommit=True,
+            maxsize=50,
         )
 
     async def close(self):
@@ -60,6 +59,7 @@ class Connection:
                            executemany=False):
         conn = None
         cur = None
+        result = None
         try:
             conn = await pool.get_connection()
             cur = await conn.cursor()
@@ -69,10 +69,9 @@ class Connection:
             else:
                 await cur.execute(query, params)
 
-            result = None
+            print(query, result)
             if fetch:
                 result = await cur.fetchall() if fetchall or not fetch_first else await cur.fetchone()
-                print(query, result)
 
             if fetch_first and not fetchall:
                 result = result[0] if result else None
@@ -82,12 +81,17 @@ class Connection:
 
             return result
 
+
+
         except Exception as e:
+            print(e)
             if conn:
                 await conn.rollback()
+                await conn.ensure_closed()
             raise e
 
         finally:
+            print(result)
             if cur:
                 await cur.close()
             if conn:
