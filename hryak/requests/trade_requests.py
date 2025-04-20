@@ -31,7 +31,7 @@ async def trade(user1_id, user2_id, trade_id):
         if await Trade.get_tax_splitting(trade_id) is not None or not await GameFunc.get_trade_total_tax(trade_id):
             await Trade.set_status(trade_id, 'tax_processing_success')
             return {'status': 'success', 'trade_status': 'tax_processing_success'}
-        return {'status': 'success', 'trade_status': 'tax_processing'}
+        return {'status': 'success', 'trade_status': 'tax_processing', 'total_tax': await GameFunc.get_trade_total_tax(trade_id)}
     if await Trade.get_status(trade_id) == 'tax_processing_success':
         if await Trade.get_status(trade_id) == 'transferring':
             return
