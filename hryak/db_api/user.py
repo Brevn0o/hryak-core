@@ -164,7 +164,6 @@ class User:
             commit=False,
             fetch=True
         )
-        print(result)
         if result is not None:
             return json.loads(result)
         else:

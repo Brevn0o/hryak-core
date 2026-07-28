@@ -69,7 +69,6 @@ class Connection:
             else:
                 await cur.execute(query, params)
 
-            print(query, result)
             if fetch:
                 result = await cur.fetchall() if fetchall or not fetch_first else await cur.fetchone()
 
@@ -91,7 +90,6 @@ class Connection:
             raise e
 
         finally:
-            print(result)
             if cur:
                 await cur.close()
             if conn:

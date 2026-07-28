@@ -130,7 +130,6 @@ class Func:
                         await f.write(content)
                 else:
                     content = await (await aiohttp.ClientSession().get(link)).read()
-                    print(file_extension, content)
                     async with aiofiles.open(path, 'wb') as f:
                         await f.write(content)
             except requests.exceptions.ConnectionError:
