@@ -36,6 +36,10 @@ class Func:
         return round(datetime.datetime.now().timestamp())
 
     @staticmethod
+    def generate_random_pig_name(language):
+        return f'{translate(config.pig_names[0], language)} {translate(config.pig_names[1], language)}'
+
+    @staticmethod
     def common_elements(list_of_lists):
         common_set = set(list_of_lists[0])
         for lst in list_of_lists[1:]:
