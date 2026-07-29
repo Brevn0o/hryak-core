@@ -920,11 +920,11 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7543.PNG",
+          "image": "bin/images/IMG_7543.png",
           "shadow": "bin/images/shailushai_backpack-1-shadow.png"
         },
         "2": {
-          "image": "bin/images/IMG_7544.PNG"
+          "image": "bin/images/IMG_7544.png"
         }
       },
       "type": "back"
