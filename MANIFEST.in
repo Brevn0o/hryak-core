@@ -1,1 +1,2 @@
 recursive-include hryak *.json
+recursive-include hryak/bin *.png

@@ -45,7 +45,7 @@
     ],
     "requirements": null,
     "wealth_impact": 0.2,
-    "image": "bin/images/IMG_7601(1).png",
+    "image": "bin/images/common_case.png",
     "cases": {}
   },
   "diamond_hryak_set": {
@@ -102,7 +102,7 @@
     "requirements": null,
     "tax": "10%",
     "wealth_impact": 0.1,
-    "image": "bin/images/pig_1726423714_6203.png",
+    "image": "bin/images/diamond_hryak_set.png",
     "cases": {}
   },
   "mr_beast_set": {
@@ -171,7 +171,7 @@
     "requirements": null,
     "tax": "10%",
     "wealth_impact": 0.1,
-    "image": "bin/images/pig_1726423560_3641.png",
+    "image": "bin/images/mr_beast_set.png",
     "cases": {}
   },
   "rare_case": {
@@ -220,7 +220,7 @@
     ],
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/IMG_7600(1).png",
+    "image": "bin/images/rare_case.png",
     "cases": {}
   },
   "zoo_case": {
@@ -286,7 +286,7 @@
     ],
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/IMG_7599(1).png",
+    "image": "bin/images/zoo_case.png",
     "cases": {}
   },
   "hryak_the_end_case": {
@@ -359,7 +359,7 @@
     ],
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/rare_case.png",
+    "image": "bin/images/hryak_the_end_case.png",
     "cases": {}
   },
   "laxative": {
@@ -396,7 +396,7 @@
     "case_drops": null,
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/IMG_7573.png",
+    "image": "bin/images/laxative.png",
     "cases": {}
   },
   "compound_feed": {
@@ -432,7 +432,7 @@
     "case_drops": null,
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/IMG_7566.png",
+    "image": "bin/images/compound_feed.png",
     "cases": {}
   },
   "milk": {
@@ -464,7 +464,7 @@
     "case_drops": null,
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/transparent-glass-of-fresh-milk-png.png",
+    "image": "bin/images/milk.png",
     "cases": {}
   },
   "activated_charcoal": {
@@ -499,7 +499,7 @@
     "case_drops": null,
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/IMG_7570(1).png",
+    "image": "bin/images/activated_charcoal.png",
     "cases": {}
   },
   "streak_freezer": {
@@ -530,7 +530,7 @@
     "case_drops": null,
     "requirements": null,
     "wealth_impact": 0.1,
-    "image": "bin/images/Streak-freeze-new.png",
+    "image": "bin/images/streak_freezer.png",
     "cases": {}
   },
   "body_combiner": {
@@ -692,7 +692,7 @@
     "requirements": null,
     "tax": "auto",
     "wealth_impact": 1,
-    "image": "bin/images/IMG_7572.png",
+    "image": "bin/images/barbecue.png",
     "cases": {}
   },
   "beer": {
@@ -756,7 +756,7 @@
     "requirements": null,
     "tax": "auto",
     "wealth_impact": 1,
-    "image": "bin/images/41341312.png",
+    "image": "bin/images/lard.png",
     "cases": {}
   },
   "poop": {
@@ -788,7 +788,7 @@
     "requirements": null,
     "tax": "auto",
     "wealth_impact": 1,
-    "image": "bin/images/IMG_7560.png",
+    "image": "bin/images/poop.png",
     "cases": {}
   },
   "test_item": {
@@ -920,11 +920,11 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7543.png",
+          "image": "bin/images/shailushai_backpack-1.png",
           "shadow": "bin/images/shailushai_backpack-1-shadow.png"
         },
         "2": {
-          "image": "bin/images/IMG_7544.png"
+          "image": "bin/images/shailushai_backpack-2.png"
         }
       },
       "type": "back"
@@ -964,7 +964,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/sparkles-1-image.png"
+          "image": "bin/images/sparkles-1.png"
         }
       },
       "type": "back"
@@ -1002,27 +1002,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/bea_body-body-image.png",
+          "image": "bin/images/bea_body-body.png",
           "shadow": "bin/images/bea_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/bea_body-right_ear-image.png",
+          "image": "bin/images/bea_body-right_ear.png",
           "shadow": "bin/images/bea_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/bea_body-left_ear-image.png",
+          "image": "bin/images/bea_body-left_ear.png",
           "shadow": "bin/images/bea_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/bea_body-nose-image.png"
+          "image": "bin/images/bea_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/bea_body-tail-image.png",
+          "image": "bin/images/bea_body-tail.png",
           "shadow": "bin/images/bea_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/bea_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/bea_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/bea_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/bea_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1057,22 +1057,22 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/beluga_body-body-image.png",
+          "image": "bin/images/beluga_body-body.png",
           "shadow": "bin/images/blue_cat_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/beluga_body-right_ear-image.png",
+          "image": "bin/images/beluga_body-right_ear.png",
           "shadow": "bin/images/blue_cat_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/beluga_body-left_ear-image.png",
+          "image": "bin/images/beluga_body-left_ear.png",
           "shadow": "bin/images/blue_cat_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/beluga_body-nose-image.png"
+          "image": "bin/images/beluga_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/beluga_body-tail-image.png",
+          "image": "bin/images/beluga_body-tail.png",
           "shadow": "bin/images/blue_cat_body-tail-shadow.png"
         }
       },
@@ -1117,22 +1117,22 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/IMG_7578(1).png",
+          "image": "bin/images/blue_cat_body-body.png",
           "shadow": "bin/images/blue_cat_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/IMG_7581.png",
+          "image": "bin/images/blue_cat_body-right_ear.png",
           "shadow": "bin/images/blue_cat_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/IMG_7582(1).png",
+          "image": "bin/images/blue_cat_body-left_ear.png",
           "shadow": "bin/images/blue_cat_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/IMG_7580(1).png"
+          "image": "bin/images/blue_cat_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/IMG_7579(1).png",
+          "image": "bin/images/blue_cat_body-tail.png",
           "shadow": "bin/images/blue_cat_body-tail-shadow.png"
         }
       },
@@ -1179,27 +1179,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/boar_body-body-image.png",
+          "image": "bin/images/boar_body-body.png",
           "shadow": "bin/images/boar_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/boar_body-right_ear-image.png",
+          "image": "bin/images/boar_body-right_ear.png",
           "shadow": "bin/images/boar_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/boar_body-left_ear-image.png",
+          "image": "bin/images/boar_body-left_ear.png",
           "shadow": "bin/images/boar_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/boar_body-nose-image.png"
+          "image": "bin/images/boar_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/boar_body-tail-image.png",
+          "image": "bin/images/boar_body-tail.png",
           "shadow": "bin/images/boar_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/boar_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/boar_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/boar_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/boar_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1234,27 +1234,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/brook_body-body-image.png",
+          "image": "bin/images/brook_body-body.png",
           "shadow": "bin/images/brook_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/brook_body-right_ear-image.png",
+          "image": "bin/images/brook_body-right_ear.png",
           "shadow": "bin/images/brook_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/brook_body-left_ear-image.png",
+          "image": "bin/images/brook_body-left_ear.png",
           "shadow": "bin/images/brook_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/brook_body-nose-image.png"
+          "image": "bin/images/brook_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/brook_body-tail-image.png",
+          "image": "bin/images/brook_body-tail.png",
           "shadow": "bin/images/brook_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/brook_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/brook_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/brook_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/brook_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1289,27 +1289,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/camouflage_body-body-image.png",
+          "image": "bin/images/camouflage_body-body.png",
           "shadow": "bin/images/camouflage_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/camouflage_body-right_ear-image.png",
+          "image": "bin/images/camouflage_body-right_ear.png",
           "shadow": "bin/images/camouflage_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/camouflage_body-left_ear-image.png",
+          "image": "bin/images/camouflage_body-left_ear.png",
           "shadow": "bin/images/camouflage_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/camouflage_body-nose-image.png"
+          "image": "bin/images/camouflage_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/camouflage_body-tail-image.png",
+          "image": "bin/images/camouflage_body-tail.png",
           "shadow": "bin/images/camouflage_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/camouflage_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/camouflage_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/camouflage_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/camouflage_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1347,22 +1347,22 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/cat_body-body-image.png",
+          "image": "bin/images/cat_body-body.png",
           "shadow": "bin/images/cat_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/cat_body-right_ear-image.png",
+          "image": "bin/images/cat_body-right_ear.png",
           "shadow": "bin/images/cat_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/cat_body-left_ear-image.png",
+          "image": "bin/images/cat_body-left_ear.png",
           "shadow": "bin/images/cat_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/cat_body-nose-image.png"
+          "image": "bin/images/cat_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/cat_body-tail-image.png",
+          "image": "bin/images/cat_body-tail.png",
           "shadow": "bin/images/cat_body-tail-shadow.png"
         }
       },
@@ -1370,8 +1370,8 @@
         "piercing_nose",
         "mouth"
       ],
-      "right_ear_line_1": "bin/images/cat_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/cat_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/cat_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/cat_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1406,27 +1406,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/cheese_body-body-image.png",
+          "image": "bin/images/cheese_body-body.png",
           "shadow": "bin/images/cheese_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/cheese_body-right_ear-image.png",
+          "image": "bin/images/cheese_body-right_ear.png",
           "shadow": "bin/images/cheese_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/cheese_body-left_ear-image.png",
+          "image": "bin/images/cheese_body-left_ear.png",
           "shadow": "bin/images/cheese_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/cheese_body-nose-image.png"
+          "image": "bin/images/cheese_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/cheese_body-tail-image.png",
+          "image": "bin/images/cheese_body-tail.png",
           "shadow": "bin/images/cheese_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/cheese_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/cheese_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/cheese_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/cheese_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1464,27 +1464,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/cow_body-body-image.png",
+          "image": "bin/images/cow_body-body.png",
           "shadow": "bin/images/cow_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/cow_body-right_ear-image.png",
+          "image": "bin/images/cow_body-right_ear.png",
           "shadow": "bin/images/cow_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/cow_body-left_ear-image.png",
+          "image": "bin/images/cow_body-left_ear.png",
           "shadow": "bin/images/cow_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/cow_body-nose-image.png"
+          "image": "bin/images/cow_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/cow_body-tail-image.png",
+          "image": "bin/images/cow_body-tail.png",
           "shadow": "bin/images/cow_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/cow_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/cow_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/cow_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/cow_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1519,27 +1519,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/dark_body-body-image.png",
+          "image": "bin/images/dark_body-body.png",
           "shadow": "bin/images/dark_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/dark_body-right_ear-image.png",
+          "image": "bin/images/dark_body-right_ear.png",
           "shadow": "bin/images/dark_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/dark_body-left_ear-image.png",
+          "image": "bin/images/dark_body-left_ear.png",
           "shadow": "bin/images/dark_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/dark_body-nose-image.png"
+          "image": "bin/images/dark_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/dark_body-tail-image.png",
+          "image": "bin/images/dark_body-tail.png",
           "shadow": "bin/images/dark_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/dark_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/dark_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/dark_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/dark_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1577,27 +1577,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/default_body-body-image.png",
+          "image": "bin/images/default_body-body.png",
           "shadow": "bin/images/default_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/default_body-right_ear-image.png",
+          "image": "bin/images/default_body-right_ear.png",
           "shadow": "bin/images/default_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/default_body-left_ear-image.png",
+          "image": "bin/images/default_body-left_ear.png",
           "shadow": "bin/images/default_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/default_body-nose-image.png"
+          "image": "bin/images/default_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/default_body-tail-image.png",
+          "image": "bin/images/default_body-tail.png",
           "shadow": "bin/images/default_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/default_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/default_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/default_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/default_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1632,27 +1632,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/diamond_body-body-image.png",
+          "image": "bin/images/diamond_body-body.png",
           "shadow": "bin/images/diamond_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/diamond_body-right_ear-image.png",
+          "image": "bin/images/diamond_body-right_ear.png",
           "shadow": "bin/images/diamond_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/diamond_body-left_ear-image.png",
+          "image": "bin/images/diamond_body-left_ear.png",
           "shadow": "bin/images/diamond_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/diamond_body-nose-image.png"
+          "image": "bin/images/diamond_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/diamond_body-tail-image.png",
+          "image": "bin/images/diamond_body-tail.png",
           "shadow": "bin/images/diamond_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/diamond_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/diamond_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/diamond_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/diamond_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1688,27 +1688,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/dinosaur_body-body-image.png",
+          "image": "bin/images/dinosaur_body-body.png",
           "shadow": "bin/images/dinosaur_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/dinosaur_body-right_ear-image.png",
+          "image": "bin/images/dinosaur_body-right_ear.png",
           "shadow": "bin/images/dinosaur_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/dinosaur_body-left_ear-image.png",
+          "image": "bin/images/dinosaur_body-left_ear.png",
           "shadow": "bin/images/dinosaur_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/dinosaur_body-nose-image.png"
+          "image": "bin/images/dinosaur_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/dinosaur_body-tail-image.png",
+          "image": "bin/images/dinosaur_body-tail.png",
           "shadow": "bin/images/dinosaur_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/dinosaur_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/dinosaur_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/dinosaur_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/dinosaur_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1743,22 +1743,22 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/dog_body-body-image.png",
+          "image": "bin/images/dog_body-body.png",
           "shadow": "bin/images/blue_cat_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/dog_body-right_ear-image.png",
+          "image": "bin/images/dog_body-right_ear.png",
           "shadow": "bin/images/blue_cat_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/dog_body-left_ear-image.png",
+          "image": "bin/images/dog_body-left_ear.png",
           "shadow": "bin/images/blue_cat_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/dog_body-nose-image.png"
+          "image": "bin/images/dog_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/dog_body-tail-image.png",
+          "image": "bin/images/dog_body-tail.png",
           "shadow": "bin/images/dog_body-tail-shadow.png"
         }
       },
@@ -1802,27 +1802,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/giraffe_body-body-image.png",
+          "image": "bin/images/giraffe_body-body.png",
           "shadow": "bin/images/giraffe_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/giraffe_body-right_ear-image.png",
+          "image": "bin/images/giraffe_body-right_ear.png",
           "shadow": "bin/images/giraffe_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/giraffe_body-left_ear-image.png",
+          "image": "bin/images/giraffe_body-left_ear.png",
           "shadow": "bin/images/giraffe_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/giraffe_body-nose-image.png"
+          "image": "bin/images/giraffe_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/giraffe_body-tail-image.png",
+          "image": "bin/images/giraffe_body-tail.png",
           "shadow": "bin/images/giraffe_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/giraffe_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/giraffe_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/giraffe_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/giraffe_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1857,27 +1857,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/gold_body-body-image.png",
+          "image": "bin/images/gold_body-body.png",
           "shadow": "bin/images/gold_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/gold_body-right_ear-image.png",
+          "image": "bin/images/gold_body-right_ear.png",
           "shadow": "bin/images/gold_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/gold_body-left_ear-image.png",
+          "image": "bin/images/gold_body-left_ear.png",
           "shadow": "bin/images/gold_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/gold_body-nose-image.png"
+          "image": "bin/images/gold_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/gold_body-tail-image.png",
+          "image": "bin/images/gold_body-tail.png",
           "shadow": "bin/images/gold_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/gold_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/gold_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/gold_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/gold_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1913,27 +1913,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/green_body-body-image.png",
+          "image": "bin/images/green_body-body.png",
           "shadow": "bin/images/green_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/green_body-right_ear-image.png",
+          "image": "bin/images/green_body-right_ear.png",
           "shadow": "bin/images/green_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/green_body-left_ear-image.png",
+          "image": "bin/images/green_body-left_ear.png",
           "shadow": "bin/images/green_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/green_body-nose-image.png"
+          "image": "bin/images/green_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/green_body-tail-image.png",
+          "image": "bin/images/green_body-tail.png",
           "shadow": "bin/images/green_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/green_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/green_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/green_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/green_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -1971,22 +1971,22 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/igar_body-body-image.png",
+          "image": "bin/images/igar_body-body.png",
           "shadow": "bin/images/igar_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/igar_body-right_ear-image.png",
+          "image": "bin/images/igar_body-right_ear.png",
           "shadow": "bin/images/igar_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/igar_body-left_ear-image.png",
+          "image": "bin/images/igar_body-left_ear.png",
           "shadow": "bin/images/igar_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/igar_body-nose-image.png"
+          "image": "bin/images/igar_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/igar_body-tail-image.png",
+          "image": "bin/images/igar_body-tail.png",
           "shadow": "bin/images/igar_body-tail-shadow.png"
         }
       },
@@ -1994,8 +1994,8 @@
         "piercing_nose",
         "mouth"
       ],
-      "right_ear_line_1": "bin/images/igar_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/igar_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/igar_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/igar_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2030,27 +2030,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/lgbt_body-body-image.png",
+          "image": "bin/images/lgbt_body-body.png",
           "shadow": "bin/images/lgbt_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/lgbt_body-right_ear-image.png",
+          "image": "bin/images/lgbt_body-right_ear.png",
           "shadow": "bin/images/lgbt_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/lgbt_body-left_ear-image.png",
+          "image": "bin/images/lgbt_body-left_ear.png",
           "shadow": "bin/images/lgbt_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/lgbt_body-nose-image.png"
+          "image": "bin/images/lgbt_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/lgbt_body-tail-image.png",
+          "image": "bin/images/lgbt_body-tail.png",
           "shadow": "bin/images/lgbt_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/lgbt_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/lgbt_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/lgbt_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/lgbt_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2088,27 +2088,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/minecraft_zombie_body-body-image.png",
+          "image": "bin/images/minecraft_zombie_body-body.png",
           "shadow": "bin/images/minecraft_zombie_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/minecraft_zombie_body-right_ear-image.png",
+          "image": "bin/images/minecraft_zombie_body-right_ear.png",
           "shadow": "bin/images/minecraft_zombie_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/minecraft_zombie_body-left_ear-image.png",
+          "image": "bin/images/minecraft_zombie_body-left_ear.png",
           "shadow": "bin/images/minecraft_zombie_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/minecraft_zombie_body-nose-image.png"
+          "image": "bin/images/minecraft_zombie_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/minecraft_zombie_body-tail-image.png",
+          "image": "bin/images/minecraft_zombie_body-tail.png",
           "shadow": "bin/images/minecraft_zombie_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/minecraft_zombie_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/minecraft_zombie_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/minecraft_zombie_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/minecraft_zombie_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2146,22 +2146,22 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/mr_beast_body-body-image.png",
+          "image": "bin/images/mr_beast_body-body.png",
           "shadow": "bin/images/mr_beast_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/mr_beast_body-right_ear-image.png",
+          "image": "bin/images/mr_beast_body-right_ear.png",
           "shadow": "bin/images/mr_beast_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/mr_beast_body-left_ear-image.png",
+          "image": "bin/images/mr_beast_body-left_ear.png",
           "shadow": "bin/images/mr_beast_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/mr_beast_body-nose-image.png"
+          "image": "bin/images/mr_beast_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/mr_beast_body-tail-image.png",
+          "image": "bin/images/mr_beast_body-tail.png",
           "shadow": "bin/images/mr_beast_body-tail-shadow.png"
         }
       },
@@ -2169,8 +2169,8 @@
         "piercing_nose",
         "mouth"
       ],
-      "right_ear_line_1": "bin/images/mr_beast_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/mr_beast_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/mr_beast_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/mr_beast_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2206,27 +2206,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/robot_body-body-image.png",
+          "image": "bin/images/robot_body-body.png",
           "shadow": "bin/images/robot_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/robot_body-right_ear-image.png",
+          "image": "bin/images/robot_body-right_ear.png",
           "shadow": "bin/images/robot_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/robot_body-left_ear-image.png",
+          "image": "bin/images/robot_body-left_ear.png",
           "shadow": "bin/images/robot_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/robot_body-nose-image.png"
+          "image": "bin/images/robot_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/robot_body-tail-image.png",
+          "image": "bin/images/robot_body-tail.png",
           "shadow": "bin/images/robot_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/robot_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/robot_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/robot_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/robot_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2264,27 +2264,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/russia_body-body-image.png",
+          "image": "bin/images/russia_body-body.png",
           "shadow": "bin/images/russia_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/russia_body-right_ear-image.png",
+          "image": "bin/images/russia_body-right_ear.png",
           "shadow": "bin/images/russia_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/russia_body-left_ear-image.png",
+          "image": "bin/images/russia_body-left_ear.png",
           "shadow": "bin/images/russia_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/russia_body-nose-image.png"
+          "image": "bin/images/russia_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/russia_body-tail-image.png",
+          "image": "bin/images/russia_body-tail.png",
           "shadow": "bin/images/russia_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/russia_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/russia_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/russia_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/russia_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2322,31 +2322,31 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/shark_body-body-image.png",
+          "image": "bin/images/shark_body-body.png",
           "shadow": "bin/images/shark_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/shark_body-right_ear-image.png",
+          "image": "bin/images/shark_body-right_ear.png",
           "shadow": "bin/images/shark_body-right_ear-shadow.png"
         },
         "middle_ear": {
-          "image": "bin/images/shark_body-middle_ear-image.png",
+          "image": "bin/images/shark_body-middle_ear.png",
           "shadow": "bin/images/shark_body-middle_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/shark_body-left_ear-image.png",
+          "image": "bin/images/shark_body-left_ear.png",
           "shadow": "bin/images/shark_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/shark_body-nose-image.png"
+          "image": "bin/images/shark_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/shark_body-tail-image.png",
+          "image": "bin/images/shark_body-tail.png",
           "shadow": "bin/images/shark_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/shark_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/shark_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/shark_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/shark_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2381,27 +2381,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/spider_body-body-image.png",
+          "image": "bin/images/spider_body-body.png",
           "shadow": "bin/images/spider_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/spider_body-right_ear-image.png",
+          "image": "bin/images/spider_body-right_ear.png",
           "shadow": "bin/images/spider_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/spider_body-left_ear-image.png",
+          "image": "bin/images/spider_body-left_ear.png",
           "shadow": "bin/images/spider_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/spider_body-nose-image.png"
+          "image": "bin/images/spider_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/spider_body-tail-image.png",
+          "image": "bin/images/spider_body-tail.png",
           "shadow": "bin/images/spider_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/spider_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/spider_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/spider_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/spider_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2439,27 +2439,27 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/ukraine_body-body-image.png",
+          "image": "bin/images/ukraine_body-body.png",
           "shadow": "bin/images/ukraine_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/ukraine_body-right_ear-image.png",
+          "image": "bin/images/ukraine_body-right_ear.png",
           "shadow": "bin/images/ukraine_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/ukraine_body-left_ear-image.png",
+          "image": "bin/images/ukraine_body-left_ear.png",
           "shadow": "bin/images/ukraine_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/ukraine_body-nose-image.png"
+          "image": "bin/images/ukraine_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/ukraine_body-tail-image.png",
+          "image": "bin/images/ukraine_body-tail.png",
           "shadow": "bin/images/ukraine_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/ukraine_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/ukraine_body-tail-right_ear_line_2.png",
+      "right_ear_line_1": "bin/images/ukraine_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/ukraine_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2497,29 +2497,29 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/white_body-body-image.png",
+          "image": "bin/images/white_body-body.png",
           "shadow": "bin/images/white_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/white_body-right_ear-image.png",
+          "image": "bin/images/white_body-right_ear.png",
           "shadow": "bin/images/white_body-right_ear-shadow.png"
         },
         "left_ear": {
-          "image": "bin/images/white_body-left_ear-image.png",
+          "image": "bin/images/white_body-left_ear.png",
           "shadow": "bin/images/white_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/white_body-nose-image.png"
+          "image": "bin/images/white_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/white_body-tail-image.png",
+          "image": "bin/images/white_body-tail.png",
           "shadow": "bin/images/white_body-tail-shadow.png"
         }
       },
-      "right_eye_outline": "bin/images/white_body-tail-right_eye_outline.png",
-      "left_eye_outline": "bin/images/white_body-tail-left_eye_outline.png",
-      "right_ear_line_1": "bin/images/white_body-tail-right_ear_line_1.png",
-      "right_ear_line_2": "bin/images/white_body-tail-right_ear_line_2.png",
+      "right_eye_outline": "bin/images/white_body-right_eye_outline.png",
+      "left_eye_outline": "bin/images/white_body-left_eye_outline.png",
+      "right_ear_line_1": "bin/images/white_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/white_body-right_ear_line_2.png",
       "type": "body"
     },
     "emoji": "🎨",
@@ -2556,26 +2556,26 @@
     "skin_config": {
       "layers": {
         "body": {
-          "image": "bin/images/IMG_7519.png",
+          "image": "bin/images/elephant_body-body.png",
           "shadow": "bin/images/blue_cat_body-body-shadow.png"
         },
         "right_ear": {
-          "image": "bin/images/IMG_7531.png"
+          "image": "bin/images/elephant_body-right_ear.png"
         },
         "left_ear": {
-          "image": "bin/images/IMG_7529.png",
-          "shadow": "bin/images/IMG_7525.png"
+          "image": "bin/images/elephant_body-left_ear.png",
+          "shadow": "bin/images/elephant_body-left_ear-shadow.png"
         },
         "nose": {
-          "image": "bin/images/IMG_7530.png"
+          "image": "bin/images/elephant_body-nose.png"
         },
         "tail": {
-          "image": "bin/images/IMG_7528.png",
-          "shadow": "bin/images/IMG_7526.png"
+          "image": "bin/images/elephant_body-tail.png",
+          "shadow": "bin/images/elephant_body-tail-shadow.png"
         }
       },
-      "right_ear_line_1": "bin/images/IMG_7533.png",
-      "right_ear_line_2": "bin/images/IMG_7532.png",
+      "right_ear_line_1": "bin/images/elephant_body-right_ear_line_1.png",
+      "right_ear_line_2": "bin/images/elephant_body-right_ear_line_2.png",
       "not_compatible_with": [
         "piercing_nose",
         "mouth",
@@ -2616,10 +2616,10 @@
     "skin_config": {
       "layers": {
         "left_eye": {
-          "image": "bin/images/black_eyes-left_eye-image.png"
+          "image": "bin/images/black_eyes-left_eye.png"
         },
         "right_eye": {
-          "image": "bin/images/black_eyes-right_eye-image.png"
+          "image": "bin/images/black_eyes-right_eye.png"
         }
       },
       "type": "eyes"
@@ -2659,10 +2659,10 @@
     "skin_config": {
       "layers": {
         "left_eye": {
-          "image": "bin/images/crazy_eyes-left_eye-image.png"
+          "image": "bin/images/crazy_eyes-left_eye.png"
         },
         "right_eye": {
-          "image": "bin/images/crazy_eyes-right_eye-image.png"
+          "image": "bin/images/crazy_eyes-right_eye.png"
         }
       },
       "type": "eyes"
@@ -2702,10 +2702,10 @@
     "skin_config": {
       "layers": {
         "left_eye": {
-          "image": "bin/images/cute_eyes-left_eye-image.png"
+          "image": "bin/images/cute_eyes-left_eye.png"
         },
         "right_eye": {
-          "image": "bin/images/cute_eyes-right_eye-image.png"
+          "image": "bin/images/cute_eyes-right_eye.png"
         }
       },
       "hide": [
@@ -2749,10 +2749,10 @@
     "skin_config": {
       "layers": {
         "left_eye": {
-          "image": "bin/images/white_eyes-left_eye-image.png"
+          "image": "bin/images/white_eyes-left_eye.png"
         },
         "right_eye": {
-          "image": "bin/images/white_eyes-right_eye-image.png"
+          "image": "bin/images/white_eyes-right_eye.png"
         }
       },
       "type": "eyes"
@@ -2792,10 +2792,10 @@
     "skin_config": {
       "layers": {
         "left_eye": {
-          "image": "bin/images/yellow_eyes-left_eye-image.png"
+          "image": "bin/images/yellow_eyes-left_eye.png"
         },
         "right_eye": {
-          "image": "bin/images/yellow_eyes-right_eye-image.png"
+          "image": "bin/images/yellow_eyes-right_eye.png"
         }
       },
       "type": "eyes"
@@ -2835,7 +2835,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/amogus_glasses-1-image.png"
+          "image": "bin/images/amogus_glasses-1.png"
         }
       },
       "hide": [
@@ -2887,7 +2887,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/hyak_face-1-image.png"
+          "image": "bin/images/hyak_face-1.png"
         }
       },
       "hide": [
@@ -2939,7 +2939,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pig_mask-1-image.png"
+          "image": "bin/images/pig_mask-1.png"
         }
       },
       "hide": [
@@ -2990,7 +2990,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eggman_glasses-1-image.png"
+          "image": "bin/images/eggman_glasses-1.png"
         }
       },
       "hide": [
@@ -3036,7 +3036,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eye_patch-1-image.png",
+          "image": "bin/images/eye_patch-1.png",
           "before": "hat"
         }
       },
@@ -3081,7 +3081,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/fire_glasses-1-image.png"
+          "image": "bin/images/fire_glasses-1.png"
         }
       },
       "type": "glasses"
@@ -3119,7 +3119,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/monocle-1-image.png"
+          "image": "bin/images/monocle-1.png"
         }
       },
       "type": "glasses"
@@ -3159,7 +3159,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/nahodkins_glasses-1-image.png"
+          "image": "bin/images/nahodkins_glasses-1.png"
         }
       },
       "type": "glasses"
@@ -3199,7 +3199,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pixel_glasses-1-image.png"
+          "image": "bin/images/pixel_glasses-1.png"
         }
       },
       "hide": [
@@ -3245,7 +3245,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/rounded_glasses-1-image.png"
+          "image": "bin/images/rounded_glasses-1.png"
         }
       },
       "type": "glasses"
@@ -3285,7 +3285,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/round_glasses-1-image.png"
+          "image": "bin/images/round_glasses-1.png"
         }
       },
       "type": "glasses"
@@ -3325,7 +3325,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/star_glasses-1-image.png"
+          "image": "bin/images/star_glasses-1.png"
         }
       },
       "type": "glasses"
@@ -3365,7 +3365,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/sunglasses-1-image.png"
+          "image": "bin/images/sunglasses-1.png"
         }
       },
       "hide": [
@@ -3411,7 +3411,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/american_hat-1-image.png",
+          "image": "bin/images/american_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -3453,7 +3453,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/amongus_hat-1-image.png",
+          "image": "bin/images/amongus_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -3494,7 +3494,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/angel_hat-1-image.png",
+          "image": "bin/images/angel_hat-1.png",
           "shadow": "bin/images/angel_hat-1-shadow.png"
         }
       },
@@ -3539,7 +3539,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/aquarium_hat-1-image.png",
+          "image": "bin/images/aquarium_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -3580,7 +3580,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/blue_wreath-1-image.png"
+          "image": "bin/images/blue_wreath-1.png"
         }
       },
       "type": "hat",
@@ -3622,7 +3622,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/box_hat-1-image.png",
+          "image": "bin/images/box_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -3664,7 +3664,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_hat-1-image.png"
+          "image": "bin/images/brook_hat-1.png"
         }
       },
       "type": "hat"
@@ -3701,7 +3701,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/chef_hat-1-image.png",
+          "image": "bin/images/chef_hat-1.png",
           "shadow": "bin/images/chef_hat-1-shadow.png",
           "before": "right_ear"
         }
@@ -3743,7 +3743,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/clown_hat-1-image.png"
+          "image": "bin/images/clown_hat-1.png"
         }
       },
       "type": "hat"
@@ -3783,7 +3783,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/cylinder-1-image.png"
+          "image": "bin/images/cylinder-1.png"
         }
       },
       "type": "hat",
@@ -3825,7 +3825,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/danwl_hat-1-image.png",
+          "image": "bin/images/danwl_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -3863,7 +3863,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/demon_horns-1-image.png"
+          "image": "bin/images/demon_horns-1.png"
         }
       },
       "type": "hat",
@@ -3905,7 +3905,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/diamond_helmet-1-image.png",
+          "image": "bin/images/diamond_helmet-1.png",
           "before": "right_ear"
         }
       },
@@ -3946,11 +3946,11 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/dusk_lobber_hat-1-image.png",
+          "image": "bin/images/dusk_lobber_hat-1.png",
           "before": "right_ear"
         },
         "2": {
-          "image": "bin/images/dusk_lobber_hat-2-image.png",
+          "image": "bin/images/dusk_lobber_hat-2.png",
           "before": "body"
         }
       },
@@ -3991,7 +3991,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eggman_glasses_hat-1-image.png"
+          "image": "bin/images/eggman_glasses_hat-1.png"
         }
       },
       "type": "hat"
@@ -4031,7 +4031,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/fire_diadem-1-image.png"
+          "image": "bin/images/fire_diadem-1.png"
         }
       },
       "type": "hat"
@@ -4069,7 +4069,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/flower_hat-1-image.png",
+          "image": "bin/images/flower_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -4110,7 +4110,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/frog_hat-1-image.png"
+          "image": "bin/images/frog_hat-1.png"
         }
       },
       "hide": [
@@ -4154,7 +4154,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/gold_poop_hat-1-image.png",
+          "image": "bin/images/gold_poop_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -4195,7 +4195,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/green_cylinder-1-image.png"
+          "image": "bin/images/green_cylinder-1.png"
         }
       },
       "type": "hat",
@@ -4237,7 +4237,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/headphones-1-image.png",
+          "image": "bin/images/headphones-1.png",
           "before": "right_ear"
         }
       },
@@ -4275,7 +4275,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/hedgehog_hat-1-image.png"
+          "image": "bin/images/hedgehog_hat-1.png"
         }
       },
       "hide": [
@@ -4319,7 +4319,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/kid_cap-1-image.png",
+          "image": "bin/images/kid_cap-1.png",
           "shadow": "bin/images/kid_cap-1-shadow.png",
           "before": "right_ear"
         }
@@ -4361,7 +4361,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/low_budget_cylinder-1-image.png"
+          "image": "bin/images/low_budget_cylinder-1.png"
         }
       },
       "type": "hat"
@@ -4398,7 +4398,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/luffy_hat-1-image.png",
+          "image": "bin/images/luffy_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -4440,7 +4440,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/magnet_hat-1-image.png",
+          "image": "bin/images/magnet_hat-1.png",
           "shadow": "bin/images/magnet_hat-1-shadow.png"
         }
       },
@@ -4481,7 +4481,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/manga_hat-1-image.png",
+          "image": "bin/images/manga_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -4523,7 +4523,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/mcdonalds_cap-1-image.png",
+          "image": "bin/images/mcdonalds_cap-1.png",
           "shadow": "bin/images/mcdonalds_cap-1-shadow.png",
           "before": "right_ear"
         }
@@ -4568,7 +4568,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/military_cap-1-image.png",
+          "image": "bin/images/military_cap-1.png",
           "shadow": "bin/images/military_cap-1-shadow.png",
           "before": "right_ear"
         }
@@ -4613,7 +4613,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/muzzle_of_a_tank-1-image.png",
+          "image": "bin/images/muzzle_of_a_tank-1.png",
           "shadow": "bin/images/muzzle_of_a_tank-1-shadow.png"
         }
       },
@@ -4654,7 +4654,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/nimbus-1-image.png"
+          "image": "bin/images/nimbus-1.png"
         }
       },
       "color": "yellow",
@@ -4695,7 +4695,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/nitro_hat-1-image.png"
+          "image": "bin/images/nitro_hat-1.png"
         }
       },
       "type": "hat"
@@ -4743,7 +4743,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/nyusha_hair-1-image.png",
+          "image": "bin/images/nyusha_hair-1.png",
           "shadow": "bin/images/nyusha_hair-1-shadow.png",
           "before": "right_ear"
         }
@@ -4786,7 +4786,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/old_man_hat-1-image.png",
+          "image": "bin/images/old_man_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -4828,7 +4828,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pig_king_crown-1-image.png",
+          "image": "bin/images/pig_king_crown-1.png",
           "before": "right_ear"
         }
       },
@@ -4869,7 +4869,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pink_wreath-1-image.png"
+          "image": "bin/images/pink_wreath-1.png"
         }
       },
       "type": "hat",
@@ -4910,7 +4910,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7596(1).png",
+          "image": "bin/images/purple_emo_hair-1.png",
           "before": "right_ear"
         }
       },
@@ -4951,7 +4951,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7636.png"
+          "image": "bin/images/long_hair-1.png"
         }
       },
       "right_ear_line": "1",
@@ -4991,7 +4991,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7597(1).png",
+          "image": "bin/images/watermelon_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -5033,7 +5033,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pirate_hat-1-image.png",
+          "image": "bin/images/pirate_hat-1.png",
           "shadow": "bin/images/pirate_hat-1-shadow.png"
         }
       },
@@ -5074,7 +5074,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/poop_hat-1-image.png",
+          "image": "bin/images/poop_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -5115,7 +5115,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/purple_demon_horns-1-image.png"
+          "image": "bin/images/purple_demon_horns-1.png"
         }
       },
       "type": "hat",
@@ -5157,7 +5157,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/red_bandage-1-image.png"
+          "image": "bin/images/red_bandage-1.png"
         }
       },
       "type": "hat",
@@ -5199,7 +5199,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/robbin_good_hat-1-image.png",
+          "image": "bin/images/robbin_good_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -5241,7 +5241,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/shailushai_hat-1-image.png",
+          "image": "bin/images/shailushai_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -5283,7 +5283,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/sleepy_hat-1-image.png"
+          "image": "bin/images/sleepy_hat-1.png"
         }
       },
       "type": "hat"
@@ -5323,7 +5323,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/speedwagon_hat-1-image.png",
+          "image": "bin/images/speedwagon_hat-1.png",
           "before": "right_ear"
         }
       },
@@ -5364,7 +5364,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/straw_hat-1-image.png"
+          "image": "bin/images/straw_hat-1.png"
         }
       },
       "type": "hat"
@@ -5404,7 +5404,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/unicorn_hat-1-image.png"
+          "image": "bin/images/unicorn_hat-1.png"
         }
       },
       "type": "hat",
@@ -5446,7 +5446,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/vizard_hat-1-image.png"
+          "image": "bin/images/vizard_hat-1.png"
         }
       },
       "type": "hat"
@@ -5486,7 +5486,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/white_cap-1-image.png",
+          "image": "bin/images/white_cap-1.png",
           "shadow": "bin/images/white_cap-1-shadow.png",
           "before": "right_ear"
         }
@@ -5531,7 +5531,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/wilson_hair-1-image.png"
+          "image": "bin/images/wilson_hair-1.png"
         }
       },
       "hide": [
@@ -5575,7 +5575,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/z_cap_white-1-image.png",
+          "image": "bin/images/z_cap_white-1.png",
           "shadow": "bin/images/z_cap_white-1-shadow.png",
           "before": "right_ear"
         }
@@ -5617,7 +5617,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/cossack_hair-1-image.png"
+          "image": "bin/images/cossack_hair-1.png"
         }
       },
       "type": "hat"
@@ -5656,11 +5656,11 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7547.png",
+          "image": "bin/images/bee_hat-1.png",
           "before": "right_ear"
         },
         "2": {
-          "image": "bin/images/IMG_7548.png",
+          "image": "bin/images/bee_hat-2.png",
           "after": "right_ear"
         }
       },
@@ -5698,11 +5698,11 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7550.png",
-          "shadow": "bin/images/IMG_7552.png"
+          "image": "bin/images/brick_hat-1.png",
+          "shadow": "bin/images/brick_hat-1-shadow.png"
         },
         "2": {
-          "image": "bin/images/IMG_7549.png"
+          "image": "bin/images/brick_hat-2.png"
         }
       },
       "type": "hat"
@@ -5738,7 +5738,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7551.png"
+          "image": "bin/images/demon_nimbus-1.png"
         }
       },
       "color": "red",
@@ -5776,7 +5776,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/leg_shackles-1-image.png"
+          "image": "bin/images/leg_shackles-1.png"
         }
       },
       "type": "legs"
@@ -5815,7 +5815,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7585.png"
+          "image": "bin/images/purple_emo_bracelet-1.png"
         }
       },
       "type": "legs"
@@ -5854,7 +5854,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7598(1).png"
+          "image": "bin/images/wrist_watch-1.png"
         }
       },
       "type": "legs"
@@ -5894,7 +5894,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/nyusha_shoes-1-image.png",
+          "image": "bin/images/nyusha_shoes-1.png",
           "shadow": "bin/images/nyusha_shoes-1-shadow.png"
         }
       },
@@ -5935,7 +5935,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/tank_tracks-1-image.png"
+          "image": "bin/images/tank_tracks-1.png"
         }
       },
       "type": "legs"
@@ -5973,7 +5973,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/active_2_mark-1-image.png"
+          "image": "bin/images/active_2_mark-1.png"
         }
       },
       "type": "makeup"
@@ -6045,7 +6045,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/active_3_mark-1-image.png"
+          "image": "bin/images/active_3_mark-1.png"
         }
       },
       "type": "makeup"
@@ -6113,7 +6113,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/active_4_mark-1-image.png"
+          "image": "bin/images/active_4_mark-1.png"
         }
       },
       "type": "makeup"
@@ -6177,7 +6177,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/active_6_mark-1-image.png"
+          "image": "bin/images/active_6_mark-1.png"
         }
       },
       "type": "makeup"
@@ -6233,7 +6233,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/artist_makeup-1-image.png"
+          "image": "bin/images/artist_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6273,7 +6273,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/black_makeup-1-image.png"
+          "image": "bin/images/black_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6313,7 +6313,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/blush-1-image.png"
+          "image": "bin/images/blush-1.png"
         }
       },
       "type": "makeup"
@@ -6353,7 +6353,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_makeup-1-image.png"
+          "image": "bin/images/brook_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6390,7 +6390,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_tattoo5-1-image.png"
+          "image": "bin/images/brook_tattoo5-1.png"
         }
       },
       "type": "makeup"
@@ -6427,7 +6427,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/clown_makeup-1-image.png"
+          "image": "bin/images/clown_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6467,7 +6467,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/cry_makeup-1-image.png"
+          "image": "bin/images/cry_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6507,7 +6507,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eye_fingal-1-image.png"
+          "image": "bin/images/eye_fingal-1.png"
         }
       },
       "type": "makeup"
@@ -6547,7 +6547,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eye_scar-1-image.png"
+          "image": "bin/images/eye_scar-1.png"
         }
       },
       "type": "makeup"
@@ -6587,7 +6587,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/morgenshtern_tattoo-1-image.png"
+          "image": "bin/images/morgenshtern_tattoo-1.png"
         }
       },
       "type": "makeup"
@@ -6627,7 +6627,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/mr_beast_makeup-1-image.png"
+          "image": "bin/images/mr_beast_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6665,7 +6665,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/regular_makeup-1-image.png"
+          "image": "bin/images/regular_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6705,7 +6705,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/star_makeup-1-image.png"
+          "image": "bin/images/star_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6745,7 +6745,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/unibrow-1-image.png"
+          "image": "bin/images/unibrow-1.png"
         }
       },
       "type": "makeup"
@@ -6784,7 +6784,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7557.png"
+          "image": "bin/images/blood_on_eye_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6820,7 +6820,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7555.png"
+          "image": "bin/images/reddening_makeup-1.png"
         }
       },
       "type": "makeup"
@@ -6857,7 +6857,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/boar_fangs-1-image.png"
+          "image": "bin/images/boar_fangs-1.png"
         }
       },
       "type": "mouth"
@@ -6897,7 +6897,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/cigarette-1-image.png",
+          "image": "bin/images/cigarette-1.png",
           "after": "suit"
         }
       },
@@ -6938,7 +6938,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eggman_beard-1-image.png",
+          "image": "bin/images/eggman_beard-1.png",
           "after": [
             "glasses"
           ]
@@ -6981,7 +6981,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/honey_stick-1-image.png",
+          "image": "bin/images/honey_stick-1.png",
           "after": "suit"
         }
       },
@@ -7022,7 +7022,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/light_smile_mouth-1-image.png"
+          "image": "bin/images/light_smile_mouth-1.png"
         }
       },
       "type": "mouth"
@@ -7062,7 +7062,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/lips-1-image.png"
+          "image": "bin/images/lips-1.png"
         }
       },
       "type": "mouth"
@@ -7102,7 +7102,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/magic_stick-1-image.png",
+          "image": "bin/images/magic_stick-1.png",
           "after": "suit"
         }
       },
@@ -7143,7 +7143,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/nerd_teeth-1-image.png"
+          "image": "bin/images/nerd_teeth-1.png"
         }
       },
       "type": "mouth"
@@ -7183,7 +7183,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/original_mouth-1-image.png"
+          "image": "bin/images/original_mouth-1.png"
         }
       },
       "type": "mouth"
@@ -7223,7 +7223,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/spikelet-1-image.png",
+          "image": "bin/images/spikelet-1.png",
           "after": "suit"
         }
       },
@@ -7264,7 +7264,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/tassel-1-image.png",
+          "image": "bin/images/tassel-1.png",
           "after": "suit"
         }
       },
@@ -7305,7 +7305,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/vampire_fangs-1-image.png"
+          "image": "bin/images/vampire_fangs-1.png"
         }
       },
       "type": "mouth"
@@ -7345,7 +7345,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/cossack_beard-1-image.png",
+          "image": "bin/images/cossack_beard-1.png",
           "after": "glasses"
         }
       },
@@ -7385,7 +7385,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7553.png",
+          "image": "bin/images/baron_beard-1.png",
           "after": [
             "glasses"
           ]
@@ -7424,7 +7424,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7554.png"
+          "image": "bin/images/tongue_mouth-1.png"
         }
       },
       "type": "mouth"
@@ -7461,7 +7461,7 @@
     "skin_config": {
       "layers": {
         "nose": {
-          "image": "bin/images/clown_nose-nose-image.png"
+          "image": "bin/images/clown_nose-nose.png"
         }
       },
       "not_compatible_with": [
@@ -7504,7 +7504,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/ear_shackles-1-image.png"
+          "image": "bin/images/ear_shackles-1.png"
         }
       },
       "not_compatible_with": [
@@ -7547,7 +7547,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/gold_ear_piercing-1-image.png"
+          "image": "bin/images/gold_ear_piercing-1.png"
         }
       },
       "not_compatible_with": [
@@ -7592,7 +7592,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/silver_ear_piercing-1-image.png"
+          "image": "bin/images/silver_ear_piercing-1.png"
         }
       },
       "not_compatible_with": [
@@ -7637,7 +7637,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/skull_piercing-1-image.png",
+          "image": "bin/images/skull_piercing-1.png",
           "shadow": "bin/images/skull_piercing-1-shadow.png"
         }
       },
@@ -7678,7 +7678,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/gold_nose_piercing-1-image.png"
+          "image": "bin/images/gold_nose_piercing-1.png"
         }
       },
       "type": "piercing_nose",
@@ -7720,7 +7720,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/silver_nose_piercing-1-image.png"
+          "image": "bin/images/silver_nose_piercing-1.png"
         }
       },
       "type": "piercing_nose",
@@ -7762,10 +7762,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/amethyst_pupils-left_pupil-image.png"
+          "image": "bin/images/amethyst_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/amethyst_pupils-right_pupil-image.png"
+          "image": "bin/images/amethyst_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -7802,10 +7802,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/black_pupils-left_pupil-image.png"
+          "image": "bin/images/black_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/black_pupils-right_pupil-image.png"
+          "image": "bin/images/black_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -7845,10 +7845,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/blue_pupils-left_pupil-image.png"
+          "image": "bin/images/blue_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/blue_pupils-right_pupil-image.png"
+          "image": "bin/images/blue_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -7888,10 +7888,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/IMG_7587.png"
+          "image": "bin/images/blue_anime_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/IMG_7586.png"
+          "image": "bin/images/blue_anime_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -7930,10 +7930,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/IMG_7589.png"
+          "image": "bin/images/green_anime_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/IMG_7588(1).png"
+          "image": "bin/images/green_anime_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -7972,10 +7972,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/IMG_7593.png"
+          "image": "bin/images/purple_anime_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/IMG_7592.png"
+          "image": "bin/images/purple_anime_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8014,10 +8014,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/IMG_7595.png"
+          "image": "bin/images/pink_anime_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/IMG_7594(1).png"
+          "image": "bin/images/pink_anime_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8057,10 +8057,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/IMG_7591(1).png"
+          "image": "bin/images/red_anime_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/IMG_7590.png"
+          "image": "bin/images/red_anime_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8100,10 +8100,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/gold_pupils-left_pupil-image.png"
+          "image": "bin/images/gold_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/gold_pupils-right_pupil-image.png"
+          "image": "bin/images/gold_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8141,10 +8141,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/green_pupils-left_pupil-image.png"
+          "image": "bin/images/green_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/green_pupils-right_pupil-image.png"
+          "image": "bin/images/green_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8184,10 +8184,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/magic_pupils-left_pupil-image.png"
+          "image": "bin/images/magic_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/magic_pupils-right_pupil-image.png"
+          "image": "bin/images/magic_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8227,10 +8227,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/orange_pupils-left_pupil-image.png"
+          "image": "bin/images/orange_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/orange_pupils-right_pupil-image.png"
+          "image": "bin/images/orange_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8270,10 +8270,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/pink_pupils-left_pupil-image.png"
+          "image": "bin/images/pink_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/pink_pupils-right_pupil-image.png"
+          "image": "bin/images/pink_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8313,10 +8313,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/purple_pupils-left_pupil-image.png"
+          "image": "bin/images/purple_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/purple_pupils-right_pupil-image.png"
+          "image": "bin/images/purple_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8356,10 +8356,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/red_pupils-left_pupil-image.png"
+          "image": "bin/images/red_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/red_pupils-right_pupil-image.png"
+          "image": "bin/images/red_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8399,10 +8399,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/rick_pupils-left_pupil-image.png"
+          "image": "bin/images/rick_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/rick_pupils-right_pupil-image.png"
+          "image": "bin/images/rick_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8442,10 +8442,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/vampire_pupils-left_pupil-image.png"
+          "image": "bin/images/vampire_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/vampire_pupils-right_pupil-image.png"
+          "image": "bin/images/vampire_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8485,10 +8485,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/white_pupils-left_pupil-image.png"
+          "image": "bin/images/white_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/white_pupils-right_pupil-image.png"
+          "image": "bin/images/white_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8528,10 +8528,10 @@
     "skin_config": {
       "layers": {
         "left_pupil": {
-          "image": "bin/images/yellow_pupils-left_pupil-image.png"
+          "image": "bin/images/yellow_pupils-left_pupil.png"
         },
         "right_pupil": {
-          "image": "bin/images/yellow_pupils-right_pupil-image.png"
+          "image": "bin/images/yellow_pupils-right_pupil.png"
         }
       },
       "type": "pupils"
@@ -8571,7 +8571,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_guitar-1-image.png"
+          "image": "bin/images/brook_guitar-1.png"
         }
       },
       "type": "suit"
@@ -8608,12 +8608,12 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/case_suit-1-image.png",
+          "image": "bin/images/case_suit-1.png",
           "shadow": "bin/images/case_suit-1-shadow.png",
           "before": "body"
         },
         "2": {
-          "image": "bin/images/case_suit-2-image.png"
+          "image": "bin/images/case_suit-2.png"
         }
       },
       "type": "suit"
@@ -8653,7 +8653,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/danwl_suit-1-image.png"
+          "image": "bin/images/danwl_suit-1.png"
         }
       },
       "type": "suit"
@@ -8690,7 +8690,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/eggman_suit-1-image.png"
+          "image": "bin/images/eggman_suit-1.png"
         }
       },
       "type": "suit"
@@ -8730,7 +8730,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/kenny_suit-1-image.png",
+          "image": "bin/images/kenny_suit-1.png",
           "before": "right_ear"
         }
       },
@@ -8768,7 +8768,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/minecraft_zombie_suit-1-image.png"
+          "image": "bin/images/minecraft_zombie_suit-1.png"
         }
       },
       "type": "suit"
@@ -8808,7 +8808,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pajama-1-image.png"
+          "image": "bin/images/pajama-1.png"
         }
       },
       "type": "suit"
@@ -8848,7 +8848,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/sheep_suit-1-image.png",
+          "image": "bin/images/sheep_suit-1.png",
           "shadow": "bin/images/sheep_suit-1-shadow.png",
           "before": "right_ear"
         }
@@ -8895,7 +8895,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/shrek_suit-1-image.png"
+          "image": "bin/images/shrek_suit-1.png"
         }
       },
       "type": "suit"
@@ -8935,7 +8935,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/space_suit-1-image.png",
+          "image": "bin/images/space_suit-1.png",
           "after": "face",
           "before": "right_ear"
         }
@@ -8988,7 +8988,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/spiky_suit-1-image.png"
+          "image": "bin/images/spiky_suit-1.png"
         }
       },
       "type": "suit"
@@ -9028,7 +9028,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/summer_dress-1-image.png"
+          "image": "bin/images/summer_dress-1.png"
         }
       },
       "type": "suit"
@@ -9068,7 +9068,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/cossack_suit-1-image.png"
+          "image": "bin/images/cossack_suit-1.png"
         }
       },
       "type": "suit"
@@ -9108,7 +9108,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/active_1_mark-1-image.png"
+          "image": "bin/images/active_1_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9184,7 +9184,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/active_5_mark-1-image.png"
+          "image": "bin/images/active_5_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9244,7 +9244,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/alex555055_tattoo-1-image.png"
+          "image": "bin/images/alex555055_tattoo-1.png"
         }
       },
       "type": "tattoo"
@@ -9281,7 +9281,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/applejack_mark-1-image.png"
+          "image": "bin/images/applejack_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9321,7 +9321,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_tattoo-1-image.png"
+          "image": "bin/images/brook_tattoo-1.png"
         }
       },
       "type": "tattoo"
@@ -9358,7 +9358,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_tattoo2-1-image.png"
+          "image": "bin/images/brook_tattoo2-1.png"
         }
       },
       "type": "tattoo"
@@ -9395,7 +9395,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_tattoo4-1-image.png"
+          "image": "bin/images/brook_tattoo3-1.png"
         }
       },
       "type": "tattoo"
@@ -9432,7 +9432,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_tattoo3-1-image.png"
+          "image": "bin/images/brook_tattoo4-1.png"
         }
       },
       "type": "tattoo"
@@ -9469,7 +9469,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/brook_tattoo6-1-image.png"
+          "image": "bin/images/brook_tattoo6-1.png"
         }
       },
       "type": "tattoo"
@@ -9506,7 +9506,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7662.png"
+          "image": "bin/images/brook_tattoo7-1.png"
         }
       },
       "type": "tattoo"
@@ -9543,7 +9543,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/discord_mark-1-image.png"
+          "image": "bin/images/discord_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9583,7 +9583,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/face_anton_mark-1-image.png"
+          "image": "bin/images/face_anton_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9620,7 +9620,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/face_max_mark-1-image.png"
+          "image": "bin/images/face_max_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9657,7 +9657,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/fluttershy_mark-1-image.png"
+          "image": "bin/images/fluttershy_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9697,7 +9697,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/fufbolka_tattoo-1-image.png"
+          "image": "bin/images/fufbolka_tattoo-1.png"
         }
       },
       "type": "tattoo"
@@ -9734,7 +9734,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pentagram_tattoo-1-image.png"
+          "image": "bin/images/pentagram_tattoo-1.png"
         }
       },
       "type": "tattoo"
@@ -9774,7 +9774,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/pinkie_pie_mark-1-image.png"
+          "image": "bin/images/pinkie_pie_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9814,7 +9814,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/polish_flag_mark-1-image.png"
+          "image": "bin/images/polish_flag_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9854,7 +9854,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/radiation_mark-1-image.png"
+          "image": "bin/images/radiation_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9894,7 +9894,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/rainbow_dash_mark-1-image.png"
+          "image": "bin/images/rainbow_dash_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9931,7 +9931,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/rarity_mark-1-image.png"
+          "image": "bin/images/rarity_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -9968,7 +9968,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/russian_flag_mark-1-image.png"
+          "image": "bin/images/russian_flag_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -10005,7 +10005,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/spider_mark-1-image.png"
+          "image": "bin/images/spider_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -10045,7 +10045,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/target_mark-1-image.png"
+          "image": "bin/images/target_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -10085,7 +10085,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/twilight_parkle_mark-1-image.png"
+          "image": "bin/images/twilight_parkle_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -10125,7 +10125,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/ukraine_flag_mark-1-image.png"
+          "image": "bin/images/ukraine_flag_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -10165,7 +10165,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/usa_flag_mark-1-image.png"
+          "image": "bin/images/usa_flag_mark-1.png"
         }
       },
       "type": "tattoo"
@@ -10204,7 +10204,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7556.png"
+          "image": "bin/images/butchering_tattoo-1.png"
         }
       },
       "type": "tattoo"
@@ -10240,7 +10240,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/IMG_7558.png"
+          "image": "bin/images/blood_tattoo-1.png"
         }
       },
       "type": "tattoo"
@@ -10277,7 +10277,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/black_tie-1-image.png"
+          "image": "bin/images/black_tie-1.png"
         }
       },
       "type": "tie",
@@ -10319,7 +10319,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/bow_tie-1-image.png"
+          "image": "bin/images/bow_tie-1.png"
         }
       },
       "type": "tie"
@@ -10359,7 +10359,7 @@
     "skin_config": {
       "layers": {
         "1": {
-          "image": "bin/images/red_tie-1-image.png"
+          "image": "bin/images/red_tie-1.png"
         }
       },
       "type": "tie",

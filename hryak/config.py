@@ -120,8 +120,25 @@ skin_layers_rules = {
     }}
 
 
-with open(os.path.join(os.path.dirname(__file__), 'items_config.json'), 'r', encoding='utf-8') as f:
+package_path = os.path.dirname(__file__)
+
+with open(os.path.join(package_path, 'items_config.json'), 'r', encoding='utf-8') as f:
     items = json.loads(f.read())
+
+
+def _absolutize_asset_paths(node):
+    # image paths in items_config.json are stored relative to this package (bin/images/...),
+    # so they resolve regardless of the working directory the bot is launched from
+    if isinstance(node, dict):
+        return {k: _absolutize_asset_paths(v) for k, v in node.items()}
+    if isinstance(node, list):
+        return [_absolutize_asset_paths(v) for v in node]
+    if isinstance(node, str) and node.startswith('bin/'):
+        return os.path.join(package_path, node)
+    return node
+
+
+items = _absolutize_asset_paths(items)
 
 daily_shop_items_types = {
     'hat': 1,
