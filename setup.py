@@ -2,13 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='hryak',
-    version='0.1.0',
+    version='0.2.0',
     packages=find_packages(),
     description='Logic package for Hryak',
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
     include_package_data=True,
+    # declared explicitly so the images ship in the wheel regardless of MANIFEST.in handling
+    package_data={'hryak': ['*.json', 'bin/images/*.png']},
     install_requires=[
         'mysql-connector-python==9.2.0',
         'aiocache == 0.12.3',
