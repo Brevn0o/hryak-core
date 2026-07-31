@@ -27,6 +27,7 @@ class Setup:
     async def create_user_table():
         columns = [
             'id varchar(32) PRIMARY KEY UNIQUE',
+            'discord_id varchar(32) UNIQUE',
             'created int DEFAULT 0',
             "pig json",
             "inventory json",
