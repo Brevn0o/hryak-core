@@ -7,6 +7,8 @@ from aiocache import cached, caches
 logs_path = None
 test = False
 github_version = False
+supported_platforms = ('discord',)
+platform = None  # set by the front-end via setters.set_platform
 pig_feed_cooldown = 4 * 3600
 pig_butcher_cooldown = 40 * 3600
 streak_timeout = 24.5 * 3600

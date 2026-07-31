@@ -2,6 +2,7 @@ import json
 import random
 
 from .connection import Connection
+from .schema import user_id_column
 from ..functions import Func
 from ..functions import translate
 from .. import config
@@ -15,7 +16,7 @@ class Events:
     @staticmethod
     async def get_events(user_id):
         result = await Connection.make_request(
-            f"SELECT events FROM {config.users_schema} WHERE id = {user_id}",
+            f"SELECT events FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
             commit=False,
             fetch=True,
         )
@@ -28,7 +29,7 @@ class Events:
     async def update_events(user_id, new_events):
         new_events = json.dumps(new_events, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET events = %s WHERE id = {user_id}",
+            f"UPDATE {config.users_schema} SET events = %s WHERE {user_id_column()} = {user_id}",
             (new_events,)
         )
 

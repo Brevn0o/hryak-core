@@ -4,6 +4,7 @@ import aiocache
 from cachetools import cached
 
 from .connection import Connection
+from .schema import user_id_column
 from ..functions import Func
 from hryak import config
 
@@ -35,7 +36,7 @@ class History:
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="history.get")
     async def get(user_id: int) -> dict:
         result = await Connection.make_request(
-            f"SELECT history FROM {config.users_schema} WHERE id = %s",
+            f"SELECT history FROM {config.users_schema} WHERE {user_id_column()} = %s",
             params=(user_id,),
             commit=False,
             fetch=True,
@@ -49,7 +50,7 @@ class History:
     async def update_history(user_id: int, new_history: dict):
         new_history = json.dumps(new_history, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET history = %s WHERE id = %s", (new_history, user_id)
+            f"UPDATE {config.users_schema} SET history = %s WHERE {user_id_column()} = %s", (new_history, user_id)
         )
         await History.clear_get_history_cache(user_id)
 
@@ -117,7 +118,7 @@ class History:
     @staticmethod
     async def get_shop_history(user_id: int):
         result = await Connection.make_request(
-            f"SELECT history FROM {config.users_schema} WHERE id = %s",
+            f"SELECT history FROM {config.users_schema} WHERE {user_id_column()} = %s",
             params=(user_id,),
             commit=False,
             fetch=True,

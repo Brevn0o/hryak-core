@@ -4,6 +4,7 @@ import aiocache
 from cachetools import cached
 
 from .connection import Connection
+from .schema import user_id_column
 from ..functions import Func, translate
 from ..locale import Locale
 from hryak import config
@@ -39,7 +40,7 @@ class Pig:
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="pig.get")
     async def get(user_id) -> dict:
         result = await Connection.make_request(
-            f"SELECT pig FROM {config.users_schema} WHERE id = %s",
+            f"SELECT pig FROM {config.users_schema} WHERE {user_id_column()} = %s",
             params=(user_id,),
             commit=False,
             fetch=True,
@@ -58,7 +59,7 @@ class Pig:
     async def update_pig(user_id: int, new_pig: dict):
         new_pig = json.dumps(new_pig, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET pig = %s WHERE id = {user_id}", (new_pig,)
+            f"UPDATE {config.users_schema} SET pig = %s WHERE {user_id_column()} = {user_id}", (new_pig,)
         )
         await Pig.clear_get_pig_cache(user_id)
 

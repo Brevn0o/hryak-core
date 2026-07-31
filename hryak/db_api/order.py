@@ -1,6 +1,7 @@
 import json, random
 
 from .connection import Connection
+from .schema import user_id_column
 from ..functions import Func
 from hryak import config
 
@@ -23,7 +24,7 @@ class Order:
     @staticmethod
     async def get_user_orders(user_id):
         result = await Connection.make_request(
-            f"SELECT orders FROM {config.users_schema} WHERE id = {user_id}",
+            f"SELECT orders FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
             commit=False,
             fetch=True,
         )
@@ -36,7 +37,7 @@ class Order:
     async def set_new_orders(user_id, new_orders):
         new_orders = json.dumps(new_orders, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET orders = '{new_orders}' WHERE id = {user_id}"
+            f"UPDATE {config.users_schema} SET orders = '{new_orders}' WHERE {user_id_column()} = {user_id}"
         )
 
     @staticmethod
@@ -104,7 +105,7 @@ class Order:
     @staticmethod
     async def get_user(order_id: str):
         users = await Connection.make_request(
-            f"SELECT id FROM {config.users_schema} WHERE JSON_CONTAINS_PATH(orders, 'one', '$.\"%s\"') = 1",
+            f"SELECT {user_id_column()} FROM {config.users_schema} WHERE JSON_CONTAINS_PATH(orders, 'one', '$.\"%s\"') = 1",
             params=(order_id,),
             commit=False,
             fetch=True,

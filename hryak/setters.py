@@ -24,3 +24,9 @@ def set_bot_guilds(guilds: dict):
 
 def set_temp_folder_path(path: str):
     config.temp_folder_path = path
+
+def set_platform(platform: str):
+    """Tells core which front-end it is running as, so user lookups use the right id column."""
+    if platform not in config.supported_platforms:
+        raise ValueError(f"unknown platform {platform!r}, expected one of {config.supported_platforms}")
+    config.platform = platform

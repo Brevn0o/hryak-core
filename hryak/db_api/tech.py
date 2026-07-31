@@ -5,6 +5,7 @@ import aiocache
 from cachetools import cached
 
 from .connection import Connection
+from .schema import user_id_column
 from hryak import config
 from .user import User
 from .item import Item
@@ -23,7 +24,7 @@ class Tech:
         :param where:
             Example: JSON_EXTRACT(inventory, '$.coins.amount') > 0
         """
-        query = f'SELECT id{f" , {extra_select}" if extra_select else ""} FROM {config.users_schema}'
+        query = f'SELECT {user_id_column()}{f" , {extra_select}" if extra_select else ""} FROM {config.users_schema}'
         if where is not None:
             query += f" WHERE {where}"
         if order_by is not None:
