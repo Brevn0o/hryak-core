@@ -406,7 +406,7 @@
       "ru": "Комбикорм"
     },
     "description": {
-      "en": "When used, the pig will gain more weight, but will produce less poops",
+      "en": "When used, the pig will gain more weight, but will produce less manure",
       "ru": "При использовании свинья будет набирать больше веса, но при этом будет выдавать меньше навоза"
     },
     "type": "consumable",
@@ -508,7 +508,7 @@
       "ru": "Заморозка стрика"
     },
     "description": {
-      "en": "Freezes your streak if you suddenly forgot to feed the pig",
+      "en": "Freezes your streak if you forget to feed the pig",
       "ru": "Замораживает ваш стрик, если вы вдруг забыли покормить Хряка"
     },
     "type": "consumable",
@@ -540,7 +540,7 @@
       "ru": "Комбинатор красок"
     },
     "description": {
-      "en": "Allows you to combine different parts of body with each other",
+      "en": "Allows you to combine different body parts with each other",
       "ru": "Позволяет вам комбинировать разные части красок между собой"
     },
     "type": "device",
@@ -575,7 +575,7 @@
       "ru": "Монеты"
     },
     "description": {
-      "en": "Coins for which you can buy something",
+      "en": "Coins you can buy things with",
       "ru": "Монеты, за которые можно что-то купить"
     },
     "type": "money",
@@ -607,7 +607,7 @@
       "ru": "Хряк-Доллары"
     },
     "description": {
-      "en": "Hollars for which you can buy something",
+      "en": "Hollars you can buy things with",
       "ru": "Холлары, за которые можно что-то купить"
     },
     "type": "money",
@@ -730,7 +730,7 @@
   "lard": {
     "id": "lard",
     "name": {
-      "en": "Meat",
+      "en": "Lard",
       "ru": "Сало"
     },
     "description": {
@@ -909,7 +909,7 @@
   "shailushai_backpack": {
     "id": "shailushai_backpack",
     "name": {
-      "en": "Shauilushai backpack",
+      "en": "Shailushai backpack",
       "ru": "Рюкзак Шайлушая"
     },
     "description": {
@@ -991,7 +991,7 @@
   "bea_body": {
     "id": "bea_body",
     "name": {
-      "en": "Bea paint",
+      "en": "Bee paint",
       "ru": "Пчелиная краска"
     },
     "description": {
@@ -1172,7 +1172,7 @@
       "ru": "Краска кабана"
     },
     "description": {
-      "en": "Wild Boar from the Wild",
+      "en": "A wild boar from the wild",
       "ru": "Дикий Хряк из дикой природы"
     },
     "type": "skin",
@@ -1681,7 +1681,7 @@
       "ru": "Краска динозавра"
     },
     "description": {
-      "en": "The Prehistoric pig has returned from ancient times",
+      "en": "The prehistoric pig has returned from ancient times",
       "ru": "Доисторический Хряк вернулся с древних времен"
     },
     "type": "skin",
@@ -2135,7 +2135,7 @@
   "mr_beast_body": {
     "id": "mr_beast_body",
     "name": {
-      "en": "Mr.Beast paint",
+      "en": "Mr. Beast paint",
       "ru": "Краска Мистер Биста"
     },
     "description": {
@@ -2199,7 +2199,7 @@
       "ru": "Краска робота"
     },
     "description": {
-      "en": "Pig to eat, the pig is happy. beep boop",
+      "en": "Feed the pig and the pig is happy. Beep boop",
       "ru": "Хряк кушать, хряк доволен. Бип-буп"
     },
     "type": "skin",
@@ -2490,7 +2490,7 @@
       "ru": "Белая краска"
     },
     "description": {
-      "en": "Be the whitest and purest Boar",
+      "en": "Be the whitest and purest boar",
       "ru": "Будь самым белым и чистым Хряком"
     },
     "type": "skin",
@@ -2605,11 +2605,11 @@
   "black_eyes": {
     "id": "black_eyes",
     "name": {
-      "en": "Big black lenses",
+      "en": "Big black contacts",
       "ru": "Большие черные линзы"
     },
     "description": {
-      "en": "Big lenses that change eye color",
+      "en": "Big contacts that change eye color",
       "ru": "Большие линзы, меняющие цвет глаз"
     },
     "type": "skin",
@@ -2648,11 +2648,11 @@
   "crazy_eyes": {
     "id": "crazy_eyes",
     "name": {
-      "en": "Big crazy lenses",
+      "en": "Big crazy contacts",
       "ru": "Большие безумные линзы"
     },
     "description": {
-      "en": "Big lenses that change eye color",
+      "en": "Big contacts that change eye color",
       "ru": "Большие линзы, меняющие цвет глаз"
     },
     "type": "skin",
@@ -2738,11 +2738,11 @@
   "white_eyes": {
     "id": "white_eyes",
     "name": {
-      "en": "Big white lenses",
+      "en": "Big white contacts",
       "ru": "Большие белые линзы"
     },
     "description": {
-      "en": "Big lenses that change eye color",
+      "en": "Big contacts that change eye color",
       "ru": "Большие линзы, меняющие цвет глаз"
     },
     "type": "skin",
@@ -2781,11 +2781,11 @@
   "yellow_eyes": {
     "id": "yellow_eyes",
     "name": {
-      "en": "Big yellow lenses",
+      "en": "Big yellow contacts",
       "ru": "Большие желтые линзы"
     },
     "description": {
-      "en": "Big lenses that change eye color",
+      "en": "Big contacts that change eye color",
       "ru": "Большие линзы, меняющие цвет глаз"
     },
     "type": "skin",
@@ -2983,7 +2983,7 @@
       "ru": "Очки Эггмана"
     },
     "description": {
-      "en": "Real Eggman glasses, I'm not lying 100%",
+      "en": "Real Eggman glasses, I'm 100% not lying",
       "ru": "Настоящие очки Эггмана, не вру 100 %"
     },
     "type": "skin",
@@ -3029,7 +3029,7 @@
       "ru": "Повязка на глаз"
     },
     "description": {
-      "en": "Cool eye patch, just like the pirates",
+      "en": "Cool eye patch, just like a pirate's",
       "ru": "Крутая повязка на глаз, прям как у пиратов"
     },
     "type": "skin",
@@ -3074,7 +3074,7 @@
       "ru": "Огненные очки"
     },
     "description": {
-      "en": "Cool glasses in the form of fire",
+      "en": "Cool glasses shaped like fire",
       "ru": "Крутые очки в форме огня"
     },
     "type": "skin",
@@ -3188,7 +3188,7 @@
   "pixel_glasses": {
     "id": "pixel_glasses",
     "name": {
-      "en": "Pixel Glasses",
+      "en": "Pixel glasses",
       "ru": "Пикскельные очки"
     },
     "description": {
@@ -3358,7 +3358,7 @@
       "ru": "Солнцезащитные очки"
     },
     "description": {
-      "en": "With these glasses you can not be afraid of the sun",
+      "en": "With these glasses you don't have to fear the sun",
       "ru": "С этими очками можно не боятся солнца"
     },
     "type": "skin",
@@ -3404,7 +3404,7 @@
       "ru": "Американская шляпа"
     },
     "description": {
-      "en": "A hat in which you can feel freedom",
+      "en": "A hat that makes you feel free",
       "ru": "Шляпа, в которой можно почувствовать свободу"
     },
     "type": "skin",
@@ -3532,7 +3532,7 @@
       "ru": "Аквариум"
     },
     "description": {
-      "en": "Who wants to wear an aquarium on their head",
+      "en": "Who wants to wear an aquarium on their head?",
       "ru": "Кто захочет носить аквариум на голове"
     },
     "type": "skin",
@@ -3772,7 +3772,7 @@
   "cylinder": {
     "id": "cylinder",
     "name": {
-      "en": "Cylinder",
+      "en": "Top hat",
       "ru": "Цилиндр"
     },
     "description": {
@@ -3856,7 +3856,7 @@
       "ru": "Рога демона"
     },
     "description": {
-      "en": "Bad pig, the most terrible that exists",
+      "en": "A bad pig, the most terrible there is",
       "ru": "Плохой хряк, самый ужасный который только существует"
     },
     "type": "skin",
@@ -3898,7 +3898,7 @@
       "ru": "Алмазный шлем"
     },
     "description": {
-      "en": "I think I've already seen this helmet in some game",
+      "en": "I think I've seen this helmet in some game before",
       "ru": "Кажется я уже видел этот шлем в какой то игре"
     },
     "type": "skin",
@@ -3939,7 +3939,7 @@
       "ru": "Шляпа Сумеречной Мечтательницы"
     },
     "description": {
-      "en": "Did you still understand the reference to PvZ? Yes?",
+      "en": "Did you get the PvZ reference? Yes?",
       "ru": "Все же поняли отсылку на PvZ? Да?"
     },
     "type": "skin",
@@ -3980,7 +3980,7 @@
   "eggman_glasses_hat": {
     "id": "eggman_glasses_hat",
     "name": {
-      "en": "Eggman's galsses (hat)",
+      "en": "Eggman's glasses (hat)",
       "ru": "Очки Эггмана (шляпа)"
     },
     "description": {
@@ -4024,7 +4024,7 @@
       "ru": "Огненная корона"
     },
     "description": {
-      "en": "With such a crown it will always be warm",
+      "en": "With a crown like this you'll always be warm",
       "ru": "С такой короной будет всегда тепло"
     },
     "type": "skin",
@@ -4058,7 +4058,7 @@
   "flower_hat": {
     "id": "flower_hat",
     "name": {
-      "en": "Flower on head",
+      "en": "Flower on the head",
       "ru": "Цветок на голове"
     },
     "description": {
@@ -4103,7 +4103,7 @@
       "ru": "Лягушачья панамка"
     },
     "description": {
-      "en": "Chill panama hat for chill boar",
+      "en": "Chill panama hat for a chill boar",
       "ru": "Чиловая панамка для чилового хряка"
     },
     "type": "skin",
@@ -4184,7 +4184,7 @@
   "green_cylinder": {
     "id": "green_cylinder",
     "name": {
-      "en": "Green cylinder",
+      "en": "Green top hat",
       "ru": "Цилиндр Находкинса"
     },
     "description": {
@@ -4264,7 +4264,7 @@
   "hedgehog_hat": {
     "id": "hedgehog_hat",
     "name": {
-      "en": "Hedgehog hat ",
+      "en": "Hedgehog hat",
       "ru": "Шляпа ежика"
     },
     "description": {
@@ -4350,11 +4350,11 @@
   "low_budget_cylinder": {
     "id": "low_budget_cylinder",
     "name": {
-      "en": "Low budget cylinder",
+      "en": "Low budget top hat",
       "ru": "Низко бюджетный цилиндр"
     },
     "description": {
-      "en": "The creator of the Hryak did not have enough budget to make a normal skin",
+      "en": "The creator of Hryak did not have enough budget to make a proper skin",
       "ru": "Создателю Хряка не хватило бюджета, чтобы сделать нормальный скин"
     },
     "type": "skin",
@@ -4433,7 +4433,7 @@
       "ru": "Магнитная шляпа"
     },
     "description": {
-      "en": "They say it helps to magnetize money",
+      "en": "They say it helps attract money",
       "ru": "Говорят что это помогает примагнитить деньги"
     },
     "type": "skin",
@@ -4512,7 +4512,7 @@
   "mcdonalds_cap": {
     "id": "mcdonalds_cap",
     "name": {
-      "en": "Mcdonalds_cap",
+      "en": "McDonald's cap",
       "ru": "Кепка из мака"
     },
     "description": {
@@ -4602,7 +4602,7 @@
   "muzzle_of_a_tank": {
     "id": "muzzle_of_a_tank",
     "name": {
-      "en": "Muzzle of a tank",
+      "en": "Tank barrel",
       "ru": "Дуло от танка"
     },
     "description": {
@@ -4732,7 +4732,7 @@
   "nyusha_hair": {
     "id": "nyusha_hair",
     "name": {
-      "en": "Nyusha hair",
+      "en": "Nyusha's hair",
       "ru": "Волосы Нюши"
     },
     "description": {
@@ -5108,7 +5108,7 @@
       "ru": "Фиолетовые рога демона"
     },
     "description": {
-      "en": "Bad pig, the most terrible that exists",
+      "en": "A bad pig, the most terrible there is",
       "ru": "Плохой хряк, самый ужасный который только существует"
     },
     "type": "skin",
@@ -5146,7 +5146,7 @@
   "red_bandage": {
     "id": "red_bandage",
     "name": {
-      "en": "Red Bandage",
+      "en": "Red bandage",
       "ru": "Красная повязка"
     },
     "description": {
@@ -5353,7 +5353,7 @@
   "straw_hat": {
     "id": "straw_hat",
     "name": {
-      "en": "Straw_hat.png",
+      "en": "Straw hat",
       "ru": "Solomennaya_shlapa.png"
     },
     "description": {
@@ -5435,11 +5435,11 @@
   "vizard_hat": {
     "id": "vizard_hat",
     "name": {
-      "en": "Vizard hat",
+      "en": "Wizard hat",
       "ru": "Шляпа волшебника"
     },
     "description": {
-      "en": "Pig can now cast spells",
+      "en": "The pig can now cast spells",
       "ru": "Хряк теперь может колдовать"
     },
     "type": "skin",
@@ -5524,7 +5524,7 @@
       "ru": "Волосы Уилсона"
     },
     "description": {
-      "en": "The main thing is not to go into the darkness",
+      "en": "Just don't go into the dark",
       "ru": "Главное не идти во тьму"
     },
     "type": "skin",
@@ -5610,7 +5610,7 @@
       "ru": "Волосы козака"
     },
     "description": {
-      "en": "Such forelocks are a symbol of strength. Well maybe",
+      "en": "Such forelocks are a symbol of strength. Well, maybe",
       "ru": "Такие чубчики - это символ силы. Ну наверное"
     },
     "type": "skin",
@@ -5691,7 +5691,7 @@
       "ru": "Кирпич в голове"
     },
     "description": {
-      "en": "A slight headache. But it's nothing, it will heal by the wedding",
+      "en": "A slight headache. But don't worry, it'll heal before the wedding",
       "ru": "Небольшая головная боль. Но ничего, до свадьбы заживет"
     },
     "type": "skin",
@@ -6226,7 +6226,7 @@
       "ru": "Макияж художника"
     },
     "description": {
-      "en": "Careless pig gets dirty with paint",
+      "en": "A careless pig gets covered in paint",
       "ru": "Неосторожный Хряк испачкался краской"
     },
     "type": "skin",
@@ -6346,7 +6346,7 @@
       "ru": "Макияж Брука"
     },
     "description": {
-      "en": "Tattoo for your pig",
+      "en": "Makeup for your pig",
       "ru": "Татуировка для хряка"
     },
     "type": "skin",
@@ -6496,7 +6496,7 @@
   "eye_fingal": {
     "id": "eye_fingal",
     "name": {
-      "en": "Fingal",
+      "en": "Black eye",
       "ru": "Фингал"
     },
     "description": {
@@ -6576,7 +6576,7 @@
   "morgenshtern_tattoo": {
     "id": "morgenshtern_tattoo",
     "name": {
-      "en": "Morgenshtern tatoo",
+      "en": "Morgenshtern tattoo",
       "ru": "Тату Моргенштерна"
     },
     "description": {
@@ -6616,7 +6616,7 @@
   "mr_beast_makeup": {
     "id": "mr_beast_makeup",
     "name": {
-      "en": "Mr.Beast makeup",
+      "en": "Mr. Beast makeup",
       "ru": "Макияж Мистер Биста"
     },
     "description": {
@@ -6809,7 +6809,7 @@
   },
   "reddening_makeup": {
     "name": {
-      "en": "Reddening",
+      "en": "Redness",
       "ru": "Покраснение"
     },
     "description": {
@@ -6850,7 +6850,7 @@
       "ru": "Клыки кабана"
     },
     "description": {
-      "en": "A real, wild boar",
+      "en": "A real wild boar",
       "ru": "Настоящий, дикий Хряк"
     },
     "type": "skin",
@@ -6974,7 +6974,7 @@
       "ru": "Медовая палочка"
     },
     "description": {
-      "en": "Mmm. The most delicious honey created by Pig bees",
+      "en": "Mmm. The most delicious honey, made by pig bees",
       "ru": "Ммм. Самый вкусный мед созданный Хряковыми пчёлами"
     },
     "type": "skin",
@@ -7015,7 +7015,7 @@
       "ru": "Легкая улыбка"
     },
     "description": {
-      "en": "A smile always makes a Pig better",
+      "en": "A smile always makes a pig better",
       "ru": "Улыбка всегда красит Хряка"
     },
     "type": "skin",
@@ -7091,7 +7091,7 @@
   "magic_stick": {
     "id": "magic_stick",
     "name": {
-      "en": "Magic stick",
+      "en": "Magic wand",
       "ru": "Магическая палка"
     },
     "description": {
@@ -7212,7 +7212,7 @@
   "spikelet": {
     "id": "spikelet",
     "name": {
-      "en": "Spikelet",
+      "en": "Wheat stalk",
       "ru": "Колосок"
     },
     "description": {
@@ -7253,7 +7253,7 @@
   "tassel": {
     "id": "tassel",
     "name": {
-      "en": "Tassel",
+      "en": "Paintbrush",
       "ru": "Кисточка"
     },
     "description": {
@@ -7417,7 +7417,7 @@
       "ru": "Язык"
     },
     "description": {
-      "en": "Stuck out his tongue and is silent",
+      "en": "Sticks out his tongue and says nothing",
       "ru": "Высунул язык и молчит"
     },
     "type": "skin",
@@ -7751,11 +7751,11 @@
   "amethyst_pupils": {
     "id": "amethyst_pupils",
     "name": {
-      "en": "Amethyst pupils",
+      "en": "Amethyst contacts",
       "ru": "Аметистовые зрачки"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -7791,11 +7791,11 @@
   "black_pupils": {
     "id": "black_pupils",
     "name": {
-      "en": "Black lenses",
+      "en": "Black contacts",
       "ru": "Чёрные линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -7834,11 +7834,11 @@
   "blue_pupils": {
     "id": "blue_pupils",
     "name": {
-      "en": "Blue lenses",
+      "en": "Blue contacts",
       "ru": "Голубые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -7877,11 +7877,11 @@
   "blue_anime_pupils": {
     "id": "blue_pupils",
     "name": {
-      "en": "Blue anime lenses",
+      "en": "Blue anime contacts",
       "ru": "Голубые аниме линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -7919,11 +7919,11 @@
   },
   "green_anime_pupils": {
     "name": {
-      "en": "Green anime lenses",
+      "en": "Green anime contacts",
       "ru": "Зеленые аниме линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -7961,11 +7961,11 @@
   },
   "purple_anime_pupils": {
     "name": {
-      "en": "Purple anime lenses",
+      "en": "Purple anime contacts",
       "ru": "Фиолетовые аниме линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8003,11 +8003,11 @@
   },
   "pink_anime_pupils": {
     "name": {
-      "en": "Pink anime lenses",
+      "en": "Pink anime contacts",
       "ru": "Розовые аниме линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8046,11 +8046,11 @@
   "red_anime_pupils": {
     "id": "blue_pupils",
     "name": {
-      "en": "Red anime lenses",
+      "en": "Red anime contacts",
       "ru": "Красные аниме линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8089,11 +8089,11 @@
   "gold_pupils": {
     "id": "gold_pupils",
     "name": {
-      "en": "Gold lenses",
+      "en": "Gold contacts",
       "ru": "Золотые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8130,11 +8130,11 @@
   "green_pupils": {
     "id": "green_pupils",
     "name": {
-      "en": "Green lenses",
+      "en": "Green contacts",
       "ru": "Зеленые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8173,11 +8173,11 @@
   "magic_pupils": {
     "id": "magic_pupils",
     "name": {
-      "en": "Magic lenses",
+      "en": "Magic contacts",
       "ru": "Магические линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8216,11 +8216,11 @@
   "orange_pupils": {
     "id": "orange_pupils",
     "name": {
-      "en": "Orange lenses",
+      "en": "Orange contacts",
       "ru": "Оранжевые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8259,11 +8259,11 @@
   "pink_pupils": {
     "id": "pink_pupils",
     "name": {
-      "en": "Pink lenses",
+      "en": "Pink contacts",
       "ru": "Розовые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8302,11 +8302,11 @@
   "purple_pupils": {
     "id": "purple_pupils",
     "name": {
-      "en": "Purple lenses",
+      "en": "Purple contacts",
       "ru": "Фиолетовые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8345,11 +8345,11 @@
   "red_pupils": {
     "id": "red_pupils",
     "name": {
-      "en": "Red lenses",
+      "en": "Red contacts",
       "ru": "Красные линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8388,11 +8388,11 @@
   "rick_pupils": {
     "id": "rick_pupils",
     "name": {
-      "en": "Rick's lenses",
+      "en": "Rick's contacts",
       "ru": "Линзы Рика"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8431,11 +8431,11 @@
   "vampire_pupils": {
     "id": "vampire_pupils",
     "name": {
-      "en": "Vampire pupils",
+      "en": "Vampire contacts",
       "ru": "Линзы вампира"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8474,11 +8474,11 @@
   "white_pupils": {
     "id": "white_pupils",
     "name": {
-      "en": "White lenses",
+      "en": "White contacts",
       "ru": "Белые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8517,11 +8517,11 @@
   "yellow_pupils": {
     "id": "yellow_pupils",
     "name": {
-      "en": "Yellow lenses",
+      "en": "Yellow contacts",
       "ru": "Желтые линзы"
     },
     "description": {
-      "en": "Lenses that change pupils color",
+      "en": "Contacts that change pupil color",
       "ru": "Линзы, меняющие цвет зрачков"
     },
     "type": "skin",
@@ -8601,7 +8601,7 @@
       "ru": "Костюм кейса"
     },
     "description": {
-      "en": "If you have a box, why not put it on pig?",
+      "en": "If you have a box, why not put it on a pig?",
       "ru": "Если у вас есть коробка, почему бы не надеть ее на Хряка?"
     },
     "type": "skin",
@@ -8646,7 +8646,7 @@
       "ru": "Костюм Danwl"
     },
     "description": {
-      "en": "Costume for Danwl",
+      "en": "Suit for Danwl",
       "ru": "Костюм для Danwl"
     },
     "type": "skin",
@@ -8683,7 +8683,7 @@
       "ru": "Костюм Эггмана"
     },
     "description": {
-      "en": "Become 50 % Eggman",
+      "en": "Become 50% Eggman",
       "ru": "Стань на 50 % Эггманом"
     },
     "type": "skin",
@@ -8797,11 +8797,11 @@
   "pajama": {
     "id": "pajama",
     "name": {
-      "en": "Pajama",
+      "en": "Pajamas",
       "ru": "Пижама"
     },
     "description": {
-      "en": "Time for bed for all the boars",
+      "en": "Bedtime for all boars",
       "ru": "Всем Хрякам время спать"
     },
     "type": "skin",
@@ -9021,7 +9021,7 @@
       "ru": "Летнее платье"
     },
     "description": {
-      "en": "Dress for Pig? Why not",
+      "en": "A dress for a pig? Why not",
       "ru": "Платье на Хряка? Почему бы и нет"
     },
     "type": "skin",
@@ -9061,7 +9061,7 @@
       "ru": "Костюм козака"
     },
     "description": {
-      "en": "Take part of the Ukrainian culture into yourself",
+      "en": "Take a piece of Ukrainian culture with you",
       "ru": "Прими в себя часть украинской культуры"
     },
     "type": "skin",
@@ -9843,7 +9843,7 @@
   "radiation_mark": {
     "id": "radiation_mark",
     "name": {
-      "en": "Radiation makeup",
+      "en": "Radiation tattoo",
       "ru": "Тату - радиация"
     },
     "description": {
@@ -10074,7 +10074,7 @@
   "twilight_parkle_mark": {
     "id": "twilight_parkle_mark",
     "name": {
-      "en": "Twilight Parkle cutie mark",
+      "en": "Twilight Sparkle cutie mark",
       "ru": "Искорка - катушек"
     },
     "description": {
@@ -10193,7 +10193,7 @@
   },
   "butchering_tattoo": {
     "name": {
-      "en": "Butchering tatoo",
+      "en": "Butchering tattoo",
       "ru": "Маркировка"
     },
     "description": {
@@ -10394,7 +10394,7 @@
       "ru": "Мангал"
     },
     "description": {
-      "en": "On this grill you can fry something",
+      "en": "You can fry something on this grill",
       "ru": "На этом мангале вы можете пожарить что-то"
     },
     "type": "tool",
@@ -10425,7 +10425,7 @@
       "ru": "Нож"
     },
     "description": {
-      "en": "With this knife, you can carefully take fat from a pig",
+      "en": "With this knife you can carefully cut the fat from a pig",
       "ru": "С этим ножом вы можете аккуратно снимать сало со свиньи"
     },
     "type": "tool",
