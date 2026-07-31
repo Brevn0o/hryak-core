@@ -85,16 +85,13 @@ class Func:
             return
 
         cache = aiocache.caches.get(cache_id)
-        key = Func.cache_key_builder(func, args)
-
-        if args is None:
+        if not args:
             await cache.clear()
             return
 
-        try:
-            await cache.delete(key)
-        except Exception:
-            pass
+        # callers pass the original args either as one tuple or positionally
+        call_args = args[0] if len(args) == 1 and isinstance(args[0], tuple) else args
+        await cache.delete(Func.cache_key_builder(func, *call_args))
 
     @staticmethod
     def cache_key_builder(func, *args, **kwargs):

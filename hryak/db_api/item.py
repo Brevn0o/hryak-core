@@ -327,9 +327,8 @@ class Item:
         if props:
             return int(props['a'])
         if user_id is not None:
-            query = f"SELECT IFNULL(JSON_UNQUOTE(JSON_EXTRACT(inventory, CONCAT('$.', %s, '.amount'))), '0') AS amount FROM {config.users_schema} WHERE id = %s"
-            amount = await Connection.make_request(query, params=(item_id, user_id,), commit=False, fetch=True)
-            if amount is None:
-                return 0
-            return int(float(amount))
+            # read from the cached inventory instead of querying the same row per item
+            from .user import User
+            inventory = await User.get_inventory(user_id)
+            return int(float(inventory.get(item_id, {}).get('amount', 0)))
         return 0
