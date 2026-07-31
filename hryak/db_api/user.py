@@ -74,15 +74,15 @@ class User:
 
     @staticmethod
     @aiocache.cached(ttl=86400)
-    async def get_user(client, user_id):
-        user = client.get_user(int(user_id))
+    async def get_discord_user(discord_client, user_id):
+        user = discord_client.get_user(int(user_id))
         if user is None:
-            user = await client.fetch_user(int(user_id))
+            user = await discord_client.fetch_user(int(user_id))
         return user
 
     @staticmethod
-    async def get_name(client, user_id):
-        user = await User.get_user(client, user_id)
+    async def get_discord_user_name(discord_client, user_id):
+        user = await User.get_discord_user(discord_client, user_id)
         return user.display_name
 
     @staticmethod

@@ -5,6 +5,7 @@ from hryak.functions import Func, translate
 from hryak.game_functions import GameFunc
 from hryak import config
 from hryak.locale import Locale
+from hryak.statuses import Status
 
 
 @aiocache.cached(cache=aiocache.SimpleMemoryCache, ttl=120)
@@ -14,7 +15,7 @@ async def __top_users(user_id: int, extra_select: str, order_by: str, where: str
     for i, weight in r:
         top_users.append((i, weight, units))
     user_position = await Tech.get_user_position(user_id, order_by=order_by, where=where, guild=guild)
-    return {'status': 'success', 'users': top_users, 'user_position': user_position}
+    return {'status': Status.SUCCESS, 'users': top_users, 'user_position': user_position}
 
 async def top_weight_users(user_id: int, lang: str, guild=None):
     """

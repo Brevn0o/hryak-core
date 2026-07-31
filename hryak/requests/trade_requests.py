@@ -1,18 +1,19 @@
 from ..db_api import Trade, Item, User, Pig
 from ..game_functions import GameFunc
+from hryak.statuses import Status, TradeStatus
 
 
 async def trade(user1_id, user2_id, trade_id):
     await User.register_user_if_not_exists(user1_id)
     await User.register_user_if_not_exists(user2_id)
     if trade_id is None:
-        return {'status': '400;no_trade_id'}
+        return {'status': Status.NO_TRADE_ID}
     agree_number = await Trade.get_agree_number(trade_id)
     if agree_number == 2 and await Trade.get_status(trade_id) == 'in_process':
         await Trade.set_status(trade_id, 'tax_processing')
-        return {'status': 'success', 'trade_status': 'tax_processing'}
+        return {'status': Status.SUCCESS, 'trade_status': TradeStatus.TAX_PROCESSING}
     elif agree_number < 2 and await Trade.get_status(trade_id) == 'in_process':
-        return {'status': 'success', 'trade_status': 'in_process'}
+        return {'status': Status.SUCCESS, 'trade_status': TradeStatus.IN_PROCESS}
     if await Trade.get_status(trade_id) == 'tax_processing':
         if await Trade.get_tax_splitting_vote(trade_id, user1_id) == 'tax_split_1':
             await Trade.set_tax_splitting(trade_id, 'tax_split_1')
@@ -30,8 +31,8 @@ async def trade(user1_id, user2_id, trade_id):
                 await Trade.add_tax_to_pay(trade_id, user2_id, item_id, amount)
         if await Trade.get_tax_splitting(trade_id) is not None or not await GameFunc.get_trade_total_tax(trade_id):
             await Trade.set_status(trade_id, 'tax_processing_success')
-            return {'status': 'success', 'trade_status': 'tax_processing_success'}
-        return {'status': 'success', 'trade_status': 'tax_processing', 'total_tax': await GameFunc.get_trade_total_tax(trade_id)}
+            return {'status': Status.SUCCESS, 'trade_status': TradeStatus.TAX_PROCESSING_SUCCESS}
+        return {'status': Status.SUCCESS, 'trade_status': TradeStatus.TAX_PROCESSING, 'total_tax': await GameFunc.get_trade_total_tax(trade_id)}
     if await Trade.get_status(trade_id) == 'tax_processing_success':
         if await Trade.get_status(trade_id) == 'transferring':
             return
@@ -46,7 +47,7 @@ async def trade(user1_id, user2_id, trade_id):
                     total_items[key] = value
             for item_id, data in total_items.items():
                 if await Item.get_amount(item_id, user_id) < data['amount']:
-                    return {'status': '400;not_enough_items', 'user_id': user_id, 'item_id': item_id}
+                    return {'status': Status.NOT_ENOUGH_ITEMS, 'user_id': user_id, 'item_id': item_id}
         for user_id in [user1_id, user2_id]:
             for item_id, data in (await Trade.get_items(trade_id, user_id)).items():
                 user_id_to_give = user1_id if user_id == user2_id else user1_id
@@ -61,4 +62,4 @@ async def trade(user1_id, user2_id, trade_id):
                 if await Item.get_amount(item_id, user_id) <= 0 and await Item.get_type(item_id) == 'skin':
                     await Pig.remove_skin(user_id, item_id)
         await Trade.set_status(trade_id, 'success')
-        return {'status': 'success', 'trade_status': 'success'}
+        return {'status': Status.SUCCESS, 'trade_status': TradeStatus.SUCCESS}

@@ -87,7 +87,7 @@ class Trade:
         user_id = list(data['users'])[index]
         if not fetch:
             return user_id
-        return await User.get_user(client, user_id)
+        return await User.get_discord_user(client, user_id)
 
     @staticmethod
     async def get_user_data(trade_id, user_id):

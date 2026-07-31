@@ -1,3 +1,4 @@
+from .statuses import Status, TradeStatus
 from . import requests
 from .functions import Func, translate
 from .game_functions import GameFunc

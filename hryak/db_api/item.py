@@ -252,14 +252,14 @@ class Item:
         return await Item.get_data(item_id, 'requirements')
 
     @staticmethod
-    async def get_all_allowed_users_by_requirements(client, item_id: str):
+    async def get_all_allowed_users_by_requirements(discord_client, item_id: str):
         requirements = await Item.get_requirements(item_id)
         requirements_results = []
         for n, i in enumerate(requirements):
             requirements_results.append([])
             for j in i:
                 if 'guild' in j:
-                    guild = client.get_guild(j['guild'])
+                    guild = discord_client.get_guild(j['guild'])
                     if guild is not None:
                         if 'role' in j:
                             role = guild.get_role(j['role'])
@@ -271,14 +271,14 @@ class Item:
         return Func.common_elements(requirements_results)
 
     @staticmethod
-    async def is_user_allowed_by_item_requirements(client, user_id: int, item_id: str):
+    async def is_user_allowed_by_item_requirements(discord_client, user_id: int, item_id: str):
         requirements = await Item.get_requirements(item_id)
         requirements_results = []
         for n, i in enumerate(requirements):
             requirements_results.append([])
             for j in i:
                 if 'guild' in j:
-                    guild = client.get_guild(j['guild'])
+                    guild = discord_client.get_guild(j['guild'])
                     if guild is not None:
                         member = guild.get_member(int(user_id))
                         if 'role' in j:

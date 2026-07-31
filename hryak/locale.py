@@ -101,6 +101,15 @@ class Locale:
                       'ru': 'Эксклюзив'}
     }
 
+    BuffTypes = {
+        'weight': {'en': 'Weight gaining',
+                   'ru': 'Массо-набор'},
+        'pooping': {'en': 'Manure quantity',
+                    'ru': 'Количество навоза'},
+        'vomit_chance': {'en': 'Chance of vomiting',
+                         'ru': 'Шанс тошноты'},
+    }
+
     PigAges = {
         '1': {'en': 'Mini-pig',
               'ru': 'Мини-пиг'},
@@ -112,9 +121,9 @@ class Locale:
               'ru': 'Взрослый'},
         '5': {'en': 'Elder',
               'ru': 'Старец'},
-        '6': {'en': 'Veteran',
-              'ru': 'Ветеран'},
-        '7': {'en': 'Ancient',
+        '6': {'en': 'Ancient',
+              'ru': 'Древний'},
+        '7': {'en': 'Eternal',
               'ru': 'Вечный'},
     }
 
@@ -128,4 +137,4 @@ class Locale:
 
     class Global:
         kg = {'en': 'kg',
-                'ru': 'кг'}
+              'ru': 'кг'}

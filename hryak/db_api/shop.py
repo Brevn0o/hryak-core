@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import json
 import random
 
@@ -91,7 +92,7 @@ class Shop:
             return int(result[0])
 
     @staticmethod
-    async def add_shop_state():
+    async def update():
 
         data = {
             'consumables_shop': [],
@@ -122,6 +123,20 @@ class Shop:
             params=(json.dumps(data),)
         )
         await Shop.clear_get_data_cache()
+
+    @staticmethod
+    async def update_if_needed():
+        """Regenerates the shop if it has not been generated since midnight.
+
+        Safe to call as often as you like - it decides on its own whether anything
+        is due. Returns True if a new shop state was written.
+        """
+        last_update_timestamp = await Shop.get_update_timestamp()
+        midnight = int(datetime.datetime.combine(datetime.date.today(), datetime.time(0, 0)).timestamp())
+        if last_update_timestamp is None or last_update_timestamp < midnight:
+            await Shop.update()
+            return True
+        return False
 
     @staticmethod
     async def generate_shop_daily_items():

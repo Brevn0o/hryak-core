@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import math
 
@@ -37,14 +38,14 @@ class GameFunc:
         return res
 
     @staticmethod
-    async def get_all_pig_buffs(user_id, client=None):
+    async def get_all_pig_buffs(user_id, discord_client=None):
         buffs = {}
         for buff in await Pig.get_buffs(user_id):
             if await Pig.get_buff_amount(user_id, buff) > 0 or not await Pig.buff_expired(user_id, buff):
                 buffs[buff] = await Item.get_buffs(buff)
-            if client is not None:
+            if discord_client is not None:
                 for i in config.bot_guilds:
-                    bot_guild = client.get_guild(i)
+                    bot_guild = discord_client.get_guild(i)
                     if bot_guild is not None:
                         if bot_guild.get_member(user_id) is not None:
                             buffs['support_server'] = {'weight': 'x1.05'}
@@ -104,6 +105,21 @@ class GameFunc:
     async def calculate_missed_streak_days(user_id):
         return (Func.generate_current_timestamp() - await History.get_last_streak_timestamp(
             user_id)) // config.streak_timeout
+
+    @staticmethod
+    async def reset_expired_streaks(delay: float = 1):
+        """Zeroes the streak of everyone who has missed more than one streak window.
+
+        Safe to call as often as you like. Sleeps `delay` seconds between users to keep
+        the load off the database. Returns how many streaks were reset.
+        """
+        reset = 0
+        for user_id in await Tech.get_all_users(where="JSON_EXTRACT(stats, '$.streak') > 0"):
+            if await GameFunc.calculate_missed_streak_days(user_id) > 1:
+                await Stats.set_streak(user_id, 0)
+                reset += 1
+            await asyncio.sleep(delay)
+        return reset
 
     @staticmethod
     async def get_not_compatible_active_skins(user_id, item_id):

@@ -109,6 +109,23 @@ class Tech:
         return result
 
     @staticmethod
+    async def get_categorized_items(user_id, inventory_type: str):
+        """
+        Returns {category_key: [item_id, ...]} for an inventory or wardrobe list.
+        'all' is always the first key; for 'wardrobe' the rest are raw skin types.
+        Keys are raw ids - translating them is up to the caller.
+        """
+        items = await Tech.get_all_items((('inventory_type', inventory_type),), user_id=user_id)
+        if inventory_type != 'wardrobe':
+            types = await asyncio.gather(*(Item.get_type(i) for i in items))
+            return {'all': [i for _, i in sorted(zip(types, items), key=lambda pair: pair[0] or '')]}
+        skin_types = await asyncio.gather(*(Item.get_skin_type(i) for i in items))
+        categorized = {'all': [i for _, i in sorted(zip(skin_types, items), key=lambda pair: pair[0] or '')]}
+        for item_type in sorted({t for t in skin_types if t is not None}):
+            categorized[item_type] = await Tech.get_all_items((('skin_config', 'type', item_type),))
+        return categorized
+
+    @staticmethod
     async def clear_get_all_items_cache(params):
         try:
             config.db_caches['tech.get_all_items'].pop(params)
