@@ -54,7 +54,8 @@ async def butcher(user_id: int):
 
 async def rename(user_id: int, name: str):
     await Pig.rename(user_id, name)
-    for i in ['*', '`']:
+    illegal_symbols = ['*', '`']
+    for i in illegal_symbols:
         name = name.replace(i, '')
     if not name:
         name = 'Hryak'

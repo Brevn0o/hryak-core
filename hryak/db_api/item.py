@@ -232,8 +232,8 @@ class Item:
                     rarities = {'3': 0, '4': 1, '5': 2}
                     for j in config.items:
                         cases = await Item.get_cases(j)
-                        if item_id in await cases:
-                            if await cases[item_id] is not None:
+                        if item_id in cases:
+                            if cases[item_id] is not None:
                                 case_possible_drops[n].append({"items": [j], "amount": [1, 1], "chance": cases[item_id]})
                             elif await Item.get_rarity(j) in rarities:
                                 case_possible_drops[n][rarities[await Item.get_rarity(j)]]['items'].append(j)

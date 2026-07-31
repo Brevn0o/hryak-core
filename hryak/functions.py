@@ -128,15 +128,13 @@ class Func:
         path = Func.generate_temp_path(name, file_extension=file_extension)
         for i in range(3):
             try:
-                if file_extension in ['gif']:
-                    content = await (await aiohttp.ClientSession().get(link)).read()
-                    async with aiofiles.open(path, 'wb') as f:
-                        await f.write(content)
-                else:
-                    content = await (await aiohttp.ClientSession().get(link)).read()
-                    async with aiofiles.open(path, 'wb') as f:
-                        await f.write(content)
-            except requests.exceptions.ConnectionError:
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(link) as response:
+                        content = await response.read()
+                async with aiofiles.open(path, 'wb') as f:
+                    await f.write(content)
+                return path
+            except (aiohttp.ClientError, TimeoutError):
                 continue
         return path
 
