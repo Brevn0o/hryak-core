@@ -16,7 +16,8 @@ class Events:
     @staticmethod
     async def get_events(user_id):
         result = await Connection.make_request(
-            f"SELECT events FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT events FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True,
         )
@@ -29,8 +30,8 @@ class Events:
     async def update_events(user_id, new_events):
         new_events = json.dumps(new_events, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET events = %s WHERE {user_id_column()} = {user_id}",
-            (new_events,)
+            f"UPDATE {config.users_schema} SET events = %s WHERE {user_id_column()} = %s",
+            (new_events, user_id)
         )
 
     @staticmethod

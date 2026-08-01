@@ -75,7 +75,8 @@ class User:
         if column is None:
             column = user_id_column()
         result = await Connection.make_request(
-            f"SELECT EXISTS(SELECT 1 FROM {config.users_schema} WHERE {column} = {user_id})",
+            f"SELECT EXISTS(SELECT 1 FROM {config.users_schema} WHERE {column} = %s)",
+            params=(user_id,),
             commit=False,
             fetch=True
         )
@@ -98,7 +99,8 @@ class User:
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="user.get_inventory")
     async def get_inventory(user_id: str):
         result = await Connection.make_request(
-            f"SELECT inventory FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT inventory FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True
         )
@@ -159,8 +161,8 @@ class User:
     async def set_new_inventory(user_id, new_inventory):
         new_inventory = json.dumps(new_inventory, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET inventory = %s WHERE {user_id_column()} = {user_id}",
-            params=(new_inventory,)
+            f"UPDATE {config.users_schema} SET inventory = %s WHERE {user_id_column()} = %s",
+            params=(new_inventory, user_id)
         )
         await User.clear_get_inventory_cache(user_id)
 
@@ -216,7 +218,8 @@ class User:
     @staticmethod
     async def get_registration_timestamp(user_id: int):
         result = await Connection.make_request(
-            f"SELECT created FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT created FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True
         )
@@ -253,7 +256,8 @@ class User:
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="user.get_rating")
     async def get_rating(user_id):
         result = await Connection.make_request(
-            f"SELECT rating FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT rating FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True,
         )
@@ -270,7 +274,8 @@ class User:
     async def set_new_rating(user_id, new_rating):
         new_rating = json.dumps(new_rating, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET rating = '{new_rating}' WHERE {user_id_column()} = {user_id}"
+            f"UPDATE {config.users_schema} SET rating = %s WHERE {user_id_column()} = %s",
+            params=(new_rating, user_id)
         )
         await User.clear_get_rating_cache(user_id)
 
@@ -342,7 +347,8 @@ class User:
     @staticmethod
     async def get_orders(user_id):
         result = await Connection.make_request(
-            f"SELECT orders FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT orders FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True,
         )
@@ -355,7 +361,8 @@ class User:
     async def set_new_orders(user_id, new_orders):
         new_orders = json.dumps(new_orders, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET orders = '{new_orders}' WHERE {user_id_column()} = {user_id}"
+            f"UPDATE {config.users_schema} SET orders = %s WHERE {user_id_column()} = %s",
+            params=(new_orders, user_id)
         )
 
     @staticmethod

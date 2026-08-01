@@ -59,7 +59,7 @@ class Pig:
     async def update_pig(user_id: int, new_pig: dict):
         new_pig = json.dumps(new_pig, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET pig = %s WHERE {user_id_column()} = {user_id}", (new_pig,)
+            f"UPDATE {config.users_schema} SET pig = %s WHERE {user_id_column()} = %s", (new_pig, user_id)
         )
         await Pig.clear_get_pig_cache(user_id)
 

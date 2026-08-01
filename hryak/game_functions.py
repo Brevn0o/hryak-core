@@ -107,6 +107,18 @@ class GameFunc:
             user_id)) // config.streak_timeout
 
     @staticmethod
+    async def get_number_of_possible_skin_variations():
+        """How many distinct pigs can be assembled - the product of the skins available per slot."""
+        counts = {}
+        for item_id in await Tech.get_all_items((('type', 'skin'),)):
+            skin_type = await Item.get_skin_type(item_id)
+            counts[skin_type] = counts.get(skin_type, 0) + 1
+        variations = 1
+        for number_of_skins in counts.values():
+            variations *= number_of_skins
+        return variations
+
+    @staticmethod
     async def reset_expired_streaks(delay: float = 1):
         """Zeroes the streak of everyone who has missed more than one streak window.
 

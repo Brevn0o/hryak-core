@@ -32,7 +32,8 @@ class Guild:
     @staticmethod
     async def exists(guild_id):
         result = await Connection.make_request(
-            f"SELECT EXISTS(SELECT 1 FROM {config.guilds_schema} WHERE id = {guild_id})",
+            f"SELECT EXISTS(SELECT 1 FROM {config.guilds_schema} WHERE id = %s)",
+            params=(guild_id,),
             commit=False,
             fetch=True
         )
@@ -73,7 +74,7 @@ class Guild:
     async def set_settings(guild_id, new_settings):
         new_settings = json.dumps(new_settings, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.guilds_schema} SET settings = %s WHERE id = {guild_id}", (new_settings,)
+            f"UPDATE {config.guilds_schema} SET settings = %s WHERE id = %s", (new_settings, guild_id)
         )
 
     @staticmethod

@@ -33,11 +33,12 @@ async def trade(user1_id, user2_id, trade_id):
             await Trade.set_status(trade_id, 'tax_processing_success')
             return {'status': Status.SUCCESS, 'trade_status': TradeStatus.TAX_PROCESSING_SUCCESS}
         return {'status': Status.SUCCESS, 'trade_status': TradeStatus.TAX_PROCESSING, 'total_tax': await GameFunc.get_trade_total_tax(trade_id)}
+    if await Trade.get_status(trade_id) == TradeStatus.TRANSFERRING:
+        # a second call arrived while the first one is still moving items
+        return {'status': Status.IN_PROCESS, 'trade_status': TradeStatus.TRANSFERRING}
     if await Trade.get_status(trade_id) == 'tax_processing_success':
-        if await Trade.get_status(trade_id) == 'transferring':
-            return
         await Trade.set_status(trade_id, 'transferring')
-        for user_id in [user2_id, user2_id]:
+        for user_id in [user1_id, user2_id]:
             total_items = await Trade.get_items(trade_id, user_id)
             tax_to_pay = await Trade.get_tax_to_pay(trade_id, user_id)
             for key, value in tax_to_pay.items():
@@ -50,8 +51,8 @@ async def trade(user1_id, user2_id, trade_id):
                     return {'status': Status.NOT_ENOUGH_ITEMS, 'user_id': user_id, 'item_id': item_id}
         for user_id in [user1_id, user2_id]:
             for item_id, data in (await Trade.get_items(trade_id, user_id)).items():
-                user_id_to_give = user1_id if user_id == user2_id else user1_id
-                user_id_to_remove = user1_id if user_id != user2_id else user2_id
+                user_id_to_give = user2_id if user_id == user1_id else user1_id
+                user_id_to_remove = user_id
                 amount = data['amount']
                 await User.transfer_item(user_id_to_remove, user_id_to_give, item_id, amount)
                 if await Item.get_amount(item_id, user_id_to_remove) <= 0 and await Item.get_type(item_id) == 'skin':
@@ -63,3 +64,5 @@ async def trade(user1_id, user2_id, trade_id):
                     await Pig.remove_skin(user_id, item_id)
         await Trade.set_status(trade_id, 'success')
         return {'status': Status.SUCCESS, 'trade_status': TradeStatus.SUCCESS}
+    # the trade is already finished - report its state instead of returning None
+    return {'status': Status.SUCCESS, 'trade_status': await Trade.get_status(trade_id)}

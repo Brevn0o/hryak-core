@@ -58,7 +58,8 @@ class PromoCode:
     @staticmethod
     async def max_uses(code: str):
         result = await Connection.make_request(
-            f"SELECT max_uses FROM {config.promocodes_schema} WHERE id = '{code}'",
+            f"SELECT max_uses FROM {config.promocodes_schema} WHERE id = %s",
+            params=(code,),
             commit=False,
             fetch=True
         )
@@ -67,7 +68,8 @@ class PromoCode:
     @staticmethod
     async def created(code: str):
         result = await Connection.make_request(
-            f"SELECT created FROM {config.promocodes_schema} WHERE id = '{code}'",
+            f"SELECT created FROM {config.promocodes_schema} WHERE id = %s",
+            params=(code,),
             commit=False,
             fetch=True
         )
@@ -76,7 +78,8 @@ class PromoCode:
     @staticmethod
     async def get_users_used(code: str) -> list:
         result = await Connection.make_request(
-            f"SELECT users_used FROM {config.promocodes_schema} WHERE id = '{code}'",
+            f"SELECT users_used FROM {config.promocodes_schema} WHERE id = %s",
+            params=(code,),
             commit=False,
             fetch=True
         )
@@ -88,7 +91,8 @@ class PromoCode:
     @staticmethod
     async def expires_in(code: str):
         result = await Connection.make_request(
-            f"SELECT expires_in FROM {config.promocodes_schema} WHERE id = '{code}'",
+            f"SELECT expires_in FROM {config.promocodes_schema} WHERE id = %s",
+            params=(code,),
             commit=False,
             fetch=True
         )
@@ -104,5 +108,6 @@ class PromoCode:
     async def set_new_users_used(code: str, new_users: list):
         new_users = json.dumps(new_users, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.promocodes_schema} SET users_used = '{new_users}' WHERE id = '{code}'"
+            f"UPDATE {config.promocodes_schema} SET users_used = %s WHERE id = %s",
+            params=(new_users, code)
         )

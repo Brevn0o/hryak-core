@@ -24,7 +24,8 @@ class Order:
     @staticmethod
     async def get_user_orders(user_id):
         result = await Connection.make_request(
-            f"SELECT orders FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT orders FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True,
         )
@@ -37,7 +38,8 @@ class Order:
     async def set_new_orders(user_id, new_orders):
         new_orders = json.dumps(new_orders, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET orders = '{new_orders}' WHERE {user_id_column()} = {user_id}"
+            f"UPDATE {config.users_schema} SET orders = %s WHERE {user_id_column()} = %s",
+            params=(new_orders, user_id)
         )
 
     @staticmethod

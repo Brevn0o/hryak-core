@@ -19,12 +19,15 @@ class Shop:
     @staticmethod
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="shop.get_data")
     async def get_data(shop_id=None):
+        params = None
         if shop_id is None:
             query = f"SELECT data FROM {config.shop_schema} ORDER BY id DESC LIMIT 1"
         else:
-            query = f"SELECT data FROM {config.shop_schema} WHERE id = {shop_id}"
+            query = f"SELECT data FROM {config.shop_schema} WHERE id = %s"
+            params = (shop_id,)
         result = await Connection.make_request(
             query,
+            params=params,
             commit=False,
             fetch=True
         )
@@ -78,12 +81,15 @@ class Shop:
 
     @staticmethod
     async def get_update_timestamp(shop_id: int = None):
+        params = None
         if shop_id is None:
             query = f"SELECT timestamp FROM {config.shop_schema} ORDER BY id DESC LIMIT 1"
         else:
-            query = f"SELECT timestamp FROM {config.shop_schema} WHERE id = {shop_id}"
+            query = f"SELECT timestamp FROM {config.shop_schema} WHERE id = %s"
+            params = (shop_id,)
         result = await Connection.make_request(
             query,
+            params=params,
             commit=False,
             fetch=True,
             fetch_first=True

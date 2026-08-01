@@ -32,7 +32,8 @@ class Stats:
     @staticmethod
     async def get_stats(user_id):
         result = await Connection.make_request(
-            f"SELECT stats FROM {config.users_schema} WHERE {user_id_column()} = {user_id}",
+            f"SELECT stats FROM {config.users_schema} WHERE {user_id_column()} = %s",
+            params=(user_id,),
             commit=False,
             fetch=True,
         )
@@ -45,7 +46,7 @@ class Stats:
     async def set_stats(user_id, new_stats):
         new_stats = json.dumps(new_stats, ensure_ascii=False)
         await Connection.make_request(
-            f"UPDATE {config.users_schema} SET stats = %s WHERE {user_id_column()} = {user_id}", params=(new_stats,)
+            f"UPDATE {config.users_schema} SET stats = %s WHERE {user_id_column()} = %s", params=(new_stats, user_id)
         )
 
     @staticmethod
