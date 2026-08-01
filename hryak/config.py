@@ -274,19 +274,21 @@ db_caches = {
     'tech.get_all_items': TTLCache(maxsize=1000, ttl=600000)
 }
 cache_ttl = 600000
-# caches holding data that every front-end must agree on
+# mutable state - every front-end has to agree on these, so they can go in a shared cache
 shared_cache_aliases = (
     'user.get_inventory', 'user.get_settings', 'user.get_rating',
-    'item.get_data', 'item.get_emoji', 'pig.get', 'shop.get_data',
-    'history.get', 'tech.__get_all_items', 'tech.get_all_items',
+    'pig.get', 'shop.get_data', 'history.get',
+)
+# derived from items_config.json: identical in every process, never changes at runtime.
+# sharing these would only turn a free dict lookup into a network round trip.
+local_cache_aliases = (
+    'item.get_data', 'item.get_emoji', 'tech.__get_all_items', 'tech.get_all_items',
 )
 
 
 def _memory_cache_config():
-    # 'default' holds process-local things - temp file paths, discord objects - and must
-    # never be shared, so it stays in memory whatever the shared backend is
     conf = {'default': {'cache': 'aiocache.SimpleMemoryCache', 'ttl': cache_ttl}}
-    for alias in shared_cache_aliases:
+    for alias in local_cache_aliases + shared_cache_aliases:
         conf[alias] = {'cache': 'aiocache.SimpleMemoryCache', 'ttl': cache_ttl}
     return conf
 
@@ -294,11 +296,11 @@ def _memory_cache_config():
 caches.set_config(_memory_cache_config())
 
 pig_names = [
-    {'en': ['Sleepy', 'Angry', 'Kind', 'Crazy', 'Drunk', 'High', 'Big', 'Stinky', 'Fat', 'Thin', 'Funny', 'Smart',
-            'Dumb', 'Sexy', 'Chubby', 'Small', 'Large'],
+    {'en': ['Sleepy', 'Angry', 'Kind', 'Crazy', 'Drunk', 'High', 'Big', 'Stinky', 'Fat', 'Skinny', 'Funny', 'Smart',
+            'Dumb', 'Sexy', 'Silly', 'Small', 'Big', 'Wet'],
      'ru': ['Грязный', 'Крутой', 'Сухой', 'Мокрый', 'Обкуренный', 'Мертвый', 'Вонючий', 'Сладкий', 'Непробиваемый',
             'Толстый', 'Тонкий', 'Смешной', 'Умный', 'Глупый', 'Сексуальный', 'Пухлый', 'Маленький', 'Большой']},
-    {'en': ['Pig', 'Meat', 'Maxim', 'John', 'Jack', 'Chris', 'Anthony'],
+    {'en': ['Pig', 'Meat', 'Maxim', 'John', 'Jack', 'Chris', 'Anthony', 'Joaquin', 'Danny'],
      'ru': ['Хряк', 'Свин', 'Шашлык', 'Максим', 'Антон', 'Александр', 'Иван', 'Матвей', 'Даниил', 'Денис', 'Кирилл',
             'Дмитрий', 'Артем', 'Алексей', 'Егор', 'Станислав', 'Роман', 'Виктор', 'Илья', 'Никита', 'Владимир',
             'Михаил']},

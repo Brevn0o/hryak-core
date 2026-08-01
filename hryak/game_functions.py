@@ -61,13 +61,21 @@ class GameFunc:
     @staticmethod
     async def get_user_wealth(user_id):
         wealth = {}
-        for item_id in await User.get_inventory(user_id):
-            if await Item.get_wealth_impact(item_id) is not None and await Item.get_market_price(item_id) is not None:
-                if await Item.get_market_price_currency(item_id) not in wealth:
-                    wealth[await Item.get_market_price_currency(item_id)] = 0
-                wealth[await Item.get_market_price_currency(item_id)] += await Item.get_amount(item_id,
-                                                                                   user_id) * await Item.get_market_price(
-                    item_id) * await Item.get_wealth_impact(item_id)
+        start_time = datetime.datetime.now()
+        print(start_time)
+        inventory = await User.get_inventory(user_id)
+        for item_id, item_data in inventory.items():
+            wealth_impact = await Item.get_wealth_impact(item_id)
+            market_price = await Item.get_market_price(item_id)
+            if wealth_impact is not None and market_price is not None:
+                currency = await Item.get_market_price_currency(item_id)
+                # the amount is already in the inventory we just read, so don't fetch it per item
+                props = await Item.get_props(item_id)
+                amount = int(props['a']) if 'a' in props else int(float(item_data.get('amount', 0)))
+                if currency not in wealth:
+                    wealth[currency] = 0
+                wealth[currency] += amount * market_price * wealth_impact
+        print(f"User wealth calculation time: {datetime.datetime.now() - start_time}")
         return wealth
 
     @staticmethod
