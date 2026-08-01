@@ -64,14 +64,12 @@ class GameFunc:
         start_time = datetime.datetime.now()
         print(start_time)
         inventory = await User.get_inventory(user_id)
-        for item_id, item_data in inventory.items():
+        for item_id in inventory:
             wealth_impact = await Item.get_wealth_impact(item_id)
             market_price = await Item.get_market_price(item_id)
             if wealth_impact is not None and market_price is not None:
                 currency = await Item.get_market_price_currency(item_id)
-                # the amount is already in the inventory we just read, so don't fetch it per item
-                props = await Item.get_props(item_id)
-                amount = int(props['a']) if 'a' in props else int(float(item_data.get('amount', 0)))
+                amount = await Item.get_amount(item_id, user_id, inventory=inventory)
                 if currency not in wealth:
                     wealth[currency] = 0
                 wealth[currency] += amount * market_price * wealth_impact

@@ -279,8 +279,6 @@ shared_cache_aliases = (
     'user.get_inventory', 'user.get_settings', 'user.get_rating',
     'pig.get', 'shop.get_data', 'history.get',
 )
-# derived from items_config.json: identical in every process, never changes at runtime.
-# sharing these would only turn a free dict lookup into a network round trip.
 local_cache_aliases = (
     'item.get_data', 'item.get_emoji', 'tech.__get_all_items', 'tech.get_all_items',
 )

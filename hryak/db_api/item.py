@@ -322,13 +322,13 @@ class Item:
         return await Item.get_data(item_id, 'tradable')
 
     @staticmethod
-    async def get_amount(item_id: str, user_id: int = None):
+    async def get_amount(item_id: str, user_id: int = None, inventory: dict = None):
         props = await Item.get_props(item_id)
         if props:
             return int(props['a'])
-        if user_id is not None:
-            # read from the cached inventory instead of querying the same row per item
+        if inventory is None and user_id is not None:
             from .user import User
             inventory = await User.get_inventory(user_id)
+        if inventory is not None:
             return int(float(inventory.get(item_id, {}).get('amount', 0)))
         return 0
