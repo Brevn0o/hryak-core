@@ -695,38 +695,6 @@
     "image": "bin/images/barbecue.png",
     "cases": {}
   },
-  "beer": {
-    "id": "beer",
-    "name": {
-      "en": "Beer",
-      "ru": "Пиво"
-    },
-    "description": {
-      "en": "True beer, crafted with love",
-      "ru": "Настоящее пиво, созданное с любовью"
-    },
-    "type": "resource",
-    "skin_config": null,
-    "emoji": "🍺",
-    "inventory_type": "inventory",
-    "rarity": "2",
-    "cooked_item_id": null,
-    "market_price": 100,
-    "market_price_currency": "coins",
-    "shop_category": null,
-    "shop_cooldown": null,
-    "buffs": null,
-    "salable": false,
-    "sell_price": 100,
-    "sell_price_currency": "coins",
-    "tradable": true,
-    "case_drops": null,
-    "requirements": null,
-    "tax": "auto",
-    "wealth_impact": 0,
-    "image": "bin/images/beer.png",
-    "cases": {}
-  },
   "lard": {
     "id": "lard",
     "name": {
@@ -842,6 +810,38 @@
     "image": "bin/images/test_item.png",
     "cases": {}
   },
+  "beer": {
+    "id": "beer",
+    "name": {
+      "en": "Beer",
+      "ru": "Пиво"
+    },
+    "description": {
+      "en": "True beer, crafted with love",
+      "ru": "Настоящее пиво, созданное с любовью"
+    },
+    "type": "resource",
+    "skin_config": null,
+    "emoji": "🍺",
+    "inventory_type": "inventory",
+    "rarity": "2",
+    "cooked_item_id": null,
+    "market_price": 100,
+    "market_price_currency": "coins",
+    "shop_category": null,
+    "shop_cooldown": null,
+    "buffs": null,
+    "salable": false,
+    "sell_price": 100,
+    "sell_price_currency": "coins",
+    "tradable": true,
+    "case_drops": null,
+    "requirements": null,
+    "tax": "auto",
+    "wealth_impact": 0,
+    "image": "bin/images/beer.png",
+    "cases": {}
+  },
   "vodka": {
     "id": "vodka",
     "name": {
@@ -904,6 +904,38 @@
     "tax": "auto",
     "wealth_impact": 0,
     "image": "bin/images/whiskey.png",
+    "cases": {}
+  },
+  "tequila": {
+    "id": "tequila",
+    "name": {
+      "en": "Tequila",
+      "ru": "Текила"
+    },
+    "description": {
+      "en": "True mexican tequila",
+      "ru": "Настоящая мексиканская текила"
+    },
+    "type": "resource",
+    "skin_config": null,
+    "emoji": "💧",
+    "inventory_type": "inventory",
+    "rarity": "2",
+    "cooked_item_id": null,
+    "market_price": 150,
+    "market_price_currency": "coins",
+    "shop_category": null,
+    "shop_cooldown": null,
+    "buffs": null,
+    "salable": false,
+    "sell_price": 150,
+    "sell_price_currency": "coins",
+    "tradable": true,
+    "case_drops": null,
+    "requirements": null,
+    "tax": "auto",
+    "wealth_impact": 0,
+    "image": "bin/images/tequila.png",
     "cases": {}
   },
   "shailushai_backpack": {
