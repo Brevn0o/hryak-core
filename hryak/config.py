@@ -273,52 +273,25 @@ db_caches = {
     'tech.__get_all_items': TTLCache(maxsize=1000, ttl=600000),
     'tech.get_all_items': TTLCache(maxsize=1000, ttl=600000)
 }
-caches.set_config({
-    'default': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'user.get_inventory': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'user.get_settings': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'user.get_rating': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'item.get_data': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'item.get_emoji': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'pig.get': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'shop.get_data': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'history.get': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'tech.__get_all_items': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    },
-    'tech.get_all_items': {
-        'cache': "aiocache.SimpleMemoryCache",
-        'ttl': 600000,
-    }
-})
+cache_ttl = 600000
+# caches holding data that every front-end must agree on
+shared_cache_aliases = (
+    'user.get_inventory', 'user.get_settings', 'user.get_rating',
+    'item.get_data', 'item.get_emoji', 'pig.get', 'shop.get_data',
+    'history.get', 'tech.__get_all_items', 'tech.get_all_items',
+)
+
+
+def _memory_cache_config():
+    # 'default' holds process-local things - temp file paths, discord objects - and must
+    # never be shared, so it stays in memory whatever the shared backend is
+    conf = {'default': {'cache': 'aiocache.SimpleMemoryCache', 'ttl': cache_ttl}}
+    for alias in shared_cache_aliases:
+        conf[alias] = {'cache': 'aiocache.SimpleMemoryCache', 'ttl': cache_ttl}
+    return conf
+
+
+caches.set_config(_memory_cache_config())
 
 pig_names = [
     {'en': ['Sleepy', 'Angry', 'Kind', 'Crazy', 'Drunk', 'High', 'Big', 'Stinky', 'Fat', 'Thin', 'Funny', 'Smart',

@@ -18,6 +18,7 @@ setup(
         'requests == 2.32.3',
         'numpy == 2.2.1',
         'scipy == 1.14.1',
+        'redis == 5.2.1',
     ],
     python_requires='~=3.12.0',
 )
