@@ -83,6 +83,70 @@ class User:
         return bool(result)
 
     @staticmethod
+    async def transfer_data(from_user_id, to_user_id, overwrite: bool = False):
+        """Moves a whole account onto another platform id.
+
+        Nothing is actually copied. The row keeps its internal id, so pig, inventory,
+        stats, events, history and orders come along untouched - only the platform id
+        on the row changes, plus the few places where other rows point at the user by
+        that id instead of by the internal one.
+
+        Returns Status.NOT_EXIST when there is nothing to move, and Status.ALREADY_USED
+        when to_user_id already has an account - pass overwrite=True to delete it first,
+        which is not reversible.
+        """
+        from .pig import Pig
+        from ..statuses import Status
+
+        from_user_id, to_user_id = str(from_user_id), str(to_user_id)
+        if from_user_id == to_user_id:
+            return Status.SUCCESS
+        if not await User.exists(from_user_id):
+            return Status.NOT_EXIST
+        if await User.exists(to_user_id):
+            if not overwrite:
+                return Status.ALREADY_USED
+            await Connection.make_request(
+                f"DELETE FROM {config.users_schema} WHERE {user_id_column()} = %s",
+                params=(to_user_id,)
+            )
+
+        await Connection.make_request(
+            f"UPDATE {config.users_schema} SET {user_id_column()} = %s WHERE {user_id_column()} = %s",
+            params=(to_user_id, from_user_id)
+        )
+
+        # rating is keyed by the id of whoever left the rate, so the user appears in
+        # everyone else's row. if both ids rated the same person, the moved one wins
+        await Connection.make_request(
+            f"UPDATE {config.users_schema} SET rating = JSON_REMOVE("
+            f"JSON_SET(rating, CONCAT('$.\"', %s, '\"'), JSON_EXTRACT(rating, CONCAT('$.\"', %s, '\"'))), "
+            f"CONCAT('$.\"', %s, '\"')) "
+            f"WHERE JSON_CONTAINS_PATH(rating, 'one', CONCAT('$.\"', %s, '\"'))",
+            params=(to_user_id, from_user_id, from_user_id, from_user_id)
+        )
+        await Connection.make_request(
+            f"UPDATE {config.users_schema} SET pig = JSON_SET(pig, '$.pregnant_by', %s) "
+            f"WHERE JSON_UNQUOTE(JSON_EXTRACT(pig, '$.pregnant_by')) = %s",
+            params=(to_user_id, from_user_id)
+        )
+        await Connection.make_request(
+            f"UPDATE {config.promocodes_schema} SET users_used = JSON_REPLACE("
+            f"users_used, JSON_UNQUOTE(JSON_SEARCH(users_used, 'one', %s)), %s) "
+            f"WHERE JSON_SEARCH(users_used, 'one', %s) IS NOT NULL",
+            params=(from_user_id, to_user_id, from_user_id)
+        )
+
+        for user_id in (from_user_id, to_user_id):
+            await User.clear_get_inventory_cache(user_id)
+            await User.clear_get_settings_cache(user_id)
+            await Pig.clear_get_pig_cache(user_id)
+            await History.clear_get_history_cache(user_id)
+        # the rename edited other people's rating blobs, so drop the whole alias
+        await Func.clear_db_cache('user.get_rating', User.get_rating)
+        return Status.SUCCESS
+
+    @staticmethod
     @aiocache.cached(ttl=86400)
     async def get_discord_user(discord_client, user_id):
         user = discord_client.get_user(int(user_id))
