@@ -94,8 +94,10 @@ class Shop:
             fetch=True,
             fetch_first=True
         )
-        if result is not None and result[0] is not None:
-            return int(result[0])
+        # make_request already unwrapped the row, so result is the timestamp itself -
+        # indexing it again would take the first character of the string
+        if result is not None:
+            return int(result)
 
     @staticmethod
     async def update():

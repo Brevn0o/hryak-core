@@ -64,5 +64,6 @@ class Setup:
         columns = ['id varchar(32) PRIMARY KEY UNIQUE',
                    'joined int',
                    'settings json',
+                   'pig json',
                    ]
         await Setup.create_table(columns, config.guilds_schema)

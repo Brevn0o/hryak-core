@@ -17,6 +17,33 @@ async def __top_users(user_id: int, extra_select: str, order_by: str, where: str
     user_position = await Tech.get_user_position(user_id, order_by=order_by, where=where, guild=guild)
     return {'status': Status.SUCCESS, 'users': top_users, 'user_position': user_position}
 
+@aiocache.cached(cache=aiocache.SimpleMemoryCache, ttl=120)
+async def __top_guilds(guild_id, extra_select: str, order_by: str, where: str, units: str, limit: int = 10):
+    query = f'SELECT id, {extra_select} FROM {config.guilds_schema}'
+    if where is not None:
+        query += f' WHERE {where}'
+    if order_by is not None:
+        query += f' ORDER BY {order_by}'
+    r = await Connection.make_request(query, commit=False, fetch=True, fetchall=True)
+    if r is None:
+        r = []
+    top_guilds = []
+    for i, value in r[:limit]:
+        top_guilds.append((i, value, units))
+    guild_ids = [i[0] for i in r]
+    guild_position = guild_ids.index(str(guild_id)) if str(guild_id) in guild_ids else None
+    return {'status': Status.SUCCESS, 'guilds': top_guilds, 'guild_position': guild_position}
+
+async def top_weight_guilds(guild_id, lang: str):
+    """
+    Get the top guilds by the weight of their server pig.
+    :return: list of tuples (guild_id, weight, unit) and guild_position
+    """
+    extra_select = "IFNULL(JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')), '0')"
+    order_by = "CAST(JSON_UNQUOTE(JSON_EXTRACT(pig, '$.weight')) AS DECIMAL(15,4)) DESC"
+    where = "JSON_TYPE(JSON_EXTRACT(pig, '$.channel_id')) NOT IN ('NULL')"
+    return await __top_guilds(guild_id, extra_select, order_by, where, translate(Locale.Global.kg, lang))
+
 async def top_weight_users(user_id: int, lang: str, guild=None):
     """
     Get the top users by weight.

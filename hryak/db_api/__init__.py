@@ -10,6 +10,7 @@ from .events import Events
 from .history import History
 from .setup import Setup
 from .guild import Guild
+from .guild_pig import GuildPig
 from .stats import Stats
 from .order import Order
 from .shop import Shop

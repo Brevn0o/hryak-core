@@ -64,6 +64,50 @@ default_pig = {'name': 'Hryak',
                          'hat': None,
                          'legs': None,
                          'tie': None}}
+default_guild_pig = {'name': 'Hryak',
+                     'weight': 1,
+                     'genetic': {
+                         'tail': 'default_body',
+                         'left_ear': 'default_body',
+                         'left_eye': 'white_eyes',
+                         'right_eye': 'white_eyes',
+                         'left_pupil': 'black_pupils',
+                         'right_pupil': 'black_pupils',
+                         'right_ear': 'default_body',
+                         'nose': 'default_body',
+                         'body': 'default_body',
+                         'eyes': 'white_eyes',
+                         'pupils': 'black_pupils',
+                     },
+                     'skins': {'body': None,
+                               'tattoo': None,
+                               'tail': None,
+                               'left_ear': None,
+                               'makeup': None,
+                               'mouth': None,
+                               'left_eye': None,
+                               'right_eye': None,
+                               'left_pupil': None,
+                               'right_pupil': None,
+                               'middle_ear': None,
+                               'right_ear': None,
+                               'suit': None,
+                               'glasses': None,
+                               'nose': None,
+                               'piercing_nose': None,
+                               'face': None,
+                               'piercing_ear': None,
+                               'back': None,
+                               'hat': None,
+                               'legs': None,
+                               'tie': None},
+                     # [{'user_id': 123, 'timestamp': 123456, 'weight_added': 5}, ...]
+                     'feeds': [],
+                     'channel_id': None,  # where the pig lives
+                     'message_id': None,  # the pig's message, kept up to date in place
+                     'channel_created_by_bot': False}  # ours to delete when the pig moves out
+guild_pig_feed_cooldown = 12 * 3600
+
 default_pig_body_genetic = ['default_body']
 default_pig_pupils_genetic = ['black_pupils', 'blue_pupils', 'green_pupils',
                               'orange_pupils', 'pink_pupils', 'yellow_pupils', 'purple_pupils']
@@ -71,7 +115,8 @@ default_pig_eyes_genetic = ['white_eyes']
 default_stats = {'pig_fed': 0, 'money_earned': 0, 'commands_used': {}, 'items_used': {}, 'items_sold': {}, 'streak': 0,
                  'successful_orders': 0, 'dollars_donated': 0,
                  'language_changed': False}
-default_history = {'feed_history': [], 'butcher_history': [], 'shop_history': [], 'streak_history': []}
+default_history = {'feed_history': [], 'butcher_history': [], 'shop_history': [], 'streak_history': [],
+                   'server_feed_history': []}
 
 default_item = {
     'id': 'none',
@@ -233,7 +278,7 @@ image_links = {'image_is_blocked': 'https://thumbsnap.com/i/EQ1EaKmW.png'}
 db_api_cash_size = 10
 db_api_cash_ttl = 1
 
-guild_settings = {'allow_say': False}
+guild_settings = {'allow_say': False, 'language': 'en'}
 user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True}
 emotions_erase_cords = {'sad': [(668, 904, 855, 849, 734, 740),
                                 (917, 842, 1150, 917, 1085, 734)],
@@ -287,7 +332,7 @@ cache_ttl = 600000
 # mutable state - every front-end has to agree on these, so they can go in a shared cache
 shared_cache_aliases = (
     'user.get_inventory', 'user.get_settings', 'user.get_rating',
-    'pig.get', 'shop.get_data', 'history.get',
+    'pig.get', 'guild_pig.get', 'guild.get_settings', 'shop.get_data', 'history.get',
 )
 local_cache_aliases = (
     'item.get_data', 'item.get_emoji', 'tech.__get_all_items', 'tech.get_all_items',

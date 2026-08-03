@@ -12,21 +12,37 @@ from hryak import config
 class Guild:
 
     @staticmethod
-    async def register_guild_if_not_exists(guild_id):
+    async def register_guild_if_not_exists(guild_id, lang: str = None):
         if not await Guild.exists(guild_id):
-            await Guild.register(guild_id)
+            await Guild.register(guild_id, lang)
 
     @staticmethod
-    async def register(guild_id):
+    async def new_settings(lang: str = None):
+        settings = config.guild_settings.copy()
+        settings['language'] = lang or config.guild_settings['language']
+        return json.dumps(settings)
+
+    @staticmethod
+    async def register(guild_id, lang: str = None):
+        """In the bulk form an entry may be a plain id or a (guild_id, lang) pair, so a
+        front-end that has guessed a language per guild can say so."""
         if type(guild_id) in [list, tuple]:
-            guild_ids = [(guild, Func.generate_current_timestamp(), json.dumps(config.guild_settings)) for guild in
-                         guild_id]
-            query = f"INSERT IGNORE INTO {config.guilds_schema} (id, joined, settings) VALUES (%s, %s, %s)"
+            guild_ids = []
+            for guild in guild_id:
+                if type(guild) in [list, tuple]:
+                    guild, guild_lang = guild
+                else:
+                    guild_lang = lang
+                guild_ids.append((guild, Func.generate_current_timestamp(),
+                                  await Guild.new_settings(guild_lang),
+                                  json.dumps(config.default_guild_pig)))
+            query = f"INSERT IGNORE INTO {config.guilds_schema} (id, joined, settings, pig) VALUES (%s, %s, %s, %s)"
             await Connection.make_request(query, params=tuple(guild_ids), executemany=True)
         else:
-            query = f"INSERT INTO {config.guilds_schema} (id, joined, settings) VALUES (%s, %s, %s)"
+            query = f"INSERT INTO {config.guilds_schema} (id, joined, settings, pig) VALUES (%s, %s, %s, %s)"
             await Connection.make_request(query, params=(
-            guild_id, Func.generate_current_timestamp(), json.dumps(config.guild_settings)),
+            guild_id, Func.generate_current_timestamp(), await Guild.new_settings(lang),
+            json.dumps(config.default_guild_pig)),
                                     executemany=False)
 
     @staticmethod
@@ -57,7 +73,7 @@ class Guild:
         await Guild.set_settings(guild_id, settings)
 
     @staticmethod
-    @aiocache.cached(key="user.get_settings:{user_id}", alias="user.get_settings")
+    @aiocache.cached(key_builder=Func.cache_key_builder, alias="guild.get_settings")
     async def get_settings(guild_id):
         result = await Connection.make_request(
             f"SELECT settings FROM {config.guilds_schema} WHERE id = %s",
@@ -71,11 +87,16 @@ class Guild:
             return {}
 
     @staticmethod
+    async def clear_get_settings_cache(guild_id):
+        await Func.clear_db_cache('guild.get_settings', Guild.get_settings, guild_id)
+
+    @staticmethod
     async def set_settings(guild_id, new_settings):
         new_settings = json.dumps(new_settings, ensure_ascii=False)
         await Connection.make_request(
             f"UPDATE {config.guilds_schema} SET settings = %s WHERE id = %s", (new_settings, guild_id)
         )
+        await Guild.clear_get_settings_cache(guild_id)
 
     @staticmethod
     async def set_join_channel(guild_id, channel_id):
@@ -98,6 +119,18 @@ class Guild:
     async def join_message(guild_id):
         settings = await Guild.get_settings(guild_id)
         return settings['join_message']
+
+    @staticmethod
+    async def get_language(guild_id):
+        """A guild always speaks something - never hand back None."""
+        settings = await Guild.get_settings(guild_id)
+        return settings.get('language') or config.guild_settings['language']
+
+    @staticmethod
+    async def set_language(guild_id, language):
+        settings = await Guild.get_settings(guild_id)
+        settings['language'] = language or config.guild_settings['language']
+        await Guild.set_settings(guild_id, settings)
 
     @staticmethod
     async def is_say_allowed(guild_id):

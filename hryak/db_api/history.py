@@ -78,6 +78,25 @@ class History:
         return last_feed
 
     @staticmethod
+    async def get_server_feed_history(user_id: int):
+        history = await History.get(user_id)
+        return history[f'server_feed_history']
+
+    @staticmethod
+    async def add_server_feed_to_history(user_id: int, timestamp: int):
+        history = await History.get(user_id)
+        history[f'server_feed_history'].append(timestamp)
+        await History.update_history(user_id, history)
+
+    @staticmethod
+    async def get_last_server_feed(user_id: int):
+        history = await History.get(user_id)
+        last_server_feed = None
+        if len(history[f'server_feed_history']) > 0:
+            last_server_feed = history[f'server_feed_history'][-1]
+        return last_server_feed
+
+    @staticmethod
     async def get_butcher_history(user_id: int):
         history = await History.get(user_id)
         return history[f'butcher_history']
