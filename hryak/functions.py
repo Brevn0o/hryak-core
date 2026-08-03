@@ -14,10 +14,8 @@ from . import config
 def translate(locales, lang, format_options: dict = None):
     translated_text = 'translation_error'
     if type(locales) == dict:
-        if lang not in locales:
+        if lang not in locales or locales.get(lang) is None:
             lang = 'en'
-        if lang not in locales:
-            lang = list(locales)[0]
         translated_text = locales[lang]
     elif type(locales) == str:
         translated_text = locales
