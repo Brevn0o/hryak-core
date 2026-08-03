@@ -28,8 +28,6 @@ trade_data = {}
 
 default_pig = {'name': 'Hryak',
                'weight': 1,
-               'feed_history': [],
-               'butcher_history': [],
                'buffs': {},
                'genetic': {
                    'tail': 'default_body',
