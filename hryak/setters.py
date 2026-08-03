@@ -62,6 +62,12 @@ def set_redis_cache(host: str, port: int = 6379, db: int = 0, password: str = No
     return _rebind_cached_functions()
 
 
+def set_lava_api_key(key: str):
+    config.lava_api_key = key
+
+def set_lava_donate_options(options: dict):
+    config.lava_donate_options = options
+
 def set_logs_path(path: str):
     config.logs_path = path
 

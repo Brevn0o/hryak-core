@@ -16,6 +16,9 @@ doctor_price = 5
 bot_guilds = []
 temp_folder_path = None
 
+lava_api_key = None
+lava_donate_options = dict()
+
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
 shop_schema = 'shop'
@@ -172,11 +175,11 @@ donate_coins_prices = {  # coins: real_currency
         20000: 499.00,
     },
     'en': {  # USD
-        750: 0.25,
-        1550: 0.49,
-        3300: 0.99,
-        7200: 1.99,
-        20000: 4.99,
+        750: 0.49,
+        1550: 0.99,
+        3300: 1.99,
+        7200: 3.99,
+        20000: 8.99,
     }}
 
 language_currencies = {
@@ -191,7 +194,7 @@ amount_of_hollars_per_unit_of_real_currency = {
 }
 
 currency_to_usd = {
-    'RUB': 90,
+    'RUB': 100,
     'USD': 1,
     'UAH': 40
 }
@@ -203,8 +206,9 @@ currency_symbols = {
 }
 
 payment_methods_for_languages = {
-    'ru': ['aaio', 'donatepay', 'donatello'],
-    'en': ['aaio']
+    'uk': ['donatello'],
+    'ru': ['lava.top', 'donatello'],
+    'en': ['lava.top', 'donatello']
 }
 
 fight_gifs = ['https://thumbsnap.com/i/3A83K3Ub.gif', 'https://thumbsnap.com/i/bKNDTHvr.gif',

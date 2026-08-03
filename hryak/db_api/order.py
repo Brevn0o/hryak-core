@@ -2,7 +2,7 @@ import json, random
 
 from .connection import Connection
 from .schema import user_id_column
-from ..functions import Func
+from ..functions import Func, Lava
 from hryak import config
 
 
@@ -15,6 +15,7 @@ class Order:
             f"SELECT orders FROM {config.users_schema} WHERE JSON_LENGTH(orders) > 0",
             commit=False,
             fetchall=True,
+            fetch=True
         )
         for i in result:
             for j in i:
@@ -62,7 +63,10 @@ class Order:
     @staticmethod
     async def get_order(order_id: str):
         orders = await Connection.make_request(
-            f"SELECT JSON_EXTRACT(orders, CONCAT('$.', %s)) FROM {config.users_schema} WHERE JSON_CONTAINS_PATH(orders, 'one', '$.\"%s\"') = 1",
+            # the path has to be built by mysql: a %s inside a quoted literal gets escaped
+            # into '$."'id'"', and an unquoted $.id is invalid for numeric or dashed ids
+            f"SELECT JSON_EXTRACT(orders, CONCAT('$.\"', %s, '\"')) FROM {config.users_schema} "
+            f"WHERE JSON_CONTAINS_PATH(orders, 'one', CONCAT('$.\"', %s, '\"')) = 1",
             params=(order_id, order_id),
             commit=False,
             fetch=True,
@@ -71,8 +75,12 @@ class Order:
             return json.loads(orders[0][0])
 
     @staticmethod
-    async def get_status(order_id: str):
+    async def get_status(order_id: str, fetch: bool = False):
         order = await Order.get_order(order_id)
+        if fetch:
+            platform = order['platform']
+            if platform == 'lava.top':
+                return await Lava.get_status(order_id)
         return order['status']
 
     @staticmethod
@@ -95,6 +103,11 @@ class Order:
         return order['platform']
 
     @staticmethod
+    async def get_timestamp(order_id: str):
+        order = await Order.get_order(order_id)
+        return order['timestamp']
+
+    @staticmethod
     async def get_amount(order_id: str):
         order = await Order.get_order(order_id)
         return order['amount']
@@ -107,7 +120,8 @@ class Order:
     @staticmethod
     async def get_user(order_id: str):
         users = await Connection.make_request(
-            f"SELECT {user_id_column()} FROM {config.users_schema} WHERE JSON_CONTAINS_PATH(orders, 'one', '$.\"%s\"') = 1",
+            f"SELECT {user_id_column()} FROM {config.users_schema} "
+            f"WHERE JSON_CONTAINS_PATH(orders, 'one', CONCAT('$.\"', %s, '\"')) = 1",
             params=(order_id,),
             commit=False,
             fetch=True,

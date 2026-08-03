@@ -28,6 +28,53 @@ def translate(locales, lang, format_options: dict = None):
             translated_text = translated_text.replace('{' + k + '}', str(v))
     return translated_text
 
+class Lava:
+
+    @staticmethod
+    def _raise_for_status(response):
+        """raise_for_status() hides the body, which is where lava explains what it rejected."""
+        if not response.ok:
+            raise requests.HTTPError(
+                f'{response.status_code} for {response.url}: {response.text[:500]}',
+                response=response)
+
+    @staticmethod
+    async def create_order(user_id: str, reward_type: str, amount: float,
+                     currency: str = "RUB", language: str = "EN") -> dict:
+        """Creates a payment link.
+
+        The offers are in "price on request" mode, so v3 takes the amount in the request
+        itself - no need to rewrite the offer's price beforehand.
+        """
+        offer_id = config.lava_donate_options[reward_type]
+        r = requests.post(
+            "https://gate.lava.top/api/v3/invoice",
+            headers={"X-Api-Key": config.lava_api_key, "Content-Type": "application/json"},
+            json={
+                "email": f"{user_id}@example.com",
+                "offerId": offer_id,
+                "currency": currency,
+                "amount": amount,
+                "buyerLanguage": language.upper(),
+                "clientUtm": {"utm_content": user_id},
+            },
+            timeout=30,
+        )
+        Lava._raise_for_status(r)
+        data = r.json()
+
+        return {"invoice_id": data["id"], "url": data.get("paymentUrl")}
+
+    @staticmethod
+    async def get_status(invoice_id: str) -> str:
+        resp = requests.get(
+            f"https://gate.lava.top/api/v1/invoices/{invoice_id}",
+            headers={"X-Api-Key": config.lava_api_key, "Content-Type": "application/json"},
+            timeout=30
+        )
+        Lava._raise_for_status(resp)
+        return str(resp.json().get("status", "unknown")).lower()
+
 
 class Func:
 
