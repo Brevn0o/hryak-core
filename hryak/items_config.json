@@ -3,11 +3,13 @@
     "id": "common_case",
     "name": {
       "en": "Wooden case",
-      "ru": "Деревянный кейс"
+      "ru": "Деревянный кейс",
+      "uk": "Дерев'яний кейс"
     },
     "description": {
       "en": "Wooden case that can be opened",
-      "ru": "Деревянный кейс, который можно открыть"
+      "ru": "Деревянный кейс, который можно открыть",
+      "uk": "Дерев'яний кейс, який можна відкрити"
     },
     "type": "case",
     "skin_config": null,
@@ -52,11 +54,13 @@
     "id": "diamond_hryak_set",
     "name": {
       "en": "Diamond Hryak set",
-      "ru": "Набор Алмазного Хряка"
+      "ru": "Набор Алмазного Хряка",
+      "uk": "Набір Алмазного Хряка"
     },
     "description": {
       "en": "Shines brighter than Las Vegas",
-      "ru": "Сияет ярче чем Лас Вегас"
+      "ru": "Сияет ярче чем Лас Вегас",
+      "uk": "Сяє яскравіше за Лас-Вегас"
     },
     "type": "case",
     "skin_config": null,
@@ -109,11 +113,13 @@
     "id": "mr_beast_set",
     "name": {
       "en": "Mr. Beast set",
-      "ru": "Набор Биста"
+      "ru": "Набор Биста",
+      "uk": "Набір Біста"
     },
     "description": {
       "en": "A wonderful set of the legendary Mr. Beast",
-      "ru": "Замечательный набор легендарного Мистера Биста"
+      "ru": "Замечательный набор легендарного Мистера Биста",
+      "uk": "Чудовий набір легендарного Містера Біста"
     },
     "type": "case",
     "skin_config": null,
@@ -178,11 +184,13 @@
     "id": "rare_case",
     "name": {
       "en": "Iron case",
-      "ru": "Металический кейс"
+      "ru": "Металический кейс",
+      "uk": "Металевий кейс"
     },
     "description": {
       "en": "Iron case that can be opened",
-      "ru": "Металический кейс, который можно открыть"
+      "ru": "Металический кейс, который можно открыть",
+      "uk": "Металевий кейс, який можна відкрити"
     },
     "type": "case",
     "skin_config": null,
@@ -226,11 +234,13 @@
   "zoo_case": {
     "name": {
       "en": "Zoo case",
-      "ru": "Кейс зоопарка"
+      "ru": "Кейс зоопарка",
+      "uk": "Кейс зоопарку"
     },
     "description": {
       "en": "Zoo case that can be opened",
-      "ru": "Кейс зоопарка, который можно открыть"
+      "ru": "Кейс зоопарка, который можно открыть",
+      "uk": "Кейс зоопарку, який можна відкрити"
     },
     "type": "case",
     "skin_config": null,
@@ -292,11 +302,13 @@
   "hryak_the_end_case": {
     "name": {
       "en": "Cool case",
-      "ru": "Крутой кейс"
+      "ru": "Крутой кейс",
+      "uk": "Крутий кейс"
     },
     "description": {
       "en": "Cool case that can be opened",
-      "ru": "10 эксклюзивных предметов прячутся внутри, лол"
+      "ru": "10 эксклюзивных предметов прячутся внутри, лол",
+      "uk": "10 ексклюзивних предметів ховаються всередині, лол"
     },
     "type": "case",
     "skin_config": null,
@@ -366,11 +378,13 @@
     "id": "laxative",
     "name": {
       "en": "Laxative",
-      "ru": "Слабительное"
+      "ru": "Слабительное",
+      "uk": "Проносне"
     },
     "description": {
       "en": "When used, a pig will give more manure, but at the same time the pig will gain less weight",
-      "ru": "При использовании свинья будет давать больше навоза, но при этом хряк будет набирать меньше веса"
+      "ru": "При использовании свинья будет давать больше навоза, но при этом хряк будет набирать меньше веса",
+      "uk": "При використанні свиня даватиме більше гною, але при цьому хряк набиратиме менше ваги"
     },
     "type": "consumable",
     "skin_config": null,
@@ -403,11 +417,13 @@
     "id": "compound_feed",
     "name": {
       "en": "Compound feed",
-      "ru": "Комбикорм"
+      "ru": "Комбикорм",
+      "uk": "Комбікорм"
     },
     "description": {
       "en": "When used, the pig will gain more weight, but will produce less manure",
-      "ru": "При использовании свинья будет набирать больше веса, но при этом будет выдавать меньше навоза"
+      "ru": "При использовании свинья будет набирать больше веса, но при этом будет выдавать меньше навоза",
+      "uk": "При використанні свиня набиратиме більше ваги, але при цьому даватиме менше гною"
     },
     "type": "consumable",
     "skin_config": null,
@@ -438,11 +454,13 @@
   "milk": {
     "name": {
       "en": "Milk",
-      "ru": "Молоко"
+      "ru": "Молоко",
+      "uk": "Молоко"
     },
     "description": {
       "en": "When used, the pig will lose almost all of its buffs",
-      "ru": "При использовании свинья потеряет почти все свои баффы"
+      "ru": "При использовании свинья потеряет почти все свои баффы",
+      "uk": "При використанні свиня втратить майже всі свої бафи"
     },
     "type": "consumable",
     "skin_config": null,
@@ -470,11 +488,13 @@
   "activated_charcoal": {
     "name": {
       "en": "Activated charcoal",
-      "ru": "Активированный уголь"
+      "ru": "Активированный уголь",
+      "uk": "Активоване вугілля"
     },
     "description": {
       "en": "Reduces the chance that your pig will vomit",
-      "ru": "Уменьшает шанс того что вашего Хряка стошнит"
+      "ru": "Уменьшает шанс того что вашего Хряка стошнит",
+      "uk": "Зменшує шанс того, що вашого Хряка знудить"
     },
     "type": "consumable",
     "skin_config": null,
@@ -505,11 +525,13 @@
   "streak_freezer": {
     "name": {
       "en": "Streak freezer",
-      "ru": "Заморозка стрика"
+      "ru": "Заморозка стрика",
+      "uk": "Заморозка стріку"
     },
     "description": {
       "en": "Freezes your streak if you forget to feed the pig",
-      "ru": "Замораживает ваш стрик, если вы вдруг забыли покормить Хряка"
+      "ru": "Замораживает ваш стрик, если вы вдруг забыли покормить Хряка",
+      "uk": "Заморожує ваш стрік, якщо ви раптом забули погодувати Хряка"
     },
     "type": "consumable",
     "skin_config": null,
@@ -537,11 +559,13 @@
     "id": "body_combiner",
     "name": {
       "en": "Body combiner",
-      "ru": "Комбинатор красок"
+      "ru": "Комбинатор красок",
+      "uk": "Комбінатор фарб"
     },
     "description": {
       "en": "Allows you to combine different body parts with each other",
-      "ru": "Позволяет вам комбинировать разные части красок между собой"
+      "ru": "Позволяет вам комбинировать разные части красок между собой",
+      "uk": "Дозволяє вам комбінувати різні частини фарб між собою"
     },
     "type": "device",
     "skin_config": null,
@@ -572,11 +596,13 @@
     "id": "coins",
     "name": {
       "en": "Coins",
-      "ru": "Монеты"
+      "ru": "Монеты",
+      "uk": "Монети"
     },
     "description": {
       "en": "Coins you can buy things with",
-      "ru": "Монеты, за которые можно что-то купить"
+      "ru": "Монеты, за которые можно что-то купить",
+      "uk": "Монети, за які можна щось купити"
     },
     "type": "money",
     "skin_config": null,
@@ -604,11 +630,13 @@
     "id": "hollars",
     "name": {
       "en": "Hryak-Dollars",
-      "ru": "Хряк-Доллары"
+      "ru": "Хряк-Доллары",
+      "uk": "Хряк-Долари"
     },
     "description": {
       "en": "Hollars you can buy things with",
-      "ru": "Холлары, за которые можно что-то купить"
+      "ru": "Холлары, за которые можно что-то купить",
+      "uk": "Холари, за які можна щось купити"
     },
     "type": "money",
     "skin_config": null,
@@ -636,11 +664,13 @@
     "id": "ruble",
     "name": {
       "en": "Ruble",
-      "ru": "Рубль"
+      "ru": "Рубль",
+      "uk": "Рубль"
     },
     "description": {
       "en": "Ruble ruble ruble",
-      "ru": "Абстрактная валюта, используемая в специальных случаях"
+      "ru": "Абстрактная валюта, используемая в специальных случаях",
+      "uk": "Абстрактна валюта, що використовується в особливих випадках"
     },
     "type": "money",
     "skin_config": null,
@@ -667,11 +697,13 @@
     "id": "barbecue",
     "name": {
       "en": "Barbecue",
-      "ru": "Шашлык"
+      "ru": "Шашлык",
+      "uk": "Шашлик"
     },
     "description": {
       "en": "Delicious homemade barbecue",
-      "ru": "Очень вкусный шашлык, приготовленный в домашних условиях"
+      "ru": "Очень вкусный шашлык, приготовленный в домашних условиях",
+      "uk": "Дуже смачний шашлик, приготований у домашніх умовах"
     },
     "type": "resource",
     "skin_config": null,
@@ -699,11 +731,13 @@
     "id": "lard",
     "name": {
       "en": "Lard",
-      "ru": "Сало"
+      "ru": "Сало",
+      "uk": "Сало"
     },
     "description": {
       "en": "The freshest and most natural lard you can find",
-      "ru": "Самое свежее и натуральное сало, которое можно найти"
+      "ru": "Самое свежее и натуральное сало, которое можно найти",
+      "uk": "Найсвіжіше та найнатуральніше сало, яке можна знайти"
     },
     "type": "resource",
     "skin_config": null,
@@ -731,11 +765,13 @@
     "id": "poop",
     "name": {
       "en": "Poops",
-      "ru": "Навоз"
+      "ru": "Навоз",
+      "uk": "Гній"
     },
     "description": {
       "en": "Pure, and most importantly, natural manure",
-      "ru": "Чистый, а самое главное натуральный навоз"
+      "ru": "Чистый, а самое главное натуральный навоз",
+      "uk": "Чистий, а найголовніше натуральний гній"
     },
     "type": "resource",
     "skin_config": null,
@@ -763,11 +799,13 @@
     "id": "test_item",
     "name": {
       "en": "Test item",
-      "ru": "Тестовый итем"
+      "ru": "Тестовый итем",
+      "uk": "Тестовий айтем"
     },
     "description": {
       "en": "ENENENENENENEN",
-      "ru": "RURURURURURU"
+      "ru": "RURURURURURU",
+      "uk": "UAUAUAUAUAUA"
     },
     "type": "resource",
     "skin_config": null,
@@ -814,11 +852,13 @@
     "id": "beer",
     "name": {
       "en": "Beer",
-      "ru": "Пиво"
+      "ru": "Пиво",
+      "uk": "Пиво"
     },
     "description": {
       "en": "True beer, crafted with love",
-      "ru": "Настоящее пиво, созданное с любовью"
+      "ru": "Настоящее пиво, созданное с любовью",
+      "uk": "Справжнє пиво, створене з любов'ю"
     },
     "type": "resource",
     "skin_config": null,
@@ -846,11 +886,13 @@
     "id": "vodka",
     "name": {
       "en": "Vodka",
-      "ru": "Водка"
+      "ru": "Водка",
+      "uk": "Горілка"
     },
     "description": {
       "en": "True russian vodka",
-      "ru": "Настоящая русская водка"
+      "ru": "Настоящая русская водка",
+      "uk": "Справжня російська горілка"
     },
     "type": "resource",
     "skin_config": null,
@@ -878,11 +920,13 @@
     "id": "whiskey",
     "name": {
       "en": "Whiskey",
-      "ru": "Виски"
+      "ru": "Виски",
+      "uk": "Віскі"
     },
     "description": {
       "en": "Real elite whiskey",
-      "ru": "Настоящий элитный виски"
+      "ru": "Настоящий элитный виски",
+      "uk": "Справжній елітний віскі"
     },
     "type": "resource",
     "skin_config": null,
@@ -910,11 +954,13 @@
     "id": "tequila",
     "name": {
       "en": "Tequila",
-      "ru": "Текила"
+      "ru": "Текила",
+      "uk": "Текіла"
     },
     "description": {
       "en": "True mexican tequila",
-      "ru": "Настоящая мексиканская текила"
+      "ru": "Настоящая мексиканская текила",
+      "uk": "Справжня мексиканська текіла"
     },
     "type": "resource",
     "skin_config": null,
@@ -942,11 +988,13 @@
     "id": "shailushai_backpack",
     "name": {
       "en": "Shailushai backpack",
-      "ru": "Рюкзак Шайлушая"
+      "ru": "Рюкзак Шайлушая",
+      "uk": "Рюкзак Шайлушая"
     },
     "description": {
       "en": "We live, we love, we lie",
-      "ru": "We live, we love, we lie"
+      "ru": "We live, we love, we lie",
+      "uk": "We live, we love, we lie"
     },
     "type": "skin",
     "skin_config": {
@@ -986,11 +1034,13 @@
     "id": "sparkles",
     "name": {
       "en": "Sparkles",
-      "ru": "Блёстки"
+      "ru": "Блёстки",
+      "uk": "Блискітки"
     },
     "description": {
       "en": "Make the pig more ShInY",
-      "ru": "Сделай Хряка более БлЕсТяЩиМ"
+      "ru": "Сделай Хряка более БлЕсТяЩиМ",
+      "uk": "Зроби Хряка більш БлИсКуЧиМ"
     },
     "type": "skin",
     "skin_config": {
@@ -1024,11 +1074,13 @@
     "id": "bea_body",
     "name": {
       "en": "Bee paint",
-      "ru": "Пчелиная краска"
+      "ru": "Пчелиная краска",
+      "uk": "Бджолина фарба"
     },
     "description": {
       "en": "Bzz-bzzzzzz. Bz-bzz",
-      "ru": "Бзз-бзззззз. Бз-бзз"
+      "ru": "Бзз-бзззззз. Бз-бзз",
+      "uk": "Бзз-бззззз. Бз-бзз"
     },
     "type": "skin",
     "skin_config": {
@@ -1079,11 +1131,13 @@
     "id": "beluga_body",
     "name": {
       "en": "Beluga paint",
-      "ru": "Краска белуги"
+      "ru": "Краска белуги",
+      "uk": "Фарба белуги"
     },
     "description": {
       "en": "The most popular cat in discord",
-      "ru": "Самый популярный кот в дискорде"
+      "ru": "Самый популярный кот в дискорде",
+      "uk": "Найпопулярніший кіт у дискорді"
     },
     "type": "skin",
     "skin_config": {
@@ -1139,11 +1193,13 @@
     "id": "blue_cat_body",
     "name": {
       "en": "Blue cat paint",
-      "ru": "Голубая кошачья краска"
+      "ru": "Голубая кошачья краска",
+      "uk": "Блакитна котяча фарба"
     },
     "description": {
       "en": "Blue cat paint for pig",
-      "ru": "Голубая кошачья краска для хряка"
+      "ru": "Голубая кошачья краска для хряка",
+      "uk": "Блакитна котяча фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1201,11 +1257,13 @@
     "id": "boar_body",
     "name": {
       "en": "Boar paint",
-      "ru": "Краска кабана"
+      "ru": "Краска кабана",
+      "uk": "Фарба кабана"
     },
     "description": {
       "en": "A wild boar from the wild",
-      "ru": "Дикий Хряк из дикой природы"
+      "ru": "Дикий Хряк из дикой природы",
+      "uk": "Дикий Хряк з дикої природи"
     },
     "type": "skin",
     "skin_config": {
@@ -1256,11 +1314,13 @@
     "id": "brook_body",
     "name": {
       "en": "Brook paint",
-      "ru": "Краска Брука"
+      "ru": "Краска Брука",
+      "uk": "Фарба Брука"
     },
     "description": {
       "en": "Brook paint for pig",
-      "ru": "Краска Брука для Хряка"
+      "ru": "Краска Брука для Хряка",
+      "uk": "Фарба Брука для Хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1311,11 +1371,13 @@
     "id": "camouflage_body",
     "name": {
       "en": "Camouflage paint",
-      "ru": "Камуфляжная краска"
+      "ru": "Камуфляжная краска",
+      "uk": "Камуфляжна фарба"
     },
     "description": {
       "en": "With this paint you will become almost invisible",
-      "ru": "С этой краской вы станете почти невидимым"
+      "ru": "С этой краской вы станете почти невидимым",
+      "uk": "З цією фарбою ви станете майже невидимим"
     },
     "type": "skin",
     "skin_config": {
@@ -1369,11 +1431,13 @@
     "id": "cat_body",
     "name": {
       "en": "Mew-paint",
-      "ru": "Мяу-краска"
+      "ru": "Мяу-краска",
+      "uk": "Мяу-фарба"
     },
     "description": {
       "en": "It seems the pig has ceased to be a pig",
-      "ru": "Кажется Хряк перестал быть Хряком"
+      "ru": "Кажется Хряк перестал быть Хряком",
+      "uk": "Здається, Хряк перестав бути Хряком"
     },
     "type": "skin",
     "skin_config": {
@@ -1428,11 +1492,13 @@
     "id": "cheese_body",
     "name": {
       "en": "Cheese paint",
-      "ru": "Сырная краска"
+      "ru": "Сырная краска",
+      "uk": "Сирна фарба"
     },
     "description": {
       "en": "Very tasty pig with the taste of cheese and sponge",
-      "ru": "Очень вкусный хряк со вкусом сыра и губки"
+      "ru": "Очень вкусный хряк со вкусом сыра и губки",
+      "uk": "Дуже смачний хряк зі смаком сиру та губки"
     },
     "type": "skin",
     "skin_config": {
@@ -1486,11 +1552,13 @@
     "id": "cow_body",
     "name": {
       "en": "Cow paint",
-      "ru": "Коровья краска"
+      "ru": "Коровья краска",
+      "uk": "Коров'яча фарба"
     },
     "description": {
       "en": "Muuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
-      "ru": "Мууууууууууууууууууууууууууууууууууууууууууу"
+      "ru": "Мууууууууууууууууууууууууууууууууууууууууууу",
+      "uk": "Мууууууууууууууууууууууууууууууууууууууууууу"
     },
     "type": "skin",
     "skin_config": {
@@ -1541,11 +1609,13 @@
     "id": "dark_body",
     "name": {
       "en": "Chocolate paint",
-      "ru": "Шоколадная краска"
+      "ru": "Шоколадная краска",
+      "uk": "Шоколадна фарба"
     },
     "description": {
       "en": "Chocolate paint for pig",
-      "ru": "Шоколадная краска для хряка"
+      "ru": "Шоколадная краска для хряка",
+      "uk": "Шоколадна фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1599,11 +1669,13 @@
     "id": "default_body",
     "name": {
       "en": "Default paint",
-      "ru": "Стандартная краска"
+      "ru": "Стандартная краска",
+      "uk": "Стандартна фарба"
     },
     "description": {
       "en": "Default paint for a pig",
-      "ru": "Стандартная краска для хряка"
+      "ru": "Стандартная краска для хряка",
+      "uk": "Стандартна фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1654,11 +1726,13 @@
     "id": "diamond_body",
     "name": {
       "en": "Diamond paint",
-      "ru": "Алмазная краска"
+      "ru": "Алмазная краска",
+      "uk": "Алмазна фарба"
     },
     "description": {
       "en": "Diamond paint for pig",
-      "ru": "Алмазная краска для хряка"
+      "ru": "Алмазная краска для хряка",
+      "uk": "Алмазна фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1710,11 +1784,13 @@
     "id": "dinosaur_body",
     "name": {
       "en": "Dinosaur paint",
-      "ru": "Краска динозавра"
+      "ru": "Краска динозавра",
+      "uk": "Фарба динозавра"
     },
     "description": {
       "en": "The prehistoric pig has returned from ancient times",
-      "ru": "Доисторический Хряк вернулся с древних времен"
+      "ru": "Доисторический Хряк вернулся с древних времен",
+      "uk": "Доісторичний Хряк повернувся з давніх часів"
     },
     "type": "skin",
     "skin_config": {
@@ -1765,11 +1841,13 @@
     "id": "dog_body",
     "name": {
       "en": "Dog paint",
-      "ru": "Собачья краска"
+      "ru": "Собачья краска",
+      "uk": "Собача фарба"
     },
     "description": {
       "en": "A true mix of dog and pig",
-      "ru": "Настоящая смесь собаки и свиньи"
+      "ru": "Настоящая смесь собаки и свиньи",
+      "uk": "Справжня суміш собаки та свині"
     },
     "type": "skin",
     "skin_config": {
@@ -1824,11 +1902,13 @@
     "id": "giraffe_body",
     "name": {
       "en": "Giraffe paint",
-      "ru": "Жирафья краска"
+      "ru": "Жирафья краска",
+      "uk": "Жирафова фарба"
     },
     "description": {
       "en": "Giraffes are cool, aren't they?",
-      "ru": "Жирафы ведь крутые, не так ли?"
+      "ru": "Жирафы ведь крутые, не так ли?",
+      "uk": "Жирафи ж круті, чи не так?"
     },
     "type": "skin",
     "skin_config": {
@@ -1879,11 +1959,13 @@
     "id": "gold_body",
     "name": {
       "en": "Gold paint",
-      "ru": "Золотая краска"
+      "ru": "Золотая краска",
+      "uk": "Золота фарба"
     },
     "description": {
       "en": "Gold paint for pig",
-      "ru": "Золотая краска для хряка"
+      "ru": "Золотая краска для хряка",
+      "uk": "Золота фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1935,11 +2017,13 @@
     "id": "green_body",
     "name": {
       "en": "Green paint",
-      "ru": "Зелёная краска"
+      "ru": "Зелёная краска",
+      "uk": "Зелена фарба"
     },
     "description": {
       "en": "Green paint for pig",
-      "ru": "Зелёная краска для хряка"
+      "ru": "Зелёная краска для хряка",
+      "uk": "Зелена фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -1993,11 +2077,13 @@
     "id": "igar_body",
     "name": {
       "en": "Igar paint",
-      "ru": "Краска Игаря"
+      "ru": "Краска Игаря",
+      "uk": "Фарба Ігаря"
     },
     "description": {
       "en": "Genius, super-intelligence, sigma",
-      "ru": "Гений, сверх-разум, сигма"
+      "ru": "Гений, сверх-разум, сигма",
+      "uk": "Геній, надрозум, сигма"
     },
     "type": "skin",
     "skin_config": {
@@ -2052,11 +2138,13 @@
     "id": "lgbt_body",
     "name": {
       "en": "LGBT paint",
-      "ru": "ЛГБТ краска"
+      "ru": "ЛГБТ краска",
+      "uk": "ЛГБТ фарба"
     },
     "description": {
       "en": "LGBT paint for pig",
-      "ru": "ЛГБТ краска для хряка"
+      "ru": "ЛГБТ краска для хряка",
+      "uk": "ЛГБТ фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -2110,11 +2198,13 @@
     "id": "minecraft_zombie_body",
     "name": {
       "en": "Frayed green paint",
-      "ru": "Потрёпанная зелёная краска"
+      "ru": "Потрёпанная зелёная краска",
+      "uk": "Пошарпана зелена фарба"
     },
     "description": {
       "en": "Green paint for pig",
-      "ru": "Зелёная краска для хряка"
+      "ru": "Зелёная краска для хряка",
+      "uk": "Зелена фарба для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -2168,11 +2258,13 @@
     "id": "mr_beast_body",
     "name": {
       "en": "Mr. Beast paint",
-      "ru": "Краска Мистер Биста"
+      "ru": "Краска Мистер Биста",
+      "uk": "Фарба Містер Біста"
     },
     "description": {
       "en": "Feel like a billionaire",
-      "ru": "Почувствуй себя миллиардером"
+      "ru": "Почувствуй себя миллиардером",
+      "uk": "Відчуй себе мільярдером"
     },
     "type": "skin",
     "skin_config": {
@@ -2228,11 +2320,13 @@
     "id": "robot_body",
     "name": {
       "en": "Robot paint",
-      "ru": "Краска робота"
+      "ru": "Краска робота",
+      "uk": "Фарба робота"
     },
     "description": {
       "en": "Feed the pig and the pig is happy. Beep boop",
-      "ru": "Хряк кушать, хряк доволен. Бип-буп"
+      "ru": "Хряк кушать, хряк доволен. Бип-буп",
+      "uk": "Хряк їсти, хряк задоволений. Біп-буп"
     },
     "type": "skin",
     "skin_config": {
@@ -2286,11 +2380,13 @@
     "id": "russia_body",
     "name": {
       "en": "Russian paint",
-      "ru": "Русская краска"
+      "ru": "Русская краска",
+      "uk": "Російська фарба"
     },
     "description": {
       "en": "It's time for political debate",
-      "ru": "Самое время для политических дисскусий"
+      "ru": "Самое время для политических дисскусий",
+      "uk": "Саме час для політичних дискусій"
     },
     "type": "skin",
     "skin_config": {
@@ -2344,11 +2440,13 @@
     "id": "shark_body",
     "name": {
       "en": "Shark paint",
-      "ru": "Акулья краска"
+      "ru": "Акулья краска",
+      "uk": "Акуляча фарба"
     },
     "description": {
       "en": "Baby shark tu-tu-tu-tu, baby shark tu-tu-tu-tu",
-      "ru": "Акулёнок ту-ту-ту-ту, акулёнок ту-ту-ту-ту"
+      "ru": "Акулёнок ту-ту-ту-ту, акулёнок ту-ту-ту-ту",
+      "uk": "Акуленя ту-ту-ту-ту, акуленя ту-ту-ту-ту"
     },
     "type": "skin",
     "skin_config": {
@@ -2403,11 +2501,13 @@
     "id": "spider_body",
     "name": {
       "en": "Spider paint",
-      "ru": "Паучья краска"
+      "ru": "Паучья краска",
+      "uk": "Павуча фарба"
     },
     "description": {
       "en": "A pig spider lives in one of the universes",
-      "ru": "В одной из вселенных проживает хряк-паук"
+      "ru": "В одной из вселенных проживает хряк-паук",
+      "uk": "В одному зі всесвітів проживає хряк-павук"
     },
     "type": "skin",
     "skin_config": {
@@ -2461,11 +2561,13 @@
     "id": "ukraine_body",
     "name": {
       "en": "Ukrainian paint",
-      "ru": "Украинская краска"
+      "ru": "Украинская краска",
+      "uk": "Українська фарба"
     },
     "description": {
       "en": "It's time for political debate",
-      "ru": "Самое время для политических дисскусий"
+      "ru": "Самое время для политических дисскусий",
+      "uk": "Саме час для політичних дискусій"
     },
     "type": "skin",
     "skin_config": {
@@ -2519,11 +2621,13 @@
     "id": "white_body",
     "name": {
       "en": "White paint",
-      "ru": "Белая краска"
+      "ru": "Белая краска",
+      "uk": "Біла фарба"
     },
     "description": {
       "en": "Be the whitest and purest boar",
-      "ru": "Будь самым белым и чистым Хряком"
+      "ru": "Будь самым белым и чистым Хряком",
+      "uk": "Будь найбілішим та найчистішим Хряком"
     },
     "type": "skin",
     "skin_config": {
@@ -2578,11 +2682,13 @@
   "elephant_body": {
     "name": {
       "en": "Elephant paint",
-      "ru": "Слонья краска"
+      "ru": "Слонья краска",
+      "uk": "Слоняча фарба"
     },
     "description": {
       "en": "XXL sized pig",
-      "ru": "Хряк размера XXL"
+      "ru": "Хряк размера XXL",
+      "uk": "Хряк розміру XXL"
     },
     "type": "skin",
     "skin_config": {
@@ -2638,11 +2744,13 @@
     "id": "black_eyes",
     "name": {
       "en": "Big black contacts",
-      "ru": "Большие черные линзы"
+      "ru": "Большие черные линзы",
+      "uk": "Великі чорні лінзи"
     },
     "description": {
       "en": "Big contacts that change eye color",
-      "ru": "Большие линзы, меняющие цвет глаз"
+      "ru": "Большие линзы, меняющие цвет глаз",
+      "uk": "Великі лінзи, що змінюють колір очей"
     },
     "type": "skin",
     "skin_config": {
@@ -2681,11 +2789,13 @@
     "id": "crazy_eyes",
     "name": {
       "en": "Big crazy contacts",
-      "ru": "Большие безумные линзы"
+      "ru": "Большие безумные линзы",
+      "uk": "Великі божевільні лінзи"
     },
     "description": {
       "en": "Big contacts that change eye color",
-      "ru": "Большие линзы, меняющие цвет глаз"
+      "ru": "Большие линзы, меняющие цвет глаз",
+      "uk": "Великі лінзи, що змінюють колір очей"
     },
     "type": "skin",
     "skin_config": {
@@ -2724,11 +2834,13 @@
     "id": "cute_eyes",
     "name": {
       "en": "Cute eyes",
-      "ru": "Милые глаза"
+      "ru": "Милые глаза",
+      "uk": "Милі очі"
     },
     "description": {
       "en": "So cute, just don't let those eyes fool you",
-      "ru": "Так мило, только пусть эти глаза вас не обманывают"
+      "ru": "Так мило, только пусть эти глаза вас не обманывают",
+      "uk": "Так мило, тільки хай ці очі вас не обманюють"
     },
     "type": "skin",
     "skin_config": {
@@ -2771,11 +2883,13 @@
     "id": "white_eyes",
     "name": {
       "en": "Big white contacts",
-      "ru": "Большие белые линзы"
+      "ru": "Большие белые линзы",
+      "uk": "Великі білі лінзи"
     },
     "description": {
       "en": "Big contacts that change eye color",
-      "ru": "Большие линзы, меняющие цвет глаз"
+      "ru": "Большие линзы, меняющие цвет глаз",
+      "uk": "Великі лінзи, що змінюють колір очей"
     },
     "type": "skin",
     "skin_config": {
@@ -2814,11 +2928,13 @@
     "id": "yellow_eyes",
     "name": {
       "en": "Big yellow contacts",
-      "ru": "Большие желтые линзы"
+      "ru": "Большие желтые линзы",
+      "uk": "Великі жовті лінзи"
     },
     "description": {
       "en": "Big contacts that change eye color",
-      "ru": "Большие линзы, меняющие цвет глаз"
+      "ru": "Большие линзы, меняющие цвет глаз",
+      "uk": "Великі лінзи, що змінюють колір очей"
     },
     "type": "skin",
     "skin_config": {
@@ -2857,11 +2973,13 @@
     "id": "amogus_glasses",
     "name": {
       "en": "Amogus face",
-      "ru": "Лицо амогуса"
+      "ru": "Лицо амогуса",
+      "uk": "Обличчя амогуса"
     },
     "description": {
       "en": "Feel like a real amogus",
-      "ru": "Почувствуй себя настоящим амогусом"
+      "ru": "Почувствуй себя настоящим амогусом",
+      "uk": "Відчуй себе справжнім амогусом"
     },
     "type": "skin",
     "skin_config": {
@@ -2909,11 +3027,13 @@
     "id": "hyak_face",
     "name": {
       "en": "Hyak face",
-      "ru": "Лицо Хяка"
+      "ru": "Лицо Хяка",
+      "uk": "Обличчя Хяка"
     },
     "description": {
       "en": "Oh, this is the legendary Hyak",
-      "ru": "Да это же легендарный Хяк"
+      "ru": "Да это же легендарный Хяк",
+      "uk": "Та це ж легендарний Хяк"
     },
     "type": "skin",
     "skin_config": {
@@ -2961,11 +3081,13 @@
     "id": "pig_mask",
     "name": {
       "en": "Pig mask",
-      "ru": "Маска свиньи"
+      "ru": "Маска свиньи",
+      "uk": "Маска свині"
     },
     "description": {
       "en": "Who is hiding behind the mask?",
-      "ru": "Кто же скрывается за маской?"
+      "ru": "Кто же скрывается за маской?",
+      "uk": "Хто ж ховається за маскою?"
     },
     "type": "skin",
     "skin_config": {
@@ -3012,11 +3134,13 @@
     "id": "eggman_glasses",
     "name": {
       "en": "Eggman's glasses",
-      "ru": "Очки Эггмана"
+      "ru": "Очки Эггмана",
+      "uk": "Окуляри Еггмана"
     },
     "description": {
       "en": "Real Eggman glasses, I'm 100% not lying",
-      "ru": "Настоящие очки Эггмана, не вру 100 %"
+      "ru": "Настоящие очки Эггмана, не вру 100 %",
+      "uk": "Справжні окуляри Еггмана, не брешу на 100 %"
     },
     "type": "skin",
     "skin_config": {
@@ -3058,11 +3182,13 @@
     "id": "eye_patch",
     "name": {
       "en": "Eye patch",
-      "ru": "Повязка на глаз"
+      "ru": "Повязка на глаз",
+      "uk": "Пов'язка на око"
     },
     "description": {
       "en": "Cool eye patch, just like a pirate's",
-      "ru": "Крутая повязка на глаз, прям как у пиратов"
+      "ru": "Крутая повязка на глаз, прям как у пиратов",
+      "uk": "Крута пов'язка на око, прямо як у піратів"
     },
     "type": "skin",
     "skin_config": {
@@ -3103,11 +3229,13 @@
     "id": "fire_glasses",
     "name": {
       "en": "Fire glasses",
-      "ru": "Огненные очки"
+      "ru": "Огненные очки",
+      "uk": "Вогняні окуляри"
     },
     "description": {
       "en": "Cool glasses shaped like fire",
-      "ru": "Крутые очки в форме огня"
+      "ru": "Крутые очки в форме огня",
+      "uk": "Круті окуляри у формі вогню"
     },
     "type": "skin",
     "skin_config": {
@@ -3141,11 +3269,13 @@
     "id": "monocle",
     "name": {
       "en": "Monocle",
-      "ru": "Монокль"
+      "ru": "Монокль",
+      "uk": "Монокль"
     },
     "description": {
       "en": "What a cultured and educated pig",
-      "ru": "Какой культурный и воспитанный хряк"
+      "ru": "Какой культурный и воспитанный хряк",
+      "uk": "Який культурний та вихований хряк"
     },
     "type": "skin",
     "skin_config": {
@@ -3181,11 +3311,13 @@
     "id": "nahodkins_glasses",
     "name": {
       "en": "Green glasses",
-      "ru": "Очки Находкинса"
+      "ru": "Очки Находкинса",
+      "uk": "Окуляри Находкінса"
     },
     "description": {
       "en": "Well, am I that bad?",
-      "ru": "Ну разве я такой уж плохой?"
+      "ru": "Ну разве я такой уж плохой?",
+      "uk": "Ну хіба я такий уже поганий?"
     },
     "type": "skin",
     "skin_config": {
@@ -3221,11 +3353,13 @@
     "id": "pixel_glasses",
     "name": {
       "en": "Pixel glasses",
-      "ru": "Пикскельные очки"
+      "ru": "Пикскельные очки",
+      "uk": "Піксельні окуляри"
     },
     "description": {
       "en": "Cool pixel glasses",
-      "ru": "Крутые пиксельные очки"
+      "ru": "Крутые пиксельные очки",
+      "uk": "Круті піксельні окуляри"
     },
     "type": "skin",
     "skin_config": {
@@ -3267,11 +3401,13 @@
     "id": "rounded_glasses",
     "name": {
       "en": "Rounded glasses",
-      "ru": "Закруглённые очки"
+      "ru": "Закруглённые очки",
+      "uk": "Заокруглені окуляри"
     },
     "description": {
       "en": "People say they improve eyesight",
-      "ru": "Говорят что они улучшают зрение"
+      "ru": "Говорят что они улучшают зрение",
+      "uk": "Кажуть, що вони покращують зір"
     },
     "type": "skin",
     "skin_config": {
@@ -3307,11 +3443,13 @@
     "id": "round_glasses",
     "name": {
       "en": "Round glasses",
-      "ru": "Круглые очки"
+      "ru": "Круглые очки",
+      "uk": "Круглі окуляри"
     },
     "description": {
       "en": "You will look like Harry Potter",
-      "ru": "Вы будете выглядеть как Гарри Потер"
+      "ru": "Вы будете выглядеть как Гарри Потер",
+      "uk": "Ви будете виглядати як Гаррі Поттер"
     },
     "type": "skin",
     "skin_config": {
@@ -3347,11 +3485,13 @@
     "id": "star_glasses",
     "name": {
       "en": "Star glasses",
-      "ru": "Звёздные очки"
+      "ru": "Звёздные очки",
+      "uk": "Зоряні окуляри"
     },
     "description": {
       "en": "Shine like a star with these glasses",
-      "ru": "Сияй как звезда с этими очками"
+      "ru": "Сияй как звезда с этими очками",
+      "uk": "Сяй як зірка з цими окулярами"
     },
     "type": "skin",
     "skin_config": {
@@ -3387,11 +3527,13 @@
     "id": "sunglasses",
     "name": {
       "en": "Sunglasses",
-      "ru": "Солнцезащитные очки"
+      "ru": "Солнцезащитные очки",
+      "uk": "Сонцезахисні окуляри"
     },
     "description": {
       "en": "With these glasses you don't have to fear the sun",
-      "ru": "С этими очками можно не боятся солнца"
+      "ru": "С этими очками можно не боятся солнца",
+      "uk": "З цими окулярами можна не боятися сонця"
     },
     "type": "skin",
     "skin_config": {
@@ -3433,11 +3575,13 @@
     "id": "american_hat",
     "name": {
       "en": "American hat",
-      "ru": "Американская шляпа"
+      "ru": "Американская шляпа",
+      "uk": "Американський капелюх"
     },
     "description": {
       "en": "A hat that makes you feel free",
-      "ru": "Шляпа, в которой можно почувствовать свободу"
+      "ru": "Шляпа, в которой можно почувствовать свободу",
+      "uk": "Капелюх, у якому можна відчути свободу"
     },
     "type": "skin",
     "skin_config": {
@@ -3475,11 +3619,13 @@
     "id": "amongus_hat",
     "name": {
       "en": "Little amongus",
-      "ru": "Амонгасик"
+      "ru": "Амонгасик",
+      "uk": "Амонгасик"
     },
     "description": {
       "en": "He doesn't bother you, does he?",
-      "ru": "Он же вам не мешает, правда?"
+      "ru": "Он же вам не мешает, правда?",
+      "uk": "Він же вам не заважає, правда?"
     },
     "type": "skin",
     "skin_config": {
@@ -3516,11 +3662,13 @@
     "id": "angel_hat",
     "name": {
       "en": "Angel",
-      "ru": "Ангел"
+      "ru": "Ангел",
+      "uk": "Ангел"
     },
     "description": {
       "en": "Don't be afraid...",
-      "ru": "Не бойся..."
+      "ru": "Не бойся...",
+      "uk": "Не бійся..."
     },
     "type": "skin",
     "skin_config": {
@@ -3561,11 +3709,13 @@
     "id": "aquarium_hat",
     "name": {
       "en": "Aquarium",
-      "ru": "Аквариум"
+      "ru": "Аквариум",
+      "uk": "Акваріум"
     },
     "description": {
       "en": "Who wants to wear an aquarium on their head?",
-      "ru": "Кто захочет носить аквариум на голове"
+      "ru": "Кто захочет носить аквариум на голове",
+      "uk": "Хто захоче носити акваріум на голові"
     },
     "type": "skin",
     "skin_config": {
@@ -3602,11 +3752,13 @@
     "id": "blue_wreath",
     "name": {
       "en": "Blue wreath",
-      "ru": "Голубой венок"
+      "ru": "Голубой венок",
+      "uk": "Блакитний вінок"
     },
     "description": {
       "en": "Blue flower wreath",
-      "ru": "Венок из голубых цветов"
+      "ru": "Венок из голубых цветов",
+      "uk": "Вінок із блакитних квітів"
     },
     "type": "skin",
     "skin_config": {
@@ -3644,11 +3796,13 @@
     "id": "box_hat",
     "name": {
       "en": "Box hat",
-      "ru": "Коробка"
+      "ru": "Коробка",
+      "uk": "Коробка"
     },
     "description": {
       "en": "This box looks good, doesn't it?",
-      "ru": "А эта коробка выглядит неплохо, да?"
+      "ru": "А эта коробка выглядит неплохо, да?",
+      "uk": "А ця коробка виглядає непогано, так?"
     },
     "type": "skin",
     "skin_config": {
@@ -3686,11 +3840,13 @@
     "id": "brook_hat",
     "name": {
       "en": "Brook hat",
-      "ru": "Шляпа Брука"
+      "ru": "Шляпа Брука",
+      "uk": "Капелюх Брука"
     },
     "description": {
       "en": "Very fashionable hat",
-      "ru": "Очень модная шляпа"
+      "ru": "Очень модная шляпа",
+      "uk": "Дуже модний капелюх"
     },
     "type": "skin",
     "skin_config": {
@@ -3723,11 +3879,13 @@
     "id": "chef_hat",
     "name": {
       "en": "Chef hat",
-      "ru": "Шляпа шефа"
+      "ru": "Шляпа шефа",
+      "uk": "Капелюх шефа"
     },
     "description": {
       "en": "Only real chefs can wear this",
-      "ru": "Только настоящие повара могут носить такое"
+      "ru": "Только настоящие повара могут носить такое",
+      "uk": "Тільки справжні кухарі можуть носити таке"
     },
     "type": "skin",
     "skin_config": {
@@ -3765,11 +3923,13 @@
     "id": "clown_hat",
     "name": {
       "en": "Clown hair",
-      "ru": "Клоунский парик"
+      "ru": "Клоунский парик",
+      "uk": "Клоунська перука"
     },
     "description": {
       "en": "Especially for those who support war",
-      "ru": "Специально для тех, кто поддерживает коммунизм"
+      "ru": "Специально для тех, кто поддерживает коммунизм",
+      "uk": "Спеціально для тих, хто підтримує комунізм"
     },
     "type": "skin",
     "skin_config": {
@@ -3805,11 +3965,13 @@
     "id": "cylinder",
     "name": {
       "en": "Top hat",
-      "ru": "Цилиндр"
+      "ru": "Цилиндр",
+      "uk": "Циліндр"
     },
     "description": {
       "en": "Very fashionable top hat",
-      "ru": "Очень модный цилиндр"
+      "ru": "Очень модный цилиндр",
+      "uk": "Дуже модний циліндр"
     },
     "type": "skin",
     "skin_config": {
@@ -3847,11 +4009,13 @@
     "id": "danwl_hat",
     "name": {
       "en": "Danwl hat",
-      "ru": "Шляпа Danwl"
+      "ru": "Шляпа Danwl",
+      "uk": "Капелюх Danwl"
     },
     "description": {
       "en": "Hat for Danwl",
-      "ru": "Волосы для Danwl"
+      "ru": "Волосы для Danwl",
+      "uk": "Волосся для Danwl"
     },
     "type": "skin",
     "skin_config": {
@@ -3885,11 +4049,13 @@
     "id": "demon_horns",
     "name": {
       "en": "Demon horns",
-      "ru": "Рога демона"
+      "ru": "Рога демона",
+      "uk": "Роги демона"
     },
     "description": {
       "en": "A bad pig, the most terrible there is",
-      "ru": "Плохой хряк, самый ужасный который только существует"
+      "ru": "Плохой хряк, самый ужасный который только существует",
+      "uk": "Поганий хряк, найжахливіший, який тільки існує"
     },
     "type": "skin",
     "skin_config": {
@@ -3927,11 +4093,13 @@
     "id": "diamond_helmet",
     "name": {
       "en": "Diamond helmet",
-      "ru": "Алмазный шлем"
+      "ru": "Алмазный шлем",
+      "uk": "Алмазний шолом"
     },
     "description": {
       "en": "I think I've seen this helmet in some game before",
-      "ru": "Кажется я уже видел этот шлем в какой то игре"
+      "ru": "Кажется я уже видел этот шлем в какой то игре",
+      "uk": "Здається, я вже бачив цей шолом у якійсь грі"
     },
     "type": "skin",
     "skin_config": {
@@ -3968,11 +4136,13 @@
     "id": "dusk_lobber_hat",
     "name": {
       "en": "Dusk Lobber hat",
-      "ru": "Шляпа Сумеречной Мечтательницы"
+      "ru": "Шляпа Сумеречной Мечтательницы",
+      "uk": "Капелюх Сутінкової Мрійниці"
     },
     "description": {
       "en": "Did you get the PvZ reference? Yes?",
-      "ru": "Все же поняли отсылку на PvZ? Да?"
+      "ru": "Все же поняли отсылку на PvZ? Да?",
+      "uk": "Усі ж зрозуміли відсилання на PvZ? Так?"
     },
     "type": "skin",
     "skin_config": {
@@ -4013,11 +4183,13 @@
     "id": "eggman_glasses_hat",
     "name": {
       "en": "Eggman's glasses (hat)",
-      "ru": "Очки Эггмана (шляпа)"
+      "ru": "Очки Эггмана (шляпа)",
+      "uk": "Окуляри Еггмана (капелюх)"
     },
     "description": {
       "en": "Become 15% Eggman",
-      "ru": "Стань на 15 % Эггманом"
+      "ru": "Стань на 15 % Эггманом",
+      "uk": "Стань на 15 % Еггманом"
     },
     "type": "skin",
     "skin_config": {
@@ -4053,11 +4225,13 @@
     "id": "fire_diadem",
     "name": {
       "en": "Fire diadem",
-      "ru": "Огненная корона"
+      "ru": "Огненная корона",
+      "uk": "Вогняна корона"
     },
     "description": {
       "en": "With a crown like this you'll always be warm",
-      "ru": "С такой короной будет всегда тепло"
+      "ru": "С такой короной будет всегда тепло",
+      "uk": "З такою короною завжди буде тепло"
     },
     "type": "skin",
     "skin_config": {
@@ -4091,11 +4265,13 @@
     "id": "flower_hat",
     "name": {
       "en": "Flower on the head",
-      "ru": "Цветок на голове"
+      "ru": "Цветок на голове",
+      "uk": "Квітка на голові"
     },
     "description": {
       "en": "An ordinary flower on the head",
-      "ru": "Обычный цветок на голове"
+      "ru": "Обычный цветок на голове",
+      "uk": "Звичайна квітка на голові"
     },
     "type": "skin",
     "skin_config": {
@@ -4132,11 +4308,13 @@
     "id": "frog_hat",
     "name": {
       "en": "Frog hat",
-      "ru": "Лягушачья панамка"
+      "ru": "Лягушачья панамка",
+      "uk": "Жаб'яча панамка"
     },
     "description": {
       "en": "Chill panama hat for a chill boar",
-      "ru": "Чиловая панамка для чилового хряка"
+      "ru": "Чиловая панамка для чилового хряка",
+      "uk": "Чілова панамка для чілового хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -4176,11 +4354,13 @@
     "id": "gold_poop_hat",
     "name": {
       "en": "Gold poop hat",
-      "ru": "Золотая навозная шляпа"
+      "ru": "Золотая навозная шляпа",
+      "uk": "Золотий гнойовий капелюх"
     },
     "description": {
       "en": "This is golden poop!",
-      "ru": "Это же золотой навоз!"
+      "ru": "Это же золотой навоз!",
+      "uk": "Це ж золотий гній!"
     },
     "type": "skin",
     "skin_config": {
@@ -4217,11 +4397,13 @@
     "id": "green_cylinder",
     "name": {
       "en": "Green top hat",
-      "ru": "Цилиндр Находкинса"
+      "ru": "Цилиндр Находкинса",
+      "uk": "Циліндр Находкінса"
     },
     "description": {
       "en": "How bad could I be?",
-      "ru": "Ну ра-а-азве я плохой?"
+      "ru": "Ну ра-а-азве я плохой?",
+      "uk": "Ну хі-і-іба я поганий?"
     },
     "type": "skin",
     "skin_config": {
@@ -4259,11 +4441,13 @@
     "id": "headphones",
     "name": {
       "en": "Headphones",
-      "ru": "Наушники"
+      "ru": "Наушники",
+      "uk": "Навушники"
     },
     "description": {
       "en": "You can't hear anything in them, but they look cool",
-      "ru": "Нарисуйте кто нибудь нормальные наушники и киньте создателю"
+      "ru": "Нарисуйте кто нибудь нормальные наушники и киньте создателю",
+      "uk": "Намалюйте хтось нормальні навушники та киньте творцю"
     },
     "type": "skin",
     "skin_config": {
@@ -4297,11 +4481,13 @@
     "id": "hedgehog_hat",
     "name": {
       "en": "Hedgehog hat",
-      "ru": "Шляпа ежика"
+      "ru": "Шляпа ежика",
+      "uk": "Капелюх їжачка"
     },
     "description": {
       "en": "Hedgehog, is it true that you are sick?",
-      "ru": "Ежик, а это правда что ты колишся?"
+      "ru": "Ежик, а это правда что ты колишся?",
+      "uk": "Їжачок, а це правда, що ти колючий?"
     },
     "type": "skin",
     "skin_config": {
@@ -4341,11 +4527,13 @@
     "id": "kid_cap",
     "name": {
       "en": "Kid cap",
-      "ru": "Детская кепка"
+      "ru": "Детская кепка",
+      "uk": "Дитяча кепка"
     },
     "description": {
       "en": "If children were the flowers of life, then they would be weeds.",
-      "ru": "Если бы дети были цветами жизни, то они были бы сорняками"
+      "ru": "Если бы дети были цветами жизни, то они были бы сорняками",
+      "uk": "Якби діти були квітами життя, то вони були б бур'янами"
     },
     "type": "skin",
     "skin_config": {
@@ -4383,11 +4571,13 @@
     "id": "low_budget_cylinder",
     "name": {
       "en": "Low budget top hat",
-      "ru": "Низко бюджетный цилиндр"
+      "ru": "Низко бюджетный цилиндр",
+      "uk": "Низькобюджетний циліндр"
     },
     "description": {
       "en": "The creator of Hryak did not have enough budget to make a proper skin",
-      "ru": "Создателю Хряка не хватило бюджета, чтобы сделать нормальный скин"
+      "ru": "Создателю Хряка не хватило бюджета, чтобы сделать нормальный скин",
+      "uk": "Творцю Хряка не вистачило бюджету, щоб зробити нормальний скін"
     },
     "type": "skin",
     "skin_config": {
@@ -4420,11 +4610,13 @@
     "id": "luffy_hat",
     "name": {
       "en": "Luffy hat",
-      "ru": "Шляпа луффи"
+      "ru": "Шляпа луффи",
+      "uk": "Капелюх Луффі"
     },
     "description": {
       "en": "Gomu gomu no",
-      "ru": "Gomu gomu no"
+      "ru": "Gomu gomu no",
+      "uk": "Gomu gomu no"
     },
     "type": "skin",
     "skin_config": {
@@ -4462,11 +4654,13 @@
     "id": "magnet_hat",
     "name": {
       "en": "Magnet hat",
-      "ru": "Магнитная шляпа"
+      "ru": "Магнитная шляпа",
+      "uk": "Магнітний капелюх"
     },
     "description": {
       "en": "They say it helps attract money",
-      "ru": "Говорят что это помогает примагнитить деньги"
+      "ru": "Говорят что это помогает примагнитить деньги",
+      "uk": "Кажуть, що це допомагає примагнітити гроші"
     },
     "type": "skin",
     "skin_config": {
@@ -4503,11 +4697,13 @@
     "id": "manga_hat",
     "name": {
       "en": "Manga hat",
-      "ru": "Шляпа из манги"
+      "ru": "Шляпа из манги",
+      "uk": "Капелюх із манги"
     },
     "description": {
       "en": "Black and white hat straight from the manga",
-      "ru": "Черно-белая шляпа, прямиком из манги"
+      "ru": "Черно-белая шляпа, прямиком из манги",
+      "uk": "Чорно-білий капелюх, прямісінько з манги"
     },
     "type": "skin",
     "skin_config": {
@@ -4545,11 +4741,13 @@
     "id": "mcdonalds_cap",
     "name": {
       "en": "McDonald's cap",
-      "ru": "Кепка из мака"
+      "ru": "Кепка из мака",
+      "uk": "Кепка з маку"
     },
     "description": {
       "en": "The work of all programmers in the future",
-      "ru": "Работа всех программистов в будущем"
+      "ru": "Работа всех программистов в будущем",
+      "uk": "Робота всіх програмістів у майбутньому"
     },
     "type": "skin",
     "skin_config": {
@@ -4590,11 +4788,13 @@
     "id": "military_cap",
     "name": {
       "en": "Military cap",
-      "ru": "Военная шляпа"
+      "ru": "Военная шляпа",
+      "uk": "Військовий капелюх"
     },
     "description": {
       "en": "With this hat you can immediately go to Bakhmut",
-      "ru": "С этой шапкой можно сразу в Бахмут"
+      "ru": "С этой шапкой можно сразу в Бахмут",
+      "uk": "З цією шапкою можна одразу в Бахмут"
     },
     "type": "skin",
     "skin_config": {
@@ -4635,11 +4835,13 @@
     "id": "muzzle_of_a_tank",
     "name": {
       "en": "Tank barrel",
-      "ru": "Дуло от танка"
+      "ru": "Дуло от танка",
+      "uk": "Дуло від танка"
     },
     "description": {
       "en": "Become a war pig with this gun",
-      "ru": "Станьте военным свином с помощью этой пушки"
+      "ru": "Станьте военным свином с помощью этой пушки",
+      "uk": "Станьте військовим свином за допомогою цієї гармати"
     },
     "type": "skin",
     "skin_config": {
@@ -4676,11 +4878,13 @@
     "id": "nimbus",
     "name": {
       "en": "Halo",
-      "ru": "Нимб"
+      "ru": "Нимб",
+      "uk": "Німб"
     },
     "description": {
       "en": "Pigs always go to heaven",
-      "ru": "Хряки всегда попадают в рай"
+      "ru": "Хряки всегда попадают в рай",
+      "uk": "Хряки завжди потрапляють до раю"
     },
     "type": "skin",
     "skin_config": {
@@ -4717,11 +4921,13 @@
     "id": "nitro_hat",
     "name": {
       "en": "Nitro",
-      "ru": "Нитро"
+      "ru": "Нитро",
+      "uk": "Нітро"
     },
     "description": {
       "en": "Only for true legends",
-      "ru": "Только для настоящих легенд"
+      "ru": "Только для настоящих легенд",
+      "uk": "Тільки для справжніх легенд"
     },
     "type": "skin",
     "skin_config": {
@@ -4765,11 +4971,13 @@
     "id": "nyusha_hair",
     "name": {
       "en": "Nyusha's hair",
-      "ru": "Волосы Нюши"
+      "ru": "Волосы Нюши",
+      "uk": "Волосся Нюші"
     },
     "description": {
       "en": "Hair of a real Nyusha",
-      "ru": "Волосы настоящей Шлюши"
+      "ru": "Волосы настоящей Шлюши",
+      "uk": "Волосся справжньої Шлюші"
     },
     "type": "skin",
     "skin_config": {
@@ -4808,11 +5016,13 @@
     "id": "old_man_hat",
     "name": {
       "en": "Old man hat",
-      "ru": "Дедовская шляпа"
+      "ru": "Дедовская шляпа",
+      "uk": "Дідівський капелюх"
     },
     "description": {
       "en": "Very cool hat if you are an old guy",
-      "ru": "Очень крутая шляпа, если ты дед"
+      "ru": "Очень крутая шляпа, если ты дед",
+      "uk": "Дуже крутий капелюх, якщо ти дід"
     },
     "type": "skin",
     "skin_config": {
@@ -4850,11 +5060,13 @@
     "id": "pig_king_crown",
     "name": {
       "en": "Pig king crown",
-      "ru": "Корона короля свиней"
+      "ru": "Корона короля свиней",
+      "uk": "Корона короля свиней"
     },
     "description": {
       "en": "Only kings can wear this",
-      "ru": "Только короли могут носить такое"
+      "ru": "Только короли могут носить такое",
+      "uk": "Тільки королі можуть носити таке"
     },
     "type": "skin",
     "skin_config": {
@@ -4891,11 +5103,13 @@
     "id": "pink_wreath",
     "name": {
       "en": "Pink wreath",
-      "ru": "Розовый венок"
+      "ru": "Розовый венок",
+      "uk": "Рожевий вінок"
     },
     "description": {
       "en": "Pink flower wreath",
-      "ru": "Венок из розовых цветов"
+      "ru": "Венок из розовых цветов",
+      "uk": "Вінок із рожевих квітів"
     },
     "type": "skin",
     "skin_config": {
@@ -4932,11 +5146,13 @@
   "purple_emo_hair": {
     "name": {
       "en": "Purple emo hair",
-      "ru": "Фиолетовые эмо волосы"
+      "ru": "Фиолетовые эмо волосы",
+      "uk": "Фіолетове емо волосся"
     },
     "description": {
       "en": "Tired of life? Change your hairstyle!",
-      "ru": "Надоела жизнь? Поменяй прическу!"
+      "ru": "Надоела жизнь? Поменяй прическу!",
+      "uk": "Набридло життя? Зміни зачіску!"
     },
     "type": "skin",
     "skin_config": {
@@ -4973,11 +5189,13 @@
   "long_hair": {
     "name": {
       "en": "Long hair",
-      "ru": "Длинные волосы"
+      "ru": "Длинные волосы",
+      "uk": "Довге волосся"
     },
     "description": {
       "en": "The longer the hair, the wiser the person. Well, or a pig, I don't care",
-      "ru": "Чем длиннее волосы, тем мудрее человек. Ну или свинья, плевать"
+      "ru": "Чем длиннее волосы, тем мудрее человек. Ну или свинья, плевать",
+      "uk": "Чим довше волосся, тим мудріша людина. Ну або свиня, байдуже"
     },
     "type": "skin",
     "skin_config": {
@@ -5013,11 +5231,13 @@
   "watermelon_hat": {
     "name": {
       "en": "Watermelon hat",
-      "ru": "Арбузная шляпка"
+      "ru": "Арбузная шляпка",
+      "uk": "Кавуновий капелюшок"
     },
     "description": {
       "en": "The coolest guys wear this hat",
-      "ru": "Самые базованые челики носят эту шляпу"
+      "ru": "Самые базованые челики носят эту шляпу",
+      "uk": "Найбазованіші чуваки носять цей капелюх"
     },
     "type": "skin",
     "skin_config": {
@@ -5055,11 +5275,13 @@
     "id": "pirate_hat",
     "name": {
       "en": "Pirate hat",
-      "ru": "Пиратская шляпа"
+      "ru": "Пиратская шляпа",
+      "uk": "Піратський капелюх"
     },
     "description": {
       "en": "Rob, kill and bathe in gold. And then die at 30",
-      "ru": "Грабь, убивай и купайся в золоте. А потом умри в 30"
+      "ru": "Грабь, убивай и купайся в золоте. А потом умри в 30",
+      "uk": "Грабуй, вбивай і купайся в золоті. А потім помри в 30"
     },
     "type": "skin",
     "skin_config": {
@@ -5096,11 +5318,13 @@
     "id": "poop_hat",
     "name": {
       "en": "Poop hat",
-      "ru": "Навозная шляпа"
+      "ru": "Навозная шляпа",
+      "uk": "Гнойовий капелюх"
     },
     "description": {
       "en": "It smells so good",
-      "ru": "Воняет пизд..ц"
+      "ru": "Воняет пизд..ц",
+      "uk": "Смердить пізд..ць"
     },
     "type": "skin",
     "skin_config": {
@@ -5137,11 +5361,13 @@
     "id": "purple_demon_horns",
     "name": {
       "en": "Purple demon horns",
-      "ru": "Фиолетовые рога демона"
+      "ru": "Фиолетовые рога демона",
+      "uk": "Фіолетові роги демона"
     },
     "description": {
       "en": "A bad pig, the most terrible there is",
-      "ru": "Плохой хряк, самый ужасный который только существует"
+      "ru": "Плохой хряк, самый ужасный который только существует",
+      "uk": "Поганий хряк, найжахливіший, який тільки існує"
     },
     "type": "skin",
     "skin_config": {
@@ -5179,11 +5405,13 @@
     "id": "red_bandage",
     "name": {
       "en": "Red bandage",
-      "ru": "Красная повязка"
+      "ru": "Красная повязка",
+      "uk": "Червона пов'язка"
     },
     "description": {
       "en": "Stylish red headband",
-      "ru": "Стильная красная повязка"
+      "ru": "Стильная красная повязка",
+      "uk": "Стильна червона пов'язка"
     },
     "type": "skin",
     "skin_config": {
@@ -5221,11 +5449,13 @@
     "id": "robbin_good_hat",
     "name": {
       "en": "Robin Hood hat",
-      "ru": "Шляпа Робин Гуда"
+      "ru": "Шляпа Робин Гуда",
+      "uk": "Капелюх Робін Гуда"
     },
     "description": {
       "en": "Steal from the poor and give to the rich",
-      "ru": "Воруйте у бедных и отдавайте богатым"
+      "ru": "Воруйте у бедных и отдавайте богатым",
+      "uk": "Крадіть у бідних та віддавайте багатим"
     },
     "type": "skin",
     "skin_config": {
@@ -5263,11 +5493,13 @@
     "id": "shailushai_hat",
     "name": {
       "en": "Shailushai hat",
-      "ru": "Шапка Шайлушая"
+      "ru": "Шапка Шайлушая",
+      "uk": "Шапка Шайлушая"
     },
     "description": {
       "en": "We live, we love, we lie",
-      "ru": "We live, we love, we lie"
+      "ru": "We live, we love, we lie",
+      "uk": "We live, we love, we lie"
     },
     "type": "skin",
     "skin_config": {
@@ -5305,11 +5537,13 @@
     "id": "sleepy_hat",
     "name": {
       "en": "Sleepy mask",
-      "ru": "Сонная маска"
+      "ru": "Сонная маска",
+      "uk": "Сонна маска"
     },
     "description": {
       "en": "Sleep well, dear pig",
-      "ru": "Спи спокойно, дорогой Хряк"
+      "ru": "Спи спокойно, дорогой Хряк",
+      "uk": "Спи спокійно, дорогий Хряче"
     },
     "type": "skin",
     "skin_config": {
@@ -5345,11 +5579,13 @@
     "id": "speedwagon_hat",
     "name": {
       "en": "Speedwagon hat",
-      "ru": "Шляпа спидвагона"
+      "ru": "Шляпа спидвагона",
+      "uk": "Капелюх спідвагона"
     },
     "description": {
       "en": "Idk, didn't watch",
-      "ru": "Почувствуй себя спидвагоном"
+      "ru": "Почувствуй себя спидвагоном",
+      "uk": "Відчуй себе спідвагоном"
     },
     "type": "skin",
     "skin_config": {
@@ -5386,11 +5622,13 @@
     "id": "straw_hat",
     "name": {
       "en": "Straw hat",
-      "ru": "Solomennaya_shlapa.png"
+      "ru": "Solomennaya_shlapa.png",
+      "uk": "Solomennaya_shlapa.png"
     },
     "description": {
       "en": "Yes, I took a ready-made picture from the Internet, so what?",
-      "ru": "Да, я взял готовую картинку с интернета, и что?"
+      "ru": "Да, я взял готовую картинку с интернета, и что?",
+      "uk": "Так, я взяв готову картинку з інтернету, і що?"
     },
     "type": "skin",
     "skin_config": {
@@ -5426,11 +5664,13 @@
     "id": "unicorn_hat",
     "name": {
       "en": "Unicorn horn",
-      "ru": "Рог единорога"
+      "ru": "Рог единорога",
+      "uk": "Ріг єдинорога"
     },
     "description": {
       "en": "Conjure something with this horn",
-      "ru": "Наколдуй этим рогом что нибудь"
+      "ru": "Наколдуй этим рогом что нибудь",
+      "uk": "Начаклуй цим рогом щось"
     },
     "type": "skin",
     "skin_config": {
@@ -5468,11 +5708,13 @@
     "id": "vizard_hat",
     "name": {
       "en": "Wizard hat",
-      "ru": "Шляпа волшебника"
+      "ru": "Шляпа волшебника",
+      "uk": "Капелюх чарівника"
     },
     "description": {
       "en": "The pig can now cast spells",
-      "ru": "Хряк теперь может колдовать"
+      "ru": "Хряк теперь может колдовать",
+      "uk": "Хряк тепер може чаклувати"
     },
     "type": "skin",
     "skin_config": {
@@ -5508,11 +5750,13 @@
     "id": "white_cap",
     "name": {
       "en": "White cap",
-      "ru": "Белая кепка"
+      "ru": "Белая кепка",
+      "uk": "Біла кепка"
     },
     "description": {
       "en": "White cap, nothing else",
-      "ru": "Белая кепка, ничего больше"
+      "ru": "Белая кепка, ничего больше",
+      "uk": "Біла кепка, нічого більше"
     },
     "type": "skin",
     "skin_config": {
@@ -5553,11 +5797,13 @@
     "id": "wilson_hair",
     "name": {
       "en": "Wilson's hair",
-      "ru": "Волосы Уилсона"
+      "ru": "Волосы Уилсона",
+      "uk": "Волосся Вілсона"
     },
     "description": {
       "en": "Just don't go into the dark",
-      "ru": "Главное не идти во тьму"
+      "ru": "Главное не идти во тьму",
+      "uk": "Головне не йти у пітьму"
     },
     "type": "skin",
     "skin_config": {
@@ -5597,11 +5843,13 @@
     "id": "z_cap_white",
     "name": {
       "en": "White Z cap",
-      "ru": "Белая Z кепка"
+      "ru": "Белая Z кепка",
+      "uk": "Біла Z кепка"
     },
     "description": {
       "en": "White cap with letter Z",
-      "ru": "Белая кепка с буквой Z"
+      "ru": "Белая кепка с буквой Z",
+      "uk": "Біла кепка з літерою Z"
     },
     "type": "skin",
     "skin_config": {
@@ -5639,11 +5887,13 @@
     "id": "cossack_hair",
     "name": {
       "en": "Cossack's hair",
-      "ru": "Волосы козака"
+      "ru": "Волосы козака",
+      "uk": "Волосся козака"
     },
     "description": {
       "en": "Such forelocks are a symbol of strength. Well, maybe",
-      "ru": "Такие чубчики - это символ силы. Ну наверное"
+      "ru": "Такие чубчики - это символ силы. Ну наверное",
+      "uk": "Такі чубчики - це символ сили. Ну мабуть"
     },
     "type": "skin",
     "skin_config": {
@@ -5678,11 +5928,13 @@
   "bee_hat": {
     "name": {
       "en": "Bee on the head",
-      "ru": "Пчёлка на головке"
+      "ru": "Пчёлка на головке",
+      "uk": "Бджілка на голівці"
     },
     "description": {
       "en": "He doesn't bother you, does he?",
-      "ru": "Она же вам не мешает, правда?"
+      "ru": "Она же вам не мешает, правда?",
+      "uk": "Вона ж вам не заважає, правда?"
     },
     "type": "skin",
     "skin_config": {
@@ -5720,11 +5972,13 @@
   "brick_hat": {
     "name": {
       "en": "Brick in the head",
-      "ru": "Кирпич в голове"
+      "ru": "Кирпич в голове",
+      "uk": "Цегла в голові"
     },
     "description": {
       "en": "A slight headache. But don't worry, it'll heal before the wedding",
-      "ru": "Небольшая головная боль. Но ничего, до свадьбы заживет"
+      "ru": "Небольшая головная боль. Но ничего, до свадьбы заживет",
+      "uk": "Невеликий головний біль. Але нічого, до весілля загоїться"
     },
     "type": "skin",
     "skin_config": {
@@ -5760,11 +6014,13 @@
   "demon_nimbus": {
     "name": {
       "en": "Demon halo",
-      "ru": "Дьяволський нимб"
+      "ru": "Дьяволський нимб",
+      "uk": "Диявольський німб"
     },
     "description": {
       "en": "Pigs don't always go to heaven, unfortunately",
-      "ru": "Хряки не всегда попадают в рай, к сожалению"
+      "ru": "Хряки не всегда попадают в рай, к сожалению",
+      "uk": "Хряки не завжди потрапляють до раю, на жаль"
     },
     "type": "skin",
     "skin_config": {
@@ -5798,11 +6054,13 @@
     "id": "leg_shackles",
     "name": {
       "en": "Handcuffs",
-      "ru": "Наручники"
+      "ru": "Наручники",
+      "uk": "Наручники"
     },
     "description": {
       "en": "For those who stole chewing gum from the store",
-      "ru": "Для тех кто украл жвачку с магазина"
+      "ru": "Для тех кто украл жвачку с магазина",
+      "uk": "Для тих, хто вкрав жуйку з магазину"
     },
     "type": "skin",
     "skin_config": {
@@ -5837,11 +6095,13 @@
   "purple_emo_bracelet": {
     "name": {
       "en": "Purple emo bracelet",
-      "ru": "Фиолетовый эмо браслет"
+      "ru": "Фиолетовый эмо браслет",
+      "uk": "Фіолетовий емо браслет"
     },
     "description": {
       "en": "Do you want to seem cool? Put this on",
-      "ru": "Хочешь показаться крутым? Надень это"
+      "ru": "Хочешь показаться крутым? Надень это",
+      "uk": "Хочеш здатися крутим? Надінь це"
     },
     "type": "skin",
     "skin_config": {
@@ -5876,11 +6136,13 @@
   "wrist_watch": {
     "name": {
       "en": "Wrist watch",
-      "ru": "Наручные часы"
+      "ru": "Наручные часы",
+      "uk": "Наручний годинник"
     },
     "description": {
       "en": "The future doesn't exist",
-      "ru": "Когда будешь путешествовать во времени, сможешь узнать время"
+      "ru": "Когда будешь путешествовать во времени, сможешь узнать время",
+      "uk": "Коли будеш подорожувати в часі, зможеш дізнатися час"
     },
     "type": "skin",
     "skin_config": {
@@ -5916,11 +6178,13 @@
     "id": "nyusha_shoes",
     "name": {
       "en": "Nyusha's shoes",
-      "ru": "Туфли Нюши"
+      "ru": "Туфли Нюши",
+      "uk": "Туфлі Нюші"
     },
     "description": {
       "en": "Shoes from Nyusha",
-      "ru": "Туфельки от Шлюши"
+      "ru": "Туфельки от Шлюши",
+      "uk": "Туфельки від Шлюші"
     },
     "type": "skin",
     "skin_config": {
@@ -5957,11 +6221,13 @@
     "id": "tank_tracks",
     "name": {
       "en": "Tank tracks",
-      "ru": "Гусеницы от танка"
+      "ru": "Гусеницы от танка",
+      "uk": "Гусениці від танка"
     },
     "description": {
       "en": "The very thing for traveling to the Ukr ... Well, okay, the joke is not funny",
-      "ru": "Самое то для путешествий в Ук... А ладно, шутка не смешная"
+      "ru": "Самое то для путешествий в Ук... А ладно, шутка не смешная",
+      "uk": "Саме те для подорожей в Ук... А, гаразд, жарт не смішний"
     },
     "type": "skin",
     "skin_config": {
@@ -5995,11 +6261,13 @@
     "id": "active_2_mark",
     "name": {
       "en": "Active 2 mark",
-      "ru": "Активность 2 - тату"
+      "ru": "Активность 2 - тату",
+      "uk": "Активність 2 - тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -6067,11 +6335,13 @@
     "id": "active_3_mark",
     "name": {
       "en": "Active 3 mark",
-      "ru": "Активность 3 - тату"
+      "ru": "Активность 3 - тату",
+      "uk": "Активність 3 - тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -6135,11 +6405,13 @@
     "id": "active_4_mark",
     "name": {
       "en": "Active 4 mark",
-      "ru": "Активность 4 - тату"
+      "ru": "Активность 4 - тату",
+      "uk": "Активність 4 - тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -6199,11 +6471,13 @@
     "id": "active_6_mark",
     "name": {
       "en": "Active 6 mark",
-      "ru": "Активность 6 - тату"
+      "ru": "Активность 6 - тату",
+      "uk": "Активність 6 - тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -6255,11 +6529,13 @@
     "id": "artist_makeup",
     "name": {
       "en": "Artist makeup",
-      "ru": "Макияж художника"
+      "ru": "Макияж художника",
+      "uk": "Макіяж художника"
     },
     "description": {
       "en": "A careless pig gets covered in paint",
-      "ru": "Неосторожный Хряк испачкался краской"
+      "ru": "Неосторожный Хряк испачкался краской",
+      "uk": "Необережний Хряк забруднився фарбою"
     },
     "type": "skin",
     "skin_config": {
@@ -6295,11 +6571,13 @@
     "id": "black_makeup",
     "name": {
       "en": "Black makeup",
-      "ru": "Чёрный макияж"
+      "ru": "Чёрный макияж",
+      "uk": "Чорний макіяж"
     },
     "description": {
       "en": "For those who find life too bright",
-      "ru": "Для тех, кому жизнь кажется слишком светлой"
+      "ru": "Для тех, кому жизнь кажется слишком светлой",
+      "uk": "Для тих, кому життя здається надто світлим"
     },
     "type": "skin",
     "skin_config": {
@@ -6335,11 +6613,13 @@
     "id": "blush",
     "name": {
       "en": "Blush",
-      "ru": "Румянец"
+      "ru": "Румянец",
+      "uk": "Рум'янець"
     },
     "description": {
       "en": "It's so pretty",
-      "ru": "Это так мило"
+      "ru": "Это так мило",
+      "uk": "Це так мило"
     },
     "type": "skin",
     "skin_config": {
@@ -6375,11 +6655,13 @@
     "id": "brook_makeup",
     "name": {
       "en": "Brook makeup",
-      "ru": "Макияж Брука"
+      "ru": "Макияж Брука",
+      "uk": "Макіяж Брука"
     },
     "description": {
       "en": "Makeup for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -6412,11 +6694,13 @@
     "id": "brook_tattoo5",
     "name": {
       "en": "Hryak-Coin",
-      "ru": "Хряккоин"
+      "ru": "Хряккоин",
+      "uk": "Хряккоїн"
     },
     "description": {
       "en": "Valuable currency. They say there are only a few of these",
-      "ru": "Ценная валюта. Говорят что таких существует только несколько штук"
+      "ru": "Ценная валюта. Говорят что таких существует только несколько штук",
+      "uk": "Цінна валюта. Кажуть, що таких існує лише кілька штук"
     },
     "type": "skin",
     "skin_config": {
@@ -6449,11 +6733,13 @@
     "id": "clown_makeup",
     "name": {
       "en": "Clown makeup",
-      "ru": "Клоунский макияж"
+      "ru": "Клоунский макияж",
+      "uk": "Клоунський макіяж"
     },
     "description": {
       "en": "For real clowns",
-      "ru": "Для самых настоящих клоунов"
+      "ru": "Для самых настоящих клоунов",
+      "uk": "Для найсправжніших клоунів"
     },
     "type": "skin",
     "skin_config": {
@@ -6489,11 +6775,13 @@
     "id": "cry_makeup",
     "name": {
       "en": "Dripping mascara",
-      "ru": "Потёкшая тушь"
+      "ru": "Потёкшая тушь",
+      "uk": "Потекла туш"
     },
     "description": {
       "en": "Pig cry-cry. Pig be sad",
-      "ru": "Хряк плак-плак. Хряк грустить"
+      "ru": "Хряк плак-плак. Хряк грустить",
+      "uk": "Хряк плак-плак. Хряк сумувати"
     },
     "type": "skin",
     "skin_config": {
@@ -6529,11 +6817,13 @@
     "id": "eye_fingal",
     "name": {
       "en": "Black eye",
-      "ru": "Фингал"
+      "ru": "Фингал",
+      "uk": "Фінгал"
     },
     "description": {
       "en": "Just put some ice on and it'll go away",
-      "ru": "Просто приложи лед и всё пройдёт"
+      "ru": "Просто приложи лед и всё пройдёт",
+      "uk": "Просто приклади лід і все мине"
     },
     "type": "skin",
     "skin_config": {
@@ -6569,11 +6859,13 @@
     "id": "eye_scar",
     "name": {
       "en": "Eye scar",
-      "ru": "Шрам на глазе"
+      "ru": "Шрам на глазе",
+      "uk": "Шрам на оці"
     },
     "description": {
       "en": "Scar on the eye, what else to say",
-      "ru": "Шрам на глазе, что еще сказать"
+      "ru": "Шрам на глазе, что еще сказать",
+      "uk": "Шрам на оці, що ще сказати"
     },
     "type": "skin",
     "skin_config": {
@@ -6609,11 +6901,13 @@
     "id": "morgenshtern_tattoo",
     "name": {
       "en": "Morgenshtern tattoo",
-      "ru": "Тату Моргенштерна"
+      "ru": "Тату Моргенштерна",
+      "uk": "Тату Моргенштерна"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуха прям как у Моргенштерна!"
+      "ru": "Татуха прям как у Моргенштерна!",
+      "uk": "Татуха прямо як у Моргенштерна!"
     },
     "type": "skin",
     "skin_config": {
@@ -6649,11 +6943,13 @@
     "id": "mr_beast_makeup",
     "name": {
       "en": "Mr. Beast makeup",
-      "ru": "Макияж Мистер Биста"
+      "ru": "Макияж Мистер Биста",
+      "uk": "Макіяж Містер Біста"
     },
     "description": {
       "en": "Feel like a billionaire",
-      "ru": "Почувствуй себя миллиардером"
+      "ru": "Почувствуй себя миллиардером",
+      "uk": "Відчуй себе мільярдером"
     },
     "type": "skin",
     "skin_config": {
@@ -6687,11 +6983,13 @@
     "id": "regular_makeup",
     "name": {
       "en": "Regular makeup",
-      "ru": "Обычный макияж"
+      "ru": "Обычный макияж",
+      "uk": "Звичайний макіяж"
     },
     "description": {
       "en": "The most ordinary makeup, did you expect something more?",
-      "ru": "Самый обычный макияж, вы ожидали чего то большего?"
+      "ru": "Самый обычный макияж, вы ожидали чего то большего?",
+      "uk": "Найзвичайніший макіяж, ви очікували чогось більшого?"
     },
     "type": "skin",
     "skin_config": {
@@ -6727,11 +7025,13 @@
     "id": "star_makeup",
     "name": {
       "en": "Star makeup",
-      "ru": "Звездный макияж"
+      "ru": "Звездный макияж",
+      "uk": "Зоряний макіяж"
     },
     "description": {
       "en": "A star on the eye",
-      "ru": "Звезда на глазе"
+      "ru": "Звезда на глазе",
+      "uk": "Зірка на оці"
     },
     "type": "skin",
     "skin_config": {
@@ -6767,11 +7067,13 @@
     "id": "unibrow",
     "name": {
       "en": "Unibrow",
-      "ru": "Монобровь"
+      "ru": "Монобровь",
+      "uk": "Монобрів"
     },
     "description": {
       "en": "One hamburger, bro",
-      "ru": "Одну сырную, брат"
+      "ru": "Одну сырную, брат",
+      "uk": "Одну сирну, брате"
     },
     "type": "skin",
     "skin_config": {
@@ -6806,11 +7108,13 @@
   "blood_on_eye_makeup": {
     "name": {
       "en": "Bloody secret",
-      "ru": "Кровавый секрет"
+      "ru": "Кровавый секрет",
+      "uk": "Кривава таємниця"
     },
     "description": {
       "en": "Makeup for your pig",
-      "ru": "Никогда не спрашивайте почему у Хряка запачкан глаз"
+      "ru": "Никогда не спрашивайте почему у Хряка запачкан глаз",
+      "uk": "Ніколи не питайте, чому у Хряка забруднене око"
     },
     "type": "skin",
     "skin_config": {
@@ -6842,11 +7146,13 @@
   "reddening_makeup": {
     "name": {
       "en": "Redness",
-      "ru": "Покраснение"
+      "ru": "Покраснение",
+      "uk": "Почервоніння"
     },
     "description": {
       "en": "Makeup for your pig",
-      "ru": "Сейчас разорвет от злости, ну или от смущения. Тут как посмотреть"
+      "ru": "Сейчас разорвет от злости, ну или от смущения. Тут как посмотреть",
+      "uk": "Зараз розірве від злості, ну або від збентеження. Тут як подивитися"
     },
     "type": "skin",
     "skin_config": {
@@ -6879,11 +7185,13 @@
     "id": "boar_fangs",
     "name": {
       "en": "Boar tusks",
-      "ru": "Клыки кабана"
+      "ru": "Клыки кабана",
+      "uk": "Ікла кабана"
     },
     "description": {
       "en": "A real wild boar",
-      "ru": "Настоящий, дикий Хряк"
+      "ru": "Настоящий, дикий Хряк",
+      "uk": "Справжній, дикий Хряк"
     },
     "type": "skin",
     "skin_config": {
@@ -6919,11 +7227,13 @@
     "id": "cigarette",
     "name": {
       "en": "Cigarette",
-      "ru": "Сигарета"
+      "ru": "Сигарета",
+      "uk": "Сигарета"
     },
     "description": {
       "en": "Smoking is harmful to health",
-      "ru": "Курение вредно для здоровья"
+      "ru": "Курение вредно для здоровья",
+      "uk": "Куріння шкідливе для здоров'я"
     },
     "type": "skin",
     "skin_config": {
@@ -6960,11 +7270,13 @@
     "id": "eggman_beard",
     "name": {
       "en": "Eggman's beard",
-      "ru": "Борода Эггмана"
+      "ru": "Борода Эггмана",
+      "uk": "Борода Еггмана"
     },
     "description": {
       "en": "Put on this beard and feel 25% like Eggman",
-      "ru": "Надень эту бороду и почувствуй себя Эггманом на 25 %"
+      "ru": "Надень эту бороду и почувствуй себя Эггманом на 25 %",
+      "uk": "Надінь цю бороду і відчуй себе Еггманом на 25 %"
     },
     "type": "skin",
     "skin_config": {
@@ -7003,11 +7315,13 @@
     "id": "honey_stick",
     "name": {
       "en": "Honey stick",
-      "ru": "Медовая палочка"
+      "ru": "Медовая палочка",
+      "uk": "Медова паличка"
     },
     "description": {
       "en": "Mmm. The most delicious honey, made by pig bees",
-      "ru": "Ммм. Самый вкусный мед созданный Хряковыми пчёлами"
+      "ru": "Ммм. Самый вкусный мед созданный Хряковыми пчёлами",
+      "uk": "Ммм. Найсмачніший мед, створений Хряковими бджолами"
     },
     "type": "skin",
     "skin_config": {
@@ -7044,11 +7358,13 @@
     "id": "light_smile_mouth",
     "name": {
       "en": "Slight smile",
-      "ru": "Легкая улыбка"
+      "ru": "Легкая улыбка",
+      "uk": "Легка усмішка"
     },
     "description": {
       "en": "A smile always makes a pig better",
-      "ru": "Улыбка всегда красит Хряка"
+      "ru": "Улыбка всегда красит Хряка",
+      "uk": "Усмішка завжди прикрашає Хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -7084,11 +7400,13 @@
     "id": "lips",
     "name": {
       "en": "Lips",
-      "ru": "Губы"
+      "ru": "Губы",
+      "uk": "Губи"
     },
     "description": {
       "en": "Now you can kiss someone",
-      "ru": "Теперь можно поцеловать кого нибудь"
+      "ru": "Теперь можно поцеловать кого нибудь",
+      "uk": "Тепер можна поцілувати когось"
     },
     "type": "skin",
     "skin_config": {
@@ -7124,11 +7442,13 @@
     "id": "magic_stick",
     "name": {
       "en": "Magic wand",
-      "ru": "Магическая палка"
+      "ru": "Магическая палка",
+      "uk": "Магічна палиця"
     },
     "description": {
       "en": "Time to conjure diarrhea",
-      "ru": "Время наколдовать понос"
+      "ru": "Время наколдовать понос",
+      "uk": "Час начаклувати пронос"
     },
     "type": "skin",
     "skin_config": {
@@ -7165,11 +7485,13 @@
     "id": "nerd_teeth",
     "name": {
       "en": "Nerd teeth",
-      "ru": "Зубы нерда"
+      "ru": "Зубы нерда",
+      "uk": "Зуби нерда"
     },
     "description": {
       "en": "🤓🤓🤓🤓🤓🤓",
-      "ru": "ВоОобфето, 🤓🤓🤓"
+      "ru": "ВоОобфето, 🤓🤓🤓",
+      "uk": "ВзАгАлІ-то, 🤓🤓🤓"
     },
     "type": "skin",
     "skin_config": {
@@ -7205,11 +7527,13 @@
     "id": "original_mouth",
     "name": {
       "en": "Original mouth",
-      "ru": "Класический рот"
+      "ru": "Класический рот",
+      "uk": "Класичний рот"
     },
     "description": {
       "en": "Pig finally has a mouth",
-      "ru": "У Хряка наконец-то появился рот"
+      "ru": "У Хряка наконец-то появился рот",
+      "uk": "У Хряка нарешті з'явився рот"
     },
     "type": "skin",
     "skin_config": {
@@ -7245,11 +7569,13 @@
     "id": "spikelet",
     "name": {
       "en": "Wheat stalk",
-      "ru": "Колосок"
+      "ru": "Колосок",
+      "uk": "Колосок"
     },
     "description": {
       "en": "Now you look like a cool farmer",
-      "ru": "Теперь ты выглядишь как крутой фермер"
+      "ru": "Теперь ты выглядишь как крутой фермер",
+      "uk": "Тепер ти виглядаєш як крутий фермер"
     },
     "type": "skin",
     "skin_config": {
@@ -7286,11 +7612,13 @@
     "id": "tassel",
     "name": {
       "en": "Paintbrush",
-      "ru": "Кисточка"
+      "ru": "Кисточка",
+      "uk": "Пензлик"
     },
     "description": {
       "en": "The pig is now a real artist",
-      "ru": "Хряк теперь настоящий художник, идёт захватывать ваши сердца"
+      "ru": "Хряк теперь настоящий художник, идёт захватывать ваши сердца",
+      "uk": "Хряк тепер справжній художник, іде захоплювати ваші серця"
     },
     "type": "skin",
     "skin_config": {
@@ -7327,11 +7655,13 @@
     "id": "vampire_fangs",
     "name": {
       "en": "Vampire fangs",
-      "ru": "Клыки вампира"
+      "ru": "Клыки вампира",
+      "uk": "Ікла вампіра"
     },
     "description": {
       "en": "Unfortunately, pig will not become immortal",
-      "ru": "Бессмертным к сожалению Хряк не станет"
+      "ru": "Бессмертным к сожалению Хряк не станет",
+      "uk": "Безсмертним, на жаль, Хряк не стане"
     },
     "type": "skin",
     "skin_config": {
@@ -7367,11 +7697,13 @@
     "id": "cossack_beard",
     "name": {
       "en": "Cossack's beard",
-      "ru": "Борода козака"
+      "ru": "Борода козака",
+      "uk": "Борода козака"
     },
     "description": {
       "en": "How long does it take to grow something like this?",
-      "ru": "Сколько времени нужно потратить, чтобы отрастить такое?"
+      "ru": "Сколько времени нужно потратить, чтобы отрастить такое?",
+      "uk": "Скільки часу потрібно витратити, щоб відростити таке?"
     },
     "type": "skin",
     "skin_config": {
@@ -7407,11 +7739,13 @@
   "baron_beard": {
     "name": {
       "en": "Baron's beard",
-      "ru": "Борода Барона"
+      "ru": "Борода Барона",
+      "uk": "Борода Барона"
     },
     "description": {
       "en": "Put on this beard and feel like a legend",
-      "ru": "Надень эту бороду и почувствуй себя легендой, которой ты не станешь"
+      "ru": "Надень эту бороду и почувствуй себя легендой, которой ты не станешь",
+      "uk": "Надінь цю бороду і відчуй себе легендою, якою ти не станеш"
     },
     "type": "skin",
     "skin_config": {
@@ -7446,11 +7780,13 @@
   "tongue_mouth": {
     "name": {
       "en": "Tongue",
-      "ru": "Язык"
+      "ru": "Язык",
+      "uk": "Язик"
     },
     "description": {
       "en": "Sticks out his tongue and says nothing",
-      "ru": "Высунул язык и молчит"
+      "ru": "Высунул язык и молчит",
+      "uk": "Висунув язика і мовчить"
     },
     "type": "skin",
     "skin_config": {
@@ -7483,11 +7819,13 @@
     "id": "clown_nose",
     "name": {
       "en": "Clown nose",
-      "ru": "Нос клоуна"
+      "ru": "Нос клоуна",
+      "uk": "Ніс клоуна"
     },
     "description": {
       "en": "Great for you if you feel like a clown",
-      "ru": "Отлично подойдёт вам, если вы чувствуете себя клоуном"
+      "ru": "Отлично подойдёт вам, если вы чувствуете себя клоуном",
+      "uk": "Чудово підійде вам, якщо ви почуваєтеся клоуном"
     },
     "type": "skin",
     "skin_config": {
@@ -7526,11 +7864,13 @@
     "id": "ear_shackles",
     "name": {
       "en": "Ear shackles",
-      "ru": "Наручники на ухо"
+      "ru": "Наручники на ухо",
+      "uk": "Наручники на вухо"
     },
     "description": {
       "en": "Does not allow the most charming Boar in the world to move",
-      "ru": "Не даёт пошевелится самому очаровательному Хряку в мире"
+      "ru": "Не даёт пошевелится самому очаровательному Хряку в мире",
+      "uk": "Не дає поворухнутися найчарівнішому Хряку у світі"
     },
     "type": "skin",
     "skin_config": {
@@ -7569,11 +7909,13 @@
     "id": "gold_ear_piercing",
     "name": {
       "en": "Gold piercing (Ear)",
-      "ru": "Золотой пирсинг (Ухо)"
+      "ru": "Золотой пирсинг (Ухо)",
+      "uk": "Золотий пірсинг (Вухо)"
     },
     "description": {
       "en": "Pig piercing",
-      "ru": "Пирсинг для хряка"
+      "ru": "Пирсинг для хряка",
+      "uk": "Пірсинг для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -7614,11 +7956,13 @@
     "id": "silver_ear_piercing",
     "name": {
       "en": "Silver piercing (Ear)",
-      "ru": "Серебряный пирсинг (Ухо)"
+      "ru": "Серебряный пирсинг (Ухо)",
+      "uk": "Срібний пірсинг (Вухо)"
     },
     "description": {
       "en": "Pig piercing",
-      "ru": "Пирсинг для хряка"
+      "ru": "Пирсинг для хряка",
+      "uk": "Пірсинг для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -7659,11 +8003,13 @@
     "id": "skull_piercing",
     "name": {
       "en": "Skull piercing",
-      "ru": "Пирсинг - череп"
+      "ru": "Пирсинг - череп",
+      "uk": "Пірсинг - череп"
     },
     "description": {
       "en": "Pig piercing",
-      "ru": "Пирсинг для хряка"
+      "ru": "Пирсинг для хряка",
+      "uk": "Пірсинг для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -7700,11 +8046,13 @@
     "id": "gold_nose_piercing",
     "name": {
       "en": "Gold piercing (Nose)",
-      "ru": "Золотой пирсинг (Нос)"
+      "ru": "Золотой пирсинг (Нос)",
+      "uk": "Золотий пірсинг (Ніс)"
     },
     "description": {
       "en": "Pig piercing",
-      "ru": "Пирсинг для хряка"
+      "ru": "Пирсинг для хряка",
+      "uk": "Пірсинг для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -7742,11 +8090,13 @@
     "id": "silver_nose_piercing",
     "name": {
       "en": "Silver piercing (Nose)",
-      "ru": "Серебряный пирсинг (Нос)"
+      "ru": "Серебряный пирсинг (Нос)",
+      "uk": "Срібний пірсинг (Ніс)"
     },
     "description": {
       "en": "Pig piercing",
-      "ru": "Пирсинг для хряка"
+      "ru": "Пирсинг для хряка",
+      "uk": "Пірсинг для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -7784,11 +8134,13 @@
     "id": "amethyst_pupils",
     "name": {
       "en": "Amethyst contacts",
-      "ru": "Аметистовые зрачки"
+      "ru": "Аметистовые зрачки",
+      "uk": "Аметистові лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -7824,11 +8176,13 @@
     "id": "black_pupils",
     "name": {
       "en": "Black contacts",
-      "ru": "Чёрные линзы"
+      "ru": "Чёрные линзы",
+      "uk": "Чорні лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -7867,11 +8221,13 @@
     "id": "blue_pupils",
     "name": {
       "en": "Blue contacts",
-      "ru": "Голубые линзы"
+      "ru": "Голубые линзы",
+      "uk": "Блакитні лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -7910,11 +8266,13 @@
     "id": "blue_pupils",
     "name": {
       "en": "Blue anime contacts",
-      "ru": "Голубые аниме линзы"
+      "ru": "Голубые аниме линзы",
+      "uk": "Блакитні аніме лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -7952,11 +8310,13 @@
   "green_anime_pupils": {
     "name": {
       "en": "Green anime contacts",
-      "ru": "Зеленые аниме линзы"
+      "ru": "Зеленые аниме линзы",
+      "uk": "Зелені аніме лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -7994,11 +8354,13 @@
   "purple_anime_pupils": {
     "name": {
       "en": "Purple anime contacts",
-      "ru": "Фиолетовые аниме линзы"
+      "ru": "Фиолетовые аниме линзы",
+      "uk": "Фіолетові аніме лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8036,11 +8398,13 @@
   "pink_anime_pupils": {
     "name": {
       "en": "Pink anime contacts",
-      "ru": "Розовые аниме линзы"
+      "ru": "Розовые аниме линзы",
+      "uk": "Рожеві аніме лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8079,11 +8443,13 @@
     "id": "blue_pupils",
     "name": {
       "en": "Red anime contacts",
-      "ru": "Красные аниме линзы"
+      "ru": "Красные аниме линзы",
+      "uk": "Червоні аніме лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8122,11 +8488,13 @@
     "id": "gold_pupils",
     "name": {
       "en": "Gold contacts",
-      "ru": "Золотые линзы"
+      "ru": "Золотые линзы",
+      "uk": "Золоті лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8163,11 +8531,13 @@
     "id": "green_pupils",
     "name": {
       "en": "Green contacts",
-      "ru": "Зеленые линзы"
+      "ru": "Зеленые линзы",
+      "uk": "Зелені лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8206,11 +8576,13 @@
     "id": "magic_pupils",
     "name": {
       "en": "Magic contacts",
-      "ru": "Магические линзы"
+      "ru": "Магические линзы",
+      "uk": "Магічні лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8249,11 +8621,13 @@
     "id": "orange_pupils",
     "name": {
       "en": "Orange contacts",
-      "ru": "Оранжевые линзы"
+      "ru": "Оранжевые линзы",
+      "uk": "Помаранчеві лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8292,11 +8666,13 @@
     "id": "pink_pupils",
     "name": {
       "en": "Pink contacts",
-      "ru": "Розовые линзы"
+      "ru": "Розовые линзы",
+      "uk": "Рожеві лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8335,11 +8711,13 @@
     "id": "purple_pupils",
     "name": {
       "en": "Purple contacts",
-      "ru": "Фиолетовые линзы"
+      "ru": "Фиолетовые линзы",
+      "uk": "Фіолетові лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8378,11 +8756,13 @@
     "id": "red_pupils",
     "name": {
       "en": "Red contacts",
-      "ru": "Красные линзы"
+      "ru": "Красные линзы",
+      "uk": "Червоні лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8421,11 +8801,13 @@
     "id": "rick_pupils",
     "name": {
       "en": "Rick's contacts",
-      "ru": "Линзы Рика"
+      "ru": "Линзы Рика",
+      "uk": "Лінзи Ріка"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8464,11 +8846,13 @@
     "id": "vampire_pupils",
     "name": {
       "en": "Vampire contacts",
-      "ru": "Линзы вампира"
+      "ru": "Линзы вампира",
+      "uk": "Лінзи вампіра"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8507,11 +8891,13 @@
     "id": "white_pupils",
     "name": {
       "en": "White contacts",
-      "ru": "Белые линзы"
+      "ru": "Белые линзы",
+      "uk": "Білі лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8550,11 +8936,13 @@
     "id": "yellow_pupils",
     "name": {
       "en": "Yellow contacts",
-      "ru": "Желтые линзы"
+      "ru": "Желтые линзы",
+      "uk": "Жовті лінзи"
     },
     "description": {
       "en": "Contacts that change pupil color",
-      "ru": "Линзы, меняющие цвет зрачков"
+      "ru": "Линзы, меняющие цвет зрачков",
+      "uk": "Лінзи, що змінюють колір зіниць"
     },
     "type": "skin",
     "skin_config": {
@@ -8593,11 +8981,13 @@
     "id": "brook_guitar",
     "name": {
       "en": "Brook guitar",
-      "ru": "Гитара Брука"
+      "ru": "Гитара Брука",
+      "uk": "Гітара Брука"
     },
     "description": {
       "en": "🎶🎵🎶🎶🎵🎵🎶🎵",
-      "ru": "🎶🎵🎶🎶🎵🎵🎶🎵"
+      "ru": "🎶🎵🎶🎶🎵🎵🎶🎵",
+      "uk": "🎶🎵🎶🎶🎵🎵🎶🎵"
     },
     "type": "skin",
     "skin_config": {
@@ -8630,11 +9020,13 @@
     "id": "case_suit",
     "name": {
       "en": "Case suit",
-      "ru": "Костюм кейса"
+      "ru": "Костюм кейса",
+      "uk": "Костюм кейса"
     },
     "description": {
       "en": "If you have a box, why not put it on a pig?",
-      "ru": "Если у вас есть коробка, почему бы не надеть ее на Хряка?"
+      "ru": "Если у вас есть коробка, почему бы не надеть ее на Хряка?",
+      "uk": "Якщо у вас є коробка, чому б не надіти її на Хряка?"
     },
     "type": "skin",
     "skin_config": {
@@ -8675,11 +9067,13 @@
     "id": "danwl_suit",
     "name": {
       "en": "Danwl suit",
-      "ru": "Костюм Danwl"
+      "ru": "Костюм Danwl",
+      "uk": "Костюм Danwl"
     },
     "description": {
       "en": "Suit for Danwl",
-      "ru": "Костюм для Danwl"
+      "ru": "Костюм для Danwl",
+      "uk": "Костюм для Danwl"
     },
     "type": "skin",
     "skin_config": {
@@ -8712,11 +9106,13 @@
     "id": "eggman_suit",
     "name": {
       "en": "Eggman's suit",
-      "ru": "Костюм Эггмана"
+      "ru": "Костюм Эггмана",
+      "uk": "Костюм Еггмана"
     },
     "description": {
       "en": "Become 50% Eggman",
-      "ru": "Стань на 50 % Эггманом"
+      "ru": "Стань на 50 % Эггманом",
+      "uk": "Стань на 50 % Еггманом"
     },
     "type": "skin",
     "skin_config": {
@@ -8752,11 +9148,13 @@
     "id": "kenny_suit",
     "name": {
       "en": "Kenny suit",
-      "ru": "Костюм Кенни"
+      "ru": "Костюм Кенни",
+      "uk": "Костюм Кенні"
     },
     "description": {
       "en": "Mfmfmmmfmmmfmfmff",
-      "ru": "Мфмфмммфмммфмфмфф"
+      "ru": "Мфмфмммфмммфмфмфф",
+      "uk": "Мфмфмммфмммфмфмфф"
     },
     "type": "skin",
     "skin_config": {
@@ -8790,11 +9188,13 @@
     "id": "minecraft_zombie_suit",
     "name": {
       "en": "Minecraft zombie clothes",
-      "ru": "Одежда майнкрафт зомби"
+      "ru": "Одежда майнкрафт зомби",
+      "uk": "Одяг майнкрафт зомбі"
     },
     "description": {
       "en": "Quite disgusting but classy",
-      "ru": "Довольно отвратительно, но стильно"
+      "ru": "Довольно отвратительно, но стильно",
+      "uk": "Досить огидно, але стильно"
     },
     "type": "skin",
     "skin_config": {
@@ -8830,11 +9230,13 @@
     "id": "pajama",
     "name": {
       "en": "Pajamas",
-      "ru": "Пижама"
+      "ru": "Пижама",
+      "uk": "Піжама"
     },
     "description": {
       "en": "Bedtime for all boars",
-      "ru": "Всем Хрякам время спать"
+      "ru": "Всем Хрякам время спать",
+      "uk": "Усім Хрякам час спати"
     },
     "type": "skin",
     "skin_config": {
@@ -8870,11 +9272,13 @@
     "id": "sheep_suit",
     "name": {
       "en": "Sheep suit",
-      "ru": "Костюм овцы"
+      "ru": "Костюм овцы",
+      "uk": "Костюм вівці"
     },
     "description": {
       "en": "Now it's not a pig, it's a sheep",
-      "ru": "Теперь это не Хряк, это овца"
+      "ru": "Теперь это не Хряк, это овца",
+      "uk": "Тепер це не Хряк, це вівця"
     },
     "type": "skin",
     "skin_config": {
@@ -8917,11 +9321,13 @@
     "id": "shrek_suit",
     "name": {
       "en": "Shrek suit",
-      "ru": "Костюм Шрэка"
+      "ru": "Костюм Шрэка",
+      "uk": "Костюм Шрека"
     },
     "description": {
       "en": "Get out of my swamp!",
-      "ru": "Убирайтесь с моего болота!"
+      "ru": "Убирайтесь с моего болота!",
+      "uk": "Забирайтеся з мого болота!"
     },
     "type": "skin",
     "skin_config": {
@@ -8957,11 +9363,13 @@
     "id": "space_suit",
     "name": {
       "en": "Space suit",
-      "ru": "Скафандр"
+      "ru": "Скафандр",
+      "uk": "Скафандр"
     },
     "description": {
       "en": "Almost ready to fly into space",
-      "ru": "К полёту в космос почти готов"
+      "ru": "К полёту в космос почти готов",
+      "uk": "До польоту в космос майже готовий"
     },
     "type": "skin",
     "skin_config": {
@@ -9010,11 +9418,13 @@
     "id": "spiky_suit",
     "name": {
       "en": "Spikes",
-      "ru": "Колючки"
+      "ru": "Колючки",
+      "uk": "Колючки"
     },
     "description": {
       "en": "Specially created for sociopaths",
-      "ru": "Специально создано для социопатов"
+      "ru": "Специально создано для социопатов",
+      "uk": "Спеціально створено для соціопатів"
     },
     "type": "skin",
     "skin_config": {
@@ -9050,11 +9460,13 @@
     "id": "summer_dress",
     "name": {
       "en": "Summer dress",
-      "ru": "Летнее платье"
+      "ru": "Летнее платье",
+      "uk": "Літня сукня"
     },
     "description": {
       "en": "A dress for a pig? Why not",
-      "ru": "Платье на Хряка? Почему бы и нет"
+      "ru": "Платье на Хряка? Почему бы и нет",
+      "uk": "Сукня на Хряка? Чому б і ні"
     },
     "type": "skin",
     "skin_config": {
@@ -9090,11 +9502,13 @@
     "id": "cossack_suit",
     "name": {
       "en": "Cossack's suit",
-      "ru": "Костюм козака"
+      "ru": "Костюм козака",
+      "uk": "Костюм козака"
     },
     "description": {
       "en": "Take a piece of Ukrainian culture with you",
-      "ru": "Прими в себя часть украинской культуры"
+      "ru": "Прими в себя часть украинской культуры",
+      "uk": "Прийми в себе частину української культури"
     },
     "type": "skin",
     "skin_config": {
@@ -9130,11 +9544,13 @@
     "id": "active_1_mark",
     "name": {
       "en": "Active 1 mark",
-      "ru": "Активность 1 - тату"
+      "ru": "Активность 1 - тату",
+      "uk": "Активність 1 - тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9206,11 +9622,13 @@
     "id": "active_5_mark",
     "name": {
       "en": "Active 5 mark",
-      "ru": "Активность 5 - тату"
+      "ru": "Активность 5 - тату",
+      "uk": "Активність 5 - тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9266,11 +9684,13 @@
     "id": "alex555055_tattoo",
     "name": {
       "en": "alex555055 tattoo",
-      "ru": "Тату alex555055"
+      "ru": "Тату alex555055",
+      "uk": "Тату alex555055"
     },
     "description": {
       "en": "Tattoo for alex555055",
-      "ru": "Эксклюзивная татуха для alex555055"
+      "ru": "Эксклюзивная татуха для alex555055",
+      "uk": "Ексклюзивна татуха для alex555055"
     },
     "type": "skin",
     "skin_config": {
@@ -9303,11 +9723,13 @@
     "id": "applejack_mark",
     "name": {
       "en": "Applejack cutie mark",
-      "ru": "Эплджек - катушек"
+      "ru": "Эплджек - катушек",
+      "uk": "Еплджек - кьютімарка"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9343,11 +9765,13 @@
     "id": "brook_tattoo",
     "name": {
       "en": "Brook tattoo",
-      "ru": "Тату Брука"
+      "ru": "Тату Брука",
+      "uk": "Тату Брука"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9380,11 +9804,13 @@
     "id": "brook_tattoo2",
     "name": {
       "en": "Brook tattoo 2",
-      "ru": "Тату Брука 2"
+      "ru": "Тату Брука 2",
+      "uk": "Тату Брука 2"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9417,11 +9843,13 @@
     "id": "brook_tattoo3",
     "name": {
       "en": "Lemon tattoo",
-      "ru": "Лимонное тату"
+      "ru": "Лимонное тату",
+      "uk": "Лимонне тату"
     },
     "description": {
       "en": "Exclusive item for a lemon connoisseur",
-      "ru": "Эксклюзивный предмет ценителя лимонов"
+      "ru": "Эксклюзивный предмет ценителя лимонов",
+      "uk": "Ексклюзивний предмет цінителя лимонів"
     },
     "type": "skin",
     "skin_config": {
@@ -9454,11 +9882,13 @@
     "id": "brook_tattoo4",
     "name": {
       "en": "Kumo tattoo",
-      "ru": "Тату Кумо"
+      "ru": "Тату Кумо",
+      "uk": "Тату Кумо"
     },
     "description": {
       "en": "For fans of: Yes, I’m a spider, so what?",
-      "ru": "Для любителей: Да я паук, И что?"
+      "ru": "Для любителей: Да я паук, И что?",
+      "uk": "Для любителів: Так, я павук, і що?"
     },
     "type": "skin",
     "skin_config": {
@@ -9491,11 +9921,13 @@
     "id": "brook_tattoo6",
     "name": {
       "en": "Spamtone tattoo",
-      "ru": "Тату Спамтона"
+      "ru": "Тату Спамтона",
+      "uk": "Тату Спамтона"
     },
     "description": {
       "en": "Really important guy",
-      "ru": "Очень [большая шишка]"
+      "ru": "Очень [большая шишка]",
+      "uk": "Дуже [велика шишка]"
     },
     "type": "skin",
     "skin_config": {
@@ -9528,11 +9960,13 @@
     "id": "brook_tattoo",
     "name": {
       "en": "Brook tattoo",
-      "ru": "Тату параса"
+      "ru": "Тату параса",
+      "uk": "Тату параса"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Это парас, покемон"
+      "ru": "Это парас, покемон",
+      "uk": "Це парас, покемон"
     },
     "type": "skin",
     "skin_config": {
@@ -9565,11 +9999,13 @@
     "id": "discord_mark",
     "name": {
       "en": "Discord tattoo",
-      "ru": "Тату - дискорд"
+      "ru": "Тату - дискорд",
+      "uk": "Тату - дискорд"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9605,11 +10041,13 @@
     "id": "face_anton_mark",
     "name": {
       "en": "Face of Anton",
-      "ru": "Ебало антона"
+      "ru": "Ебало антона",
+      "uk": "Єбало Антона"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9642,11 +10080,13 @@
     "id": "face_max_mark",
     "name": {
       "en": "Face of Maxim",
-      "ru": "Ебало Максима"
+      "ru": "Ебало Максима",
+      "uk": "Єбало Максима"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9679,11 +10119,13 @@
     "id": "fluttershy_mark",
     "name": {
       "en": "Fluttershy cutie mark",
-      "ru": "Флаттершай - катушек"
+      "ru": "Флаттершай - катушек",
+      "uk": "Флаттершай - кьютімарка"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9719,11 +10161,13 @@
     "id": "fufbolka_tattoo",
     "name": {
       "en": "Cumburger",
-      "ru": "Камбургер"
+      "ru": "Камбургер",
+      "uk": "Камбургер"
     },
     "description": {
       "en": "Full of protein",
-      "ru": "Полон белков..."
+      "ru": "Полон белков...",
+      "uk": "Повен білків..."
     },
     "type": "skin",
     "skin_config": {
@@ -9756,11 +10200,13 @@
     "id": "pentagram_tattoo",
     "name": {
       "en": "Pentagram tattoo",
-      "ru": "Тату - пентаграмма"
+      "ru": "Тату - пентаграмма",
+      "uk": "Тату - пентаграма"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9796,11 +10242,13 @@
     "id": "pinkie_pie_mark",
     "name": {
       "en": "Pinkie Pie cutie mark",
-      "ru": "Пинки Пай - катушек"
+      "ru": "Пинки Пай - катушек",
+      "uk": "Пінкі Пай - кьютімарка"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9836,11 +10284,13 @@
     "id": "polish_flag_mark",
     "name": {
       "en": "Polish flag tattoo",
-      "ru": "Польское тату"
+      "ru": "Польское тату",
+      "uk": "Польське тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9876,11 +10326,13 @@
     "id": "radiation_mark",
     "name": {
       "en": "Radiation tattoo",
-      "ru": "Тату - радиация"
+      "ru": "Тату - радиация",
+      "uk": "Тату - радіація"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9916,11 +10368,13 @@
     "id": "rainbow_dash_mark",
     "name": {
       "en": "Rainbow Dash cutie mark",
-      "ru": "Рэйнбоу Дэш - катушек"
+      "ru": "Рэйнбоу Дэш - катушек",
+      "uk": "Рейнбоу Деш - кьютімарка"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9953,11 +10407,13 @@
     "id": "rarity_mark",
     "name": {
       "en": "Rarity cutie mark",
-      "ru": "Рарити - катушек"
+      "ru": "Рарити - катушек",
+      "uk": "Раріті - кьютімарка"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -9990,11 +10446,13 @@
     "id": "russian_flag_mark",
     "name": {
       "en": "Russian flag tattoo",
-      "ru": "Русское тату"
+      "ru": "Русское тату",
+      "uk": "Російське тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -10027,11 +10485,13 @@
     "id": "spider_mark",
     "name": {
       "en": "Spider tattoo",
-      "ru": "Паук тату"
+      "ru": "Паук тату",
+      "uk": "Павук тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -10067,11 +10527,13 @@
     "id": "target_mark",
     "name": {
       "en": "Target tattoo",
-      "ru": "Тату - мишень"
+      "ru": "Тату - мишень",
+      "uk": "Тату - мішень"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -10107,11 +10569,13 @@
     "id": "twilight_parkle_mark",
     "name": {
       "en": "Twilight Sparkle cutie mark",
-      "ru": "Искорка - катушек"
+      "ru": "Искорка - катушек",
+      "uk": "Іскорка - кьютімарка"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -10147,11 +10611,13 @@
     "id": "ukraine_flag_mark",
     "name": {
       "en": "Ukrainian flag tattoo",
-      "ru": "Украинское тату"
+      "ru": "Украинское тату",
+      "uk": "Українське тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -10187,11 +10653,13 @@
     "id": "usa_flag_mark",
     "name": {
       "en": "American flag tattoo",
-      "ru": "Американское тату"
+      "ru": "Американское тату",
+      "uk": "Американське тату"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Татуировка для хряка"
+      "ru": "Татуировка для хряка",
+      "uk": "Татуювання для хряка"
     },
     "type": "skin",
     "skin_config": {
@@ -10226,11 +10694,13 @@
   "butchering_tattoo": {
     "name": {
       "en": "Butchering tattoo",
-      "ru": "Маркировка"
+      "ru": "Маркировка",
+      "uk": "Маркування"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Теперь Хряка будет удобнее резать"
+      "ru": "Теперь Хряка будет удобнее резать",
+      "uk": "Тепер Хряка буде зручніше різати"
     },
     "type": "skin",
     "skin_config": {
@@ -10262,11 +10732,13 @@
   "blood_tattoo": {
     "name": {
       "en": "Ketchup on the side",
-      "ru": "Кетчуп на боку"
+      "ru": "Кетчуп на боку",
+      "uk": "Кетчуп на боці"
     },
     "description": {
       "en": "Tattoo for your pig",
-      "ru": "Просто кетчуп"
+      "ru": "Просто кетчуп",
+      "uk": "Просто кетчуп"
     },
     "type": "skin",
     "skin_config": {
@@ -10299,11 +10771,13 @@
     "id": "black_tie",
     "name": {
       "en": "Tie",
-      "ru": "Галстук"
+      "ru": "Галстук",
+      "uk": "Краватка"
     },
     "description": {
       "en": "Mega business black tie",
-      "ru": "Мега деловой черный галстук"
+      "ru": "Мега деловой черный галстук",
+      "uk": "Мега ділова чорна краватка"
     },
     "type": "skin",
     "skin_config": {
@@ -10341,11 +10815,13 @@
     "id": "bow_tie",
     "name": {
       "en": "Bow tie",
-      "ru": "Галстук-бабочка"
+      "ru": "Галстук-бабочка",
+      "uk": "Краватка-метелик"
     },
     "description": {
       "en": "With a bow tie you will be like a real gentleman",
-      "ru": "С бабочкой ты будешь как настоящий джентельмэн"
+      "ru": "С бабочкой ты будешь как настоящий джентельмэн",
+      "uk": "З метеликом ти будеш як справжній джентльмен"
     },
     "type": "skin",
     "skin_config": {
@@ -10381,11 +10857,13 @@
     "id": "red_tie",
     "name": {
       "en": "Red tie",
-      "ru": "Красный галстук"
+      "ru": "Красный галстук",
+      "uk": "Червона краватка"
     },
     "description": {
       "en": "Mega business red tie",
-      "ru": "Мега деловой красный галстук"
+      "ru": "Мега деловой красный галстук",
+      "uk": "Мега ділова червона краватка"
     },
     "type": "skin",
     "skin_config": {
@@ -10423,11 +10901,13 @@
     "id": "grill",
     "name": {
       "en": "Grill",
-      "ru": "Мангал"
+      "ru": "Мангал",
+      "uk": "Мангал"
     },
     "description": {
       "en": "You can fry something on this grill",
-      "ru": "На этом мангале вы можете пожарить что-то"
+      "ru": "На этом мангале вы можете пожарить что-то",
+      "uk": "На цьому мангалі ви можете щось посмажити"
     },
     "type": "tool",
     "skin_config": null,
@@ -10454,11 +10934,13 @@
     "id": "knife",
     "name": {
       "en": "Knife",
-      "ru": "Нож"
+      "ru": "Нож",
+      "uk": "Ніж"
     },
     "description": {
       "en": "With this knife you can carefully cut the fat from a pig",
-      "ru": "С этим ножом вы можете аккуратно снимать сало со свиньи"
+      "ru": "С этим ножом вы можете аккуратно снимать сало со свиньи",
+      "uk": "З цим ножем ви можете акуратно знімати сало зі свині"
     },
     "type": "tool",
     "skin_config": null,
@@ -10488,11 +10970,13 @@
     "id": "weight",
     "name": {
       "en": "Weight",
-      "ru": "Вес"
+      "ru": "Вес",
+      "uk": "Вага"
     },
     "description": {
       "en": "Pig weight in kilograms",
-      "ru": "Вес хряка в килограммах"
+      "ru": "Вес хряка в килограммах",
+      "uk": "Вага хряка в кілограмах"
     },
     "type": "weight",
     "skin_config": null,
