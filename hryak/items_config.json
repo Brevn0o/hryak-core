@@ -4638,10 +4638,13 @@
             "skin_config": {
                 "layers": {
                     "1": {
-                        "image": "bin/images/fire_diadem-server-1.png"
+                        "image": "bin/images/fire_diadem-server-1.png",
+                        "before": "right_ear"
+
                     }
                 },
-                "type": "hat"
+                "type": "hat",
+                "right_ear_line": "2"
             },
             "market_price": 10000,
             "market_price_currency": "coins",
