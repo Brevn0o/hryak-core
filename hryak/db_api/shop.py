@@ -142,37 +142,47 @@ class Shop:
         await Shop.clear_get_data_cache()
 
     @staticmethod
-    async def generate_server_weekly_items():
-        """Draws this week's stock, a few of each skin type rather than the whole catalogue.
+    async def generate_server_weekly_items(shop_category: str):
+        """Draws one page's stock, a few of each skin type rather than its whole catalogue.
 
-        Same shape as the daily shop: weekly_shop_items_types says how many of each type to
-        take, and 'other' mops up whatever is not named. Asking for more of a type than
-        exists just takes all of them instead of raising.
+        Same shape as the daily shop: the page's entry in server_shop_tiers says how many of
+        each type to take, and 'other' mops up whatever is not named. Asking for more of a
+        type than exists just takes all of them instead of raising.
         """
+        wanted = config.server_shop_tiers[shop_category]
         chosen = []
-        named = [key for key in config.weekly_shop_items_types if key != 'other']
-        for key, amount in config.weekly_shop_items_types.items():
+        named = [key for key in wanted if key != 'other']
+        for key, amount in wanted.items():
             if key == 'other':
                 pool = await Tech.get_all_items(
-                    (('shop_category', 'weekly'),),
+                    (('shop_category', shop_category),),
                     exceptions=tuple(('skin_config', 'type', i) for i in named),
                     context='server')
             else:
                 pool = await Tech.get_all_items(
-                    (('shop_category', 'weekly'), ('skin_config', 'type', key)), context='server')
+                    (('shop_category', shop_category), ('skin_config', 'type', key)),
+                    context='server')
             pool = [i for i in pool if await Item.get_market_price(i, context='server') is not None]
             chosen += random.sample(pool, min(amount, len(pool)))
         return chosen
 
     @staticmethod
+    def server_shop_pages():
+        """Which page each shop_category fills - the rotating tiers, then the permanent one."""
+        return {**{tier: f'{tier}_shop' for tier in config.server_shop_tiers},
+                'always': 'permanent_shop'}
+
+    @staticmethod
     async def update_server():
         """Builds the servers' shop. Cosmetics only, priced from each item's server_config -
         an item with no server price there is simply not sold to servers."""
-        data = {'weekly_shop': [], 'permanent_shop': []}
-        for shop_category, page in (('weekly', 'weekly_shop'), ('always', 'permanent_shop')):
+        pages = Shop.server_shop_pages()
+        data = {page: [] for page in pages.values()}
+        for shop_category, page in pages.items():
             entries = []
-            # the weekly page rotates a handful; the permanent page really is everything
-            items = await Shop.generate_server_weekly_items() if shop_category == 'weekly' \
+            # a tier rotates a handful of its own bracket; the permanent page really is everything
+            items = await Shop.generate_server_weekly_items(shop_category) \
+                if shop_category in config.server_shop_tiers \
                 else await Tech.get_all_items((('shop_category', shop_category),), context='server')
             for i in items:
                 price = await Item.get_market_price(i, context='server')

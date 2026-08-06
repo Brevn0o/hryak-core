@@ -269,15 +269,18 @@ daily_shop_items_types = {
     'other': 3
 }
 
-# What the servers' weekly shop puts out, the same way daily_shop_items_types works: how
-# many of each skin type to draw, with 'other' covering everything not named above it. Ask
-# for more than exist of a type and it simply offers all of them. Keep the total well under
-# the catalogue or the rotation stops meaning anything.
-weekly_shop_items_types = {
-    'hat': 2,
-    'glasses': 1,
-    'pupils': 2,
-    'other': 1
+# The servers' shop has a page per price bracket - an item goes to whichever one its
+# server_config shop_category names. Each page draws its own mix the way daily_shop_items_types
+# does: how many of each skin type, with 'other' covering everything not named above it.
+# Ask for more of a type than exists and it simply offers all of them. Keep each total well
+# under that page's catalogue or the rotation stops meaning anything.
+server_shop_tiers = {
+    'weekly_entry': {'pupils': 2, 'hat': 2, 'other': 1},
+    'weekly_mid': {'hat': 1, 'other': 2},
+    # 'other' with nothing named above it means "any of them", so no item in the bracket
+    # is unreachable. two of three a week, so something a server is saving for is usually
+    # on the shelf when it finally has the money
+    'weekly_high': {'other': 2},
 }
 
 base_buff_multipliers = {

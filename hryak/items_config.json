@@ -3452,7 +3452,7 @@
             },
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "fire_glasses": {
@@ -3653,7 +3653,7 @@
             },
             "market_price": 10000,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_high"
         }
     },
     "rounded_glasses": {
@@ -3800,7 +3800,7 @@
             },
             "market_price": 1000,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_mid"
         }
     },
     "sunglasses": {
@@ -4053,7 +4053,7 @@
             },
             "market_price": 1500,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_mid"
         }
     },
     "blue_wreath": {
@@ -4161,7 +4161,7 @@
             },
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "brook_hat": {
@@ -4346,7 +4346,7 @@
         "server_config": {
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly",
+            "shop_category": "weekly_entry",
             "skin_config": {
                 "layers": {
                     "1": {
@@ -4644,7 +4644,7 @@
             },
             "market_price": 10000,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_high"
         }
     },
     "flower_hat": {
@@ -4888,7 +4888,7 @@
             },
             "market_price": 1500,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_mid"
         }
     },
     "hedgehog_hat": {
@@ -5565,7 +5565,7 @@
             },
             "market_price": 10000,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_high"
         }
     },
     "pink_wreath": {
@@ -5855,7 +5855,7 @@
             },
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "purple_demon_horns": {
@@ -5963,7 +5963,7 @@
             },
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "robbin_good_hat": {
@@ -6298,7 +6298,7 @@
             },
             "market_price": 1500,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_mid"
         }
     },
     "white_cap": {
@@ -7536,7 +7536,7 @@
             },
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "morgenshtern_tattoo": {
@@ -7948,7 +7948,7 @@
             },
             "market_price": 300,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "eggman_beard": {
@@ -8191,7 +8191,7 @@
             },
             "market_price": 2000,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_mid"
         }
     },
     "nerd_teeth": {
@@ -8996,7 +8996,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "blue_pupils": {
@@ -9059,7 +9059,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "blue_anime_pupils": {
@@ -9405,7 +9405,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "magic_pupils": {
@@ -9516,7 +9516,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "pink_pupils": {
@@ -9579,7 +9579,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "purple_pupils": {
@@ -9642,7 +9642,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "red_pupils": {
@@ -9705,7 +9705,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "rick_pupils": {
@@ -9864,7 +9864,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "yellow_pupils": {
@@ -9927,7 +9927,7 @@
             },
             "market_price": 200,
             "market_price_currency": "coins",
-            "shop_category": "weekly"
+            "shop_category": "weekly_entry"
         }
     },
     "brook_guitar": {
