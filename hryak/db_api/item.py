@@ -157,7 +157,15 @@ class Item:
 
     @staticmethod
     async def get_rarity(item_id: str, lang: str = None):
+        """Rarity is keyed by string everywhere - in the locale, in config.rarity_colors.
+
+        Coerced rather than trusted: a single item typed as 3 instead of '3' used to take
+        out every list it appeared in, since one bad lookup fails the whole embed.
+        """
         rarity = await Item.get_data(item_id, 'rarity')
+        if rarity is None:
+            return None
+        rarity = str(rarity)
         return translate(Locale.ItemRarities[rarity], lang) if lang else rarity
 
     @staticmethod

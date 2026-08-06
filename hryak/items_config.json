@@ -4955,7 +4955,7 @@
         "type": "skin",
         "emoji": "🌈",
         "inventory_type": "wardrobe",
-        "rarity": 3,
+        "rarity": "3",
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -5184,7 +5184,7 @@
         "type": "skin",
         "emoji": "🌈",
         "inventory_type": "wardrobe",
-        "rarity": 3,
+        "rarity": "3",
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -5920,7 +5920,7 @@
         "type": "skin",
         "emoji": "🧣",
         "inventory_type": "wardrobe",
-        "rarity": 3,
+        "rarity": "3",
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -6292,7 +6292,6 @@
                     "1": {
                         "image": "bin/images/vizard_hat-server-1.png",
                         "before": "right_ear"
-
                     }
                 },
                 "type": "hat"
@@ -6416,7 +6415,7 @@
         "type": "skin",
         "emoji": "🧢",
         "inventory_type": "wardrobe",
-        "rarity": 3,
+        "rarity": "3",
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
