@@ -3219,10 +3219,7 @@
             "case_drops": null,
             "requirements": null,
             "tax": "10%",
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -4640,7 +4637,6 @@
                     "1": {
                         "image": "bin/images/fire_diadem-server-1.png",
                         "before": "right_ear"
-
                     }
                 },
                 "type": "hat",
@@ -4959,7 +4955,7 @@
         "type": "skin",
         "emoji": "🌈",
         "inventory_type": "wardrobe",
-        "rarity": "2",
+        "rarity": 3,
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -5188,7 +5184,7 @@
         "type": "skin",
         "emoji": "🌈",
         "inventory_type": "wardrobe",
-        "rarity": "2",
+        "rarity": 3,
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -5924,7 +5920,7 @@
         "type": "skin",
         "emoji": "🧣",
         "inventory_type": "wardrobe",
-        "rarity": "2",
+        "rarity": 3,
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -6418,7 +6414,7 @@
         "type": "skin",
         "emoji": "🧢",
         "inventory_type": "wardrobe",
-        "rarity": "2",
+        "rarity": 3,
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": {
@@ -7842,7 +7838,10 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {},
+            "cases": {
+                "common_case": null,
+                "rare_case": null
+            },
             "wealth_impact": 0
         },
         "server_config": {}
@@ -8547,7 +8546,10 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {},
+            "cases": {
+                "common_case": null,
+                "rare_case": null
+            },
             "wealth_impact": 0
         },
         "server_config": {}
@@ -10011,10 +10013,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": 0.1,
-                "rare_case": 1
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
