@@ -6290,7 +6290,9 @@
             "skin_config": {
                 "layers": {
                     "1": {
-                        "image": "bin/images/vizard_hat-server-1.png"
+                        "image": "bin/images/vizard_hat-server-1.png",
+                        "before": "right_ear"
+
                     }
                 },
                 "type": "hat"
