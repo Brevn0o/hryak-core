@@ -9,6 +9,7 @@ from .schema import user_id_column
 from ..functions import Func, translate
 from .history import History
 from hryak import config
+from .guild_pig import GuildPig
 
 
 class User:
@@ -187,15 +188,25 @@ class User:
         await User.set_new_inventory(user_id, inventory)
 
     @staticmethod
+    def add_item_to_inventory(inventory, item_id, amount: int = 1):
+        """Hands back a new inventory with the item added.
+
+        Kept storage-free so the guild pig can add items by the same rule instead of
+        repeating it - the same way set_skin_to_options is shared.
+        """
+        inventory = inventory.copy()
+        amount = round(amount)
+        if item_id in inventory:
+            inventory[item_id] = {**inventory[item_id], 'amount': inventory[item_id]['amount'] + amount}
+        else:
+            inventory[item_id] = {'amount': amount}
+        return inventory
+
+    @staticmethod
     async def add_item(user_id, item_id, amount: int = 1, log: bool = True):
         inventory = await User.get_inventory(str(user_id))
         amount = round(amount)
-        if item_id in inventory:
-            inventory[item_id]['amount'] += amount
-        else:
-            inventory[item_id] = {}
-            inventory[item_id]['amount'] = amount
-        await User.set_new_inventory(user_id, inventory)
+        await User.set_new_inventory(user_id, User.add_item_to_inventory(inventory, item_id, amount))
         if log:
             await Func.add_log('item_generated',
                                user_id=user_id,
@@ -212,14 +223,34 @@ class User:
                                amount=amount)
 
     @staticmethod
-    async def transfer_item(from_user_id, to_user2_id, item_id, amount: int = 1):
-        await User.remove_item(from_user_id, item_id, amount, log=False)
-        await User.add_item(to_user2_id, item_id, amount, log=False)
-        await Func.add_log('item_transfer',
-                           from_user_id=from_user_id,
-                           to_user2_id=to_user2_id,
-                           item_id=item_id,
-                           amount=amount)
+    async def transfer_item(from_user=None, to_user=None, item_id=None, amount: int = 1,
+                            from_guild=None, to_guild=None, log: bool = True):
+        """Moves items between any two holders.
+
+        Put a user id in from_user/to_user and a guild id in from_guild/to_guild - which
+        slot you fill says what kind of holder it is, so there is nothing to look up and
+        no flag to get wrong. Exactly one of each pair has to be given.
+        """
+        if (from_user is None) == (from_guild is None):
+            raise ValueError('give exactly one of from_user or from_guild')
+        if (to_user is None) == (to_guild is None):
+            raise ValueError('give exactly one of to_user or to_guild')
+        if from_user is not None:
+            await User.remove_item(from_user, item_id, amount, log=False)
+        else:
+            await GuildPig.remove_item(from_guild, item_id, amount)
+        if to_user is not None:
+            await User.add_item(to_user, item_id, amount, log=False)
+        else:
+            await GuildPig.add_item(to_guild, item_id, amount)
+        if log:
+            await Func.add_log('item_transfer',
+                               from_user=from_user,
+                               to_user=to_user,
+                               from_guild=from_guild,
+                               to_guild=to_guild,
+                               item_id=item_id,
+                               amount=amount)
 
     @staticmethod
     async def set_new_inventory(user_id, new_inventory):

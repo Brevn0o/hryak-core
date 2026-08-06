@@ -49,6 +49,14 @@ class Setup:
         await Setup.create_table(columns, config.shop_schema)
 
     @staticmethod
+    async def create_server_shop_table():
+        columns = ['id int AUTO_INCREMENT PRIMARY KEY UNIQUE',
+                   'timestamp varchar(32)',
+                   'data json',
+                   ]
+        await Setup.create_table(columns, config.server_shop_schema)
+
+    @staticmethod
     async def create_promo_code_table():
         columns = ['id varchar(128) PRIMARY KEY UNIQUE',
                    'created varchar(32)',

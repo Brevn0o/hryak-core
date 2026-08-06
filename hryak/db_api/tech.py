@@ -57,11 +57,14 @@ class Tech:
 
     @staticmethod
     # @aiocache.cached(key="tech.__get_all_items:{user_id}", alias="tech.__get_all_items")
-    async def __get_all_items(requirements: tuple = None, exceptions: tuple = None):
+    async def __get_all_items(requirements: tuple = None, exceptions: tuple = None, context: str = None):
         result = []
         requirements = () if requirements is None else requirements
         exceptions = () if exceptions is None else exceptions
-        for k, v in config.items.items():
+        for k, item in config.items.items():
+            # flattened so a requirement can name a field without knowing which config
+            # it ended up in, and so passing a context filters on that context's values
+            v = config.item_in_context(item, context)
             correct_item = True
             for i in exceptions:
                 vv = v
@@ -94,7 +97,8 @@ class Tech:
 
     @staticmethod
     # @aiocache.cached(key_builder=lambda f, *args, **kwargs: f"tech.get_all_items:{kwargs.get('user_id')}_{kwargs.get('requirements')}_{kwargs.get('exceptions')}", alias="tech.get_all_items")
-    async def get_all_items(requirements: tuple = None, exceptions: tuple = None, user_id=None):
+    async def get_all_items(requirements: tuple = None, exceptions: tuple = None, user_id=None,
+                            context: str = None, inventory: dict = None):
         """
         :type requirements: object
             Example: (("rarity", "3"),) - it will return only items with rarity=3
@@ -102,8 +106,13 @@ class Tech:
             Example: (("type", "skin"),) - it will return everything except items with type=skin
         :param user_id:
             If user_id is specified, it will return items that are present in the user's inventory
+        :param inventory:
+            An inventory to filter against directly, for owners that are not users - a
+            guild pig keeps its things in the guild row, so there is no user_id to look up
         """
-        result = await Tech.__get_all_items(requirements, exceptions)
+        result = await Tech._Tech__get_all_items(requirements, exceptions, context)
+        if inventory is not None:
+            return [i for i in result if await Item.get_amount(i, inventory=inventory) != 0]
         if user_id is not None:
             result = [i for i in result if await Item.get_amount(i, user_id) != 0]
             await Tech.clear_get_all_items_cache((requirements, exceptions, user_id))

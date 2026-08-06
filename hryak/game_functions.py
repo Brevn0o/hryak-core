@@ -51,10 +51,10 @@ class GameFunc:
                             buffs['support_server'] = {'weight': 'x1.05'}
         buffs['pig_weight'] = {}
         pchip_function = PchipInterpolator(np.array([0, 50, 100, 500, 5000, 20000, 1000000]),
-                                           np.array([0, .5, 1, 5, 15, 20, 30]))
+                                           np.array([0, .5, 1, 3, 5, 10, 30]))
         buffs['pig_weight']['pooping'] = f'+{round(float(pchip_function(await Pig.get_weight(user_id))), 2)}'
         pchip_function = PchipInterpolator(np.array([0, 20, 50, 1000, 10000, 1000000]),
-                                           np.array([0, 0, 1, 1.5, 2, 10]))
+                                           np.array([0, 0, 1, 1.5, 5, 10]))
         buffs['pig_weight']['vomit_chance'] = f'x{round(float(pchip_function(await Pig.get_weight(user_id))), 2)}'
         return buffs
 
@@ -95,6 +95,17 @@ class GameFunc:
     async def get_transfer_amount_with_tax(amount, tax):
         amount_with_tax = math.ceil(amount + amount * (tax / 100))
         return amount_with_tax
+
+    @staticmethod
+    async def get_guild_pig_weight_bonus(weight):
+        """How much the pig's size multiplies its pooping by.
+
+        Deliberately shallow - a pig a hundred times heavier poops about twice as much per
+        feeder, not a hundred times. That is what keeps a small server worth feeding, and
+        it is sized to cancel out the placing bonus, which runs the other way.
+        """
+        x, y = config.guild_pig_poop_weight_bonus
+        return float(PchipInterpolator(np.array(x), np.array(y))(max(0, weight)))
 
     @staticmethod
     async def get_trade_total_tax(trade_id):
@@ -140,12 +151,17 @@ class GameFunc:
         return reset
 
     @staticmethod
-    async def get_not_compatible_active_skins(user_id, item_id):
-        """Returns skins worn by the user that are not compatible with item_id"""
-        pig = await Pig.get(user_id)
+    async def get_not_compatible_active_skins(user_id, item_id, skins: dict = None):
+        """Returns skins worn by the user that are not compatible with item_id
+
+        Pass skins to ask the same question about a pig that is not a user's - a guild pig
+        wears its skins in the guild row, so there is no user_id to look them up by.
+        """
+        if skins is None:
+            skins = (await Pig.get(user_id))['skins']
         not_compatible_skins = []
-        for _skin in pig['skins']:
-            _skin = pig['skins'][_skin]
+        for _skin in skins:
+            _skin = skins[_skin]
             if _skin is None:
                 continue
             if await Item.get_not_compatible_skins(item_id) is not None and (
@@ -161,13 +177,25 @@ class GameFunc:
     # ---------- private -------------
     @staticmethod
     @aiocache.cached(ttl=86400)
-    async def build_pig(skins: tuple, genetic: tuple = None, eye_emotion: str = None, remove_transparency: bool = True):
-        """The actual code is hidden due to security reasons"""
+    async def build_pig(skins: tuple, genetic: tuple = None, eye_emotion: str = None,
+                        remove_transparency: bool = True, context: str = None):
+        """The actual code is hidden due to security reasons
+
+        context picks which art the same skins are drawn with - a community pig is a
+        different shape from a personal one, so its items have their own aligned images.
+        """
+        if context == 'server':
+            if genetic is None:
+                genetic = tuple(config.default_guild_pig['genetic'].items())
+            skins = tuple((slot, None if slot in config.guild_pig_hidden_slots else item)
+                          for slot, item in skins)
+            genetic = tuple((slot, item) for slot, item in genetic
+                            if slot not in config.guild_pig_hidden_slots)
         if config.github_version:
             return await Func.get_image_path_from_link(config.image_links['image_is_blocked'])
         else:
             from .hidden import Hidden
-            return await Hidden.build_pig(skins, genetic, eye_emotion, remove_transparency)
+            return await Hidden.build_pig(skins, genetic, eye_emotion, remove_transparency, context)
 
     @staticmethod
     async def get_user_tax_percent(user_id, currency: str):

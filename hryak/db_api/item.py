@@ -20,11 +20,23 @@ class Item:
 
     @staticmethod
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="item.get_data")
-    async def get_data(item_id: str, key: str):
+    async def get_data(item_id: str, key: str, context: str = None):
+        """Reads a field off an item.
+
+        Anything shared - name, emoji, rarity - sits at the top level. Everything that
+        depends on whose pig it is lives in '<context>_config', so the same item can cost
+        one thing for a person and another for a server. A server falls back to the
+        individual config only for the keys in item_context_fallback_keys, which is how a
+        skin with no server art of its own still renders.
+        """
         clean_id = await Item.clean_id(item_id)
-        if clean_id not in config.items or key not in config.items[clean_id]:
+        item = config.items.get(clean_id)
+        if item is None:
             return None
-        res = config.items[clean_id][key]
+        item = config.item_in_context(item, context)
+        if key not in item:
+            return None
+        res = item[key]
         return res.copy() if isinstance(res, (list, dict, set)) else res
 
     @staticmethod
@@ -52,79 +64,79 @@ class Item:
         return translate(Locale.ItemTypes[_type], lang) if lang else _type
 
     @staticmethod
-    async def get_skin_config(item_id: str):
-        data = await Item.get_data(item_id, 'skin_config')
+    async def get_skin_config(item_id: str, context: str = None):
+        data = await Item.get_data(item_id, 'skin_config', context)
         return data.copy() if data else {}
 
     @staticmethod
-    async def get_skin_type(item_id: str, lang: str = None):
-        config = await Item.get_skin_config(item_id)
+    async def get_skin_type(item_id: str, lang: str = None, context: str = None):
+        config = await Item.get_skin_config(item_id, context)
         value = config.get('type')
         return translate(Locale.SkinTypes[value], lang) if lang else value
 
     @staticmethod
-    async def get_not_compatible_skins(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('not_compatible_with', []).copy()
+    async def get_not_compatible_skins(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('not_compatible_with', []).copy()
 
     @staticmethod
-    async def get_skins_to_hide(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('hide', []).copy()
+    async def get_skins_to_hide(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('hide', []).copy()
 
     @staticmethod
-    async def get_skin_layers(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('layers', {}).copy()
+    async def get_skin_layers(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('layers', {}).copy()
 
     @staticmethod
-    async def get_skin_layer(item_id: str, layer):
-        return (await Item.get_skin_layers(item_id)).get(layer)
+    async def get_skin_layer(item_id: str, layer, context: str = None):
+        return (await Item.get_skin_layers(item_id, context)).get(layer)
 
     @staticmethod
-    async def get_skin_layer_image_path(item_id: str, layer: str, type_: str = 'image'):
-        layer_data = await Item.get_skin_layer(item_id, layer)
+    async def get_skin_layer_image_path(item_id: str, layer: str, type_: str = 'image', context: str = None):
+        layer_data = await Item.get_skin_layer(item_id, layer, context)
         image = layer_data.get(type_)
         return await Func.get_image_path_from_link(image) if isinstance(image, str) else image
 
     @staticmethod
-    async def get_skin_layer_shadow(item_id: str, layer):
-        return (await Item.get_skin_layer(item_id, layer)).get('shadow')
+    async def get_skin_layer_shadow(item_id: str, layer, context: str = None):
+        return (await Item.get_skin_layer(item_id, layer, context)).get('shadow')
 
     @staticmethod
-    async def get_skin_layer_before(item_id: str, layer):
-        before = (await Item.get_skin_layer(item_id, layer)).get('before')
+    async def get_skin_layer_before(item_id: str, layer, context: str = None):
+        before = (await Item.get_skin_layer(item_id, layer, context)).get('before')
         return before.copy() if isinstance(before, list) else before
 
     @staticmethod
-    async def get_skin_layer_after(item_id: str, layer):
-        after = (await Item.get_skin_layer(item_id, layer)).get('after')
+    async def get_skin_layer_after(item_id: str, layer, context: str = None):
+        after = (await Item.get_skin_layer(item_id, layer, context)).get('after')
         return after.copy() if isinstance(after, list) else after
 
     @staticmethod
-    async def get_skin_color(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('color')
+    async def get_skin_color(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('color')
 
     @staticmethod
-    async def get_skin_group(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('item_group')
+    async def get_skin_group(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('item_group')
 
     @staticmethod
-    async def get_skin_right_ear_line(item_id: str, type_: str):
-        return (await Item.get_skin_config(item_id)).get(f'right_ear_line_{type_}')
+    async def get_skin_right_ear_line(item_id: str, type_: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get(f'right_ear_line_{type_}')
 
     @staticmethod
-    async def get_skin_right_ear_line_type(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('right_ear_line')
+    async def get_skin_right_ear_line_type(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('right_ear_line')
 
     @staticmethod
-    async def get_skin_eyes_outline_hex_color(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('eyes_outline_hex_color')
+    async def get_skin_eyes_outline_hex_color(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('eyes_outline_hex_color')
 
     @staticmethod
-    async def get_skin_right_eye_outline(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('right_eye_outline')
+    async def get_skin_right_eye_outline(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('right_eye_outline')
 
     @staticmethod
-    async def get_skin_left_eye_outline(item_id: str):
-        return (await Item.get_skin_config(item_id)).get('left_eye_outline')
+    async def get_skin_left_eye_outline(item_id: str, context: str = None):
+        return (await Item.get_skin_config(item_id, context)).get('left_eye_outline')
 
     @staticmethod
     async def get_emoji(item_id: str):
@@ -140,8 +152,8 @@ class Item:
         return await Item.get_data(item_id, 'inventory_type')
 
     @staticmethod
-    async def get_cases(item_id: str):
-        return await Item.get_data(item_id, 'cases')
+    async def get_cases(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'cases', context)
 
     @staticmethod
     async def get_rarity(item_id: str, lang: str = None):
@@ -153,8 +165,8 @@ class Item:
         return await Item.get_data(item_id, 'tax')
 
     @staticmethod
-    async def get_wealth_impact(item_id: str):
-        return await Item.get_data(item_id, 'wealth_impact')
+    async def get_wealth_impact(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'wealth_impact', context)
 
     @staticmethod
     @aiocache.cached(ttl=86400)
@@ -170,22 +182,22 @@ class Item:
         return await Item.get_data(item_id, 'cooked_item_id')
 
     @staticmethod
-    async def get_market_price(item_id: str):
+    async def get_market_price(item_id: str, context: str = None):
         props = await Item.get_props(item_id)
         if props and 'p' in props:
             return int(props['p'])
-        return await Item.get_data(item_id, 'market_price')
+        return await Item.get_data(item_id, 'market_price', context)
 
     @staticmethod
-    async def get_market_price_currency(item_id: str):
+    async def get_market_price_currency(item_id: str, context: str = None):
         props = await Item.get_props(item_id)
         if props and 'c' in props:
             return props['c']
-        return await Item.get_data(item_id, 'market_price_currency')
+        return await Item.get_data(item_id, 'market_price_currency', context)
 
     @staticmethod
-    async def get_shop_category(item_id: str):
-        return await Item.get_data(item_id, 'shop_category')
+    async def get_shop_category(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'shop_category', context)
 
     @staticmethod
     async def get_shop_cooldown(item_id: str):
@@ -195,16 +207,16 @@ class Item:
         return None, None
 
     @staticmethod
-    async def get_buffs(item_id: str):
-        return await Item.get_data(item_id, 'buffs')
+    async def get_buffs(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'buffs', context)
 
     @staticmethod
-    async def get_buff_duration(item_id: str):
-        return await Item.get_data(item_id, 'buff_duration')
+    async def get_buff_duration(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'buff_duration', context)
 
     @staticmethod
-    async def get_case_drops(item_id: str):
-        return await Item.get_data(item_id, 'case_drops')
+    async def get_case_drops(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'case_drops', context)
 
     @staticmethod
     async def generate_case_drop(item_id: str):
@@ -248,8 +260,8 @@ class Item:
         return items_dropped
 
     @staticmethod
-    async def get_requirements(item_id: str):
-        return await Item.get_data(item_id, 'requirements')
+    async def get_requirements(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'requirements', context)
 
     @staticmethod
     async def get_all_allowed_users_by_requirements(discord_client, item_id: str):
@@ -306,20 +318,20 @@ class Item:
         return final_result
 
     @staticmethod
-    async def is_salable(item_id: str):
-        return await Item.get_data(item_id, 'salable')
+    async def is_salable(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'salable', context)
 
     @staticmethod
-    async def get_sell_price(item_id: str):
-        return await Item.get_data(item_id, 'sell_price')
+    async def get_sell_price(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'sell_price', context)
 
     @staticmethod
-    async def get_sell_price_currency(item_id: str):
-        return await Item.get_data(item_id, 'sell_price_currency')
+    async def get_sell_price_currency(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'sell_price_currency', context)
 
     @staticmethod
-    async def is_tradable(item_id: str):
-        return await Item.get_data(item_id, 'tradable')
+    async def is_tradable(item_id: str, context: str = None):
+        return await Item.get_data(item_id, 'tradable', context)
 
     @staticmethod
     async def get_amount(item_id: str, user_id: int = None, inventory: dict = None):

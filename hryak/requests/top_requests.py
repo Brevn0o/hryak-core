@@ -44,6 +44,19 @@ async def top_weight_guilds(guild_id, lang: str):
     where = "JSON_TYPE(JSON_EXTRACT(pig, '$.channel_id')) NOT IN ('NULL')"
     return await __top_guilds(guild_id, extra_select, order_by, where, translate(Locale.Global.kg, lang))
 
+async def top_money_guilds(guild_id, lang: str, currency: str = 'coins'):
+    """
+    Get the top guilds by what their community pig has in the bank.
+    :return: list of tuples (guild_id, amount, unit) and guild_position
+    """
+    amount = f"JSON_UNQUOTE(JSON_EXTRACT(pig, '$.inventory.{currency}.amount'))"
+    extra_select = f"IFNULL({amount}, '0')"
+    order_by = f"CAST(IFNULL({amount}, '0') AS DECIMAL(20,4)) DESC"
+    where = "JSON_TYPE(JSON_EXTRACT(pig, '$.channel_id')) NOT IN ('NULL')"
+    return await __top_guilds(guild_id, extra_select, order_by, where,
+                              await Item.get_emoji(currency))
+
+
 async def top_weight_users(user_id: int, lang: str, guild=None):
     """
     Get the top users by weight.

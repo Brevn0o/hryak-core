@@ -22,6 +22,7 @@ lava_donate_options = dict()
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
 shop_schema = 'shop'
+server_shop_schema = 'server_shop'
 guilds_schema = 'guilds'
 
 trade_data = {}
@@ -101,12 +102,55 @@ default_guild_pig = {'name': 'Hryak',
                                'hat': None,
                                'legs': None,
                                'tie': None},
+                     # same shape as a user's inventory: {item_id: {'amount': N}}
+                     'inventory': {},
                      # [{'user_id': 123, 'timestamp': 123456, 'weight_added': 5}, ...]
                      'feeds': [],
                      'channel_id': None,  # where the pig lives
                      'message_id': None,  # the pig's message, kept up to date in place
-                     'channel_created_by_bot': False}  # ours to delete when the pig moves out
+                     'channel_created_by_bot': False,  # ours to delete when the pig moves out
+                     'poll_channel_id': None,  # where votes are put to the server
+                     'poll_channel_created_by_bot': False,
+                     'notification_channel_id': None,  # where hryak announces what happened
+                     'notification_channel_created_by_bot': False,
+                     'admin_channel_id': None,  # the panel, hidden from everyone but staff
+                     'admin_channel_created_by_bot': False,
+                     'admin_message_id': None,  # the panel's message, redrawn in place
+                     'category_id': None,  # holds whatever channels hryak made itself
+                     'category_created_by_bot': False,
+                     # one open vote per kind: {'shop': {...} or None, 'wear': {...} or None}
+                     'polls': {},
+                     # {user_id: timestamp} of the last poll each person started
+                     'proposals': {},
+                     'last_payout': None,  # when the pig last pooped, so a restart cannot double-pay
+                     # {user_id: timestamp} - feeds after a person's mark are what they are
+                     # still owed for. nothing is ever deleted from 'feeds'; this is what
+                     # says which part of it has been settled, and for whom
+                     'paid_until': {}}
+# the community pig has its pupils drawn straight onto its face, so the eye whites a
+# personal pig wears underneath them have nothing to sit in - anything listed here is left
+# out whenever a pig is drawn with the community art
+guild_pig_hidden_slots = ('eyes', 'left_eye', 'right_eye')
+# stripped from any pig name - it gets dropped into bold and italics all over the place,
+# so a stray one would unbalance whatever markdown it lands in
+illegal_name_symbols = ('*', '`', '_', '~', '|', '#', '\\')
+guild_pig_name_max_length = 32
 guild_pig_feed_cooldown = 12 * 3600
+guild_pig_poll_durations = {'shop': 24 * 3600, 'wear': 12 * 3600}  # TESTING: shop was 24 * 3600
+guild_pig_proposal_cooldown = 48 * 3600  # per person, whatever they are proposing
+guild_pig_feeder_window = 7 * 24 * 3600  # who counts as an active member of the server
+guild_pig_poll_quorum = .25
+guild_pig_poll_min_votes = 3
+
+guild_pig_poop_item = 'community_poop'
+guild_pig_payout_period = None  # TESTING: normally None
+guild_pig_poop_per_kg = 1
+guild_pig_poop_pool_jitter = .15  # +/-15%, so a payout is never quite the same twice
+guild_pig_reward_min_feeds = 2  # drive-by feeding does not get paid
+guild_pig_reward_top_shown = 10
+guild_pig_poop_rank_bonuses = (2, 1.5, 1.25)  # 1st, 2nd, 3rd
+guild_pig_poop_weight_bonus = ([0, 1000, 10000, 100000, 1000000],  # pig weight, kg
+                               [1, 1.1, 1.3, 1.7, 2.2])           # multiplier
 
 default_pig_body_genetic = ['default_body']
 default_pig_pupils_genetic = ['black_pupils', 'blue_pupils', 'green_pupils',
@@ -123,24 +167,52 @@ default_item = {
     'name': {},
     'description': {},
     'type': None,
-    'skin_config': {},
     'emoji': '🔴',
     'inventory_type': None,
     'rarity': None,
     'cooked_item_id': None,
-    'market_price': None,
-    'market_price_currency': None,
-    'shop_category': None,
-    'shop_cooldown': None,
-    'buffs': None,
-    'salable': None,
-    'sell_price': None,
-    'sell_price_currency': None,
-    'tradable': None,
-    'case_drops': None,
-    'requirements': None,
-    'image': None
+    # anything that differs between a personal pig and a server one lives in a context
+    'individual_config': {
+        'skin_config': {},
+        'market_price': None,
+        'market_price_currency': None,
+        'shop_category': None,
+        'shop_cooldown': None,
+        'buffs': None,
+        'buff_duration': None,
+        'salable': None,
+        'sell_price': None,
+        'sell_price_currency': None,
+        'tradable': None,
+        'case_drops': None,
+        'requirements': None,
+        'image': None,
+        'tax': None,
+        'cases': {},
+        'wealth_impact': None,
+    },
+    'server_config': {},
 }
+item_default_context = 'individual'
+# what a server borrows from the individual config when it has none of its own: how the
+# item looks, never what it costs - a missing server price means it is not sold to servers
+item_context_fallback_keys = ('skin_config', 'image')
+
+
+def item_in_context(item: dict, context: str = None) -> dict:
+    """Flattens an item for one context, so callers see the fields at the top level the
+    way they were before individual_config and server_config existed."""
+    if context is None:
+        context = item_default_context
+    flat = {k: v for k, v in item.items() if not k.endswith('_config') or k == 'skin_config'}
+    default = item.get(f'{item_default_context}_config') or {}
+    if context == item_default_context:
+        flat.update(default)
+    else:
+        flat.update({k: v for k, v in default.items() if k in item_context_fallback_keys})
+        flat.update(item.get(f'{context}_config') or {})
+    return flat
+
 
 skin_layers_rules = {
     'mouth': {'before': [
@@ -195,6 +267,17 @@ daily_shop_items_types = {
     'body': 1,
     'pupils': 1,
     'other': 3
+}
+
+# What the servers' weekly shop puts out, the same way daily_shop_items_types works: how
+# many of each skin type to draw, with 'other' covering everything not named above it. Ask
+# for more than exist of a type and it simply offers all of them. Keep the total well under
+# the catalogue or the rotation stops meaning anything.
+weekly_shop_items_types = {
+    'hat': 2,
+    'glasses': 1,
+    'pupils': 2,
+    'other': 1
 }
 
 base_buff_multipliers = {

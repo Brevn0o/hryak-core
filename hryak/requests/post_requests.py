@@ -40,25 +40,6 @@ async def feed(user_id: int, client = None):
         await History.add_streak_to_history(user_id, Func.generate_current_timestamp(), 'feed')
     return {"status": Status.SUCCESS, "weight_added": weight_add, "pooped_amount": pooped_amount, "vomit": vomit}
 
-async def feed_guild_pig(user_id: int, guild_id: int):
-    """One feed per user per cooldown across every server, so people have to pick a side.
-
-    The cooldown comes off the user's own history - asking "when did this person last feed
-    anyone's pig" of every guild's feed list would mean scanning the whole table.
-    """
-    if not await GuildPig.is_setup(guild_id):
-        return {'status': Status.NOT_EXIST}
-    next_feed = (await History.get_last_server_feed(user_id) or 0) + config.guild_pig_feed_cooldown
-    if Func.generate_current_timestamp() < next_feed:
-        return {'status': Status.NOT_READY, 'try_again': next_feed}
-    weight_add = round(random.uniform(1, 10), 1)
-    await GuildPig.add_feed(guild_id, user_id, weight_add)
-    await History.add_server_feed_to_history(user_id, Func.generate_current_timestamp())
-    return {'status': Status.SUCCESS,
-            'weight_added': weight_add,
-            'weight': await GuildPig.get_weight(guild_id),
-            'try_again': Func.generate_current_timestamp() + config.guild_pig_feed_cooldown}
-
 
 async def butcher(user_id: int):
     ready_to_butcher = await Pig.is_ready_to_butcher(user_id)
@@ -75,8 +56,7 @@ async def butcher(user_id: int):
 
 async def rename(user_id: int, name: str):
     await Pig.rename(user_id, name)
-    illegal_symbols = ['*', '`']
-    for i in illegal_symbols:
+    for i in config.illegal_name_symbols:
         name = name.replace(i, '')
     if not name:
         name = 'Hryak'
@@ -101,15 +81,20 @@ async def use_promocode(user_id: int, code: str):
     await PromoCode.add_users_used(code, user_id)
     return {"status": Status.SUCCESS, "rewards": rewards}
 
-async def send_money(user_id: int, receiver_id, amount: int, currency: str, confirmed: bool = True):
-    await User.register_user_if_not_exists(receiver_id)
+async def send_money(user_id: int, amount: int, currency: str, to_user=None, to_guild=None,
+                     confirmed: bool = True):
+    """Sends money to a person or to a server pig - fill whichever target slot applies,
+    the same way User.transfer_item does."""
+    if to_user is not None:
+        await User.register_user_if_not_exists(to_user)
     amount = abs(amount)
     tax = await GameFunc.get_user_tax_percent(user_id, currency)
     amount_with_tax = await GameFunc.get_transfer_amount_with_tax(amount, tax)
     if amount_with_tax > await Item.get_amount(currency, user_id):
         return {'status': Status.NO_MONEY, "tax": tax, "amount_with_tax": amount_with_tax}
     if confirmed:
-        await User.transfer_item(user_id, receiver_id, currency, amount)
+        await User.transfer_item(from_user=user_id, to_user=to_user, to_guild=to_guild,
+                                 item_id=currency, amount=amount)
         await User.remove_item(user_id, currency, amount_with_tax - amount)
         return {"status": Status.SUCCESS, "tax": tax, "amount_with_tax": amount_with_tax}
     else:

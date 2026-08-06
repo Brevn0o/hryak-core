@@ -17,13 +17,21 @@ from hryak import config
 class Shop:
 
     @staticmethod
+    def schema(context: str = None):
+        """Which table a shop lives in - the individual one, or the servers' own."""
+        if context is None:
+            context = config.item_default_context
+        return config.shop_schema if context == config.item_default_context else config.server_shop_schema
+
+    @staticmethod
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="shop.get_data")
-    async def get_data(shop_id=None):
+    async def get_data(shop_id=None, context: str = None):
         params = None
+        schema = Shop.schema(context)
         if shop_id is None:
-            query = f"SELECT data FROM {config.shop_schema} ORDER BY id DESC LIMIT 1"
+            query = f"SELECT data FROM {schema} ORDER BY id DESC LIMIT 1"
         else:
-            query = f"SELECT data FROM {config.shop_schema} WHERE id = %s"
+            query = f"SELECT data FROM {schema} WHERE id = %s"
             params = (shop_id,)
         result = await Connection.make_request(
             query,
@@ -35,15 +43,15 @@ class Shop:
             return json.loads(result)
 
     @staticmethod
-    async def clear_get_data_cache(shop_id: int = None):
+    async def clear_get_data_cache(shop_id: int = None, context: str = None):
         if shop_id is None:
             await Func.clear_db_cache('shop.get_data', Shop.get_data)
         else:
-            await Func.clear_db_cache('shop.get_data', Shop.get_data, str(shop_id))
+            await Func.clear_db_cache('shop.get_data', Shop.get_data, str(shop_id), context)
 
     @staticmethod
-    async def is_item_in_shop(item_id, shop_id=None):
-        shop_pages =await Shop.get_data(shop_id)
+    async def is_item_in_shop(item_id, shop_id=None, context: str = None):
+        shop_pages = await Shop.get_data(shop_id, context) or {}
         for shop in shop_pages:
             if item_id in shop_pages[shop]:
                 return True
@@ -80,12 +88,13 @@ class Shop:
         return data['premium_skins_shop']
 
     @staticmethod
-    async def get_update_timestamp(shop_id: int = None):
+    async def get_update_timestamp(shop_id: int = None, context: str = None):
         params = None
+        schema = Shop.schema(context)
         if shop_id is None:
-            query = f"SELECT timestamp FROM {config.shop_schema} ORDER BY id DESC LIMIT 1"
+            query = f"SELECT timestamp FROM {schema} ORDER BY id DESC LIMIT 1"
         else:
-            query = f"SELECT timestamp FROM {config.shop_schema} WHERE id = %s"
+            query = f"SELECT timestamp FROM {schema} WHERE id = %s"
             params = (shop_id,)
         result = await Connection.make_request(
             query,
@@ -131,6 +140,66 @@ class Shop:
             params=(json.dumps(data),)
         )
         await Shop.clear_get_data_cache()
+
+    @staticmethod
+    async def generate_server_weekly_items():
+        """Draws this week's stock, a few of each skin type rather than the whole catalogue.
+
+        Same shape as the daily shop: weekly_shop_items_types says how many of each type to
+        take, and 'other' mops up whatever is not named. Asking for more of a type than
+        exists just takes all of them instead of raising.
+        """
+        chosen = []
+        named = [key for key in config.weekly_shop_items_types if key != 'other']
+        for key, amount in config.weekly_shop_items_types.items():
+            if key == 'other':
+                pool = await Tech.get_all_items(
+                    (('shop_category', 'weekly'),),
+                    exceptions=tuple(('skin_config', 'type', i) for i in named),
+                    context='server')
+            else:
+                pool = await Tech.get_all_items(
+                    (('shop_category', 'weekly'), ('skin_config', 'type', key)), context='server')
+            pool = [i for i in pool if await Item.get_market_price(i, context='server') is not None]
+            chosen += random.sample(pool, min(amount, len(pool)))
+        return chosen
+
+    @staticmethod
+    async def update_server():
+        """Builds the servers' shop. Cosmetics only, priced from each item's server_config -
+        an item with no server price there is simply not sold to servers."""
+        data = {'weekly_shop': [], 'permanent_shop': []}
+        for shop_category, page in (('weekly', 'weekly_shop'), ('always', 'permanent_shop')):
+            entries = []
+            # the weekly page rotates a handful; the permanent page really is everything
+            items = await Shop.generate_server_weekly_items() if shop_category == 'weekly' \
+                else await Tech.get_all_items((('shop_category', shop_category),), context='server')
+            for i in items:
+                price = await Item.get_market_price(i, context='server')
+                if price is None:
+                    continue
+                entries.append(f'{i}.a={1}.p={price}'
+                               f'.c={await Item.get_market_price_currency(i, context="server")}')
+            prices = await asyncio.gather(*(Item.get_market_price(x) for x in entries))
+            data[page] = [x for _, x in sorted(zip(prices, entries), key=lambda pair: pair[0], reverse=True)]
+        await Connection.make_request(
+            f"INSERT INTO {config.server_shop_schema} (timestamp, data) VALUES (%s, %s)",
+            params=(Func.generate_current_timestamp(), json.dumps(data))
+        )
+        await Shop.clear_get_data_cache()
+
+    @staticmethod
+    async def update_server_if_needed():
+        """Regenerates the servers' shop once a week, at Sunday 00:00 UTC for everyone.
+
+        Safe to call as often as you like - it decides on its own whether anything is due.
+        Returns True if a new shop state was written.
+        """
+        last_update_timestamp = await Shop.get_update_timestamp(context='server')
+        if last_update_timestamp is None or last_update_timestamp < Func.get_week_start():
+            await Shop.update_server()
+            return True
+        return False
 
     @staticmethod
     async def update_if_needed():

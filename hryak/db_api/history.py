@@ -33,7 +33,7 @@ class History:
                 """, params=(json.dumps(v) if isinstance(v, list) else v,))
 
     @staticmethod
-    @aiocache.cached(key_builder=Func.cache_key_builder, alias="history.get")
+    # @aiocache.cached(key_builder=Func.cache_key_builder, alias="history.get")
     async def get(user_id: int) -> dict:
         result = await Connection.make_request(
             f"SELECT history FROM {config.users_schema} WHERE {user_id_column()} = %s",

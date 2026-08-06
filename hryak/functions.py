@@ -81,6 +81,20 @@ class Func:
         return round(datetime.datetime.now().timestamp())
 
     @staticmethod
+    def get_week_start(timestamp: int = None):
+        """Timestamp of the most recent Sunday 00:00 UTC.
+
+        Pinned to UTC rather than the machine's idea of midnight, so the weekly rotation
+        and the weekly payout land at the same moment for every server no matter where
+        the bot happens to be running.
+        """
+        moment = datetime.datetime.fromtimestamp(timestamp, datetime.timezone.utc) \
+            if timestamp is not None else datetime.datetime.now(datetime.timezone.utc)
+        midnight = moment.replace(hour=0, minute=0, second=0, microsecond=0)
+        # isoweekday(): monday is 1, sunday is 7 - so sunday is 0 days back
+        return round((midnight - datetime.timedelta(days=moment.isoweekday() % 7)).timestamp())
+
+    @staticmethod
     def generate_random_pig_name(language):
         return f'{translate(config.pig_names[0], language)} {translate(config.pig_names[1], language)}'
 
