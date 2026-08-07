@@ -10106,6 +10106,35 @@
         },
         "server_config": {}
     },
+  "sidor_suit": {
+        "id": "sidor_suit",
+        "name": {
+            "en": "Sidor's suit",
+            "ru": "Костюм Эггмана",
+            "uk": "Костюм Еггмана"
+        },
+        "description": {
+            "en": "Sidor + Lard = Fat ###",
+            "ru": "Сидор + Сало = Жирное #####",
+            "uk": "Сидор + Сало = Жирне #####"
+        },
+        "type": "skin",
+        "emoji": "🪨",
+        "inventory_type": "wardrobe",
+        "rarity": "5",
+        "cooked_item_id": null,
+        "individual_config": {},
+        "server_config": {
+          "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/img.png"
+                    }
+                },
+                "type": "suit"
+            }
+        }
+    },
     "kenny_suit": {
         "id": "kenny_suit",
         "name": {
