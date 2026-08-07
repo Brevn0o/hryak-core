@@ -70,8 +70,17 @@ class Item:
 
     @staticmethod
     async def get_skin_type(item_id: str, lang: str = None, context: str = None):
-        config = await Item.get_skin_config(item_id, context)
-        value = config.get('type')
+        """The slot a skin goes in, or None when it has no skin config in this context.
+
+        An item can exist in one context and not the other - one sold only to servers has
+        nothing in its individual config - and a list that asks the wrong way round would
+        otherwise fail whole, since one bad lookup takes the entire embed with it.
+        """
+        # not named `config`: that would shadow the module the rest of this file relies on
+        skin_config = await Item.get_skin_config(item_id, context)
+        value = skin_config.get('type')
+        if value is None:
+            return None
         return translate(Locale.SkinTypes[value], lang) if lang else value
 
     @staticmethod
