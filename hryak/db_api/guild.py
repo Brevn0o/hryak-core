@@ -1,4 +1,4 @@
-import asyncio, json
+import asyncio, copy, json
 
 import aiocache
 
@@ -74,7 +74,8 @@ class Guild:
 
     @staticmethod
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="guild.get_settings")
-    async def get_settings(guild_id):
+    async def get_raw_settings(guild_id):
+        """Whatever is actually stored in the column, nothing filled in."""
         result = await Connection.make_request(
             f"SELECT settings FROM {config.guilds_schema} WHERE id = %s",
             params=(guild_id,),
@@ -87,8 +88,18 @@ class Guild:
             return {}
 
     @staticmethod
+    async def get_settings(guild_id):
+        """Always returns every setting, even for a guild that has set none of them.
+
+        Same reasoning as the user's: each getter reads its key directly, and filling the
+        defaults in outside the cache means a newly added one reaches guilds that are
+        already cached rather than waiting out a shared redis entry.
+        """
+        return {**copy.deepcopy(config.guild_settings), **await Guild.get_raw_settings(guild_id)}
+
+    @staticmethod
     async def clear_get_settings_cache(guild_id):
-        await Func.clear_db_cache('guild.get_settings', Guild.get_settings, guild_id)
+        await Func.clear_db_cache('guild.get_settings', Guild.get_raw_settings, guild_id)
 
     @staticmethod
     async def set_settings(guild_id, new_settings):

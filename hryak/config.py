@@ -364,7 +364,9 @@ image_links = {'image_is_blocked': 'https://thumbsnap.com/i/EQ1EaKmW.png'}
 db_api_cash_size = 10
 db_api_cash_ttl = 1
 
-guild_settings = {'allow_say': False, 'language': 'en'}
+guild_settings = {'allow_say': False, 'language': 'en',
+                  # a guild usually has neither, and the getters read them directly
+                  'join_channel': None, 'join_message': None}
 user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True}
 emotions_erase_cords = {'sad': [(668, 904, 855, 849, 734, 740),
                                 (917, 842, 1150, 917, 1085, 734)],

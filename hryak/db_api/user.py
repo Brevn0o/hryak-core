@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+import copy
 import json, random
 
 import aiocache
@@ -263,7 +264,8 @@ class User:
 
     @staticmethod
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="user.get_settings")
-    async def get_settings(user_id: int):
+    async def get_raw_settings(user_id: int):
+        """Whatever is actually stored in the column, nothing filled in."""
         result = await Connection.make_request(
             f"SELECT settings FROM {config.users_schema} WHERE {user_id_column()} = %s",
             params=(user_id,),
@@ -276,8 +278,21 @@ class User:
             return {}
 
     @staticmethod
+    async def get_settings(user_id: int):
+        """Always returns every setting, even for a row that has none of them.
+
+        Each getter reads its key directly, so a setting that is merely absent - a user
+        registered before it existed, or a row the structure fix has not reached yet - used
+        to raise rather than read as its default.
+
+        Filled in outside the cache on purpose: a key added to user_settings then reaches
+        people who are already cached, instead of waiting out a shared redis entry.
+        """
+        return {**copy.deepcopy(config.user_settings), **await User.get_raw_settings(user_id)}
+
+    @staticmethod
     async def clear_get_settings_cache(user_id: int):
-        await Func.clear_db_cache('user.get_settings', User.get_settings, (user_id,))
+        await Func.clear_db_cache('user.get_settings', User.get_raw_settings, (user_id,))
 
     @staticmethod
     async def set_new_settings(user_id: int, new_settings):
