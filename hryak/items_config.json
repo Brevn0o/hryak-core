@@ -10128,7 +10128,7 @@
           "skin_config": {
                 "layers": {
                     "1": {
-                        "image": "bin/images/img.png"
+                        "image": "bin/images/img_1.png"
                     }
                 },
                 "type": "suit"

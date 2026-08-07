@@ -124,14 +124,14 @@ class GuildPig:
     async def set_skin(guild_id, item_id, layer=None):
         from .pig import Pig
         pig = await GuildPig.get(guild_id)
-        pig['skins'] = await Pig.set_skin_to_options(pig['skins'], item_id, layer)
+        pig['skins'] = await Pig.set_skin_to_options(pig['skins'], item_id, layer, context='server')
         await GuildPig.update_pig(guild_id, pig)
 
     @staticmethod
     async def remove_skin(guild_id, item_id, layer=None):
         from .pig import Pig
         pig = await GuildPig.get(guild_id)
-        pig['skins'] = await Pig.remove_skin_from_options(pig['skins'], item_id, layer)
+        pig['skins'] = await Pig.remove_skin_from_options(pig['skins'], item_id, layer, context='server')
         await GuildPig.update_pig(guild_id, pig)
 
     @staticmethod
@@ -150,10 +150,11 @@ class GuildPig:
         worn, which is the same rule the personal wardrobe draws its buttons by.
         """
         skins = await GuildPig.get_skin(guild_id, 'all')
-        skin_type = await Item.get_skin_type(item_id)
+        skin_type = await Item.get_skin_type(item_id, context='server')
         if skin_type in ['eyes', 'pupils', 'body']:
-            return any(skins.get(layer) == item_id for layer in await Item.get_skin_layers(item_id))
-        return skins.get(skin_type) == item_id
+            return any(skins.get(layer) == item_id
+                       for layer in await Item.get_skin_layers(item_id, 'server'))
+        return skin_type is not None and skins.get(skin_type) == item_id
 
     @staticmethod
     async def get_inventory(guild_id):

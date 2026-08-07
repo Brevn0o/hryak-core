@@ -180,13 +180,21 @@ class Pig:
         await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    async def set_skin_to_options(skins, item_id, layer=None):
+    async def set_skin_to_options(skins, item_id, layer=None, context: str = None):
+        """Puts a skin into the slots it occupies.
+
+        context because which slot that is comes out of the skin config, and an item sold
+        only to servers has one only in its server config - asked the wrong way round the
+        slot resolves to None and the skin is stored under a key no renderer ever walks.
+        """
         skins = skins.copy()
         if layer is None:
-            for layer in await Item.get_skin_layers(item_id):
+            for layer in await Item.get_skin_layers(item_id, context):
                 if layer in config.default_pig['skins']:
                     skins[layer] = item_id
-            skins[await Item.get_skin_type(item_id)] = item_id
+            skin_type = await Item.get_skin_type(item_id, context=context)
+            if skin_type is not None:
+                skins[skin_type] = item_id
         else:
             skins[layer] = item_id
         return skins
@@ -198,13 +206,14 @@ class Pig:
         await Pig.update_pig(user_id, pig)
 
     @staticmethod
-    async def remove_skin_from_options(skins, item_id, layer=None):
+    async def remove_skin_from_options(skins, item_id, layer=None, context: str = None):
         if layer is None:
-            for layer in await Item.get_skin_layers(item_id):
+            for layer in await Item.get_skin_layers(item_id, context):
                 if layer in config.default_pig['skins'] and skins[layer] == item_id:
                     skins[layer] = None
-            if skins.get(await Item.get_skin_type(item_id)) == item_id:
-                skins[await Item.get_skin_type(item_id)] = None
+            skin_type = await Item.get_skin_type(item_id, context=context)
+            if skin_type is not None and skins.get(skin_type) == item_id:
+                skins[skin_type] = None
         else:
             skins[layer] = None
         return skins
