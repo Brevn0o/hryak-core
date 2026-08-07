@@ -10132,7 +10132,10 @@
                     }
                 },
                 "type": "suit"
-            }
+            },
+            "market_price": 7000,
+            "market_price_currency": "coins",
+            "shop_category": "weekly_high"
         }
     },
     "kenny_suit": {
