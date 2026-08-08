@@ -2399,7 +2399,7 @@
             },
             "market_price": 600,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -2408,10 +2408,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -3329,10 +3326,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -4433,7 +4427,7 @@
             },
             "market_price": 180,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -4442,10 +4436,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -5888,7 +5879,7 @@
             },
             "market_price": 180,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -5897,10 +5888,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -8404,7 +8392,7 @@
             },
             "market_price": 250,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -8413,10 +8401,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -8780,7 +8765,7 @@
             },
             "market_price": 140,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -8789,10 +8774,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -9787,7 +9769,7 @@
             },
             "market_price": 120,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -9796,10 +9778,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -10106,7 +10085,7 @@
         },
         "server_config": {}
     },
-  "sidor_suit": {
+    "sidor_suit": {
         "id": "sidor_suit",
         "name": {
             "en": "Sidor's suit",
@@ -10125,7 +10104,7 @@
         "cooked_item_id": null,
         "individual_config": {},
         "server_config": {
-          "skin_config": {
+            "skin_config": {
                 "layers": {
                     "1": {
                         "image": "bin/images/img_1.png"
@@ -10209,7 +10188,7 @@
             },
             "market_price": 700,
             "market_price_currency": "coins",
-            "shop_category": "daily",
+            "shop_category": null,
             "shop_cooldown": null,
             "buffs": null,
             "salable": false,
@@ -10218,10 +10197,7 @@
             "tradable": true,
             "case_drops": null,
             "requirements": null,
-            "cases": {
-                "common_case": null,
-                "rare_case": null
-            },
+            "cases": {},
             "wealth_impact": 0
         },
         "server_config": {}
@@ -12158,6 +12134,95 @@
             "tax": "auto",
             "cases": {},
             "wealth_impact": 1
+        },
+        "server_config": {}
+    },
+    "halloween_case": {
+        "name": {
+            "en": "Halloween case",
+            "ru": "Хэллоуинский кейс",
+            "uk": "Гелловінський кейс"
+        },
+        "description": {
+            "en": "Halloween case that can be opened",
+            "ru": "Хэллоуинский кейс, который можно открыть",
+            "uk": "Гелловінський кейс, який можна відкрити"
+        },
+        "type": "case",
+        "emoji": "🎃",
+        "inventory_type": "inventory",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": null,
+            "market_price": 300,
+            "market_price_currency": "coins",
+            "shop_category": null,
+            "shop_cooldown": {},
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": [
+                [
+                    {
+                        "items": [
+                            "vampire_fangs",
+                            "vampire_pupils",
+                            "skull_piercing"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 60
+                    },
+                    {
+                        "items": [
+                            "demon_horns",
+                            "purple_demon_horns",
+                            "demon_nimbus",
+                            "blood_on_eye_makeup",
+                            "butchering_tattoo",
+                            "brick_hat"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 35
+                    },
+                    {
+                        "items": [
+                            "minecraft_zombie_suit",
+                            "minecraft_zombie_body",
+                            "pig_mask"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 5
+                    }
+                ],
+                [
+                    {
+                        "items": [
+                            "coins"
+                        ],
+                        "amount": [
+                            1,
+                            10
+                        ],
+                        "chance": 100
+                    }
+                ]
+            ],
+            "requirements": null,
+            "image": "bin/images/halloween_case.png",
+            "cases": {},
+            "wealth_impact": 0.1
         },
         "server_config": {}
     }
