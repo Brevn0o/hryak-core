@@ -122,6 +122,9 @@ default_guild_pig = {'name': 'Hryak',
                      'polls': {},
                      # {user_id: timestamp} of the last poll each person started
                      'proposals': {},
+                     # whether ordinary members may put buying and wearing to a vote. off
+                     # leaves those to whoever runs the server, who never needed a vote anyway
+                     'polls_allowed': True,
                      'last_payout': None,  # when the pig last pooped, so a restart cannot double-pay
                      # {user_id: timestamp} - feeds after a person's mark are what they are
                      # still owed for. nothing is ever deleted from 'feeds'; this is what

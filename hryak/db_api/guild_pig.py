@@ -282,6 +282,18 @@ class GuildPig:
         await GuildPig.update_pig(guild_id, pig)
 
     @staticmethod
+    async def get_polls_allowed(guild_id):
+        """Whether members may open votes to buy and to dress the pig."""
+        pig = await GuildPig.get(guild_id)
+        return pig['polls_allowed']
+
+    @staticmethod
+    async def set_polls_allowed(guild_id, allowed: bool):
+        pig = await GuildPig.get(guild_id)
+        pig['polls_allowed'] = bool(allowed)
+        await GuildPig.update_pig(guild_id, pig)
+
+    @staticmethod
     async def get_last_payout(guild_id):
         pig = await GuildPig.get(guild_id)
         return pig['last_payout']

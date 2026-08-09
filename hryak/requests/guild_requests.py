@@ -48,6 +48,8 @@ async def propose_server_purchase(user_id: int, guild_id: int, item_id: str, byp
     currency = await Item.get_market_price_currency(item_id)
     if bypass:  # whoever runs the server does not need anyone's permission
         return {'status': Status.SUCCESS, 'price': price, 'currency': currency, 'bypass': True}
+    if not await GuildPig.get_polls_allowed(guild_id):
+        return {'status': Status.NOT_ALLOWED}
     if await GuildPig.get_poll(guild_id, 'shop') is not None:
         return {'status': Status.IN_PROCESS}
     window = Func.generate_current_timestamp() - config.guild_pig_feeder_window
@@ -122,6 +124,16 @@ async def rename_guild_pig(guild_id: int, name: str):
     return {'status': Status.SUCCESS, 'name': name}
 
 
+async def set_guild_pig_polls_allowed(guild_id: int, allowed: bool = None):
+    """Turns members' voting on or off. Pass nothing to flip whatever it is now."""
+    if not await GuildPig.is_setup(guild_id):
+        return {'status': Status.NOT_EXIST}
+    if allowed is None:
+        allowed = not await GuildPig.get_polls_allowed(guild_id)
+    await GuildPig.set_polls_allowed(guild_id, allowed)
+    return {'status': Status.SUCCESS, 'allowed': allowed}
+
+
 async def withdraw_server_money(user_id: int, guild_id: int, amount: int, currency: str = 'coins',
                                 confirmed: bool = True):
     """Takes money out of the server's pig and puts it in one person's pocket.
@@ -164,6 +176,8 @@ async def propose_server_wear(user_id: int, guild_id: int, item_id: str, remove:
             return {'status': Status.NOT_COMPATIBLE_SKINS, 'skins': not_compatible}
     if bypass:  # whoever runs the server does not need anyone's permission
         return {'status': Status.SUCCESS, 'bypass': True}
+    if not await GuildPig.get_polls_allowed(guild_id):
+        return {'status': Status.NOT_ALLOWED}
     if await GuildPig.get_poll(guild_id, 'wear') is not None:
         return {'status': Status.IN_PROCESS}
     window = Func.generate_current_timestamp() - config.guild_pig_feeder_window

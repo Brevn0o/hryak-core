@@ -21,6 +21,7 @@ class Status:
     NOT_COMPATIBLE_SKINS = '400;not_compatible_skins'
     NOT_ENOUGH_ITEMS = '400;not_enough_items'
     NOT_A_CONTRIBUTOR = '400;not_a_contributor'
+    NOT_ALLOWED = '400;not_allowed'
     NOT_EXIST = '400;not_exist'
     NOT_READY = '400;not_ready'
     USED_TOO_MANY_TIMES = '400;used_too_many_times'
