@@ -12176,7 +12176,7 @@
                             1,
                             1
                         ],
-                        "chance": 60
+                        "chance": 599.4
                     },
                     {
                         "items": [
@@ -12185,13 +12185,16 @@
                             "demon_nimbus",
                             "blood_on_eye_makeup",
                             "butchering_tattoo",
-                            "brick_hat"
+                            "brick_hat",
+                            "pumpkin_body",
+                            "crimson_body",
+                            "corruption_body"
                         ],
                         "amount": [
                             1,
                             1
                         ],
-                        "chance": 35
+                        "chance": 349.65
                     },
                     {
                         "items": [
@@ -12203,7 +12206,17 @@
                             1,
                             1
                         ],
-                        "chance": 5
+                        "chance": 49.95
+                    },
+                    {
+                        "items": [
+                            "realistic_body"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 1
                     }
                 ],
                 [
@@ -12223,6 +12236,295 @@
             "image": "bin/images/halloween_case.png",
             "cases": {},
             "wealth_impact": 0.1
+        },
+        "server_config": {}
+    },
+    "cookie": {
+        "id": "cookie",
+        "name": {
+            "en": "Cookie",
+            "ru": "Печенье",
+            "uk": "Печиво"
+        },
+        "description": {
+            "en": "A standart chocolate chip cookie given to those who vote for hryak!",
+            "ru": "Обычное шоколадное печенье, которое дают тем, кто голосует за Хряка!",
+            "uk": "Звичайне шоколадне печиво, яке дають тим, хто голосує за Хряка!"
+        },
+        "type": "resource",
+        "emoji": "🍪",
+        "inventory_type": "inventory",
+        "rarity": "2",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": null,
+            "market_price": 20,
+            "market_price_currency": "coins",
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": true,
+            "sell_price": 20,
+            "sell_price_currency": "coins",
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "image": "bin/images/cookie.png",
+            "tax": "auto",
+            "cases": {},
+            "wealth_impact": 1
+        },
+        "server_config": {}
+    },
+    "realistic_body": {
+        "name": {
+            "en": "Realistic body",
+            "ru": "Реалистичное тело",
+            "uk": "Реалістичне тіло"
+        },
+        "description": {
+            "en": "Uncomfortably lifelike.",
+            "ru": "Неприятно правдоподобно.",
+            "uk": "Неприємно правдоподібно."
+        },
+        "type": "skin",
+        "emoji": "🎨",
+        "inventory_type": "inventory",
+        "rarity": "6",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/realistic_body-body.png",
+                        "shadow": "bin/images/realistic_body-body-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/realistic_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/realistic_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/realistic_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/realistic_body-tail.png",
+                        "shadow": "bin/images/realistic_body-tail-shadow.png"
+                    },
+                    "left_eye": {
+                        "image": "bin/images/realistic_body-left_eye.png"
+                    },
+                    "right_eye": {
+                        "image": "bin/images/realistic_body-right_eye.png"
+                    }
+                },
+                "type": "body",
+                "hide": [
+                    "eyes",
+                    "pupils"
+                ],
+                "not_compatible_with": [
+                    "eyes",
+                    "pupils"
+                ]
+            },
+            "market_price": 5000,
+            "market_price_currency": "coins",
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "image": "bin/images/realistic_body-body.png",
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "pumpkin_body": {
+        "name": {
+            "en": "Pumpkin body",
+            "ru": "Тело-тыква",
+            "uk": "Тіло-гарбуз"
+        },
+        "description": {
+            "en": "A pig grown in a patch instead of a pen.",
+            "ru": "Хряк, выращенный на грядке, а не в свинарнике.",
+            "uk": "Хряк, вирощений на грядці, а не в хліву."
+        },
+        "type": "skin",
+        "emoji": "🎨",
+        "inventory_type": "inventory",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/pumpkin_body-body.png",
+                        "shadow": "bin/images/pumpkin_body-body-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/pumpkin_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/pumpkin_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/pumpkin_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/pumpkin_body-tail.png",
+                        "shadow": "bin/images/pumpkin_body-tail-shadow.png"
+                    },
+                    "left_eye": {
+                        "image": "bin/images/pumpkin_body-left_eye.png"
+                    },
+                    "right_eye": {
+                        "image": "bin/images/pumpkin_body-right_eye.png"
+                    }
+                },
+                "type": "body"
+            },
+            "market_price": 1000,
+            "market_price_currency": "coins",
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "image": "bin/images/pumpkin_body-body.png",
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "crimson_body": {
+        "name": {
+            "en": "Crimson body",
+            "ru": "Багровое тело",
+            "uk": "Багряне тіло"
+        },
+        "description": {
+            "en": "Pulled straight out of the Crimson. It's still twitching.",
+            "ru": "Прямиком из Багрового леса. Всё ещё подёргивается.",
+            "uk": "Прямісінько з Багряного лісу. Досі здригається."
+        },
+        "type": "skin",
+        "emoji": "🎨",
+        "inventory_type": "inventory",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/crimson_body-body.png",
+                        "shadow": "bin/images/default_body-body-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/crimson_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/crimson_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/crimson_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/crimson_body-tail.png",
+                        "shadow": "bin/images/default_body-tail-shadow.png"
+                    }
+                },
+                "type": "body"
+            },
+            "market_price": 1000,
+            "market_price_currency": "coins",
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "image": "bin/images/crimson_body-body.png",
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "corruption_body": {
+        "name": {
+            "en": "Corruption body",
+            "ru": "Тело порчи",
+            "uk": "Тіло скверни"
+        },
+        "description": {
+            "en": "Something is watching from inside it. Several somethings, actually.",
+            "ru": "Что-то смотрит изнутри. На самом деле, сразу несколько чего-то.",
+            "uk": "Щось дивиться зсередини. Насправді, одразу декілька чогось."
+        },
+        "type": "skin",
+        "emoji": "🎨",
+        "inventory_type": "inventory",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/corruption_body-body.png",
+                        "shadow": "bin/images/default_body-body-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/corruption_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/corruption_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/corruption_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/corruption_body-tail.png",
+                        "shadow": "bin/images/default_body-tail-shadow.png"
+                    }
+                },
+                "type": "body"
+            },
+            "market_price": 1000,
+            "market_price_currency": "coins",
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "image": "bin/images/corruption_body-body.png",
+            "cases": {},
+            "wealth_impact": 0
         },
         "server_config": {}
     }
