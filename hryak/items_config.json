@@ -2224,7 +2224,37 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/green_body-server-body.png",
+                        "shadow": "bin/images/default_body-server-body-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/green_body-server-right_ear.png",
+                        "shadow": "bin/images/default_body-server-right_ear-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/green_body-server-left_ear.png",
+                        "shadow": "bin/images/default_body-server-left_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/green_body-server-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/green_body-server-tail.png",
+                        "shadow": "bin/images/default_body-server-tail-shadow.png"
+                    }
+                },
+                "right_ear_line_1": "bin/images/default_body-server-right_ear_line_1.png",
+                "right_ear_line_2": "bin/images/default_body-server-right_ear_line_2.png",
+                "type": "body"
+            },
+            "market_price": 15000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "igar_body": {
         "id": "igar_body",
@@ -3645,7 +3675,7 @@
                 ],
                 "type": "glasses"
             },
-            "market_price": 10000,
+            "market_price": 7000,
             "market_price_currency": "coins",
             "shop_category": "weekly_high"
         }
@@ -4485,7 +4515,20 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/diamond_helmet-server-1.png",
+                        "before": "right_ear"
+                    }
+                },
+                "type": "hat"
+            },
+            "market_price": 300,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "dusk_lobber_hat": {
         "id": "dusk_lobber_hat",
@@ -4633,7 +4676,7 @@
                 "type": "hat",
                 "right_ear_line": "2"
             },
-            "market_price": 10000,
+            "market_price": 7000,
             "market_price_currency": "coins",
             "shop_category": "weekly_high"
         }
@@ -5111,7 +5154,20 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/magnet_hat-server-1.png",
+                        "shadow": "bin/images/magnet_hat-server-1-shadow.png"
+                    }
+                },
+                "type": "hat"
+            },
+            "market_price": 1500,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "manga_hat": {
         "id": "manga_hat",
@@ -5741,7 +5797,21 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/watermelon_hat-server-1.png",
+                        "before": "right_ear"
+                    }
+                },
+                "right_ear_line": "2",
+                "type": "hat"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null
+        }
     },
     "pirate_hat": {
         "id": "pirate_hat",
@@ -6612,7 +6682,20 @@
             "cases": {},
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/demon_nimbus-server-1.png"
+                    }
+                },
+                "color": "red",
+                "type": "hat"
+            },
+            "market_price": 7000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "leg_shackles": {
         "id": "leg_shackles",
@@ -6745,7 +6828,19 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/wrist_watch-server-1.png"
+                    }
+                },
+                "type": "legs"
+            },
+            "market_price": 2000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "nyusha_shoes": {
         "id": "nyusha_shoes",
@@ -7378,7 +7473,19 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/clown_makeup-server-1.png"
+                    }
+                },
+                "type": "makeup"
+            },
+            "market_price": 1000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "cry_makeup": {
         "id": "cry_makeup",
@@ -8586,7 +8693,22 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "nose": {
+                        "image": "bin/images/clown_nose-server-nose.png"
+                    }
+                },
+                "not_compatible_with": [
+                    "piercing_nose"
+                ],
+                "type": "nose"
+            },
+            "market_price": 1000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "ear_shackles": {
         "id": "ear_shackles",
@@ -8824,7 +8946,21 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/gold_nose_piercing-server-1.png"
+                    }
+                },
+                "type": "piercing_nose",
+                "color": "gold",
+                "item_group": "piercing_nose"
+            },
+            "market_price": 1500,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "silver_nose_piercing": {
         "id": "silver_nose_piercing",
@@ -8871,7 +9007,21 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/silver_nose_piercing-server-1.png"
+                    }
+                },
+                "type": "piercing_nose",
+                "color": "silver",
+                "item_group": "piercing_nose"
+            },
+            "market_price": 1500,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "amethyst_pupils": {
         "id": "amethyst_pupils",
@@ -9090,7 +9240,22 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "left_pupil": {
+                        "image": "bin/images/blue_anime_pupils-server-left_pupil.png"
+                    },
+                    "right_pupil": {
+                        "image": "bin/images/blue_anime_pupils-server-right_pupil.png"
+                    }
+                },
+                "type": "pupils"
+            },
+            "market_price": 2000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "green_anime_pupils": {
         "name": {
@@ -9137,7 +9302,22 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "left_pupil": {
+                        "image": "bin/images/green_anime_pupils-server-left_pupil.png"
+                    },
+                    "right_pupil": {
+                        "image": "bin/images/green_anime_pupils-server-right_pupil.png"
+                    }
+                },
+                "type": "pupils"
+            },
+            "market_price": 2000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "purple_anime_pupils": {
         "name": {
@@ -9184,7 +9364,22 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "left_pupil": {
+                        "image": "bin/images/purple_anime_pupils-server-left_pupil.png"
+                    },
+                    "right_pupil": {
+                        "image": "bin/images/purple_anime_pupils-server-right_pupil.png"
+                    }
+                },
+                "type": "pupils"
+            },
+            "market_price": 2000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "pink_anime_pupils": {
         "name": {
@@ -9231,7 +9426,22 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "left_pupil": {
+                        "image": "bin/images/pink_anime_pupils-server-left_pupil.png"
+                    },
+                    "right_pupil": {
+                        "image": "bin/images/pink_anime_pupils-server-right_pupil.png"
+                    }
+                },
+                "type": "pupils"
+            },
+            "market_price": 2000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "red_anime_pupils": {
         "id": "blue_pupils",
@@ -9279,7 +9489,22 @@
             },
             "wealth_impact": 0
         },
-        "server_config": {}
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "left_pupil": {
+                        "image": "bin/images/red_anime_pupils-server-left_pupil.png"
+                    },
+                    "right_pupil": {
+                        "image": "bin/images/red_anime_pupils-server-right_pupil.png"
+                    }
+                },
+                "type": "pupils"
+            },
+            "market_price": 2000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     },
     "gold_pupils": {
         "id": "gold_pupils",
@@ -10112,7 +10337,7 @@
                 },
                 "type": "suit"
             },
-            "market_price": 7000,
+            "market_price": 10000,
             "market_price_currency": "coins",
             "shop_category": "weekly_high"
         }
@@ -12328,7 +12553,8 @@
                 ],
                 "not_compatible_with": [
                     "eyes",
-                    "pupils"
+                    "pupils",
+                    "legs"
                 ]
             },
             "market_price": 5000,
@@ -12527,5 +12753,36 @@
             "wealth_impact": 0
         },
         "server_config": {}
+    },
+    "mustache": {
+        "name": {
+            "en": "Mustache",
+            "ru": "Усы",
+            "uk": "Вуса"
+        },
+        "description": {
+            "en": "A distinguished mustache for a distinguished community pig.",
+            "ru": "Солидные усы для солидного общего хряка.",
+            "uk": "Солідні вуса для солідного спільного хряка."
+        },
+        "type": "skin",
+        "emoji": "🥸",
+        "inventory_type": "inventory",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {},
+        "server_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/mustache-server-1.png"
+                    }
+                },
+                "type": "mouth"
+            },
+            "market_price": 1000,
+            "market_price_currency": "coins",
+            "shop_category": null
+        }
     }
 }
