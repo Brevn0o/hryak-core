@@ -16,13 +16,27 @@ from .guild_pig import GuildPig
 class User:
 
     @staticmethod
-    async def fix_settings_structure_for_all_users():
-        for key, value in config.user_settings.items():
+    async def fix_settings_structure_for_all_users(nested_key_path: str = '', standard_values: dict = None):
+        """Fills in any setting a row is missing, including the ones inside a nested setting.
+
+        A dict cannot be handed to the driver as a parameter, so anything that is one goes
+        in as json and is then walked into - a row that already has the group but not a
+        newer toggle inside it would otherwise keep the gap forever.
+        """
+        if standard_values is None:
+            standard_values = config.user_settings
+        for key, value in standard_values.items():
+            key_path = f'{nested_key_path}.{key}' if nested_key_path else key
+            as_json = isinstance(value, (dict, list))
             await Connection.make_request(
-                f"UPDATE {config.users_schema} SET settings = JSON_INSERT(settings, '$.{key}', %s) "
-                f"WHERE JSON_EXTRACT(settings, '$.{key}') IS NULL",
-                params=(value,)
+                f"UPDATE {config.users_schema} "
+                f"SET settings = JSON_INSERT(settings, '$.{key_path}', "
+                f"{'CAST(%s AS JSON)' if as_json else '%s'}) "
+                f"WHERE JSON_EXTRACT(settings, '$.{key_path}') IS NULL",
+                params=(json.dumps(value) if as_json else value,)
             )
+            if isinstance(value, dict):
+                await User.fix_settings_structure_for_all_users(key_path, value)
 
     @staticmethod
     async def register_user_if_not_exists(user_id):
@@ -313,6 +327,30 @@ class User:
     async def get_language(user_id: int):
         settings = await User.get_settings(user_id)
         return settings['language']
+
+    @staticmethod
+    async def get_notifications(user_id: int):
+        """Every notification toggle, defaults filled in.
+
+        get_settings only merges the top level, so somebody who has 'notifications' stored
+        from before a toggle existed would be missing that one key - filled in here so a
+        new kind of reminder reads as off rather than raising.
+        """
+        settings = await User.get_settings(user_id)
+        return {**copy.deepcopy(config.user_settings['notifications']),
+                **(settings.get('notifications') or {})}
+
+    @staticmethod
+    async def get_notification(user_id: int, kind: str):
+        return (await User.get_notifications(user_id)).get(kind, False)
+
+    @staticmethod
+    async def set_notification(user_id: int, kind: str, enabled: bool):
+        settings = await User.get_settings(user_id)
+        notifications = await User.get_notifications(user_id)
+        notifications[kind] = bool(enabled)
+        settings['notifications'] = notifications
+        await User.set_new_settings(user_id, settings)
 
     @staticmethod
     async def set_top_participation(user_id: int, participate: bool):

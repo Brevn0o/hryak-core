@@ -1,3 +1,4 @@
+import copy
 import json
 import time
 
@@ -48,6 +49,26 @@ class Stats:
         await Connection.make_request(
             f"UPDATE {config.users_schema} SET stats = %s WHERE {user_id_column()} = %s", params=(new_stats, user_id)
         )
+
+    @staticmethod
+    async def get_notifications_sent(user_id):
+        """Which reminders are currently outstanding, defaults filled in - get_stats returns
+        the column as it is, so a row written before this key existed has none of it."""
+        stats = await Stats.get_stats(user_id)
+        return {**copy.deepcopy(config.default_stats['notifications_sent']),
+                **(stats.get('notifications_sent') or {})}
+
+    @staticmethod
+    async def get_notification_sent(user_id, kind: str):
+        return (await Stats.get_notifications_sent(user_id)).get(kind, False)
+
+    @staticmethod
+    async def set_notification_sent(user_id, kind: str, sent: bool):
+        stats = await Stats.get_stats(user_id)
+        notifications_sent = await Stats.get_notifications_sent(user_id)
+        notifications_sent[kind] = bool(sent)
+        stats['notifications_sent'] = notifications_sent
+        await Stats.set_stats(user_id, stats)
 
     @staticmethod
     async def add_pig_fed(user_id, amount: int = 1):

@@ -161,7 +161,11 @@ default_pig_pupils_genetic = ['black_pupils', 'blue_pupils', 'green_pupils',
 default_pig_eyes_genetic = ['white_eyes']
 default_stats = {'pig_fed': 0, 'money_earned': 0, 'commands_used': {}, 'items_used': {}, 'items_sold': {}, 'streak': 0,
                  'successful_orders': 0, 'dollars_donated': 0,
-                 'language_changed': False}
+                 'language_changed': False,
+                 # whether a reminder of each kind is currently outstanding: set when the dm
+                 # goes out, cleared by the thing it was reminding about. keeps one reminder
+                 # per cooldown rather than one per time the task happens to run
+                 'notifications_sent': {'feed_reminder': False, 'butcher_reminder': False}}
 default_history = {'feed_history': [], 'butcher_history': [], 'shop_history': [], 'streak_history': [],
                    'server_feed_history': []}
 
@@ -369,7 +373,8 @@ db_api_cash_ttl = 1
 
 guild_settings = {'allow_say': False, 'language': 'en',
                   'join_channel': None, 'join_message': None}
-user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True}
+user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True,
+                 'notifications': {'feed_reminder': False, 'butcher_reminder': False}}
 emotions_erase_cords = {'sad': [(668, 904, 855, 849, 734, 740),
                                 (917, 842, 1150, 917, 1085, 734)],
                         'happy': [(695, 970, 865, 970, 865, 1030, 695, 1030),
