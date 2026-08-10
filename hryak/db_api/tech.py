@@ -9,6 +9,7 @@ from .schema import user_id_column
 from hryak import config
 from .user import User
 from .item import Item
+from .pig import Pig
 
 
 class Tech:
@@ -42,6 +43,31 @@ class Tech:
         if extra_select is None:
             res = [i[0] for i in res]
         return res
+
+    @staticmethod
+    async def get_users_to_remind(kind: str = 'feed_reminder'):
+        """Ids of everyone who asked for this reminder and is owed one right now.
+
+        The opted-in-and-not-yet-told part is asked of the database rather than walked in
+        python - the users table is the whole userbase, and all but a handful of rows are
+        ruled out by those two flags alone. Readiness is the only thing checked per person,
+        since a cooldown cannot be expressed against the columns.
+        """
+        async def ready_to_butcher(user_id):
+            # a knife is needed to butcher at all, so without one the reminder would only
+            # be telling somebody to do something the bot would then refuse
+            return (await Pig.is_ready_to_butcher(user_id)
+                    and await Item.get_amount('knife', user_id) > 0)
+
+        readiness = {'feed_reminder': Pig.is_ready_to_feed,
+                     'butcher_reminder': ready_to_butcher}
+        if kind not in readiness:
+            return []
+        candidates = await Tech.get_all_users(
+            where=f"JSON_EXTRACT(settings, '$.notifications.{kind}') = CAST('true' AS JSON) "
+                  f"AND (JSON_EXTRACT(stats, '$.notifications_sent.{kind}') IS NULL "
+                  f"OR JSON_EXTRACT(stats, '$.notifications_sent.{kind}') = CAST('false' AS JSON))")
+        return [user_id for user_id in candidates if await readiness[kind](user_id)]
 
     @staticmethod
     async def get_user_position(user_id, order_by: str = None, where: str = None, guild=None):

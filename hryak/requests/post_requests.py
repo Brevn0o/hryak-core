@@ -6,45 +6,6 @@ from hryak.game_functions import GameFunc
 from hryak import config
 from hryak.statuses import Status
 
-async def get_users_to_remind(kind: str = 'feed_reminder'):
-    """Ids of everyone who asked for this reminder and is owed one right now.
-
-    The opted-in-and-not-yet-told part is asked of the database rather than walked in
-    python - the users table is the whole userbase, and all but a handful of rows are
-    ruled out by those two flags alone. Readiness is the only thing checked per person,
-    since a cooldown cannot be expressed against the columns.
-    """
-    async def ready_to_butcher(user_id):
-        # a knife is needed to butcher at all, so without one the reminder would only be
-        # telling somebody to do something the bot would then refuse
-        return (await Pig.is_ready_to_butcher(user_id)
-                and await Item.get_amount('knife', user_id) > 0)
-
-    readiness = {'feed_reminder': Pig.is_ready_to_feed,
-                 'butcher_reminder': ready_to_butcher}
-    if kind not in readiness:
-        return []
-    candidates = await Tech.get_all_users(
-        where=f"JSON_EXTRACT(settings, '$.notifications.{kind}') = CAST('true' AS JSON) "
-              f"AND (JSON_EXTRACT(stats, '$.notifications_sent.{kind}') IS NULL "
-              f"OR JSON_EXTRACT(stats, '$.notifications_sent.{kind}') = CAST('false' AS JSON))")
-    return [user_id for user_id in candidates if await readiness[kind](user_id)]
-
-
-async def set_notification(user_id: int, kind: str, enabled: bool):
-    """Turns one kind of reminder on or off for a person."""
-    if kind not in config.user_settings['notifications']:
-        return {'status': Status.NOT_EXIST}
-    await User.set_notification(user_id, kind, enabled)
-    return {'status': Status.SUCCESS, 'enabled': enabled}
-
-
-async def mark_reminder_sent(user_id: int, kind: str):
-    """Records that the dm went out, so the task does not send it again every minute."""
-    await Stats.set_notification_sent(user_id, kind, True)
-    return {'status': Status.SUCCESS}
-
-
 async def feed(user_id: int, client = None):
     ready_to_feed = await Pig.is_ready_to_feed(user_id)
     if not ready_to_feed:

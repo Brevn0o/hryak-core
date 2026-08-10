@@ -346,11 +346,17 @@ class User:
 
     @staticmethod
     async def set_notification(user_id: int, kind: str, enabled: bool):
+        """Turns one kind of reminder on or off. Returns whether it actually changed
+        anything - False for a kind that does not exist, so a stray custom_id cannot
+        write a garbage key into somebody's settings."""
+        if kind not in config.user_settings['notifications']:
+            return False
         settings = await User.get_settings(user_id)
         notifications = await User.get_notifications(user_id)
         notifications[kind] = bool(enabled)
         settings['notifications'] = notifications
         await User.set_new_settings(user_id, settings)
+        return True
 
     @staticmethod
     async def set_top_participation(user_id: int, participate: bool):

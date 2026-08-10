@@ -12487,7 +12487,10 @@
             "market_price_currency": "coins",
             "shop_category": null,
             "shop_cooldown": null,
-            "buffs": null,
+            "buffs": {
+                "weight": "x1.1",
+                "pooping": "x1.1"
+            },
             "salable": true,
             "sell_price": 20,
             "sell_price_currency": "coins",

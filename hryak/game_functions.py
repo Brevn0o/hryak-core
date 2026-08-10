@@ -19,7 +19,7 @@ class GameFunc:
         pig_buffs = await GameFunc.get_all_pig_buffs(user_id, client)
         pig_buffs_raw = {i: [] for i in res.copy()}
         for buff in pig_buffs:
-            if use_buffs and buff in ['laxative', 'compound_feed']:
+            if use_buffs and buff in ['laxative', 'compound_feed', 'cookie']:
                 await Pig.remove_buff(user_id, buff)
             for multiplier_name, multiplier in pig_buffs[buff].items():
                 pig_buffs_raw[multiplier_name].append(multiplier)
