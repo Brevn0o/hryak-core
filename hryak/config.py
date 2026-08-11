@@ -375,7 +375,7 @@ db_api_cash_ttl = 1
 guild_settings = {'allow_say': False, 'language': 'en',
                   'join_channel': None, 'join_message': None}
 user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True,
-                 'notifications': {'feed_reminder': False, 'butcher_reminder': False}}
+                 'notifications': {'feed_reminder': True, 'butcher_reminder': True}}
 emotions_erase_cords = {'sad': [(668, 904, 855, 849, 734, 740),
                                 (917, 842, 1150, 917, 1085, 734)],
                         'happy': [(695, 970, 865, 970, 865, 1030, 695, 1030),
