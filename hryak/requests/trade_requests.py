@@ -54,7 +54,8 @@ async def trade(user1_id, user2_id, trade_id):
                 user_id_to_give = user2_id if user_id == user1_id else user1_id
                 user_id_to_remove = user_id
                 amount = data['amount']
-                await User.transfer_item(user_id_to_remove, user_id_to_give, item_id, amount)
+                await User.transfer_item(user_id_to_remove, user_id_to_give, item_id, amount,
+                                         reason='trade')
                 if await Item.get_amount(item_id, user_id_to_remove) <= 0 and await Item.get_type(item_id) == 'skin':
                     await Pig.remove_skin(user_id, item_id)
             for item_id, data in (await Trade.get_tax_to_pay(trade_id, user_id)).items():

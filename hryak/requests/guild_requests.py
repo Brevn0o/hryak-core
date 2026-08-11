@@ -149,7 +149,8 @@ async def withdraw_server_money(user_id: int, guild_id: int, amount: int, curren
         return {'status': Status.NO_MONEY, 'available': available}
     if not confirmed:
         return {'status': Status.PENDING, 'available': available}
-    await User.transfer_item(from_guild=guild_id, to_user=user_id, item_id=currency, amount=amount)
+    await User.transfer_item(from_guild=guild_id, to_user=user_id, item_id=currency, amount=amount,
+                             reason='server_withdrawal')
     return {'status': Status.SUCCESS, 'amount': amount, 'available': available - amount}
 
 
@@ -316,7 +317,8 @@ async def pay_weekly_rewards(guild_id: int, since: int = None):
         if not reward['paid']:
             continue
         await User.register_user_if_not_exists(int(user_id))
-        await User.add_item(int(user_id), preview['item_id'], reward['amount'])
+        await User.add_item(int(user_id), preview['item_id'], reward['amount'],
+                               reason='server_payout')
     # the mark only moves for people who were actually paid. anyone short of the minimum
     # keeps theirs where it was, so what they fed still counts towards the next payout
     await GuildPig.set_paid_until(guild_id,

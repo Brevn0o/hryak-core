@@ -176,7 +176,7 @@ class GameFunc:
 
     @staticmethod
     async def pay_tax(user_id, amount, currency):
-        await User.remove_item(user_id, currency, amount)
+        await User.remove_item(user_id, currency, amount, reason='tax')
         await Logs.add('tax_paid', user_id=user_id,
                                    currency=currency,
                                    amount=amount)

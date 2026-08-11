@@ -16,7 +16,7 @@ async def duel(user_id: int, opponent_id: int, bet: int):
     chances_copy.pop(winner_id)
     loser_id = list(chances_copy)[0]
     money_earned = int(round(bet * 1.9))
-    await User.remove_item(winner_id, 'coins', bet)
-    await User.remove_item(loser_id, 'coins', bet)
-    await User.add_item(winner_id, 'coins', money_earned)
+    await User.remove_item(winner_id, 'coins', bet, reason='duel_stake')
+    await User.remove_item(loser_id, 'coins', bet, reason='duel_stake')
+    await User.add_item(winner_id, 'coins', money_earned, reason='duel_win')
     return {'status': Status.SUCCESS, 'winner_id': winner_id, 'loser': loser_id, 'money_earned': money_earned, 'chances': chances}

@@ -85,7 +85,10 @@ class User:
                 json.dumps({})
             )
         )
-        await User.add_item(user_id, 'common_case')
+        # only reached when the row was actually created - register_user_if_not_exists
+        # checks first, so this does not fire on every interaction
+        await Logs.add('user_registered', user_id=user_id)
+        await User.add_item(user_id, 'common_case', reason='registration_gift')
 
     @staticmethod
     async def exists(user_id, column: str = None):
@@ -219,7 +222,8 @@ class User:
         return inventory
 
     @staticmethod
-    async def add_item(user_id, item_id, amount: int = 1, log: bool = True):
+    async def add_item(user_id, item_id, amount: int = 1, log: bool = True,
+                       reason: str = None):
         inventory = await User.get_inventory(str(user_id))
         amount = round(amount)
         await User.set_new_inventory(user_id, User.add_item_to_inventory(inventory, item_id, amount))
@@ -227,20 +231,24 @@ class User:
             await Logs.add('item_generated',
                            user_id=user_id,
                            item_id=item_id,
-                           amount=amount)
+                           amount=amount,
+                           reason=reason)
 
     @staticmethod
-    async def remove_item(user_id, item_id, amount: int = 1, log: bool = True):
+    async def remove_item(user_id, item_id, amount: int = 1, log: bool = True,
+                          reason: str = None):
         await User.add_item(user_id, item_id, -amount, log=False)
         if log:
             await Logs.add('item_burned',
                            user_id=user_id,
                            item_id=item_id,
-                           amount=amount)
+                           amount=amount,
+                           reason=reason)
 
     @staticmethod
     async def transfer_item(from_user=None, to_user=None, item_id=None, amount: int = 1,
-                            from_guild=None, to_guild=None, log: bool = True):
+                            from_guild=None, to_guild=None, log: bool = True,
+                            reason: str = None):
         """Moves items between any two holders.
 
         Put a user id in from_user/to_user and a guild id in from_guild/to_guild - which
@@ -266,7 +274,8 @@ class User:
                            from_guild=from_guild,
                            to_guild=to_guild,
                            item_id=item_id,
-                           amount=amount)
+                           amount=amount,
+                           reason=reason)
 
     @staticmethod
     async def set_new_inventory(user_id, new_inventory):

@@ -33,7 +33,7 @@ async def feed(user_id: int, client = None):
     pooped_amount = round(pooped_amount)
 
     await Pig.add_weight(user_id, weight_add)
-    await User.add_item(user_id, 'poop', pooped_amount)
+    await User.add_item(user_id, 'poop', pooped_amount, reason='feed')
     await History.add_feed_to_history(user_id, Func.generate_current_timestamp())
     # the reminder has served its purpose, so the next cooldown can raise a fresh one
     await Stats.set_notification_sent(user_id, 'feed_reminder', False)
@@ -50,7 +50,7 @@ async def butcher(user_id: int):
     if await Item.get_amount('knife', user_id) <= 0:
         return {'status': Status.NO_ITEM_KNIFE}
     lard_add = random.randrange(4, 8)
-    await User.add_item(user_id, 'lard', lard_add)
+    await User.add_item(user_id, 'lard', lard_add, reason='butcher')
     weight_lost = round(random.uniform(.2, .7) * lard_add, 1)
     await Pig.add_weight(user_id, -weight_lost)
     await History.add_butcher_to_history(user_id, Func.generate_current_timestamp())
@@ -81,7 +81,7 @@ async def use_promocode(user_id: int, code: str):
         if item == 'weight':
             await Pig.add_weight(user_id, rewards[item])
         else:
-            await User.add_item(user_id, item, rewards[item])
+            await User.add_item(user_id, item, rewards[item], reason='promocode')
     await PromoCode.add_users_used(code, user_id)
     return {"status": Status.SUCCESS, "rewards": rewards}
 
@@ -98,7 +98,7 @@ async def send_money(user_id: int, amount: int, currency: str, to_user=None, to_
         return {'status': Status.NO_MONEY, "tax": tax, "amount_with_tax": amount_with_tax}
     if confirmed:
         await User.transfer_item(from_user=user_id, to_user=to_user, to_guild=to_guild,
-                                 item_id=currency, amount=amount)
+                                 item_id=currency, amount=amount, reason='send_money')
         await GameFunc.pay_tax(user_id, amount_with_tax - amount, currency)
         return {"status": Status.SUCCESS, "tax": tax, "amount_with_tax": amount_with_tax}
     else:
@@ -133,13 +133,13 @@ async def skin_remove(user_id: int, item_id: str):
 async def eat_poop(user_id: int, item_id: str):
     if await Item.get_amount(item_id, user_id) < 1:
         return {'status': Status.NOT_ENOUGH_ITEMS}
-    await User.remove_item(user_id, item_id)
+    await User.remove_item(user_id, item_id, reason='eat_poop')
     return {'status': Status.SUCCESS, 'scenario': random.choice(['poisoned', 'dizzy', 'question', 'dad'])}
 
 async def pay_doctor(user_id: int):
     if await Item.get_amount('coins', user_id) < config.doctor_price:
         return {'status': Status.NO_MONEY}
-    await User.remove_item(user_id, 'coins', config.doctor_price)
+    await User.remove_item(user_id, 'coins', config.doctor_price, reason='doctor')
     return {'status': Status.SUCCESS}
 
 async def open_case(user_id: int, item_id: str):
@@ -147,7 +147,7 @@ async def open_case(user_id: int, item_id: str):
         return {'status': Status.NOT_ENOUGH_ITEMS}
     items_dropped = await Item.generate_case_drop(item_id)
     items_dropped.pop(None, None)
-    await User.remove_item(user_id, item_id, 1)
+    await User.remove_item(user_id, item_id, 1, reason='case_opened')
     for item, amount in items_dropped.items():
-        await User.add_item(user_id, item, amount)
+        await User.add_item(user_id, item, amount, reason='case_drop')
     return {'status': Status.SUCCESS, 'items_dropped': items_dropped}
