@@ -6,6 +6,7 @@ from cachetools import cached
 
 from .connection import Connection
 from .schema import user_id_column
+from ..functions import Func
 from hryak import config
 from .user import User
 from .item import Item
@@ -68,6 +69,31 @@ class Tech:
                   f"AND (JSON_EXTRACT(stats, '$.notifications_sent.{kind}') IS NULL "
                   f"OR JSON_EXTRACT(stats, '$.notifications_sent.{kind}') = CAST('false' AS JSON))")
         return [user_id for user_id in candidates if await readiness[kind](user_id)]
+
+    @staticmethod
+    async def get_comeback_candidates(limit: int = None):
+        """People worth telling that the bot is back: they played properly, then stopped.
+
+        Anyone who has already been sent one is excluded by checking the log itself, so
+        the same person can never be written to twice however many times this is run,
+        and a partly finished send just carries on where it stopped.
+        """
+        cutoff = Func.generate_current_timestamp() - config.comeback_dormant_days * 86400
+        rows = await Connection.make_request(
+            f"SELECT u.{user_id_column()} FROM {config.users_schema} u "
+            f"WHERE JSON_EXTRACT(u.stats, '$.pig_fed') >= %s "
+            f"AND (JSON_EXTRACT(u.history, '$.feed_history[last]') IS NULL "
+            f"     OR JSON_EXTRACT(u.history, '$.feed_history[last]') < %s) "
+            # already written to - matches the way idx_user_timestamp is declared
+            f"AND NOT EXISTS (SELECT 1 FROM {config.logs_schema} l "
+            f"                WHERE l.log_type = 'come_back_notification' "
+            f"                AND CAST(l.data->>'$.user_id' AS UNSIGNED) "
+            f"                    = CAST(u.{user_id_column()} AS UNSIGNED)) "
+            f"ORDER BY JSON_EXTRACT(u.stats, '$.pig_fed') DESC"
+            f"{f' LIMIT {int(limit)}' if limit else ''}",
+            params=(config.comeback_min_feeds, cutoff),
+            commit=False, fetch=True, fetchall=True)
+        return [row[0] for row in (rows or ())]
 
     @staticmethod
     async def get_user_position(user_id, order_by: str = None, where: str = None, guild=None):

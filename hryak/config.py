@@ -26,6 +26,16 @@ server_shop_schema = 'server_shop'
 guilds_schema = 'guilds'
 logs_schema = 'logs'
 
+# The one-off "hryak is back" message to people who played before the bot went quiet.
+# Only somebody who actually played is worth writing to - anybody below this many feeds
+# tried it once and stopped, and messaging them is noise for them and risk for us.
+comeback_min_feeds = 5
+comeback_dormant_days = 60
+# Deliberately not coins: active players hold a median of ~38, so a currency gift to
+# thousands of returners would swamp the economy. Consumables cost it nothing.
+comeback_gift = {'rare_case': 2, 'cookie': 1}
+comeback_send_delay = 5.0  # seconds between DMs, to stay well inside the rate limit
+
 trade_data = {}
 
 default_pig = {'name': 'Hryak',
