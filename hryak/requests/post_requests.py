@@ -99,7 +99,7 @@ async def send_money(user_id: int, amount: int, currency: str, to_user=None, to_
     if confirmed:
         await User.transfer_item(from_user=user_id, to_user=to_user, to_guild=to_guild,
                                  item_id=currency, amount=amount)
-        await User.remove_item(user_id, currency, amount_with_tax - amount)
+        await GameFunc.pay_tax(user_id, amount_with_tax - amount, currency)
         return {"status": Status.SUCCESS, "tax": tax, "amount_with_tax": amount_with_tax}
     else:
         return {"status": Status.PENDING, "tax": tax, "amount_with_tax": amount_with_tax}

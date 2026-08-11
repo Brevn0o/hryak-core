@@ -174,6 +174,13 @@ class GameFunc:
                 not_compatible_skins.append(_skin)
         return not_compatible_skins
 
+    @staticmethod
+    async def pay_tax(user_id, amount, currency):
+        await User.remove_item(user_id, currency, amount)
+        await Logs.add('tax_paid', user_id=user_id,
+                                   currency=currency,
+                                   amount=amount)
+
     # ---------- private -------------
     @staticmethod
     @aiocache.cached(ttl=86400)

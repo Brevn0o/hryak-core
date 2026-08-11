@@ -59,7 +59,7 @@ async def trade(user1_id, user2_id, trade_id):
                     await Pig.remove_skin(user_id, item_id)
             for item_id, data in (await Trade.get_tax_to_pay(trade_id, user_id)).items():
                 amount_to_remove = data['amount']
-                await User.remove_item(user_id, item_id, amount_to_remove)
+                await GameFunc.pay_tax(user_id, amount_to_remove, item_id)
                 if await Item.get_amount(item_id, user_id) <= 0 and await Item.get_type(item_id) == 'skin':
                     await Pig.remove_skin(user_id, item_id)
         await Trade.set_status(trade_id, 'success')
