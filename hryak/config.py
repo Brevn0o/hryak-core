@@ -362,8 +362,8 @@ currency_symbols = {
 
 payment_methods_for_languages = {
     'uk': ['donatello'],
-    'ru': ['lava.top', 'donatello'],
-    'en': ['lava.top', 'donatello']
+    'ru': ['donatello'],
+    'en': ['donatello']
 }
 
 fight_gifs = ['https://thumbsnap.com/i/3A83K3Ub.gif', 'https://thumbsnap.com/i/bKNDTHvr.gif',
