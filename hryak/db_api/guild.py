@@ -157,13 +157,14 @@ class Guild:
     @staticmethod
     # @cached(TTLCache(maxsize=utils_config.db_api_cash_size, ttl=utils_config.db_api_cash_ttl))
     async def joined(guild_id):
-        result = await Connection.make_request(
+        """When the bot joined, as a unix timestamp, or None if that is not recorded.
+
+        `joined` is an int column, so there is nothing to decode - the json.loads that
+        used to be here raised TypeError on every call.
+        """
+        return await Connection.make_request(
             f"SELECT joined FROM {config.guilds_schema} WHERE id = %s",
             params=(guild_id,),
             commit=False,
             fetch=True,
         )
-        if result is not None:
-            return json.loads(result)
-        else:
-            return {}

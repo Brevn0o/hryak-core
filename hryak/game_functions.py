@@ -175,6 +175,65 @@ class GameFunc:
         return not_compatible_skins
 
     @staticmethod
+    async def guild_churn_summary(guild_id):
+        """What a server did with the bot, gathered at the moment it removes it.
+
+        Recorded on the way out because most of it stops being answerable afterwards.
+        The point is to tell the kinds of leaving apart, which need different fixes:
+
+          never set up    - nobody ran the setup. an onboarding problem, not a game one.
+          never used      - set up, but no one ever touched it.
+          went quiet      - used for a while, then stopped well before the removal.
+          left while used - still being used the day it went. someone chose to remove it.
+
+        Feeding numbers come from the guild pig rather than the log because the pig
+        keeps its whole history, while the log only knows about recent events.
+        """
+        now = Func.generate_current_timestamp()
+        joined = await Guild.joined(guild_id)
+        summary = {
+            'days_present': round((now - joined) / 86400, 1) if joined else None,
+            'was_set_up': await GuildPig.is_setup(guild_id),
+            'language': await Guild.get_language(guild_id),
+        }
+
+        feeds = await GuildPig.get_feeds(guild_id)
+        summary['pig_feeds'] = len(feeds)
+        summary['pig_feeders'] = len({str(f['user_id']) for f in feeds})
+        summary['pig_weight'] = await GuildPig.get_weight(guild_id)
+        if feeds:
+            last = max(f['timestamp'] for f in feeds)
+            first = min(f['timestamp'] for f in feeds)
+            summary['days_since_last_feed'] = round((now - last) / 86400, 1)
+            if joined:
+                summary['days_to_first_feed'] = round((first - joined) / 86400, 1)
+
+        totals = await Connection.make_request(
+            f"SELECT COUNT(*), COUNT(DISTINCT CAST(data->>'$.user_id' AS UNSIGNED)), "
+            f"MIN(timestamp), MAX(timestamp) FROM {config.logs_schema} "
+            f"WHERE log_type = 'command_used' "
+            f"AND CAST(data->>'$.guild_id' AS UNSIGNED) = %s",
+            params=(guild_id,), fetch=True, fetch_first=False)
+        used, users, first_cmd, last_cmd = totals[0] if totals else (0, 0, None, None)
+        summary['commands_used'] = int(used or 0)
+        summary['command_users'] = int(users or 0)
+        if last_cmd:
+            summary['days_silent'] = round((now - int(last_cmd)) / 86400, 1)
+        if first_cmd and joined:
+            # clamped: registration happens on the first command, so the two stamps can
+            # land in the same second and round to a confusing -0.0
+            summary['days_to_first_command'] = max(0.0, round((int(first_cmd) - joined) / 86400, 1))
+
+        top = await Connection.make_request(
+            f"SELECT CAST(data->>'$.command' AS CHAR(64)) c, COUNT(*) n "
+            f"FROM {config.logs_schema} WHERE log_type = 'command_used' "
+            f"AND CAST(data->>'$.guild_id' AS UNSIGNED) = %s "
+            f"GROUP BY c ORDER BY n DESC LIMIT 8",
+            params=(guild_id,), fetch=True, fetch_first=False)
+        summary['top_commands'] = {row[0]: int(row[1]) for row in (top or ()) if row[0]}
+        return summary
+
+    @staticmethod
     async def pay_tax(user_id, amount, currency):
         await User.remove_item(user_id, currency, amount, reason='tax')
         await Logs.add('tax_paid', user_id=user_id,
