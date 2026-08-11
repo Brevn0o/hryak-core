@@ -10,7 +10,6 @@ import numpy as np
 
 from . import config
 
-
 def translate(locales, lang, format_options: dict = None):
     translated_text = 'translation_error'
     if type(locales) == dict:
@@ -201,28 +200,3 @@ class Func:
             if not os.path.exists(path):
                 return path
 
-    @staticmethod
-    async def add_log(log_type, **kwargs):
-        current_time = datetime.datetime.now().isoformat()
-        log_entry = {
-            'timestamp': current_time,
-            'type': log_type,
-        }
-        log_entry.update({k: v for k, v in kwargs.items() if isinstance(v, (str, int, float, bool, list, dict, set))})
-        log_file_path = config.logs_path
-        if os.path.exists(log_file_path) and os.path.getsize(log_file_path) > 0:
-            with open(log_file_path, "rb+") as log_file:
-                log_file.seek(-1, os.SEEK_END)
-                last_char = log_file.read(1)
-                if last_char == b']':
-                    log_file.seek(-1, os.SEEK_END)
-                    log_file.truncate()
-                    log_file.write(b',\n')
-            with open(log_file_path, "a", encoding="utf-8") as log_file:
-                log_file.write(json.dumps(log_entry, indent=4, ensure_ascii=False))
-                log_file.write("\n]")
-        else:
-            with open(log_file_path, "w", encoding="utf-8") as log_file:
-                log_file.write("[\n")
-                log_file.write(json.dumps(log_entry, indent=4, ensure_ascii=False))
-                log_file.write("\n]")

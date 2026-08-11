@@ -24,6 +24,7 @@ promocodes_schema = 'promo_codes'
 shop_schema = 'shop'
 server_shop_schema = 'server_shop'
 guilds_schema = 'guilds'
+logs_schema = 'logs'
 
 trade_data = {}
 

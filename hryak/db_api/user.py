@@ -8,6 +8,7 @@ import aiocache
 from .connection import Connection
 from .schema import user_id_column
 from ..functions import Func, translate
+from .logs import Logs
 from .history import History
 from hryak import config
 from .guild_pig import GuildPig
@@ -223,19 +224,19 @@ class User:
         amount = round(amount)
         await User.set_new_inventory(user_id, User.add_item_to_inventory(inventory, item_id, amount))
         if log:
-            await Func.add_log('item_generated',
-                               user_id=user_id,
-                               item_id=item_id,
-                               amount=amount)
+            await Logs.add('item_generated',
+                           user_id=user_id,
+                           item_id=item_id,
+                           amount=amount)
 
     @staticmethod
     async def remove_item(user_id, item_id, amount: int = 1, log: bool = True):
         await User.add_item(user_id, item_id, -amount, log=False)
         if log:
-            await Func.add_log('item_burned',
-                               user_id=user_id,
-                               item_id=item_id,
-                               amount=amount)
+            await Logs.add('item_burned',
+                           user_id=user_id,
+                           item_id=item_id,
+                           amount=amount)
 
     @staticmethod
     async def transfer_item(from_user=None, to_user=None, item_id=None, amount: int = 1,
@@ -259,13 +260,13 @@ class User:
         else:
             await GuildPig.add_item(to_guild, item_id, amount)
         if log:
-            await Func.add_log('item_transfer',
-                               from_user=from_user,
-                               to_user=to_user,
-                               from_guild=from_guild,
-                               to_guild=to_guild,
-                               item_id=item_id,
-                               amount=amount)
+            await Logs.add('item_transfer',
+                           from_user=from_user,
+                           to_user=to_user,
+                           from_guild=from_guild,
+                           to_guild=to_guild,
+                           item_id=item_id,
+                           amount=amount)
 
     @staticmethod
     async def set_new_inventory(user_id, new_inventory):

@@ -14,5 +14,6 @@ from .guild_pig import GuildPig
 from .stats import Stats
 from .order import Order
 from .shop import Shop
+from .logs import Logs
 
 
