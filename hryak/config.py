@@ -31,6 +31,13 @@ logs_schema = 'logs'
 # tried it once and stopped, and messaging them is noise for them and risk for us.
 comeback_min_feeds = 5
 comeback_dormant_days = 60
+# Ordering. Whoever was still playing when the bot went quiet is written to first: they
+# did not choose to leave, it disappeared on them, so they are the likeliest to want it
+# back. Last feeds are grouped into weeks rather than compared exactly - two people who
+# both stopped that final week are equally "there at the end", and between them the one
+# who had played more is the better prospect.
+comeback_recency_band_days = 7
+comeback_feed_band = 50
 # Deliberately not coins: active players hold a median of ~38, so a currency gift to
 # thousands of returners would swamp the economy. Consumables cost it nothing.
 comeback_gift = {'rare_case': 2, 'cookie': 1}

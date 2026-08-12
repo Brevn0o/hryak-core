@@ -71,14 +71,27 @@ class Tech:
         return [user_id for user_id in candidates if await readiness[kind](user_id)]
 
     @staticmethod
-    async def get_comeback_candidates(limit: int = None):
+    async def get_comeback_candidates(limit: int = None, min_feeds: int = None):
         """People worth telling that the bot is back: they played properly, then stopped.
 
-        Anyone who has already been sent one is excluded by checking the log itself, so
-        the same person can never be written to twice however many times this is run,
-        and a partly finished send just carries on where it stopped.
+        Ordered by who was still playing latest, in weekly bands, and within a band by
+        how much they had played. Recency leads because the people feeding right up to
+        the moment the bot went quiet did not choose to stop - it vanished on them - and
+        they are the likeliest to want it back. Banding by week rather than comparing
+        timestamps exactly keeps that from turning into a meaningless race between two
+        people who both stopped the same week; between those two, the one who had played
+        more is the better prospect.
+
+        `min_feeds` raises the floor for one run, so a batch can be aimed at a particular
+        band and measured on its own before spending the rest of the list.
+
+        Anyone already sent one is excluded by checking the log itself, so the same
+        person can never be written to twice however many times this is run, and a partly
+        finished send simply carries on where it stopped.
         """
         cutoff = Func.generate_current_timestamp() - config.comeback_dormant_days * 86400
+        band = max(1, int(config.comeback_feed_band))
+        week = max(1, int(config.comeback_recency_band_days)) * 86400
         rows = await Connection.make_request(
             f"SELECT u.{user_id_column()} FROM {config.users_schema} u "
             f"WHERE JSON_EXTRACT(u.stats, '$.pig_fed') >= %s "
@@ -89,9 +102,15 @@ class Tech:
             f"                WHERE l.log_type = 'come_back_notification' "
             f"                AND CAST(l.data->>'$.user_id' AS UNSIGNED) "
             f"                    = CAST(u.{user_id_column()} AS UNSIGNED)) "
-            f"ORDER BY JSON_EXTRACT(u.stats, '$.pig_fed') DESC"
+            # latest to stop first, by week, then the most played inside each week.
+            # NULLs land last under DESC, which is right - somebody with no recorded
+            # last feed is the coldest lead there is
+            f"ORDER BY FLOOR(JSON_EXTRACT(u.history, '$.feed_history[last]') / {week}) DESC, "
+            f"         FLOOR(JSON_EXTRACT(u.stats, '$.pig_fed') / {band}) DESC, "
+            f"         JSON_EXTRACT(u.stats, '$.pig_fed') DESC"
             f"{f' LIMIT {int(limit)}' if limit else ''}",
-            params=(config.comeback_min_feeds, cutoff),
+            params=(min_feeds if min_feeds is not None else config.comeback_min_feeds,
+                    cutoff),
             commit=False, fetch=True, fetchall=True)
         return [row[0] for row in (rows or ())]
 
