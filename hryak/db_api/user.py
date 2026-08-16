@@ -4,6 +4,7 @@ import copy
 import json, random
 
 import aiocache
+import pymysql.err
 
 from .connection import Connection
 from .schema import user_id_column
@@ -12,6 +13,9 @@ from .logs import Logs
 from .history import History
 from hryak import config
 from .guild_pig import GuildPig
+
+# mysql's error number for a unique-key violation
+DUPLICATE_ENTRY = 1062
 
 
 class User:
@@ -68,25 +72,41 @@ class User:
             unique_primary_id = random.randrange(10000000, 99999999)
 
 
-        await Connection.make_request(
-            f"INSERT INTO {config.users_schema} (id, {user_id_column()}, created, pig, settings, inventory, stats, events, history, rating, orders) "
-            f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-            params=(
-                unique_primary_id,
-                user_id,
-                Func.generate_current_timestamp(),
-                pig,
-                json.dumps(config.user_settings),
-                json.dumps({}),
-                stats,
-                json.dumps({}),
-                json.dumps(config.default_history),
-                json.dumps({}),
-                json.dumps({})
+        try:
+            await Connection.make_request(
+                f"INSERT INTO {config.users_schema} (id, {user_id_column()}, created, pig, settings, inventory, stats, events, history, rating, orders) "
+                f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                params=(
+                    unique_primary_id,
+                    user_id,
+                    Func.generate_current_timestamp(),
+                    pig,
+                    json.dumps(config.user_settings),
+                    json.dumps({}),
+                    stats,
+                    json.dumps({}),
+                    json.dumps(config.default_history),
+                    json.dumps({}),
+                    json.dumps({})
+                )
             )
-        )
-        # only reached when the row was actually created - register_user_if_not_exists
-        # checks first, so this does not fire on every interaction
+        except pymysql.err.IntegrityError as e:
+            # Somebody else registered this id in between the exists() check and here.
+            #
+            # It is not a rare accident: discord.py's parse_interaction_create both hands
+            # the interaction to the command tree (which creates its own task) and fires
+            # on_interaction (another task), and both paths register. So every single
+            # interaction from an account that has no row yet runs two registrations at
+            # once, and one of them has to lose.
+            #
+            # The winner's row is in place and the winner does the log and the gift below,
+            # so the loser has nothing left to do. Anything other than a duplicate key is
+            # a real failure and still raised.
+            if e.args and e.args[0] == DUPLICATE_ENTRY:
+                return
+            raise
+        # only reached by whoever actually created the row, so the gift is granted once
+        # however many callers raced for it
         await Logs.add('user_registered', user_id=user_id)
         await User.add_item(user_id, 'common_case', reason='registration_gift')
 
