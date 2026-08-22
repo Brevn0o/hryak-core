@@ -33,7 +33,10 @@ async def feed(user_id: int, client = None):
     pooped_amount = round(pooped_amount)
 
     await Pig.add_weight(user_id, weight_add)
-    await User.add_item(user_id, 'poop', pooped_amount, reason='feed')
+    if pooped_amount:
+        # a vomit poops nothing, and adding zero is not free: every inventory write is a
+        # write of the whole blob, so a no-op one can only ever lose somebody else's
+        await User.add_item(user_id, 'poop', pooped_amount, reason='feed')
     await History.add_feed_to_history(user_id, Func.generate_current_timestamp())
     # the reminder has served its purpose, so the next cooldown can raise a fresh one
     await Stats.set_notification_sent(user_id, 'feed_reminder', False)

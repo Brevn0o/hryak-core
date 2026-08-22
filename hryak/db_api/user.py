@@ -220,15 +220,26 @@ class User:
 
     @staticmethod
     async def set_item_amount(user_id, item_id, amount: int = 1):
-        inventory = await User.get_inventory(str(user_id))
-        inventory[item_id] = {}
-        inventory[item_id]['item_id'] = item_id
-        inventory[item_id]['amount'] = amount
-        await User.set_new_inventory(user_id, inventory)
+        """Sets one item to an exact amount, touching nothing else in the inventory."""
+        await Connection.make_request(
+            f"UPDATE {config.users_schema} "
+            f"SET inventory = JSON_MERGE_PATCH("
+            f"      COALESCE(inventory, JSON_OBJECT()),"
+            f"      JSON_OBJECT(%s, JSON_OBJECT('item_id', %s, 'amount', %s))) "
+            f"WHERE {user_id_column()} = %s",
+            params=(item_id, item_id, round(amount), user_id)
+        )
+        await User.clear_get_inventory_cache(user_id)
 
     @staticmethod
     def add_item_to_inventory(inventory, item_id, amount: int = 1):
         """Hands back a new inventory with the item added.
+
+        Nothing calls this any more. Changing an amount goes through
+        User.change_item_amount, which does the arithmetic in the UPDATE - working out a
+        new inventory here and storing it means reading the whole blob first, and whatever
+        was written in between is lost when it goes back.
+
 
         Kept storage-free so the guild pig can add items by the same rule instead of
         repeating it - the same way set_skin_to_options is shared.
@@ -242,11 +253,40 @@ class User:
         return inventory
 
     @staticmethod
+    async def change_item_amount(user_id, item_id, delta: int):
+        """Adds delta to one item's amount, inside the database.
+
+        The arithmetic has to happen in the UPDATE rather than in python. Reading the
+        inventory, changing it and writing the whole blob back is a lost update waiting to
+        happen: anything that writes in between is overwritten by a snapshot taken before
+        it, and since the blob is the *entire* inventory, a change to any other item goes
+        with it. That is how a sale came to be silently undone and its poop reappear.
+
+        JSON_MERGE_PATCH rather than JSON_SET because it creates the item's object when
+        the item is new, which JSON_SET will not do - it can only add a key to an object
+        that already exists - while still leaving any other key inside that object alone.
+
+        No clamping at zero, deliberately: callers check what somebody has before taking
+        it away, and silently flooring here would hide the cases where that check is wrong.
+        """
+        delta = round(delta)
+        path = f'$."{item_id}".amount'
+        await Connection.make_request(
+            f"UPDATE {config.users_schema} "
+            f"SET inventory = JSON_MERGE_PATCH("
+            f"      COALESCE(inventory, JSON_OBJECT()),"
+            f"      JSON_OBJECT(%s, JSON_OBJECT('amount',"
+            f"          COALESCE(CAST(JSON_EXTRACT(inventory, %s) AS SIGNED), 0) + %s))) "
+            f"WHERE {user_id_column()} = %s",
+            params=(item_id, path, delta, user_id)
+        )
+        await User.clear_get_inventory_cache(user_id)
+
+    @staticmethod
     async def add_item(user_id, item_id, amount: int = 1, log: bool = True,
                        reason: str = None):
-        inventory = await User.get_inventory(str(user_id))
         amount = round(amount)
-        await User.set_new_inventory(user_id, User.add_item_to_inventory(inventory, item_id, amount))
+        await User.change_item_amount(user_id, item_id, amount)
         if log:
             await Logs.add('item_generated',
                            user_id=user_id,
@@ -299,6 +339,10 @@ class User:
 
     @staticmethod
     async def set_new_inventory(user_id, new_inventory):
+        # replaces the entire inventory. For changing one item's amount use
+        # change_item_amount instead - going through here means reading, changing and
+        # writing back a whole blob, which quietly drops anything written meanwhile
+
         new_inventory = json.dumps(new_inventory, ensure_ascii=False)
         await Connection.make_request(
             f"UPDATE {config.users_schema} SET inventory = %s WHERE {user_id_column()} = %s",

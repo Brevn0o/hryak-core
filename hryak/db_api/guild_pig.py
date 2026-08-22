@@ -163,15 +163,35 @@ class GuildPig:
 
     @staticmethod
     async def set_new_inventory(guild_id, new_inventory):
+        # replaces the entire inventory, by rewriting the whole pig. For changing one
+        # item's amount use add_item, which does it in the UPDATE and cannot lose a
+        # weight, a skin or a poll written at the same moment
+
         pig = await GuildPig.get(guild_id)
         pig['inventory'] = new_inventory
         await GuildPig.update_pig(guild_id, pig)
 
     @staticmethod
     async def add_item(guild_id, item_id, amount: int = 1):
-        from .user import User
-        inventory = await GuildPig.get_inventory(guild_id)
-        await GuildPig.set_new_inventory(guild_id, User.add_item_to_inventory(inventory, item_id, amount))
+        """Adds amount to one item, inside the database.
+
+        Same reason as User.change_item_amount, only more so: reading the pig, changing
+        one number and writing the whole pig back does not just risk losing another item -
+        it can lose a weight gain, a worn skin or a poll, since all of them live in the
+        same column.
+        """
+        amount = round(amount)
+        path = f'$.inventory."{item_id}".amount'
+        await Connection.make_request(
+            f"UPDATE {config.guilds_schema} "
+            f"SET pig = JSON_MERGE_PATCH("
+            f"      COALESCE(pig, JSON_OBJECT()),"
+            f"      JSON_OBJECT('inventory', JSON_OBJECT(%s, JSON_OBJECT('amount',"
+            f"          COALESCE(CAST(JSON_EXTRACT(pig, %s) AS SIGNED), 0) + %s)))) "
+            f"WHERE id = %s",
+            params=(item_id, path, amount, guild_id)
+        )
+        await GuildPig.clear_get_pig_cache(guild_id)
 
     @staticmethod
     async def remove_item(guild_id, item_id, amount: int = 1):
