@@ -169,7 +169,8 @@ class Tech:
     @staticmethod
     # @aiocache.cached(key_builder=lambda f, *args, **kwargs: f"tech.get_all_items:{kwargs.get('user_id')}_{kwargs.get('requirements')}_{kwargs.get('exceptions')}", alias="tech.get_all_items")
     async def get_all_items(requirements: tuple = None, exceptions: tuple = None, user_id=None,
-                            context: str = None, inventory: dict = None):
+                            context: str = None, inventory: dict = None,
+                            available_only: bool = False):
         """
         :type requirements: object
             Example: (("rarity", "3"),) - it will return only items with rarity=3
@@ -180,8 +181,15 @@ class Tech:
         :param inventory:
             An inventory to filter against directly, for owners that are not users - a
             guild pig keeps its things in the guild row, so there is no user_id to look up
+        :param available_only:
+            Drops anything outside its selling season. Off by default, because a season
+            says when something may be *sold* - an inventory or a wardrobe must keep
+            listing the halloween case in march, or it would vanish from the bag of
+            whoever bought one.
         """
         result = await Tech._Tech__get_all_items(requirements, exceptions, context)
+        if available_only:
+            result = [i for i in result if config.item_available_now(config.items[i], context)]
         if inventory is not None:
             return [i for i in result if await Item.get_amount(i, inventory=inventory) != 0]
         if user_id is not None:

@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 
@@ -237,6 +238,65 @@ def item_in_context(item: dict, context: str = None) -> dict:
         flat.update({k: v for k, v in default.items() if k in item_context_fallback_keys})
         flat.update(item.get(f'{context}_config') or {})
     return flat
+
+
+# Seasonal stock. An item may carry a shop_availability in its context config saying
+# when it is allowed to be sold:
+#
+#     "shop_availability": {"from": "09-01", "to": "11-01"}
+#
+# A bound written MM-DD comes round every year, which is what a holiday wants - the
+# halloween case should return next october without anybody editing a date. A bound
+# written YYYY-MM-DD happens once and never again.
+item_availability_key = 'shop_availability'
+
+
+def _availability_date(bound: str, year: int):
+    """One end of a window as a date, and whether it named its own year.
+
+    A bound without a year is anchored to the year it is being compared against, which is
+    what makes MM-DD repeat.
+    """
+    parts = [int(p) for p in bound.split('-')]
+    if len(parts) == 3:
+        return datetime.date(*parts), True
+    return datetime.date(year, *parts), False
+
+
+def item_available_now(item: dict, context: str = None, now: datetime.datetime = None) -> bool:
+    """Whether an item may be sold at this moment.
+
+    An item with no window is always for sale, so everything that existed before seasons
+    did carries on untouched.
+
+    'from' is inclusive from midnight and 'to' is exclusive, so a window ending 11-01 is
+    over the instant november begins rather than lasting through the day. A window whose
+    start falls after its end wraps the new year - {"from": "12-15", "to": "01-05"} is a
+    christmas window, not an empty one.
+
+    Read in UTC, like the weekly rotation, so a season turns over at the same moment
+    everywhere instead of wherever the bot happens to be running.
+    """
+    window = (item_in_context(item, context) or {}).get(item_availability_key)
+    if not window:
+        return True
+    start, end = window.get('from'), window.get('to')
+    if not start or not end:
+        return True
+    today = (now or datetime.datetime.now(datetime.timezone.utc)).date()
+    try:
+        start_date, start_dated = _availability_date(start, today.year)
+        end_date, end_dated = _availability_date(end, today.year)
+    except (TypeError, ValueError):
+        # a malformed window should not quietly hide an item from the shop forever
+        print(f'[availability] {item.get("id")} has an unreadable window: {window}')
+        return True
+    if start_dated or end_dated:
+        return start_date <= today < end_date
+    # neither named a year, so this repeats - and may run through new year's eve
+    if start_date <= end_date:
+        return start_date <= today < end_date
+    return today >= start_date or today < end_date
 
 
 skin_layers_rules = {

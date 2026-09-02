@@ -263,7 +263,7 @@
             "skin_config": null,
             "market_price": 2000,
             "market_price_currency": "coins",
-            "shop_category": "cases",
+            "shop_category": null,
             "shop_cooldown": {
                 "2": 79200
             },
@@ -12380,9 +12380,9 @@
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": null,
-            "market_price": 300,
-            "market_price_currency": "coins",
-            "shop_category": null,
+            "market_price": 5,
+            "market_price_currency": "cookie",
+            "shop_category": "cases",
             "shop_cooldown": {},
             "buffs": null,
             "salable": false,
@@ -12460,7 +12460,11 @@
             "requirements": null,
             "image": "bin/images/halloween_case.png",
             "cases": {},
-            "wealth_impact": 0.1
+            "wealth_impact": 0.1,
+            "shop_availability": {
+                "from": "09-01",
+                "to": "11-01"
+            }
         },
         "server_config": {}
     },
@@ -12498,7 +12502,10 @@
             "case_drops": null,
             "requirements": null,
             "image": "bin/images/cookie.png",
-            "tax": "auto",
+            "tax": [
+                50,
+                "coins"
+            ],
             "cases": {},
             "wealth_impact": 1
         },

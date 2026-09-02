@@ -19,6 +19,19 @@ class Item:
         return item_id.split('.')[0] if item_id else None
 
     @staticmethod
+    async def is_available(item_id: str, context: str = None) -> bool:
+        """Whether this item is inside its selling season.
+
+        True for anything without a window, which is nearly everything. Not cached: the
+        answer changes on its own as the date moves, and a cached one would keep a case
+        on sale into november.
+        """
+        item = config.items.get(await Item.clean_id(item_id))
+        if item is None:
+            return False
+        return config.item_available_now(item, context)
+
+    @staticmethod
     @aiocache.cached(key_builder=Func.cache_key_builder, alias="item.get_data")
     async def get_data(item_id: str, key: str, context: str = None):
         """Reads a field off an item.

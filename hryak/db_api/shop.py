@@ -123,9 +123,13 @@ class Shop:
             data['consumables_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
         for i in ["knife", "grill"]:
             data['tools_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
-        for i in ["common_case", "rare_case"]:
+        # cheapest first, the order the hardcoded list used to give. Seasonal cases come
+        # and go with their window, so the page is whatever is on sale today
+        cases = await Tech.get_all_items((('shop_category', 'cases'),), available_only=True)
+        case_prices = await asyncio.gather(*(Item.get_market_price(i) for i in cases))
+        for _, i in sorted(zip(case_prices, cases), key=lambda pair: pair[0]):
             data['case_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
-        for i in sorted(await Tech.get_all_items((('shop_category', 'premium_skins'),))):
+        for i in sorted(await Tech.get_all_items((('shop_category', 'premium_skins'),), available_only=True)):
             data['premium_skins_shop'].append(
                 f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
         async def get_price(i):
@@ -157,11 +161,11 @@ class Shop:
                 pool = await Tech.get_all_items(
                     (('shop_category', shop_category),),
                     exceptions=tuple(('skin_config', 'type', i) for i in named),
-                    context='server')
+                    context='server', available_only=True)
             else:
                 pool = await Tech.get_all_items(
                     (('shop_category', shop_category), ('skin_config', 'type', key)),
-                    context='server')
+                    context='server', available_only=True)
             pool = [i for i in pool if await Item.get_market_price(i, context='server') is not None]
             chosen += random.sample(pool, min(amount, len(pool)))
         return chosen
@@ -183,7 +187,8 @@ class Shop:
             # a tier rotates a handful of its own bracket; the permanent page really is everything
             items = await Shop.generate_server_weekly_items(shop_category) \
                 if shop_category in config.server_shop_tiers \
-                else await Tech.get_all_items((('shop_category', shop_category),), context='server')
+                else await Tech.get_all_items((('shop_category', shop_category),), context='server',
+                                              available_only=True)
             for i in items:
                 price = await Item.get_market_price(i, context='server')
                 if price is None:
@@ -199,28 +204,52 @@ class Shop:
         await Shop.clear_get_data_cache()
 
     @staticmethod
+    def season_turned_over(since: int, context: str = None):
+        """Whether any item came into or went out of season since that moment.
+
+        A rotation on a timer is too coarse for a window on its own: the servers' shop
+        turns over on a Sunday, so a season opening on a Tuesday would not be stocked for
+        five days and would sit there for six after it closed. Asking each item what it
+        would have answered then, against what it answers now, catches the boundary on
+        the next loop instead of the next rotation.
+        """
+        then = datetime.datetime.fromtimestamp(since, datetime.timezone.utc)
+        now = datetime.datetime.now(datetime.timezone.utc)
+        return any(config.item_available_now(item, context, then)
+                   != config.item_available_now(item, context, now)
+                   for item in config.items.values())
+
+    @staticmethod
     async def update_server_if_needed():
-        """Regenerates the servers' shop once a week, at Sunday 00:00 UTC for everyone.
+        """Regenerates the servers' shop once a week, at Sunday 00:00 UTC for everyone,
+        and again straight away whenever a season opens or closes.
 
         Safe to call as often as you like - it decides on its own whether anything is due.
         Returns True if a new shop state was written.
         """
         last_update_timestamp = await Shop.get_update_timestamp(context='server')
-        if last_update_timestamp is None or last_update_timestamp < Func.get_week_start():
+        if last_update_timestamp is None or last_update_timestamp < Func.get_week_start() \
+                or Shop.season_turned_over(last_update_timestamp, 'server'):
             await Shop.update_server()
             return True
         return False
 
     @staticmethod
     async def update_if_needed():
-        """Regenerates the shop if it has not been generated since midnight.
+        """Regenerates the shop if it has not been generated since midnight, and again
+        straight away whenever a season opens or closes.
+
+        Midnight is UTC, matching the weekly rotation and the windows themselves, so a
+        season starts at one moment for everybody rather than wherever the bot is running.
 
         Safe to call as often as you like - it decides on its own whether anything
         is due. Returns True if a new shop state was written.
         """
         last_update_timestamp = await Shop.get_update_timestamp()
-        midnight = int(datetime.datetime.combine(datetime.date.today(), datetime.time(0, 0)).timestamp())
-        if last_update_timestamp is None or last_update_timestamp < midnight:
+        midnight = int(datetime.datetime.now(datetime.timezone.utc)
+                       .replace(hour=0, minute=0, second=0, microsecond=0).timestamp())
+        if last_update_timestamp is None or last_update_timestamp < midnight \
+                or Shop.season_turned_over(last_update_timestamp):
             await Shop.update()
             return True
         return False
@@ -236,12 +265,14 @@ class Shop:
                 for i in daily_shop_items_types_copy:
                     exceptions.append(('skin_config', 'type', i))
                 exceptions = tuple(exceptions)
-                for i in random.sample(await Tech.get_all_items(requirements=(('shop_category', 'daily'),), exceptions=exceptions),
+                for i in random.sample(await Tech.get_all_items(requirements=(('shop_category', 'daily'),), exceptions=exceptions,
+                                                               available_only=True),
                                        config.daily_shop_items_types[key]):
                     daily_shop.append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
             else:
                 for i in random.sample(
-                        await Tech.get_all_items(requirements=(('shop_category', 'daily'), ('skin_config', 'type', key))),
+                        await Tech.get_all_items(requirements=(('shop_category', 'daily'), ('skin_config', 'type', key)),
+                                                 available_only=True),
                         config.daily_shop_items_types[key]):
                     daily_shop.append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
         unique_items = list(set(daily_shop))
