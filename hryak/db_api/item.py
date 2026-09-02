@@ -232,7 +232,10 @@ class Item:
     @staticmethod
     async def get_shop_cooldown(item_id: str):
         result = await Item.get_data(item_id, 'shop_cooldown')
-        if result is not None:
+        # an empty dict is not None but has no first key either - an item written with
+        # {} rather than null used to raise IndexError here, which surfaced as the buy
+        # button never answering at all
+        if result:
             return int(list(result.keys())[0]), int(list(result.values())[0])
         return None, None
 

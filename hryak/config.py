@@ -250,6 +250,12 @@ def item_in_context(item: dict, context: str = None) -> dict:
 # written YYYY-MM-DD happens once and never again.
 item_availability_key = 'shop_availability'
 
+# Which money comes first when one shop page mixes them. A price only means anything
+# against another price in the same currency - five cookies is not cheaper than a hundred
+# and twenty coins, it is a different question - so a page groups by this and sorts within
+# the group. Anything not named here sorts after everything that is.
+shop_currency_order = ('coins', 'hollars', 'cookie')
+
 
 def _availability_date(bound: str, year: int):
     """One end of a window as a date, and whether it named its own year.

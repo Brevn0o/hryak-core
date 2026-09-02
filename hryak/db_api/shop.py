@@ -109,6 +109,24 @@ class Shop:
             return int(result)
 
     @staticmethod
+    async def page_order_key(item_id: str, context: str = None):
+        """How one item sorts on a shop page.
+
+        Three things, in order. Permanent stock first and seasonal after it, so a page
+        reads as the usual shelf with whatever is in season added on the end, rather than
+        a limited-time item taking the top slot because it happens to be cheap. Then the
+        currency, because a price only means something against another price in the same
+        money - five cookies is not cheaper than a hundred and twenty coins, it is a
+        different question. Then, inside one currency, the cheapest first.
+        """
+        item = config.items.get(await Item.clean_id(item_id)) or {}
+        seasonal = bool(config.item_in_context(item, context).get(config.item_availability_key))
+        currency = await Item.get_market_price_currency(item_id, context)
+        rank = config.shop_currency_order.index(currency) \
+            if currency in config.shop_currency_order else len(config.shop_currency_order)
+        return seasonal, rank, await Item.get_market_price(item_id, context) or 0
+
+    @staticmethod
     async def update():
 
         data = {
@@ -123,11 +141,11 @@ class Shop:
             data['consumables_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
         for i in ["knife", "grill"]:
             data['tools_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
-        # cheapest first, the order the hardcoded list used to give. Seasonal cases come
-        # and go with their window, so the page is whatever is on sale today
+        # the permanent cases in price order, then whatever is in season. Seasonal cases
+        # come and go with their window, so the page is whatever is on sale today
         cases = await Tech.get_all_items((('shop_category', 'cases'),), available_only=True)
-        case_prices = await asyncio.gather(*(Item.get_market_price(i) for i in cases))
-        for _, i in sorted(zip(case_prices, cases), key=lambda pair: pair[0]):
+        case_order = await asyncio.gather(*(Shop.page_order_key(i) for i in cases))
+        for _, i in sorted(zip(case_order, cases), key=lambda pair: pair[0]):
             data['case_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
         for i in sorted(await Tech.get_all_items((('shop_category', 'premium_skins'),), available_only=True)):
             data['premium_skins_shop'].append(
