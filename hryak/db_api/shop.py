@@ -127,35 +127,50 @@ class Shop:
         return seasonal, rank, await Item.get_market_price(item_id, context) or 0
 
     @staticmethod
-    async def update():
+    async def entry(item_id: str, amount: int = 1, context: str = None):
+        """One line of a shop page, in the form the reader and the buyer both parse."""
+        return (f'{item_id}.a={amount}.p={await Item.get_market_price(item_id, context)}'
+                f'.c={await Item.get_market_price_currency(item_id, context)}')
 
-        data = {
+    @staticmethod
+    async def static_pages():
+        """Every page that does not draw at random, built fresh from the config.
+
+        Split out of update() so update_if_needed can ask whether the config has moved
+        underneath the stored shop. A new seasonal item, a changed price or a changed
+        order should reach the shop on the next loop rather than at the next midnight -
+        and since these pages are worked out rather than drawn, building one twice gives
+        the same answer twice, which is what makes comparing them meaningful.
+        """
+        pages = {
             'consumables_shop': [],
             'tools_shop': [],
-            'daily_shop':await Shop.generate_shop_daily_items(),
             'case_shop': [],
             'premium_skins_shop': [],
             'coins_shop': [f'coins.a={k}.p={round(v)}.c=hollars' for k, v in config.coins_prices.items()],
         }
         for i in ["laxative", 'compound_feed', "activated_charcoal", "milk"]:
-            data['consumables_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
+            pages['consumables_shop'].append(await Shop.entry(i))
         for i in ["knife", "grill"]:
-            data['tools_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
+            pages['tools_shop'].append(await Shop.entry(i))
         # the permanent cases in price order, then whatever is in season. Seasonal cases
         # come and go with their window, so the page is whatever is on sale today
         cases = await Tech.get_all_items((('shop_category', 'cases'),), available_only=True)
         case_order = await asyncio.gather(*(Shop.page_order_key(i) for i in cases))
         for _, i in sorted(zip(case_order, cases), key=lambda pair: pair[0]):
-            data['case_shop'].append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
-        for i in sorted(await Tech.get_all_items((('shop_category', 'premium_skins'),), available_only=True)):
-            data['premium_skins_shop'].append(
-                f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
-        async def get_price(i):
-            return await Item.get_market_price(i)
+            pages['case_shop'].append(await Shop.entry(i))
+        # dearest first here, the way this page has always read
+        premium = sorted(set(await Tech.get_all_items((('shop_category', 'premium_skins'),),
+                                                      available_only=True)))
+        premium_prices = await asyncio.gather(*(Item.get_market_price(i) for i in premium))
+        for _, i in sorted(zip(premium_prices, premium), key=lambda pair: pair[0], reverse=True):
+            pages['premium_skins_shop'].append(await Shop.entry(i))
+        return pages
 
-        prices = await asyncio.gather(*(Item.get_market_price(x) for x in set(data['premium_skins_shop'])))
-        sorted_items = [x for _, x in sorted(zip(prices, set(data['premium_skins_shop'])), key=lambda pair: pair[0], reverse=True)]
-        data['premium_skins_shop'] = sorted_items
+    @staticmethod
+    async def update():
+        data = {**await Shop.static_pages(),
+                'daily_shop': await Shop.generate_shop_daily_items()}
         await Connection.make_request(
             f"INSERT INTO {config.shop_schema} (timestamp, data) "
             f"VALUES ('{Func.generate_current_timestamp()}', %s)",
@@ -260,14 +275,24 @@ class Shop:
         Midnight is UTC, matching the weekly rotation and the windows themselves, so a
         season starts at one moment for everybody rather than wherever the bot is running.
 
+        It also rebuilds whenever the worked-out pages no longer match what is stored,
+        which is what carries a config change through: an item added to a page, a price
+        edited, an order changed or a season opening or closing all reach the shop on the
+        next loop instead of waiting for a midnight that may be most of a day away. The
+        daily draw is left out of that comparison - it is random by design, so it would
+        never match itself and would force a rebuild every minute.
+
         Safe to call as often as you like - it decides on its own whether anything
         is due. Returns True if a new shop state was written.
         """
         last_update_timestamp = await Shop.get_update_timestamp()
         midnight = int(datetime.datetime.now(datetime.timezone.utc)
                        .replace(hour=0, minute=0, second=0, microsecond=0).timestamp())
-        if last_update_timestamp is None or last_update_timestamp < midnight \
-                or Shop.season_turned_over(last_update_timestamp):
+        if last_update_timestamp is None or last_update_timestamp < midnight:
+            await Shop.update()
+            return True
+        stored = await Shop.get_data() or {}
+        if any(stored.get(page) != entries for page, entries in (await Shop.static_pages()).items()):
             await Shop.update()
             return True
         return False

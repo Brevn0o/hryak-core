@@ -11,6 +11,7 @@ from hryak import config
 from .user import User
 from .item import Item
 from .pig import Pig
+from .history import History
 
 
 class Tech:
@@ -60,14 +61,30 @@ class Tech:
             return (await Pig.is_ready_to_butcher(user_id)
                     and await Item.get_amount('knife', user_id) > 0)
 
+        async def ready_to_feed_server_pig(user_id):
+            # the community cooldown is one per person across every server, counted off
+            # their own history rather than any one guild's - so readiness is the same
+            # question here as it is in feed_guild_pig
+            last = await History.get_last_server_feed(user_id)
+            if last is None:
+                return False
+            return Func.generate_current_timestamp() >= last + config.guild_pig_feed_cooldown
+
         readiness = {'feed_reminder': Pig.is_ready_to_feed,
-                     'butcher_reminder': ready_to_butcher}
+                     'butcher_reminder': ready_to_butcher,
+                     'server_feed_reminder': ready_to_feed_server_pig}
+        # narrowed in sql where a kind can be: readiness is asked per person in python, so
+        # anything ruled out here is work the loop never has to do. Somebody who has never
+        # fed a community pig has nothing to be reminded of and must never be walked.
+        extra = {'server_feed_reminder':
+                 " AND JSON_LENGTH(history->'$.server_feed_history') > 0"}
         if kind not in readiness:
             return []
         candidates = await Tech.get_all_users(
             where=f"JSON_EXTRACT(settings, '$.notifications.{kind}') = CAST('true' AS JSON) "
                   f"AND (JSON_EXTRACT(stats, '$.notifications_sent.{kind}') IS NULL "
-                  f"OR JSON_EXTRACT(stats, '$.notifications_sent.{kind}') = CAST('false' AS JSON))")
+                  f"OR JSON_EXTRACT(stats, '$.notifications_sent.{kind}') = CAST('false' AS JSON))"
+                  f"{extra.get(kind, '')}")
         return [user_id for user_id in candidates if await readiness[kind](user_id)]
 
     @staticmethod
