@@ -306,6 +306,67 @@ def item_available_now(item: dict, context: str = None, now: datetime.datetime =
     return today >= start_date or today < end_date
 
 
+def validate_items(items_to_check: dict = None, root: str = None) -> list:
+    """Every way an item can be quietly wrong, checked in one place.
+
+    None of these raise anywhere - they simply make the item behave oddly, and always
+    somewhere far from the config that caused it. A skin tagged as an ordinary inventory
+    item never reaches the wardrobe, so its owner can never wear it. An empty shop_cooldown
+    used to take the buy button down with an IndexError. A skin config that exists in one
+    context and not the other took a whole embed with it. Each of those cost real time to
+    find from the symptom, and each is one line to spot from here.
+
+    Returns a list of (item_id, problem) - reporting rather than raising, since a bad
+    entry should be shouted about on boot, not stop the bot from starting.
+    """
+    import os
+    items_to_check = items if items_to_check is None else items_to_check
+    root = os.path.dirname(os.path.abspath(__file__)) if root is None else root
+    found = []
+
+    def contexts(item):
+        return (('individual', item.get('individual_config') or {}),
+                ('server', item.get('server_config') or {}))
+
+    for item_id, item in items_to_check.items():
+        if item.get('type') == 'skin':
+            # the wardrobe list is filtered on this, and it is the only way to wear one
+            if item.get('inventory_type') != 'wardrobe':
+                found.append((item_id, f"is a skin but inventory_type is "
+                                       f"{item.get('inventory_type')!r}, so it never reaches the wardrobe"))
+            if not any((cfg.get('skin_config') or {}).get('type') for _, cfg in contexts(item)):
+                found.append((item_id, 'is a skin with no skin_config.type in either context'))
+
+        for name, cfg in contexts(item):
+            if isinstance(cfg.get('shop_cooldown'), dict) and not cfg['shop_cooldown']:
+                found.append((item_id, f'[{name}] shop_cooldown is an empty dict - '
+                                       f'use null for "no limit"'))
+            if cfg.get('shop_category') and cfg.get('market_price') is None:
+                found.append((item_id, f"[{name}] is listed in the "
+                                       f"{cfg['shop_category']!r} shop with no price"))
+            # a price only has to name its money when something can actually be paid
+            if cfg.get('market_price') is not None and not cfg.get('market_price_currency') \
+                    and (cfg.get('shop_category') or cfg.get('salable')):
+                found.append((item_id, f'[{name}] has a price but no currency'))
+            if cfg.get('salable') and cfg.get('sell_price') is None:
+                found.append((item_id, f'[{name}] is salable but has no sell_price'))
+
+            window = cfg.get(item_availability_key)
+            if window and not item_available_now({'individual_config': {item_availability_key: window}}):
+                pass  # a closed season is normal; only an unreadable one is worth saying
+
+            paths = [cfg['image']] if isinstance(cfg.get('image'), str) else []
+            for layer in ((cfg.get('skin_config') or {}).get('layers') or {}).values():
+                paths += [(layer or {}).get(k) for k in ('image', 'shadow')
+                          if isinstance((layer or {}).get(k), str)]
+            for path in paths:
+                if path.startswith('http'):
+                    continue
+                if not os.path.exists(os.path.join(root, path)):
+                    found.append((item_id, f'[{name}] points at a missing file: {path}'))
+    return found
+
+
 skin_layers_rules = {
     'mouth': {'before': [
         'nose',
