@@ -71,6 +71,29 @@ class Stats:
         await Stats.set_stats(user_id, stats)
 
     @staticmethod
+    async def get_tutorial(user_id):
+        """What the tutorial has already said to this person, defaults filled in."""
+        tutorial = (await Stats.get_stats(user_id)).get('tutorial') or {}
+        return {'sent': dict(tutorial.get('sent') or {}), 'total': int(tutorial.get('total') or 0)}
+
+    @staticmethod
+    async def add_tutorial_sent(user_id, key: str, amount: int = 1):
+        """Records that one entry spoke, and returns the state after doing so.
+
+        Written before the message is actually delivered, not after: delivery is paced
+        with typing pauses and can take seconds, and two commands run inside that window
+        would both read the old count and both decide they were first.
+        """
+        stats = await Stats.get_stats(user_id)
+        tutorial = {'sent': dict((stats.get('tutorial') or {}).get('sent') or {}),
+                    'total': int((stats.get('tutorial') or {}).get('total') or 0)}
+        tutorial['sent'][key] = tutorial['sent'].get(key, 0) + amount
+        tutorial['total'] += amount
+        stats['tutorial'] = tutorial
+        await Stats.set_stats(user_id, stats)
+        return tutorial
+
+    @staticmethod
     async def add_pig_fed(user_id, amount: int = 1):
         stats = await Stats.get_stats(user_id)
         stats['pig_fed'] += amount

@@ -185,7 +185,11 @@ default_stats = {'pig_fed': 0, 'money_earned': 0, 'commands_used': {}, 'items_us
                  # goes out, cleared by the thing it was reminding about. keeps one reminder
                  # per cooldown rather than one per time the task happens to run
                  'notifications_sent': {'feed_reminder': False, 'butcher_reminder': False,
-                                        'server_feed_reminder': False}}
+                                        'server_feed_reminder': False},
+                 # what the tutorial has already said to this person. 'sent' counts each
+                 # entry by its trigger, so an entry can be allowed to fire more than once
+                 # without the guide losing track; 'total' caps the whole thing.
+                 'tutorial': {'sent': {}, 'total': 0}}
 default_history = {'feed_history': [], 'butcher_history': [], 'shop_history': [], 'streak_history': [],
                    'server_feed_history': []}
 
