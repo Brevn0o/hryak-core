@@ -83,18 +83,46 @@ class History:
         return history[f'server_feed_history']
 
     @staticmethod
-    async def add_server_feed_to_history(user_id: int, timestamp: int):
+    def server_feed_timestamp(entry):
+        """When a server feed happened, whichever shape the entry is written in.
+
+        Entries were a bare timestamp before the guild was recorded next to them. Both
+        have to read: an account whose last feed predates the change must still have its
+        cooldown counted, rather than reading as somebody who has never fed at all.
+        """
+        return entry.get('timestamp') if isinstance(entry, dict) else entry
+
+    @staticmethod
+    async def add_server_feed_to_history(user_id: int, timestamp: int, guild_id=None):
+        """Records a community feed, and which pig it was.
+
+        The guild is kept as a string - discord ids run past what json numbers hold
+        exactly, and one written as a number comes back rounded.
+        """
         history = await History.get(user_id)
-        history[f'server_feed_history'].append(timestamp)
+        history['server_feed_history'].append(
+            {'timestamp': timestamp, 'guild_id': str(guild_id)} if guild_id is not None
+            else timestamp)
         await History.update_history(user_id, history)
 
     @staticmethod
     async def get_last_server_feed(user_id: int):
         history = await History.get(user_id)
-        last_server_feed = None
-        if len(history[f'server_feed_history']) > 0:
-            last_server_feed = history[f'server_feed_history'][-1]
-        return last_server_feed
+        entries = history['server_feed_history']
+        return History.server_feed_timestamp(entries[-1]) if entries else None
+
+    @staticmethod
+    async def get_last_server_fed_guild(user_id: int):
+        """The last community pig this person fed, or None if that was never recorded.
+
+        Walks back rather than reading the last entry alone, so somebody whose most recent
+        feed predates the guild being stored still gets the one before it that does.
+        """
+        history = await History.get(user_id)
+        for entry in reversed(history['server_feed_history']):
+            if isinstance(entry, dict) and entry.get('guild_id'):
+                return entry['guild_id']
+        return None
 
     @staticmethod
     async def get_butcher_history(user_id: int):

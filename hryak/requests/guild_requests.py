@@ -26,7 +26,7 @@ async def feed_guild_pig(user_id: int, guild_id: int):
         return {'status': Status.NOT_READY, 'try_again': next_feed}
     weight_add = round(random.uniform(1, 10), 1)
     await GuildPig.add_feed(guild_id, user_id, weight_add)
-    await History.add_server_feed_to_history(user_id, Func.generate_current_timestamp())
+    await History.add_server_feed_to_history(user_id, Func.generate_current_timestamp(), guild_id)
     # the reminder has served its purpose, so the next cooldown can raise a fresh one
     await Stats.set_notification_sent(user_id, 'server_feed_reminder', False)
     return {'status': Status.SUCCESS,
