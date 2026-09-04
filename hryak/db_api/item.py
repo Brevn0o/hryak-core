@@ -175,7 +175,16 @@ class Item:
 
     @staticmethod
     async def get_cases(item_id: str, context: str = None):
-        return await Item.get_data(item_id, 'cases', context)
+        """Which cases can drop this item, and at what chance. Empty when none can.
+
+        Empty rather than None on purpose, the same way get_skin_config is: the case drop
+        builder asks this of every item in the game to work out what a wooden case may
+        contain, so one item answering None takes every case in the game down with it.
+        An item whose config for this context is empty entirely - a skin sold only to
+        servers has nothing in its individual config - is exactly that case.
+        """
+        data = await Item.get_data(item_id, 'cases', context)
+        return data.copy() if data else {}
 
     @staticmethod
     async def get_rarity(item_id: str, lang: str = None):

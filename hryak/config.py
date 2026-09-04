@@ -333,6 +333,14 @@ def validate_items(items_to_check: dict = None, root: str = None) -> list:
                 ('server', item.get('server_config') or {}))
 
     for item_id, item in items_to_check.items():
+        # an item whose config for a context is empty answers None to every getter that
+        # reads it, and a None where a mapping was expected takes whatever asked with it -
+        # an empty individual_config is what broke every case in the game
+        for name, cfg in contexts(item):
+            if name == 'individual' and not cfg:
+                found.append((item_id, 'has an empty individual_config - every field reads '
+                                       'as None, which breaks anything that asks for one'))
+
         if item.get('type') == 'skin':
             # the wardrobe list is filtered on this, and it is the only way to wear one
             if item.get('inventory_type') != 'wardrobe':
