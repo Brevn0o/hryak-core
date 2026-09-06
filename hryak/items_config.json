@@ -12798,17 +12798,17 @@
     "ancient_body": {
         "id": "ancient_body",
         "name": {
-            "en": "Ancient body",
-            "ru": "Древнее тело",
-            "uk": "Стародавнє тіло"
+            "en": "Ancient cosplay",
+            "ru": "Древний косплей",
+            "uk": "Стародавній косплей"
         },
         "description": {
-            "en": "Straight out of the museum, big eyes included",
-            "ru": "Прямиком из музея, вместе с большими глазами",
-            "uk": "Прямісінько з музею, разом з великими очима"
+            "en": "Cosplay of the most ancient hryak we could find!",
+            "ru": "Косплей самого древнего хряка, которого мы смогли найти!",
+            "uk": "Косплей найдавнішого хряка, якого ми змогли знайти!"
         },
         "type": "skin",
-        "emoji": "🏺",
+        "emoji": "🐖",
         "inventory_type": "wardrobe",
         "rarity": "5",
         "cooked_item_id": null,
@@ -12868,14 +12868,14 @@
     "old_body": {
         "id": "old_body",
         "name": {
-            "en": "Old body",
-            "ru": "Старое тело",
-            "uk": "Старе тіло"
+            "en": "Old School paint",
+            "ru": "Олдскульная краска",
+            "uk": "Олдскульна фарба"
         },
         "description": {
-            "en": "The shape Hryak had before he grew up",
-            "ru": "Таким Хряк был до того, как повзрослел",
-            "uk": "Таким Хряк був до того, як подорослішав"
+            "en": "Old Hryak in all its glory!",
+            "ru": "Старый Хряк во всей красе!",
+            "uk": "Старий Хряк у всій красі!"
         },
         "type": "skin",
         "emoji": "🐷",
@@ -13042,17 +13042,17 @@
     "ancient_bow_tie": {
         "id": "ancient_bow_tie",
         "name": {
-            "en": "Ancient bow tie",
-            "ru": "Древняя бабочка",
-            "uk": "Стародавня краватка-метелик"
+            "en": "Old bow tie",
+            "ru": "Старая бабочка",
+            "uk": "Стара краватка-метелик"
         },
         "description": {
-            "en": "Formal wear from a much older banquet",
-            "ru": "Парадный наряд с очень старого банкета",
-            "uk": "Парадне вбрання з дуже старого бенкету"
+            "en": "Tie with an integrated white outline.",
+            "ru": "Бабочка со встроенной белой обводкой.",
+            "uk": "Метелик із вбудованим білим контуром."
         },
         "type": "skin",
-        "emoji": "🎀",
+        "emoji": "👔",
         "inventory_type": "wardrobe",
         "rarity": "3",
         "cooked_item_id": null,
@@ -13127,14 +13127,14 @@
     "ancient_clown_nose": {
         "id": "ancient_clown_nose",
         "name": {
-            "en": "Ancient clown nose",
-            "ru": "Древний клоунский нос",
-            "uk": "Стародавній клоунський ніс"
+            "en": "Old clown nose",
+            "ru": "Старый клоунский нос",
+            "uk": "Старий клоунський ніс"
         },
         "description": {
-            "en": "The joke is older than you are",
-            "ru": "Эта шутка старше тебя",
-            "uk": "Цей жарт старший за тебе"
+            "en": "Red ball instead of your hryak's nose.",
+            "ru": "Красный шарик вместо пятака твоего хряка.",
+            "uk": "Червона кулька замість п'ятачка твого хряка."
         },
         "type": "skin",
         "emoji": "🤡",
@@ -13172,17 +13172,17 @@
     "ancient_star_glasses": {
         "id": "ancient_star_glasses",
         "name": {
-            "en": "Ancient star glasses",
-            "ru": "Древние очки-звёзды",
-            "uk": "Стародавні окуляри-зірки"
+            "en": "Old School Star glasses",
+            "ru": "Олдскульные очки-звёзды",
+            "uk": "Олдскульні окуляри-зірки"
         },
         "description": {
-            "en": "A vintage look at a bright future",
-            "ru": "Винтажный взгляд на светлое будущее",
-            "uk": "Вінтажний погляд на світле майбутнє"
+            "en": "Maybe a bit outdated..",
+            "ru": "Возможно, слегка устарели..",
+            "uk": "Можливо, трохи застаріли.."
         },
         "type": "skin",
-        "emoji": "🕶️",
+        "emoji": "🕶",
         "inventory_type": "wardrobe",
         "rarity": "3",
         "cooked_item_id": null,
@@ -13214,17 +13214,17 @@
     "ancient_sunglasses": {
         "id": "ancient_sunglasses",
         "name": {
-            "en": "Ancient sunglasses",
-            "ru": "Древние солнцезащитные очки",
-            "uk": "Стародавні сонцезахисні окуляри"
+            "en": "Old School sunglasses",
+            "ru": "Олдскульные солнцезащитные очки",
+            "uk": "Олдскульні сонцезахисні окуляри"
         },
         "description": {
-            "en": "They stopped the sun back then too",
-            "ru": "Они и тогда спасали от солнца",
-            "uk": "Вони й тоді рятували від сонця"
+            "en": "Wow.. I can't see anything in these!",
+            "ru": "Ого.. в них вообще ничего не видно!",
+            "uk": "Ого.. у них взагалі нічого не видно!"
         },
         "type": "skin",
-        "emoji": "🕶️",
+        "emoji": "🕶",
         "inventory_type": "wardrobe",
         "rarity": "3",
         "cooked_item_id": null,
@@ -13556,17 +13556,17 @@
     "hyak_badge": {
         "id": "hyak_badge",
         "name": {
-            "en": "Hryak badge",
-            "ru": "Значок Хряка",
-            "uk": "Значок Хряка"
+            "en": "Hyak clan Emblem",
+            "ru": "Эмблема клана Hyak",
+            "uk": "Емблема клану Hyak"
         },
         "description": {
-            "en": "Proof you were here",
-            "ru": "Доказательство, что ты здесь был",
-            "uk": "Доказ, що ти тут був"
+            "en": "On the back of this emblem, there is a nearly worn-away inscription: \"Only owners of the 'Hyak Face' may enter here.\"",
+            "ru": "На обратной стороне эмблемы почти стёртая надпись: «Сюда могут войти только владельцы „Hyak Face“».",
+            "uk": "На зворотному боці емблеми майже стертий напис: «Сюди можуть увійти лише власники „Hyak Face“»."
         },
         "type": "skin",
-        "emoji": "🛡️",
+        "emoji": "🛡",
         "inventory_type": "wardrobe",
         "rarity": "5",
         "cooked_item_id": null,
