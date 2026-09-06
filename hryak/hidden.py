@@ -321,9 +321,14 @@ class Hidden:
 
         async def fix_img_to_paste(img):
             if layer == 'right_ear' and type_ != 'shadow' and right_ear_line is not None:
-                right_ear_img = Image.open(
-                    await Func.get_image_path_from_link(await Item.get_skin_right_ear_line(item_id, right_ear_line, context)))
-                img = Image.alpha_composite(img, right_ear_img)
+                # a hat asks for the ear fold to be redrawn over it, but only the bodies
+                # that were drawn with one can supply it - eight cannot, and asking anyway
+                # handed a None to get_image_path_from_link and took the whole pig down.
+                # no line is a body without that detail, not a reason to fail to draw it
+                right_ear_line_path = await Item.get_skin_right_ear_line(item_id, right_ear_line, context)
+                if right_ear_line_path is not None:
+                    right_ear_img = Image.open(await Func.get_image_path_from_link(right_ear_line_path))
+                    img = Image.alpha_composite(img, right_ear_img)
             if layer == 'body' and left_eye_outline is not None:
                 left_eye_outline_img = Image.open(await Func.get_image_path_from_link(left_eye_outline))
                 right_eye_outline_img = Image.open(await Func.get_image_path_from_link(right_eye_outline))
