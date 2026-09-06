@@ -12839,13 +12839,21 @@
                     },
                     "right_eye": {
                         "image": "bin/images/ancient_body-right_eye.png"
+                    },
+                    "left_pupil": {
+                        "image": "bin/images/ancient_body-left_pupil.png"
+                    },
+                    "right_pupil": {
+                        "image": "bin/images/ancient_body-right_pupil.png"
                     }
                 },
                 "not_compatible_with": [
-                    "eyes"
+                    "eyes",
+                    "pupils"
                 ],
                 "hide": [
-                    "eyes"
+                    "eyes",
+                    "pupils"
                 ],
                 "type": "body"
             },
