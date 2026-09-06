@@ -12794,5 +12794,878 @@
             "market_price_currency": "coins",
             "shop_category": null
         }
+    },
+    "ancient_body": {
+        "id": "ancient_body",
+        "name": {
+            "en": "Ancient body",
+            "ru": "Древнее тело",
+            "uk": "Стародавнє тіло"
+        },
+        "description": {
+            "en": "Straight out of the museum, big eyes included",
+            "ru": "Прямиком из музея, вместе с большими глазами",
+            "uk": "Прямісінько з музею, разом з великими очима"
+        },
+        "type": "skin",
+        "emoji": "🏺",
+        "inventory_type": "wardrobe",
+        "rarity": "5",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/ancient_body-body.png",
+                        "shadow": "bin/images/ancient_body-body-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/ancient_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/ancient_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/ancient_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/ancient_body-tail.png",
+                        "shadow": "bin/images/ancient_body-tail-shadow.png"
+                    },
+                    "left_eye": {
+                        "image": "bin/images/ancient_body-left_eye.png"
+                    },
+                    "right_eye": {
+                        "image": "bin/images/ancient_body-right_eye.png"
+                    }
+                },
+                "not_compatible_with": [
+                    "eyes"
+                ],
+                "hide": [
+                    "eyes"
+                ],
+                "type": "body"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "old_body": {
+        "id": "old_body",
+        "name": {
+            "en": "Old body",
+            "ru": "Старое тело",
+            "uk": "Старе тіло"
+        },
+        "description": {
+            "en": "The shape Hryak had before he grew up",
+            "ru": "Таким Хряк был до того, как повзрослел",
+            "uk": "Таким Хряк був до того, як подорослішав"
+        },
+        "type": "skin",
+        "emoji": "🐷",
+        "inventory_type": "wardrobe",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/old_body-body.png",
+                        "shadow": "bin/images/default_body-body-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/old_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/old_body-left_ear.png",
+                        "shadow": "bin/images/old_body-left_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/old_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/old_body-tail.png",
+                        "shadow": "bin/images/default_body-tail-shadow.png"
+                    }
+                },
+                "type": "body"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "german_body": {
+        "id": "german_body",
+        "name": {
+            "en": "German body",
+            "ru": "Немецкое тело",
+            "uk": "Німецьке тіло"
+        },
+        "description": {
+            "en": "Black, red and gold, from snout to tail",
+            "ru": "Чёрный, красный и золотой, от пятака до хвоста",
+            "uk": "Чорний, червоний і золотий, від п’ятачка до хвоста"
+        },
+        "type": "skin",
+        "emoji": "🇩🇪",
+        "inventory_type": "wardrobe",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/german_body-body.png",
+                        "shadow": "bin/images/default_body-body-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/german_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/german_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/german_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/german_body-tail.png",
+                        "shadow": "bin/images/default_body-tail-shadow.png"
+                    }
+                },
+                "type": "body"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "bulb_body": {
+        "id": "bulb_body",
+        "name": {
+            "en": "Bulb body",
+            "ru": "Тело-лампочка",
+            "uk": "Тіло-лампочка"
+        },
+        "description": {
+            "en": "An idea so bright you can read by it",
+            "ru": "Идея настолько яркая, что при ней можно читать",
+            "uk": "Ідея настільки яскрава, що при ній можна читати"
+        },
+        "type": "skin",
+        "emoji": "💡",
+        "inventory_type": "wardrobe",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "body": {
+                        "image": "bin/images/bulb_body-body.png",
+                        "shadow": "bin/images/default_body-body-shadow.png"
+                    },
+                    "right_ear": {
+                        "image": "bin/images/bulb_body-right_ear.png",
+                        "shadow": "bin/images/default_body-right_ear-shadow.png"
+                    },
+                    "left_ear": {
+                        "image": "bin/images/bulb_body-left_ear.png",
+                        "shadow": "bin/images/default_body-left_ear-shadow.png"
+                    },
+                    "nose": {
+                        "image": "bin/images/bulb_body-nose.png"
+                    },
+                    "tail": {
+                        "image": "bin/images/bulb_body-tail.png",
+                        "shadow": "bin/images/bulb_body-tail-shadow.png"
+                    }
+                },
+                "type": "body"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ancient_bow_tie": {
+        "id": "ancient_bow_tie",
+        "name": {
+            "en": "Ancient bow tie",
+            "ru": "Древняя бабочка",
+            "uk": "Стародавня краватка-метелик"
+        },
+        "description": {
+            "en": "Formal wear from a much older banquet",
+            "ru": "Парадный наряд с очень старого банкета",
+            "uk": "Парадне вбрання з дуже старого бенкету"
+        },
+        "type": "skin",
+        "emoji": "🎀",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/ancient_bow_tie-1.png"
+                    }
+                },
+                "type": "tie"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ancient_case_hat": {
+        "id": "ancient_case_hat",
+        "name": {
+            "en": "Ancient case hat",
+            "ru": "Древняя шляпа-кейс",
+            "uk": "Стародавній капелюх-кейс"
+        },
+        "description": {
+            "en": "Wearing your winnings on your head",
+            "ru": "Носи свой выигрыш прямо на голове",
+            "uk": "Носи свій виграш просто на голові"
+        },
+        "type": "skin",
+        "emoji": "🎩",
+        "inventory_type": "wardrobe",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/ancient_case_hat-1.png",
+                        "before": "right_ear"
+                    }
+                },
+                "type": "hat"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ancient_clown_nose": {
+        "id": "ancient_clown_nose",
+        "name": {
+            "en": "Ancient clown nose",
+            "ru": "Древний клоунский нос",
+            "uk": "Стародавній клоунський ніс"
+        },
+        "description": {
+            "en": "The joke is older than you are",
+            "ru": "Эта шутка старше тебя",
+            "uk": "Цей жарт старший за тебе"
+        },
+        "type": "skin",
+        "emoji": "🤡",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "nose": {
+                        "image": "bin/images/ancient_clown_nose-nose.png"
+                    }
+                },
+                "not_compatible_with": [
+                    "piercing_nose"
+                ],
+                "type": "nose"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ancient_star_glasses": {
+        "id": "ancient_star_glasses",
+        "name": {
+            "en": "Ancient star glasses",
+            "ru": "Древние очки-звёзды",
+            "uk": "Стародавні окуляри-зірки"
+        },
+        "description": {
+            "en": "A vintage look at a bright future",
+            "ru": "Винтажный взгляд на светлое будущее",
+            "uk": "Вінтажний погляд на світле майбутнє"
+        },
+        "type": "skin",
+        "emoji": "🕶️",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/ancient_star_glasses-1.png"
+                    }
+                },
+                "type": "glasses"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ancient_sunglasses": {
+        "id": "ancient_sunglasses",
+        "name": {
+            "en": "Ancient sunglasses",
+            "ru": "Древние солнцезащитные очки",
+            "uk": "Стародавні сонцезахисні окуляри"
+        },
+        "description": {
+            "en": "They stopped the sun back then too",
+            "ru": "Они и тогда спасали от солнца",
+            "uk": "Вони й тоді рятували від сонця"
+        },
+        "type": "skin",
+        "emoji": "🕶️",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/ancient_sunglasses-1.png"
+                    }
+                },
+                "hide": [
+                    "left_eye",
+                    "right_eye",
+                    "left_pupil",
+                    "right_pupil"
+                ],
+                "type": "glasses"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "bee_suit": {
+        "id": "bee_suit",
+        "name": {
+            "en": "Bee suit",
+            "ru": "Костюм пчеловода",
+            "uk": "Костюм бджоляра"
+        },
+        "description": {
+            "en": "The honey is worth the trouble",
+            "ru": "Мёд стоит этих хлопот",
+            "uk": "Мед вартий цих клопотів"
+        },
+        "type": "skin",
+        "emoji": "🐝",
+        "inventory_type": "wardrobe",
+        "rarity": "5",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/bee_suit-1.png"
+                    }
+                },
+                "type": "suit"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "golden_suit": {
+        "id": "golden_suit",
+        "name": {
+            "en": "Golden suit",
+            "ru": "Золотой костюм",
+            "uk": "Золотий костюм"
+        },
+        "description": {
+            "en": "Subtlety was never the point",
+            "ru": "Скромность тут ни при чём",
+            "uk": "Скромність тут ні до чого"
+        },
+        "type": "skin",
+        "emoji": "✨",
+        "inventory_type": "wardrobe",
+        "rarity": "5",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/golden_suit-1.png"
+                    }
+                },
+                "type": "suit"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "suit": {
+        "id": "suit",
+        "name": {
+            "en": "Suit",
+            "ru": "Костюм",
+            "uk": "Костюм"
+        },
+        "description": {
+            "en": "A pig with a meeting to get to",
+            "ru": "Хряк, которого ждут на совещании",
+            "uk": "Хряк, на якого чекають на нараді"
+        },
+        "type": "skin",
+        "emoji": "👔",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/suit-1.png"
+                    }
+                },
+                "type": "suit"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ww2_suit": {
+        "id": "ww2_suit",
+        "name": {
+            "en": "WW2 suit",
+            "ru": "Костюм времён Второй мировой",
+            "uk": "Костюм часів Другої світової"
+        },
+        "description": {
+            "en": "Standard issue, a very long time ago",
+            "ru": "Стандартная выдача, очень давно",
+            "uk": "Стандартна видача, дуже давно"
+        },
+        "type": "skin",
+        "emoji": "🎖️",
+        "inventory_type": "wardrobe",
+        "rarity": "5",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/ww2_suit-1.png"
+                    }
+                },
+                "type": "suit"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "bread": {
+        "id": "bread",
+        "name": {
+            "en": "Bread",
+            "ru": "Хлеб",
+            "uk": "Хліб"
+        },
+        "description": {
+            "en": "Half a loaf, permanently",
+            "ru": "Полбуханки, и это навсегда",
+            "uk": "Півхлібини, і це назавжди"
+        },
+        "type": "skin",
+        "emoji": "🍞",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/bread-1.png"
+                    }
+                },
+                "type": "mouth"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "fangs": {
+        "id": "fangs",
+        "name": {
+            "en": "Fangs",
+            "ru": "Клыки",
+            "uk": "Ікла"
+        },
+        "description": {
+            "en": "Mostly for show",
+            "ru": "В основном для вида",
+            "uk": "Здебільшого для вигляду"
+        },
+        "type": "skin",
+        "emoji": "🦷",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/fangs-1.png"
+                    }
+                },
+                "type": "mouth"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "toothbrush_mustache": {
+        "id": "toothbrush_mustache",
+        "name": {
+            "en": "Toothbrush mustache",
+            "ru": "Усы щёточкой",
+            "uk": "Вуса щіточкою"
+        },
+        "description": {
+            "en": "A very small amount of moustache",
+            "ru": "Совсем немного усов",
+            "uk": "Зовсім трохи вусів"
+        },
+        "type": "skin",
+        "emoji": "🪥",
+        "inventory_type": "wardrobe",
+        "rarity": "3",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/toothbrush_mustache-1.png"
+                    }
+                },
+                "type": "mouth"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "hyak_badge": {
+        "id": "hyak_badge",
+        "name": {
+            "en": "Hryak badge",
+            "ru": "Значок Хряка",
+            "uk": "Значок Хряка"
+        },
+        "description": {
+            "en": "Proof you were here",
+            "ru": "Доказательство, что ты здесь был",
+            "uk": "Доказ, що ти тут був"
+        },
+        "type": "skin",
+        "emoji": "🛡️",
+        "inventory_type": "wardrobe",
+        "rarity": "5",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": {
+                "layers": {
+                    "1": {
+                        "image": "bin/images/hyak_badge-1.png"
+                    }
+                },
+                "type": "back"
+            },
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": null,
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0
+        },
+        "server_config": {}
+    },
+    "ancient_case": {
+        "id": "ancient_case",
+        "name": {
+            "en": "Ancient case",
+            "ru": "Древний кейс",
+            "uk": "Стародавній кейс"
+        },
+        "description": {
+            "en": "Sealed a long time ago. Something old is inside",
+            "ru": "Запечатан очень давно. Внутри что-то старое",
+            "uk": "Запечатаний дуже давно. Всередині щось старе"
+        },
+        "type": "case",
+        "emoji": "🏺",
+        "inventory_type": "inventory",
+        "rarity": "4",
+        "cooked_item_id": null,
+        "individual_config": {
+            "skin_config": null,
+            "market_price": null,
+            "market_price_currency": null,
+            "shop_category": null,
+            "shop_cooldown": null,
+            "buffs": null,
+            "salable": false,
+            "sell_price": null,
+            "sell_price_currency": null,
+            "tradable": true,
+            "case_drops": [
+                [
+                    {
+                        "items": [
+                            "ancient_body"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 1
+                    },
+                    {
+                        "items": [
+                            "old_body"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 10
+                    },
+                    {
+                        "items": [
+                            "ancient_clown_nose",
+                            "ancient_star_glasses",
+                            "ancient_sunglasses",
+                            "ancient_bow_tie"
+                        ],
+                        "amount": [
+                            1,
+                            1
+                        ],
+                        "chance": 100
+                    }
+                ]
+            ],
+            "requirements": null,
+            "cases": {},
+            "wealth_impact": 0.1,
+            "image": "bin/images/ancient_case.png",
+            "tax": "10%"
+        },
+        "server_config": {}
     }
 }
