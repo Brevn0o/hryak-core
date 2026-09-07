@@ -129,8 +129,8 @@ class Shop:
     @staticmethod
     async def entry(item_id: str, amount: int = 1, context: str = None):
         """One line of a shop page, in the form the reader and the buyer both parse."""
-        return (f'{item_id}.a={amount}.p={await Item.get_market_price(item_id, context)}'
-                f'.c={await Item.get_market_price_currency(item_id, context)}')
+        return (f'{item_id}?a={amount}&p={await Item.get_market_price(item_id, context)}'
+                f'&c={await Item.get_market_price_currency(item_id, context)}')
 
     @staticmethod
     async def static_pages():
@@ -147,7 +147,7 @@ class Shop:
             'tools_shop': [],
             'case_shop': [],
             'premium_skins_shop': [],
-            'coins_shop': [f'coins.a={k}.p={round(v)}.c=hollars' for k, v in config.coins_prices.items()],
+            'coins_shop': [f'coins?a={k}&p={round(v)}&c=hollars' for k, v in config.coins_prices.items()],
         }
         for i in ["laxative", 'compound_feed', "activated_charcoal", "milk"]:
             pages['consumables_shop'].append(await Shop.entry(i))
@@ -226,8 +226,7 @@ class Shop:
                 price = await Item.get_market_price(i, context='server')
                 if price is None:
                     continue
-                entries.append(f'{i}.a={1}.p={price}'
-                               f'.c={await Item.get_market_price_currency(i, context="server")}')
+                entries.append(await Shop.entry(i, context='server'))
             prices = await asyncio.gather(*(Item.get_market_price(x) for x in entries))
             data[page] = [x for _, x in sorted(zip(prices, entries), key=lambda pair: pair[0], reverse=True)]
         await Connection.make_request(
@@ -311,13 +310,13 @@ class Shop:
                 for i in random.sample(await Tech.get_all_items(requirements=(('shop_category', 'daily'),), exceptions=exceptions,
                                                                available_only=True),
                                        config.daily_shop_items_types[key]):
-                    daily_shop.append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
+                    daily_shop.append(await Shop.entry(i))
             else:
                 for i in random.sample(
                         await Tech.get_all_items(requirements=(('shop_category', 'daily'), ('skin_config', 'type', key)),
                                                  available_only=True),
                         config.daily_shop_items_types[key]):
-                    daily_shop.append(f'{i}.a={1}.p={await Item.get_market_price(i)}.c={await Item.get_market_price_currency(i)}')
+                    daily_shop.append(await Shop.entry(i))
         unique_items = list(set(daily_shop))
         price_tasks = [Item.get_market_price(x) for x in unique_items]
         prices = await asyncio.gather(*price_tasks)

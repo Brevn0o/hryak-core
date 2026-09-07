@@ -12564,7 +12564,8 @@
                 "not_compatible_with": [
                     "eyes",
                     "pupils",
-                    "legs"
+                    "tank_tracks",
+                    "nyusha_shoes"
                 ]
             },
             "market_price": 5000,
@@ -12771,9 +12772,9 @@
             "uk": "Вуса"
         },
         "description": {
-            "en": "A distinguished mustache for a distinguished community pig.",
-            "ru": "Солидные усы для солидного общего хряка.",
-            "uk": "Солідні вуса для солідного спільного хряка."
+            "en": "A distinguished mustache for a distinguished pig.",
+            "ru": "Солидные усы для солидного хряка.",
+            "uk": "Солідні вуса для солідного хряка."
         },
         "type": "skin",
         "emoji": "🥸",
@@ -12808,7 +12809,7 @@
             "uk": "Косплей найдавнішого хряка, якого ми змогли знайти!"
         },
         "type": "skin",
-        "emoji": "🐖",
+        "emoji": "🎨",
         "inventory_type": "wardrobe",
         "rarity": "5",
         "cooked_item_id": null,
@@ -12886,7 +12887,7 @@
             "uk": "Старий Хряк у всій красі!"
         },
         "type": "skin",
-        "emoji": "🐷",
+        "emoji": "🎨",
         "inventory_type": "wardrobe",
         "rarity": "4",
         "cooked_item_id": null,
@@ -12934,9 +12935,9 @@
     "german_body": {
         "id": "german_body",
         "name": {
-            "en": "German body",
-            "ru": "Немецкое тело",
-            "uk": "Німецьке тіло"
+            "en": "German paint",
+            "ru": "Немецкая краска",
+            "uk": "Німецька фарба"
         },
         "description": {
             "en": "Black, red and gold, from snout to tail",
@@ -12944,7 +12945,7 @@
             "uk": "Чорний, червоний і золотий, від п’ятачка до хвоста"
         },
         "type": "skin",
-        "emoji": "🇩🇪",
+        "emoji": "🎨",
         "inventory_type": "wardrobe",
         "rarity": "4",
         "cooked_item_id": null,
@@ -13002,7 +13003,7 @@
             "uk": "Ідея настільки яскрава, що при ній можна читати"
         },
         "type": "skin",
-        "emoji": "💡",
+        "emoji": "🎨",
         "inventory_type": "wardrobe",
         "rarity": "4",
         "cooked_item_id": null,

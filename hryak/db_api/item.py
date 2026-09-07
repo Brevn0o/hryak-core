@@ -10,13 +10,33 @@ import json
 class Item:
     @staticmethod
     async def get_props(item_id: str):
-        if item_id is None or '.' not in item_id:
+        """The parameters carried by an id, as in 'coins?a=500&p=25&c=hollars'.
+
+        A dot used to be the separator. Nothing persists an id with props - the shop is
+        the only producer and its rows are rebuilt by update_if_needed as soon as the
+        computed pages stop matching the stored ones - so the legacy branch only has to
+        cover the rows already sitting in the table, not anything a user owns.
+        """
+        if not item_id:
             return {}
-        return {i.split('=')[0]: i.split('=')[1] for i in item_id.split('.')[1:]}
+        if '?' in item_id:
+            query = item_id.split('?', 1)[1]
+            return {k: v for k, _, v in (p.partition('=') for p in query.split('&')) if k and _}
+        if '.' in item_id:  # legacy, remove once the shop table has turned over
+            return {i.split('=')[0]: i.split('=')[1] for i in item_id.split('.')[1:] if '=' in i}
+        return {}
 
     @staticmethod
     async def clean_id(item_id: str):
-        return item_id.split('.')[0] if item_id else None
+        """The bare item id, with any parameters stripped.
+
+        Splitting on '?' rather than '.' also keeps a parametrised id whole when it
+        reaches the compositor, which encodes its layers as 'item_id.layer.type' and
+        would otherwise read the parameters as layer names.
+        """
+        if not item_id:
+            return None
+        return item_id.split('?', 1)[0].split('.', 1)[0]
 
     @staticmethod
     async def is_available(item_id: str, context: str = None) -> bool:
