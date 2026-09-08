@@ -233,6 +233,16 @@ async def send_gift(user_id: int, to_user_id: int, item_id: str):
     if fee > 0 and await Item.get_amount(currency, user_id) < fee:
         return {'status': Status.NO_MONEY, 'fee': fee, 'currency': currency}
 
+    # the recipient may never have played. change_item_amount is an UPDATE, so with no
+    # row to update it writes nothing while the sender is still debited - the gift simply
+    # stops existing. Registering here rather than letting the move fail is the point of
+    # gifts: a gift is the one thing in the game you can send to somebody who has not
+    # started yet, which is what makes it worth anything as an invitation.
+    #
+    # Placed after every check and before the fee, so a request that was going to be
+    # refused leaves no empty account behind, and a failure here charges nobody.
+    await User.register_user_if_not_exists(to_user_id)
+
     if fee > 0:
         await GameFunc.pay_tax(user_id, fee, currency)
     if not await User.transfer_item(from_user=user_id, to_user=to_user_id,

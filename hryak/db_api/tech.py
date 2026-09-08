@@ -75,8 +75,18 @@ class Tech:
                      'server_feed_reminder': ready_to_feed_server_pig}
         # narrowed in sql where a kind can be: readiness is asked per person in python, so
         # anything ruled out here is work the loop never has to do. Somebody who has never
-        # fed a community pig has nothing to be reminded of and must never be walked.
-        extra = {'server_feed_reminder':
+        # fed a pig has nothing to be reminded of and must never be walked.
+        #
+        # All three are gated on having done the thing at least once. Feeding gates the
+        # butcher reminder too, not butchering: a pig has to be grown before there is
+        # anything to butcher, so somebody who never fed cannot be behind on it. The
+        # history lists are append-only, so this stays true however long ago it was, and a
+        # row that predates the key reads NULL and is excluded - which is the right answer
+        # for it anyway.
+        ever_fed = " AND JSON_LENGTH(history->'$.feed_history') > 0"
+        extra = {'feed_reminder': ever_fed,
+                 'butcher_reminder': ever_fed,
+                 'server_feed_reminder':
                  " AND JSON_LENGTH(history->'$.server_feed_history') > 0"}
         if kind not in readiness:
             return []
