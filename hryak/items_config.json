@@ -13696,7 +13696,7 @@
         "cooked_item_id": null,
         "individual_config": {
             "skin_config": null,
-            "market_price": 50,
+            "market_price": 10,
             "market_price_currency": "coins",
             "shop_category": "always",
             "shop_cooldown": null,
