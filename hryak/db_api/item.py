@@ -229,11 +229,21 @@ class Item:
 
     @staticmethod
     @aiocache.cached(ttl=86400)
-    async def get_image_path(item_id: str, folder_path: str):
-        path = Func.generate_temp_path('img', file_extension='png')
-        if await Item.get_data(item_id, 'image') is not None:
+    async def get_image_path(item_id: str, folder_path: str, style: str = None):
+        """A copy of the item's picture in a temp file, or None if it has none.
+
+        style picks one of the item's 'styles' when it has them - what a wrapped gift
+        looks like is chosen per copy, not per kind. An unknown style falls back to the
+        plain image rather than failing, so retiring a wrap does not break the gifts
+        already wrapped in it.
+        """
+        source = await Item.get_data(item_id, 'image')
+        if style is not None:
+            source = (await Item.get_data(item_id, 'styles') or {}).get(style) or source
+        if source is not None:
+            path = Func.generate_temp_path('img', file_extension='png')
             async with aiofiles.open(path, 'wb') as file:
-                await file.write(open(await Item.get_data(item_id, 'image'), 'rb').read())
+                await file.write(open(source, 'rb').read())
             return path
 
     @staticmethod

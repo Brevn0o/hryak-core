@@ -28,6 +28,11 @@ guilds_schema = 'guilds'
 logs_schema = 'logs'
 unique_items_schema = 'unique_items'
 
+# How far a container may be opened when valuing it. Gifts inside gifts are allowed
+# and are part of the joke; a hundred of them nested is a way to make valuing one
+# item cost a hundred queries, and valuing happens on every taxed action.
+container_max_depth = 5
+
 trade_data = {}
 
 default_pig = {'name': 'Hryak',
@@ -204,6 +209,10 @@ default_item = {
         'image': None,
         'tax': None,
         'cases': {},
+        # one icon per wrap, for something whose look is chosen per copy. 'image'
+        # stays the fallback: retiring a wrap must not break the gifts already
+        # wrapped in it
+        'styles': None,
         'wealth_impact': None,
     },
     'server_config': {},

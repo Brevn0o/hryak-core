@@ -149,7 +149,10 @@ class Shop:
             'premium_skins_shop': [],
             'coins_shop': [f'coins?a={k}&p={round(v)}&c=hollars' for k, v in config.coins_prices.items()],
         }
-        for i in ["laxative", 'compound_feed', "activated_charcoal", "milk"]:
+        # this page is a literal list, not a shop_category query - an item is not on it
+        # until its id is written here, which is why streak_freezer is 'always' and sold
+        # nowhere
+        for i in ["laxative", 'compound_feed', "activated_charcoal", "milk", "wrapping_paper"]:
             pages['consumables_shop'].append(await Shop.entry(i))
         for i in ["knife", "grill"]:
             pages['tools_shop'].append(await Shop.entry(i))

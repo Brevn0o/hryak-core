@@ -172,12 +172,30 @@ class UniqueItem:
         JSON_MERGE_PATCH rather than read-change-write for the usual reason: two things
         naming and rehoming the same mini-pig at once would otherwise overwrite each
         other with whichever snapshot was taken first.
+
+        It cannot empty anything. Merging {} into an object leaves that object as it was,
+        and merging None deletes the key outright - so use clear_field for that, not a
+        value that looks empty.
         """
         await Connection.make_request(
             f"UPDATE {config.unique_items_schema} "
             f"SET data = JSON_MERGE_PATCH(COALESCE(data, JSON_OBJECT()), CAST(%s AS JSON)) "
             f"WHERE id = %s",
             params=(json.dumps(fields, ensure_ascii=False), await UniqueItem.extract_unique_id(item_id)))
+        await UniqueItem.clear_get_cache(item_id)
+
+    @staticmethod
+    async def clear_field(item_id: str, field: str):
+        """Empties one field to {}, which update_data cannot do.
+
+        JSON_SET replaces the value outright where a merge patch would fold the empty
+        object into whatever is already there and change nothing.
+        """
+        await Connection.make_request(
+            f"UPDATE {config.unique_items_schema} "
+            f"SET data = JSON_SET(COALESCE(data, JSON_OBJECT()), %s, JSON_OBJECT()) "
+            f"WHERE id = %s",
+            params=(f'$.{field}', await UniqueItem.extract_unique_id(item_id)))
         await UniqueItem.clear_get_cache(item_id)
 
     @staticmethod

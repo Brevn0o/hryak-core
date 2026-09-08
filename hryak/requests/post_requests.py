@@ -1,6 +1,9 @@
+import json
+import math
 import random
 
 from hryak.db_api import *
+from hryak.db_api.schema import user_id_column
 from hryak.functions import Func
 from hryak.game_functions import GameFunc
 from hryak import config
@@ -144,6 +147,139 @@ async def pay_doctor(user_id: int):
         return {'status': Status.NO_MONEY}
     await User.remove_item(user_id, 'coins', config.doctor_price, reason='doctor')
     return {'status': Status.SUCCESS}
+
+async def wrap_gift(user_id: int, contents: dict, wrapping_paper_id: str = 'wrapping_paper',
+                    style: str = None, name: str = None, description: str = None):
+    """Puts a pile of items into a gift, spending one wrapping paper.
+
+    Everything happens in one transaction. The paper is spent, the contents leave the
+    inventory and the gift appears in the same commit - half of this landing would either
+    destroy the contents or hand out a free gift, and both are unrecoverable because the
+    gift exists exactly once.
+
+    The holdings are read back under a row lock rather than trusted from the caller: the
+    person picked these items some seconds ago through several interactions, and may have
+    spent them since.
+    """
+    contents = {i: (a.get('amount', 0) if isinstance(a, dict) else a)
+                for i, a in (contents or {}).items()}
+    contents = {i: round(a) for i, a in contents.items() if a and round(a) > 0}
+    if not contents:
+        return {'status': Status.NOTHING_TO_WRAP}
+
+    # a gift may hold a gift, and the joke stops where valuing one stops being cheap
+    for item_id in contents:
+        if await GameFunc.get_container_depth(item_id) + 1 >= config.container_max_depth:
+            return {'status': Status.WRAPPED_TOO_DEEP}
+
+    gift_id = f'gift?i={await UniqueItem.generate_new_unique_id()}'
+    data = {'contents': {i: {'amount': a} for i, a in contents.items()},
+            'style': style, 'from': str(user_id)}
+    if name:
+        data['name'] = name
+    if description:
+        data['description'] = description
+
+    async with Connection.transaction() as cur:
+        await cur.execute(
+            f"SELECT inventory FROM {config.users_schema} "
+            f"WHERE {user_id_column()} = %s FOR UPDATE", (str(user_id),))
+        row = await cur.fetchone()
+        inventory = json.loads(row[0]) if row and row[0] else {}
+
+        def held(item_id):
+            entry = inventory.get(item_id) or {}
+            return entry.get('amount', 0) if isinstance(entry, dict) else entry
+
+        if held(wrapping_paper_id) < 1:
+            return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': wrapping_paper_id}
+        for item_id, amount in contents.items():
+            if held(item_id) < amount:
+                return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
+
+        await User.change_item_amount(user_id, wrapping_paper_id, -1, cur=cur)
+        for item_id, amount in contents.items():
+            await User.change_item_amount(user_id, item_id, -amount, cur=cur)
+        if not await UniqueItem.create(gift_id, data, cur=cur):
+            return {'status': Status.NOT_EXIST}      # id collided; nothing committed
+        await User.change_item_amount(user_id, gift_id, 1, cur=cur)
+
+    await User.clear_get_inventory_cache(user_id)
+    await Logs.add('gift_wrapped', user_id=user_id, item_id=gift_id,
+                   items=len(contents), style=style)
+    return {'status': Status.SUCCESS, 'item_id': gift_id, 'contents': contents}
+
+
+async def send_gift(user_id: int, to_user_id: int, item_id: str):
+    """Delivers a wrapped gift to somebody, charging the fee on what is inside.
+
+    The fee comes from calculate_item_tax, which is the same question /trade asks of every
+    item it moves - so wrapping something and trading it costs exactly what sending it
+    does, and there is no cheaper door.
+
+    Charged before the move, the way a trade does it. Neither order can lose the gift: it
+    is only ever in one inventory or the other, and a failure after the fee leaves the
+    sender out of pocket but still holding it.
+    """
+    if user_id == to_user_id:
+        return {'status': Status.NOT_ALLOWED}
+    if not await GameFunc.get_container_contents(item_id):
+        return {'status': Status.NOT_A_CONTAINER}
+    if await Item.get_amount(item_id, user_id) < 1:
+        return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
+
+    fee, currency = await GameFunc.calculate_item_tax(item_id, user_id)
+    fee = math.ceil(fee)
+    if fee > 0 and await Item.get_amount(currency, user_id) < fee:
+        return {'status': Status.NO_MONEY, 'fee': fee, 'currency': currency}
+
+    if fee > 0:
+        await GameFunc.pay_tax(user_id, fee, currency)
+    if not await User.transfer_item(from_user=user_id, to_user=to_user_id,
+                                    item_id=item_id, amount=1, reason='gift'):
+        return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
+    return {'status': Status.SUCCESS, 'fee': fee, 'currency': currency}
+
+
+async def unwrap_gift(user_id: int, item_id: str):
+    """Opens a gift and hands its contents to whoever is holding it.
+
+    Both the inventory entry and the record are destroyed - the wrapping is spent, which
+    is what keeps paper a repeat purchase, and an opened gift is not a thing anybody needs
+    to look at again. Unlike a mini-pig, whose row outlives it because its parents are
+    part of somebody else's lineage.
+    """
+    contents = await GameFunc.get_container_contents(item_id)
+    if not contents:
+        return {'status': Status.NOT_A_CONTAINER}
+    if await Item.get_amount(item_id, user_id) < 1:
+        return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
+
+    dropped = {i: (a.get('amount', 0) if isinstance(a, dict) else a)
+               for i, a in contents.items()}
+    async with Connection.transaction() as cur:
+        await cur.execute(
+            f"SELECT JSON_EXTRACT(inventory, %s) FROM {config.users_schema} "
+            f"WHERE {user_id_column()} = %s FOR UPDATE",
+            (f'$."{item_id}"', str(user_id)))
+        row = await cur.fetchone()
+        if not row or row[0] is None:
+            return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
+        await cur.execute(
+            f"UPDATE {config.users_schema} SET inventory = JSON_REMOVE(inventory, %s) "
+            f"WHERE {user_id_column()} = %s", (f'$."{item_id}"', str(user_id)))
+        for content_id, amount in dropped.items():
+            await User.change_item_amount(user_id, content_id, amount, cur=cur)
+
+    await User.clear_get_inventory_cache(user_id)
+    # the record goes with it. An opened gift is a spent wrapper, not a thing with a
+    # history worth keeping, and leaving the row behind is what let one pay twice: the
+    # contents survived being handed out, so the same gift coming back round - out of a
+    # gift it was nested in, say - would pay again
+    await UniqueItem.remove(item_id)
+    await Logs.add('gift_opened', user_id=user_id, item_id=item_id, items=len(dropped))
+    return {'status': Status.SUCCESS, 'items_dropped': dropped}
+
 
 async def open_case(user_id: int, item_id: str):
     if await Item.get_amount(item_id, user_id) < 1:

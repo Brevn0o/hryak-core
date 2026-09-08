@@ -59,25 +59,106 @@ class GameFunc:
         return buffs
 
     @staticmethod
-    async def get_user_wealth(user_id):
-        wealth = {}
-        start_time = datetime.datetime.now()
-        print(start_time)
-        inventory = await User.get_inventory(user_id)
-        for item_id in inventory:
+    async def get_items_value(items: dict, depth: int = 0):
+        """What a pile of items is worth, as {currency: value}.
+
+        The same weighting the tax bands are read against: an item counts for its shelf
+        price times its wealth_impact, so money and sellable resources count fully, a
+        wardrobe counts for nothing, and a case counts for a tenth.
+
+        Anything in the pile that is itself a container is opened and its contents counted
+        too - otherwise wrapping a fortune would be a way to drop out of your tax band by
+        putting it in a box. depth stops that recursion: a gift inside a gift inside a
+        gift is fine and somebody nesting a hundred of them is a way to make valuing one
+        item arbitrarily expensive.
+        """
+        value = {}
+
+        def add(currency, amount):
+            value[currency] = value.get(currency, 0) + amount
+
+        for item_id, entry in (items or {}).items():
+            amount = entry.get('amount', 0) if isinstance(entry, dict) else (entry or 0)
+            if not amount:
+                continue
             wealth_impact = await Item.get_wealth_impact(item_id)
             market_price = await Item.get_market_price(item_id)
             if wealth_impact is not None and market_price is not None:
-                currency = await Item.get_market_price_currency(item_id)
-                amount = await Item.get_amount(item_id, user_id, inventory=inventory)
-                if currency not in wealth:
-                    wealth[currency] = 0
-                wealth[currency] += amount * market_price * wealth_impact
-        print(f"User wealth calculation time: {datetime.datetime.now() - start_time}")
-        return wealth
+                add(await Item.get_market_price_currency(item_id),
+                    amount * market_price * wealth_impact)
+            if depth < config.container_max_depth:
+                contents = await GameFunc.get_container_contents(item_id)
+                if contents:
+                    for currency, inner in (await GameFunc.get_items_value(
+                            contents, depth + 1)).items():
+                        add(currency, inner * amount)
+        # a wardrobe weighs nothing, and a currency that came to nothing is not a currency
+        # somebody holds - get_trade_total_tax drops its empty buckets the same way
+        return {currency: total for currency, total in value.items() if total > 0}
+
+    @staticmethod
+    async def get_container_contents(item_id: str):
+        """What one item is holding, or {} when it holds nothing.
+
+        Only a unique item can hold anything - what it carries is its own, not its kind's -
+        so this is a lookup against that instance's record and returns {} for the ordinary
+        case without touching the database when the id carries no handle.
+        """
+        from .db_api.unique_item import UniqueItem
+        if not item_id or '?i=' not in item_id:
+            return {}
+        return (await UniqueItem.get_data(item_id)).get('contents') or {}
+
+    @staticmethod
+    async def get_contents_fee(contents: dict, user_id):
+        """What moving a container holding these costs its owner, as [amount, currency].
+
+        One function so the box being packed and the confirmation before sending cannot
+        quote different numbers - they did, because each worked it out itself and one was
+        showing the value rather than the fee.
+        """
+        value = await GameFunc.get_items_value(contents)
+        if not value:
+            return [0, "coins"]
+        currency = max(value, key=value.get)
+        percent = await GameFunc.get_user_tax_percent(user_id, currency)
+        return [round(value[currency] * percent / 100, 3), currency]
+
+    @staticmethod
+    async def get_container_depth(item_id: str, depth: int = 0):
+        """How many containers deep this one already goes, counting itself as 0.
+
+        Asked before wrapping, so that a gift is refused at the moment somebody tries to
+        nest it too far rather than silently stopping being counted later. Valuing stops
+        at container_max_depth either way, and anything past that would be wealth nobody
+        can see - which is exactly the hole wrapping was not supposed to open.
+        """
+        if depth >= config.container_max_depth:
+            return depth
+        contents = await GameFunc.get_container_contents(item_id)
+        if not contents:
+            return depth
+        return max([await GameFunc.get_container_depth(i, depth + 1) for i in contents],
+                   default=depth + 1)
+
+    @staticmethod
+    async def get_user_wealth(user_id):
+        """Everything somebody holds, valued, which is what their tax band is read from.
+
+        Counts what is inside their containers as well, so putting coins in a box is not
+        a way out of a band.
+        """
+        return await GameFunc.get_items_value(await User.get_inventory(user_id))
 
     @staticmethod
     async def calculate_item_tax(item_id, user_id):
+        # a container is taxed on what it holds rather than on its own shelf price. This
+        # lives here, not in the sending flow, so that /trade charges exactly the same -
+        # get_trade_total_tax already asks this question per item, and a second
+        # implementation beside it is how the two paths drift apart
+        contents = await GameFunc.get_container_contents(item_id)
+        if contents:
+            return await GameFunc.get_contents_fee(contents, user_id)
         tax = await Item._get_tax(item_id)
         if tax is None:
             return [0, "coins"]
@@ -90,6 +171,7 @@ class GameFunc:
         elif tax.endswith('%'):
             return [round(await Item.get_market_price(item_id) * (float(tax[:-1]) / 100), 3),
                     await Item.get_market_price_currency(item_id)]
+        return [0, "coins"]     # an unreadable tax must not be a crash in every caller
 
     @staticmethod
     async def get_transfer_amount_with_tax(amount, tax):
