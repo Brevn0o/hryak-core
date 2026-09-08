@@ -13746,8 +13746,8 @@
             "wealth_impact": 0,
             "image": "bin/images/gift.png",
             "styles": {
-                "regular_blue": "bin/images/gift.png",
-                "regular_green": "bin/images/gift.png"
+                "regular_blue": "bin/images/gift_regular_blue.png",
+                "regular_red": "bin/images/gift_regular_red.png"
             }
         },
         "server_config": {}

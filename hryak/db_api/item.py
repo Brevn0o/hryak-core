@@ -4,6 +4,7 @@ from hryak import config
 from ..locale import Locale
 import aiofiles
 import aiocache
+import os
 import random
 import json
 
@@ -239,8 +240,14 @@ class Item:
         """
         source = await Item.get_data(item_id, 'image')
         if style is not None:
-            source = (await Item.get_data(item_id, 'styles') or {}).get(style) or source
-        if source is not None:
+            styled = (await Item.get_data(item_id, 'styles') or {}).get(style)
+            # the file has to be there, not just the key: retiring a wrap means deleting
+            # its picture, and every gift already wrapped in it still names it. Checking
+            # only the key would fall back for a name nobody uses and then raise for the
+            # one case the fallback exists for
+            if styled is not None and os.path.exists(styled):
+                source = styled
+        if source is not None and os.path.exists(source):
             path = Func.generate_temp_path('img', file_extension='png')
             async with aiofiles.open(path, 'wb') as file:
                 await file.write(open(source, 'rb').read())
