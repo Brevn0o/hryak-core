@@ -88,50 +88,6 @@ class Tech:
         return [user_id for user_id in candidates if await readiness[kind](user_id)]
 
     @staticmethod
-    async def get_comeback_candidates(limit: int = None, min_feeds: int = None):
-        """People worth telling that the bot is back: they played properly, then stopped.
-
-        Ordered by who was still playing latest, in weekly bands, and within a band by
-        how much they had played. Recency leads because the people feeding right up to
-        the moment the bot went quiet did not choose to stop - it vanished on them - and
-        they are the likeliest to want it back. Banding by week rather than comparing
-        timestamps exactly keeps that from turning into a meaningless race between two
-        people who both stopped the same week; between those two, the one who had played
-        more is the better prospect.
-
-        `min_feeds` raises the floor for one run, so a batch can be aimed at a particular
-        band and measured on its own before spending the rest of the list.
-
-        Anyone already sent one is excluded by checking the log itself, so the same
-        person can never be written to twice however many times this is run, and a partly
-        finished send simply carries on where it stopped.
-        """
-        cutoff = Func.generate_current_timestamp() - config.comeback_dormant_days * 86400
-        band = max(1, int(config.comeback_feed_band))
-        week = max(1, int(config.comeback_recency_band_days)) * 86400
-        rows = await Connection.make_request(
-            f"SELECT u.{user_id_column()} FROM {config.users_schema} u "
-            f"WHERE JSON_EXTRACT(u.stats, '$.pig_fed') >= %s "
-            f"AND (JSON_EXTRACT(u.history, '$.feed_history[last]') IS NULL "
-            f"     OR JSON_EXTRACT(u.history, '$.feed_history[last]') < %s) "
-            # already written to - matches the way idx_user_timestamp is declared
-            f"AND NOT EXISTS (SELECT 1 FROM {config.logs_schema} l "
-            f"                WHERE l.log_type = 'come_back_notification' "
-            f"                AND CAST(l.data->>'$.user_id' AS UNSIGNED) "
-            f"                    = CAST(u.{user_id_column()} AS UNSIGNED)) "
-            # latest to stop first, by week, then the most played inside each week.
-            # NULLs land last under DESC, which is right - somebody with no recorded
-            # last feed is the coldest lead there is
-            f"ORDER BY FLOOR(JSON_EXTRACT(u.history, '$.feed_history[last]') / {week}) DESC, "
-            f"         FLOOR(JSON_EXTRACT(u.stats, '$.pig_fed') / {band}) DESC, "
-            f"         JSON_EXTRACT(u.stats, '$.pig_fed') DESC"
-            f"{f' LIMIT {int(limit)}' if limit else ''}",
-            params=(min_feeds if min_feeds is not None else config.comeback_min_feeds,
-                    cutoff),
-            commit=False, fetch=True, fetchall=True)
-        return [row[0] for row in (rows or ())]
-
-    @staticmethod
     async def get_user_position(user_id, order_by: str = None, where: str = None, guild=None):
         users = await Tech.get_all_users(order_by=order_by, where=where, guild=guild)
         if str(user_id) in users:
@@ -207,6 +163,21 @@ class Tech:
         result = await Tech._Tech__get_all_items(requirements, exceptions, context)
         if available_only:
             result = [i for i in result if config.item_available_now(config.items[i], context)]
+
+        # __get_all_items walks the catalogue, and a unique item is not in it: 'minipig'
+        # is, but 'minipig?i=a3f9c2' is a thing somebody owns, not a kind of thing. So the
+        # instances have to be picked up from whoever is holding them, and they qualify on
+        # the same terms - the id they clean down to has to have survived the filters
+        # above. Amounts are checked below, the same as for everything else.
+        holder_inventory = inventory
+        if holder_inventory is None and user_id is not None:
+            from .user import User
+            holder_inventory = await User.get_inventory(user_id)
+        if holder_inventory:
+            catalogue = set(result)
+            result = result + [key for key in holder_inventory
+                               if '?' in key and await Item.clean_id(key) in catalogue]
+
         if inventory is not None:
             return [i for i in result if await Item.get_amount(i, inventory=inventory) != 0]
         if user_id is not None:
@@ -228,7 +199,10 @@ class Tech:
         skin_types = await asyncio.gather(*(Item.get_skin_type(i) for i in items))
         categorized = {'all': [i for _, i in sorted(zip(skin_types, items), key=lambda pair: pair[0] or '')]}
         for item_type in sorted({t for t in skin_types if t is not None}):
-            categorized[item_type] = await Tech.get_all_items((('skin_config', 'type', item_type),))
+            # user_id, or every category but 'all' lists the whole game's worth of that
+            # type rather than what this person actually owns
+            categorized[item_type] = await Tech.get_all_items((('skin_config', 'type', item_type),),
+                                                              user_id=user_id)
         return categorized
 
     @staticmethod

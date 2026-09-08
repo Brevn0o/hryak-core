@@ -15,5 +15,4 @@ from .stats import Stats
 from .order import Order
 from .shop import Shop
 from .logs import Logs
-
-
+from .unique_item import UniqueItem

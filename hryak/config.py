@@ -26,23 +26,7 @@ shop_schema = 'shop'
 server_shop_schema = 'server_shop'
 guilds_schema = 'guilds'
 logs_schema = 'logs'
-
-# The one-off "hryak is back" message to people who played before the bot went quiet.
-# Only somebody who actually played is worth writing to - anybody below this many feeds
-# tried it once and stopped, and messaging them is noise for them and risk for us.
-comeback_min_feeds = 5
-comeback_dormant_days = 60
-# Ordering. Whoever was still playing when the bot went quiet is written to first: they
-# did not choose to leave, it disappeared on them, so they are the likeliest to want it
-# back. Last feeds are grouped into weeks rather than compared exactly - two people who
-# both stopped that final week are equally "there at the end", and between them the one
-# who had played more is the better prospect.
-comeback_recency_band_days = 7
-comeback_feed_band = 50
-# Deliberately not coins: active players hold a median of ~38, so a currency gift to
-# thousands of returners would swamp the economy. Consumables cost it nothing.
-comeback_gift = {'rare_case': 2, 'cookie': 1}
-comeback_send_delay = 5.0  # seconds between DMs, to stay well inside the rate limit
+unique_items_schema = 'unique_items'
 
 trade_data = {}
 
@@ -584,13 +568,15 @@ db_caches = {
     'shop.get_data': TTLCache(maxsize=1000, ttl=600000),
     'history.get': TTLCache(maxsize=1000, ttl=600000),
     'tech.__get_all_items': TTLCache(maxsize=1000, ttl=600000),
-    'tech.get_all_items': TTLCache(maxsize=1000, ttl=600000)
+    'tech.get_all_items': TTLCache(maxsize=1000, ttl=600000),
+    'unique_item.get': TTLCache(maxsize=1000, ttl=600000)
 }
 cache_ttl = 600000
 # mutable state - every front-end has to agree on these, so they can go in a shared cache
 shared_cache_aliases = (
     'user.get_inventory', 'user.get_settings', 'user.get_rating',
     'pig.get', 'guild_pig.get', 'guild.get_settings', 'shop.get_data', 'history.get',
+    'unique_item.get',
 )
 local_cache_aliases = (
     'item.get_data', 'item.get_emoji', 'tech.__get_all_items', 'tech.get_all_items',

@@ -172,7 +172,7 @@ class GuildPig:
         await GuildPig.update_pig(guild_id, pig)
 
     @staticmethod
-    async def add_item(guild_id, item_id, amount: int = 1):
+    async def add_item(guild_id, item_id, amount: int = 1, cur=None):
         """Adds amount to one item, inside the database.
 
         Same reason as User.change_item_amount, only more so: reading the pig, changing
@@ -182,15 +182,17 @@ class GuildPig:
         """
         amount = round(amount)
         path = f'$.inventory."{item_id}".amount'
-        await Connection.make_request(
-            f"UPDATE {config.guilds_schema} "
-            f"SET pig = JSON_MERGE_PATCH("
-            f"      COALESCE(pig, JSON_OBJECT()),"
-            f"      JSON_OBJECT('inventory', JSON_OBJECT(%s, JSON_OBJECT('amount',"
-            f"          COALESCE(CAST(JSON_EXTRACT(pig, %s) AS SIGNED), 0) + %s)))) "
-            f"WHERE id = %s",
-            params=(item_id, path, amount, guild_id)
-        )
+        sql = (f"UPDATE {config.guilds_schema} "
+               f"SET pig = JSON_MERGE_PATCH("
+               f"      COALESCE(pig, JSON_OBJECT()),"
+               f"      JSON_OBJECT('inventory', JSON_OBJECT(%s, JSON_OBJECT('amount',"
+               f"          COALESCE(CAST(JSON_EXTRACT(pig, %s) AS SIGNED), 0) + %s)))) "
+               f"WHERE id = %s")
+        params = (item_id, path, amount, str(guild_id))  # id is a varchar, compare as one
+        if cur is not None:                              # run on a caller's transaction
+            await cur.execute(sql, params)
+            return
+        await Connection.make_request(sql, params=params)
         await GuildPig.clear_get_pig_cache(guild_id)
 
     @staticmethod
@@ -377,8 +379,20 @@ class GuildPig:
         return [i[0] for i in result]
 
     @staticmethod
-    async def get_last_feed(guild_id, user_id=None):
-        """When the pig was last fed - by anyone, or by one user if user_id is given."""
+    async def get_last_feed_entry(guild_id, user_id=None):
+        """The most recent feed itself - who, when, and how much it grew the pig.
+
+        By timestamp, then by position. Timestamps are whole seconds, so two people
+        feeding in the same second tie - and a plain max on the timestamp hands back the
+        first of them, which names the wrong person. Feeds are appended in order, so the
+        later position is the later feed.
+        """
         feeds = await GuildPig.get_feeds(guild_id, user_id=user_id)
         if feeds:
-            return max(feed['timestamp'] for feed in feeds)
+            return max(enumerate(feeds), key=lambda pair: (pair[1]['timestamp'], pair[0]))[1]
+
+    @staticmethod
+    async def get_last_feed(guild_id, user_id=None):
+        """When the pig was last fed - by anyone, or by one user if user_id is given."""
+        entry = await GuildPig.get_last_feed_entry(guild_id, user_id)
+        return entry['timestamp'] if entry else None

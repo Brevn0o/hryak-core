@@ -253,7 +253,7 @@ class User:
         return inventory
 
     @staticmethod
-    async def change_item_amount(user_id, item_id, delta: int):
+    async def change_item_amount(user_id, item_id, delta: int, cur=None):
         """Adds delta to one item's amount, inside the database.
 
         The arithmetic has to happen in the UPDATE rather than in python. Reading the
@@ -268,74 +268,193 @@ class User:
 
         No clamping at zero, deliberately: callers check what somebody has before taking
         it away, and silently flooring here would hide the cases where that check is wrong.
+
+        Pass cur to run on a caller's open transaction instead of taking a connection of
+        its own. Without that, calling this from inside one would reach for a second
+        connection and then block on the row locks the first is holding - a deadlock
+        against itself. The caller clears the cache after its commit, so this does not.
         """
         delta = round(delta)
         path = f'$."{item_id}".amount'
-        await Connection.make_request(
-            f"UPDATE {config.users_schema} "
-            f"SET inventory = JSON_MERGE_PATCH("
-            f"      COALESCE(inventory, JSON_OBJECT()),"
-            f"      JSON_OBJECT(%s, JSON_OBJECT('amount',"
-            f"          COALESCE(CAST(JSON_EXTRACT(inventory, %s) AS SIGNED), 0) + %s))) "
-            f"WHERE {user_id_column()} = %s",
-            params=(item_id, path, delta, user_id)
-        )
+        sql = (f"UPDATE {config.users_schema} "
+               f"SET inventory = JSON_MERGE_PATCH("
+               f"      COALESCE(inventory, JSON_OBJECT()),"
+               f"      JSON_OBJECT(%s, JSON_OBJECT('amount',"
+               f"          COALESCE(CAST(JSON_EXTRACT(inventory, %s) AS SIGNED), 0) + %s))) "
+               f"WHERE {user_id_column()} = %s")
+        # the id as a string: discord_id is a varchar, and comparing it against an int
+        # makes mysql coerce both to double, which stops being exact past 15 digits
+        params = (item_id, path, delta, str(user_id))
+        if cur is not None:
+            await cur.execute(sql, params)
+            return
+        await Connection.make_request(sql, params=params)
         await User.clear_get_inventory_cache(user_id)
 
     @staticmethod
     async def add_item(user_id, item_id, amount: int = 1, log: bool = True,
-                       reason: str = None):
+                       reason: str = None, data: dict = None) -> bool:
+        """Gives somebody an item. Returns whether it happened.
+
+        Pass data to create a unique one. What makes it unique goes into the unique_items
+        table under the same id; the inventory only ever holds {'amount': 1}, which is why
+        moving one is an ordinary transfer with nothing special about it.
+
+        Both writes share a transaction, so an item never exists without its record and a
+        record is never left without the item that was meant to carry it.
+        """
+        if data is None:
+            amount = round(amount)
+            await User.change_item_amount(user_id, item_id, amount)
+            if log:
+                await Logs.add('item_generated', user_id=user_id, item_id=item_id,
+                               amount=amount, reason=reason)
+            return True
+
+        from .unique_item import UniqueItem
         amount = round(amount)
-        await User.change_item_amount(user_id, item_id, amount)
+        async with Connection.transaction() as cur:
+            if not await UniqueItem.create(item_id, data, cur=cur):
+                return False                    # that id already exists
+            await User.change_item_amount(user_id, item_id, amount, cur=cur)
+        await User.clear_get_inventory_cache(user_id)
         if log:
-            await Logs.add('item_generated',
-                           user_id=user_id,
-                           item_id=item_id,
-                           amount=amount,
-                           reason=reason)
+            await Logs.add('item_generated', user_id=user_id, item_id=item_id,
+                           amount=amount, reason=reason)
+        return True
 
     @staticmethod
     async def remove_item(user_id, item_id, amount: int = 1, log: bool = True,
                           reason: str = None):
+        """Takes amount of an item away.
+
+        The arithmetic is the same whatever the item is. The one difference is what a
+        unique one leaves behind when the last of it goes: its key is dropped rather than
+        left sitting at amount 0, because an entry that is still there is an entry
+        add_item will refuse to write again, and a spent mini-pig would block its own id
+        forever. Its row in unique_items is untouched either way - that record is the
+        history of a thing that existed, and stays readable once nobody owns it.
+        """
+        from .unique_item import UniqueItem
+        amount = round(amount)
         await User.add_item(user_id, item_id, -amount, log=False)
+        if await UniqueItem.exists(item_id):
+            from .item import Item
+            if await Item.get_amount(item_id, user_id) <= 0:
+                await Connection.make_request(
+                    f"UPDATE {config.users_schema} "
+                    f"SET inventory = JSON_REMOVE(inventory, %s) "
+                    f"WHERE {user_id_column()} = %s",
+                    params=(f'$."{item_id}"', str(user_id)))
+                await User.clear_get_inventory_cache(user_id)
         if log:
-            await Logs.add('item_burned',
-                           user_id=user_id,
-                           item_id=item_id,
-                           amount=amount,
-                           reason=reason)
+            await Logs.add('item_burned', user_id=user_id, item_id=item_id,
+                           amount=amount, reason=reason)
+
+    @staticmethod
+    def _holder(user, guild, item_id):
+        """Where one side of a transfer keeps its things, so the SQL does not have to ask.
+
+        Users and guilds store items in different places - a user's are in
+        users.inventory keyed by discord_id, a guild's are inside guilds.pig under an
+        'inventory' key, keyed by id - and transfer_item has to read and lock either kind.
+        Rather than an if/else around every statement, this answers the four questions a
+        statement needs: which table, which column identifies the row, which JSON column
+        holds the items, and the path to one item inside it.
+
+            users   users.inventory   WHERE discord_id = ?   $."coins"
+            guilds  guilds.pig        WHERE id = ?           $.inventory."coins"
+
+        Both key columns are varchar, so both ids go in as strings - comparing a varchar
+        against an int makes mysql coerce them to double, and past 15 digits that stops
+        being exact, which is how two accounts 1 apart came to write to each other's rows.
+        """
+        if user is not None:
+            return {'table': config.users_schema, 'key': user_id_column(),
+                    'id': str(user), 'col': 'inventory',
+                    'entry': f'$."{item_id}"'}
+        return {'table': config.guilds_schema, 'key': 'id',
+                'id': str(guild), 'col': 'pig',
+                'entry': f'$.inventory."{item_id}"'}
 
     @staticmethod
     async def transfer_item(from_user=None, to_user=None, item_id=None, amount: int = 1,
                             from_guild=None, to_guild=None, log: bool = True,
-                            reason: str = None):
-        """Moves items between any two holders.
+                            reason: str = None) -> bool:
+        """Moves items between any two holders. Returns whether the move happened.
 
         Put a user id in from_user/to_user and a guild id in from_guild/to_guild - which
         slot you fill says what kind of holder it is, so there is nothing to look up and
         no flag to get wrong. Exactly one of each pair has to be given.
+
+        Everything happens in one transaction. The previous version issued a remove and
+        an add as two separate make_request calls, which is two transactions: a failure
+        in the window between them took the items out of the world. It also never checked
+        the balance, so moving more than the sender had wrote a negative amount.
+
+        Both rows are locked with FOR UPDATE before anything is written, and they are
+        locked in a fixed order - sorted by table and id - so that two transfers running
+        in opposite directions between the same pair cannot each hold what the other is
+        waiting for.
+
+        Unique items need nothing special here. What makes them unique lives in the
+        unique_items table under the same id, so the inventory holds only an amount and
+        moving one is the same arithmetic as moving a coin.
         """
         if (from_user is None) == (from_guild is None):
             raise ValueError('give exactly one of from_user or from_guild')
         if (to_user is None) == (to_guild is None):
             raise ValueError('give exactly one of to_user or to_guild')
-        if from_user is not None:
-            await User.remove_item(from_user, item_id, amount, log=False)
-        else:
-            await GuildPig.remove_item(from_guild, item_id, amount)
-        if to_user is not None:
-            await User.add_item(to_user, item_id, amount, log=False)
-        else:
-            await GuildPig.add_item(to_guild, item_id, amount)
+        amount = round(amount)
+        if amount <= 0:
+            raise ValueError('amount must be positive')
+
+        src = User._holder(from_user, from_guild, item_id)
+        dst = User._holder(to_user, to_guild, item_id)
+        if (src['table'], src['id']) == (dst['table'], dst['id']):
+            return False                       # nothing to do, and self-locking
+
+        async def read_locked(t):
+            await cur.execute(
+                f"SELECT JSON_EXTRACT({t['col']}, %s) FROM {t['table']} "
+                f"WHERE {t['key']} = %s FOR UPDATE", (t['entry'], t['id']))
+            row = await cur.fetchone()
+            return row[0] if row else None
+
+        async with Connection.transaction() as cur:
+            # a fixed lock order, so A->B and B->A cannot deadlock each other
+            first, second = sorted((src, dst), key=lambda t: (t['table'], t['id']))
+            raw = {}
+            raw[id(first)] = await read_locked(first)
+            raw[id(second)] = await read_locked(second)
+            src_raw = raw[id(src)]          # dst is read only to lock it
+
+            if src_raw is None:
+                return False                   # sender holds none of it
+            entry = json.loads(src_raw)
+            held = int(float(entry.get('amount', 0) if isinstance(entry, dict) else 0))
+            if held < amount:
+                return False                   # refuse rather than write a negative
+            # the ordinary amount arithmetic already exists and is already careful -
+            # passing the cursor runs it inside this transaction instead of taking a
+            # connection of its own and blocking on the locks held here
+            for holder, guild, delta in ((from_user, from_guild, -amount),
+                                         (to_user, to_guild, amount)):
+                if holder is not None:
+                    await User.change_item_amount(holder, item_id, delta, cur=cur)
+                else:
+                    await GuildPig.add_item(guild, item_id, delta, cur=cur)
+            moved = amount
+
+        for u in (from_user, to_user):
+            if u is not None:
+                await User.clear_get_inventory_cache(u)
         if log:
             await Logs.add('item_transfer',
-                           from_user=from_user,
-                           to_user=to_user,
-                           from_guild=from_guild,
-                           to_guild=to_guild,
-                           item_id=item_id,
-                           amount=amount,
-                           reason=reason)
+                           from_user=from_user, to_user=to_user,
+                           from_guild=from_guild, to_guild=to_guild,
+                           item_id=item_id, amount=moved, reason=reason)
+        return True
 
     @staticmethod
     async def set_new_inventory(user_id, new_inventory):

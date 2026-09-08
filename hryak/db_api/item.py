@@ -398,7 +398,10 @@ class Item:
     @staticmethod
     async def get_amount(item_id: str, user_id: int = None, inventory: dict = None):
         props = await Item.get_props(item_id)
-        if props:
+        # a shop row carries its own amount in 'a'. Other parameters exist that are not
+        # amounts - a unique item's handle, for one - so ask for the key rather than
+        # assuming that having any parameter at all means having that one
+        if 'a' in props:
             return int(props['a'])
         if inventory is None and user_id is not None:
             from .user import User
