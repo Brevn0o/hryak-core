@@ -102,6 +102,35 @@ class Setup:
                 pass  # already there - same as how the columns above are added
 
     @staticmethod
+    async def create_unique_items_table():
+        """What makes one copy of an item different from another.
+
+        The inventory only ever holds an amount, so moving a unique item is the same
+        arithmetic as moving a coin - everything that distinguishes it lives here under
+        the same id. A gift keeps its contents and its wrap in `data`; a mini-pig would
+        keep its parents there.
+
+        `id` is the full item id including its parameters (gift?i=00a5142f), which is what
+        the inventory key is, so the two line up with no translation. varchar(32) matches
+        the ids generate_new_unique_id produces.
+
+        No index on anything inside `data`. Every read here is by primary key - there is
+        no screen that lists unique items by what is in them - and an index on a json path
+        costs every insert to answer a question nobody asks yet.
+        """
+        columns = ['id varchar(32) NOT NULL PRIMARY KEY',
+                   'created bigint unsigned NOT NULL DEFAULT 0',
+                   'data json',
+                   ]
+        await Setup.create_table(columns, config.unique_items_schema)
+        try:
+            await Connection.make_request(
+                f"ALTER TABLE {config.unique_items_schema} ADD INDEX idx_created (created)",
+                commit=False)
+        except Exception:
+            pass  # already there - same as how the columns above are added
+
+    @staticmethod
     async def create_guild_table():
         columns = ['id varchar(32) PRIMARY KEY UNIQUE',
                    'joined int',
