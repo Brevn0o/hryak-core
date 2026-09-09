@@ -17,11 +17,11 @@ class Hidden:
     @staticmethod
     def get_user_tax_percent(user_id, currency: str, wealth: dict):
         if currency == 'coins':
-            pchip_function = PchipInterpolator(np.array([0, 1000, 10000, 100000, 1000000000]),
-                                               np.array([0, 5, 10, 15, 30]))
+            pchip_function = PchipInterpolator(np.array([0, 250, 1000, 10000, 100000, 1000000000]),
+                                               np.array([0, 0,   5,    10,    30,     50]))
         elif currency == 'hollars':
             pchip_function = PchipInterpolator(np.array([0, 100, 1000, 10000, 1000000]),
-                                               np.array([0, 5, 10, 15, 30]))
+                                               np.array([0, 30, 50, 100, 200]))
         else:
             pchip_function = PchipInterpolator(np.array([0, 1000000]),
                                                np.array([5, 5]))

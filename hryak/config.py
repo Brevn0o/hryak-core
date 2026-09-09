@@ -525,11 +525,7 @@ db_api_cash_ttl = 1
 guild_settings = {'allow_say': False, 'language': 'en',
                   'join_channel': None, 'join_message': None}
 user_settings = {'language': 'en', 'blocked': False, 'block_reason': None, 'top_participate': True,
-                 'notifications': {'feed_reminder': True, 'butcher_reminder': True,
-                                   # off by default, unlike the other two. Feeding a community pig is
-                                   # something most people never do, and the reminder loop checks
-                                   # readiness per opted-in user in python - switching this on for
-                                   # everybody would mean walking the whole userbase every minute
+                 'notifications': {'feed_reminder': False, 'butcher_reminder': False,
                                    'server_feed_reminder': False}}
 emotions_erase_cords = {'sad': [(668, 904, 855, 849, 734, 740),
                                 (917, 842, 1150, 917, 1085, 734)],
