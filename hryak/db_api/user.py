@@ -217,6 +217,24 @@ class User:
     async def clear_get_inventory_cache(user_id):
         await Func.clear_db_cache('user.get_inventory', User.get_inventory, (user_id,))
 
+    @staticmethod
+    async def get_inventory_for_update(user_id, cur):
+        """Somebody's inventory, read inside an open transaction with the row locked.
+
+        get_inventory is cached and unlocked, which is right for showing somebody their
+        things and wrong for deciding whether they still have them: between a cached read
+        and the write that spends them, anything can happen. This takes the row lock, so
+        what it returns is still true when the transaction commits.
+
+        Pass the cursor from Connection.transaction(). Reach for this rather than writing
+        SELECT ... FOR UPDATE by hand - the lock, the id-as-string and the missing-row
+        case are each easy to get subtly wrong, and getting them wrong loses items.
+        """
+        await cur.execute(
+            f"SELECT inventory FROM {config.users_schema} "
+            f"WHERE {user_id_column()} = %s FOR UPDATE", (str(user_id),))
+        row = await cur.fetchone()
+        return json.loads(row[0]) if row and row[0] else {}
 
     @staticmethod
     async def set_item_amount(user_id, item_id, amount: int = 1):
@@ -266,8 +284,17 @@ class User:
         the item is new, which JSON_SET will not do - it can only add a key to an object
         that already exists - while still leaving any other key inside that object alone.
 
-        No clamping at zero, deliberately: callers check what somebody has before taking
-        it away, and silently flooring here would hide the cases where that check is wrong.
+        Reaching exactly zero drops the item's key rather than leaving it sitting at 0,
+        so an inventory never holds an entry for something nobody has. That matters beyond
+        tidiness: an entry that still exists is one add_item refuses to write again, so a
+        spent unique item would otherwise block its own id forever. Doing it here, in the
+        one statement every amount change already goes through, is what makes it an
+        invariant instead of something each caller has to remember.
+
+        A negative result is still written. No clamping at zero, deliberately: callers
+        check what somebody has before taking it away, and silently flooring would hide
+        the cases where that check is wrong. Zero is the legitimate end of an item and is
+        cleaned up; below zero is a bug and stays visible.
 
         Pass cur to run on a caller's open transaction instead of taking a connection of
         its own. Without that, calling this from inside one would reach for a second
@@ -276,15 +303,20 @@ class User:
         """
         delta = round(delta)
         path = f'$."{item_id}".amount'
+        entry = f'$."{item_id}"'
         sql = (f"UPDATE {config.users_schema} "
-               f"SET inventory = JSON_MERGE_PATCH("
-               f"      COALESCE(inventory, JSON_OBJECT()),"
-               f"      JSON_OBJECT(%s, JSON_OBJECT('amount',"
-               f"          COALESCE(CAST(JSON_EXTRACT(inventory, %s) AS SIGNED), 0) + %s))) "
+               f"SET inventory = CASE WHEN "
+               f"        COALESCE(CAST(JSON_EXTRACT(inventory, %s) AS SIGNED), 0) + %s = 0 "
+               f"    THEN JSON_REMOVE(COALESCE(inventory, JSON_OBJECT()), %s) "
+               f"    ELSE JSON_MERGE_PATCH("
+               f"        COALESCE(inventory, JSON_OBJECT()),"
+               f"        JSON_OBJECT(%s, JSON_OBJECT('amount',"
+               f"            COALESCE(CAST(JSON_EXTRACT(inventory, %s) AS SIGNED), 0) + %s))) "
+               f"    END "
                f"WHERE {user_id_column()} = %s")
         # the id as a string: discord_id is a varchar, and comparing it against an int
         # makes mysql coerce both to double, which stops being exact past 15 digits
-        params = (item_id, path, delta, str(user_id))
+        params = (path, delta, entry, item_id, path, delta, str(user_id))
         if cur is not None:
             await cur.execute(sql, params)
             return
@@ -328,25 +360,14 @@ class User:
                           reason: str = None):
         """Takes amount of an item away.
 
-        The arithmetic is the same whatever the item is. The one difference is what a
-        unique one leaves behind when the last of it goes: its key is dropped rather than
-        left sitting at amount 0, because an entry that is still there is an entry
-        add_item will refuse to write again, and a spent mini-pig would block its own id
-        forever. Its row in unique_items is untouched either way - that record is the
-        history of a thing that existed, and stays readable once nobody owns it.
+        The arithmetic is the same whatever the item is, unique or not. Taking the last
+        of something drops its key, but that happens in change_item_amount for every item
+        rather than being a case handled here. Its row in unique_items is untouched - that
+        record is the history of a thing that existed, and stays readable once nobody
+        owns it.
         """
-        from .unique_item import UniqueItem
         amount = round(amount)
         await User.add_item(user_id, item_id, -amount, log=False)
-        if await UniqueItem.exists(item_id):
-            from .item import Item
-            if await Item.get_amount(item_id, user_id) <= 0:
-                await Connection.make_request(
-                    f"UPDATE {config.users_schema} "
-                    f"SET inventory = JSON_REMOVE(inventory, %s) "
-                    f"WHERE {user_id_column()} = %s",
-                    params=(f'$."{item_id}"', str(user_id)))
-                await User.clear_get_inventory_cache(user_id)
         if log:
             await Logs.add('item_burned', user_id=user_id, item_id=item_id,
                            amount=amount, reason=reason)

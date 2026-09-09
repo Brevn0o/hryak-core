@@ -1,9 +1,7 @@
-import json
 import math
 import random
 
 from hryak.db_api import *
-from hryak.db_api.schema import user_id_column
 from hryak.functions import Func
 from hryak.game_functions import GameFunc
 from hryak import config
@@ -181,20 +179,12 @@ async def wrap_gift(user_id: int, contents: dict, wrapping_paper_id: str = 'wrap
         data['description'] = description
 
     async with Connection.transaction() as cur:
-        await cur.execute(
-            f"SELECT inventory FROM {config.users_schema} "
-            f"WHERE {user_id_column()} = %s FOR UPDATE", (str(user_id),))
-        row = await cur.fetchone()
-        inventory = json.loads(row[0]) if row and row[0] else {}
+        inventory = await User.get_inventory_for_update(user_id, cur)
 
-        def held(item_id):
-            entry = inventory.get(item_id) or {}
-            return entry.get('amount', 0) if isinstance(entry, dict) else entry
-
-        if held(wrapping_paper_id) < 1:
+        if await Item.get_amount(wrapping_paper_id, inventory=inventory) < 1:
             return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': wrapping_paper_id}
         for item_id, amount in contents.items():
-            if held(item_id) < amount:
+            if await Item.get_amount(item_id, inventory=inventory) < amount:
                 return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
 
         await User.change_item_amount(user_id, wrapping_paper_id, -1, cur=cur)
@@ -233,14 +223,6 @@ async def send_gift(user_id: int, to_user_id: int, item_id: str):
     if fee > 0 and await Item.get_amount(currency, user_id) < fee:
         return {'status': Status.NO_MONEY, 'fee': fee, 'currency': currency}
 
-    # the recipient may never have played. change_item_amount is an UPDATE, so with no
-    # row to update it writes nothing while the sender is still debited - the gift simply
-    # stops existing. Registering here rather than letting the move fail is the point of
-    # gifts: a gift is the one thing in the game you can send to somebody who has not
-    # started yet, which is what makes it worth anything as an invitation.
-    #
-    # Placed after every check and before the fee, so a request that was going to be
-    # refused leaves no empty account behind, and a failure here charges nobody.
     await User.register_user_if_not_exists(to_user_id)
 
     if fee > 0:
@@ -268,24 +250,14 @@ async def unwrap_gift(user_id: int, item_id: str):
     dropped = {i: (a.get('amount', 0) if isinstance(a, dict) else a)
                for i, a in contents.items()}
     async with Connection.transaction() as cur:
-        await cur.execute(
-            f"SELECT JSON_EXTRACT(inventory, %s) FROM {config.users_schema} "
-            f"WHERE {user_id_column()} = %s FOR UPDATE",
-            (f'$."{item_id}"', str(user_id)))
-        row = await cur.fetchone()
-        if not row or row[0] is None:
+        inventory = await User.get_inventory_for_update(user_id, cur)
+        if await Item.get_amount(item_id, inventory=inventory) < 1:
             return {'status': Status.NOT_ENOUGH_ITEMS, 'item_id': item_id}
-        await cur.execute(
-            f"UPDATE {config.users_schema} SET inventory = JSON_REMOVE(inventory, %s) "
-            f"WHERE {user_id_column()} = %s", (f'$."{item_id}"', str(user_id)))
+        await User.change_item_amount(user_id, item_id, -1, cur=cur)
         for content_id, amount in dropped.items():
             await User.change_item_amount(user_id, content_id, amount, cur=cur)
 
     await User.clear_get_inventory_cache(user_id)
-    # the record goes with it. An opened gift is a spent wrapper, not a thing with a
-    # history worth keeping, and leaving the row behind is what let one pay twice: the
-    # contents survived being handed out, so the same gift coming back round - out of a
-    # gift it was nested in, say - would pay again
     await UniqueItem.remove(item_id)
     await Logs.add('gift_opened', user_id=user_id, item_id=item_id, items=len(dropped))
     return {'status': Status.SUCCESS, 'items_dropped': dropped}
