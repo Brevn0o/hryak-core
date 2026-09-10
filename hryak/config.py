@@ -23,6 +23,10 @@ stripe_api_key = None
 # where stripe sends the browser afterwards. Neither page is how the bot finds out the
 # payment happened - the order loop asks stripe directly - so these only decide what the
 # buyer looks at once they are done, and a plain landing page is enough
+# Stripe refuses a charge under 50 US cents outright, and the shop can ask for less than
+# that: hollars are 50 to the dollar, so somebody buying one would be charged 2 cents.
+# Held in usd and converted, so the same rule applies whatever currency is presented
+stripe_minimum_usd = 0.5
 stripe_success_url = 'https://discord.com/'
 stripe_cancel_url = 'https://discord.com/'
 # {reward_type: product name shown on the checkout page}. Unlike lava's offers these are

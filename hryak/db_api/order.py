@@ -40,12 +40,29 @@ class Order:
             return {}
 
     @staticmethod
-    async def set_new_orders(user_id, new_orders):
+    async def get_user_orders_for_update(user_id, cur):
+        """Somebody's orders, read inside an open transaction with the row locked.
+
+        The plain reader is fine for showing an order; it is not fine for deciding whether
+        one has already been paid out. Two runs of the fulfilment loop overlapping - or
+        two bot processes - would both read the same unpaid order and both credit it. The
+        lock is what makes "is this order still owed" and "close it" a single decision.
+        """
+        await cur.execute(
+            f"SELECT orders FROM {config.users_schema} "
+            f"WHERE {user_id_column()} = %s FOR UPDATE", (str(user_id),))
+        row = await cur.fetchone()
+        return json.loads(row[0]) if row and row[0] else {}
+
+    @staticmethod
+    async def set_new_orders(user_id, new_orders, cur=None):
         new_orders = json.dumps(new_orders, ensure_ascii=False)
-        await Connection.make_request(
-            f"UPDATE {config.users_schema} SET orders = %s WHERE {user_id_column()} = %s",
-            params=(new_orders, str(user_id))
-        )
+        sql = f"UPDATE {config.users_schema} SET orders = %s WHERE {user_id_column()} = %s"
+        params = (new_orders, str(user_id))
+        if cur is not None:
+            await cur.execute(sql, params)
+            return
+        await Connection.make_request(sql, params=params)
 
     @staticmethod
     async def create(user_id, order_id: str, items: dict, amount: float, currency: str, platform: str):

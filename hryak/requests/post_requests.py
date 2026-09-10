@@ -89,6 +89,51 @@ async def use_promocode(user_id: int, code: str):
     await PromoCode.add_users_used(code, user_id)
     return {"status": Status.SUCCESS, "rewards": rewards}
 
+async def fulfil_order(order_id: str):
+    """Hands over what a paid order bought, and closes it, in one write.
+
+    The credit and the closing share a transaction because they are the same decision.
+    Before this they were separate: the items were added, then the order was deleted, and
+    the order's status was never touched in between - so the only thing stopping a second
+    payout was the delete having happened. Anything that interrupted the gap - a restart,
+    a redeploy, a discord error while sending the notification, which is the first thing
+    the loop did - left a paid order still sitting there, and thirty seconds later the
+    loop asked the provider again, was told 'paid' again, and paid out again. With a card
+    provider that answers 'paid' forever, that repeats until somebody notices.
+
+    The orders column is read back under a row lock rather than trusted from the caller:
+    the point is to be the only one holding it at the moment the decision is made.
+    """
+    order = await Order.get_order(order_id)
+    if order is None:
+        return {'status': Status.NOT_EXIST}
+    user_id = await Order.get_user(order_id)
+    if user_id is None:
+        return {'status': Status.NOT_EXIST}
+    items = {i: round(a) for i, a in (order.get('items') or {}).items() if round(a) > 0}
+
+    async with Connection.transaction() as cur:
+        orders = await Order.get_user_orders_for_update(user_id, cur)
+        if order_id not in orders:
+            # somebody else got here first. Not an error - it is the check working
+            return {'status': Status.ALREADY_USED}
+        for item_id, amount in items.items():
+            await User.change_item_amount(user_id, item_id, amount, cur=cur)
+        orders.pop(order_id)
+        await Order.set_new_orders(user_id, orders, cur=cur)
+
+    await User.clear_get_inventory_cache(user_id)
+    # logged after the commit, so nothing is recorded as granted that was rolled back.
+    # add_item would normally write these; the credit goes through change_item_amount
+    # here instead, because that is the one that can run inside a transaction
+    for item_id, amount in items.items():
+        await Logs.add('item_generated', user_id=user_id, item_id=item_id,
+                       amount=amount, reason='donation')
+    return {'status': Status.SUCCESS, 'items': items, 'user_id': user_id,
+            'amount': order.get('amount'), 'currency': order.get('currency'),
+            'platform': order.get('platform')}
+
+
 async def send_money(user_id: int, amount: int, currency: str, to_user=None, to_guild=None,
                      confirmed: bool = True):
     """Sends money to a person or to a server pig - fill whichever target slot applies,
