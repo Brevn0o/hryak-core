@@ -2,7 +2,7 @@ import json, random
 
 from .connection import Connection
 from .schema import user_id_column
-from ..functions import Func, Lava
+from ..functions import Func, Lava, Stripe
 from hryak import config
 
 
@@ -81,6 +81,8 @@ class Order:
             platform = order['platform']
             if platform == 'lava.top':
                 return await Lava.get_status(order_id)
+            if platform == 'stripe':
+                return await Stripe.get_status(order_id)
         return order['status']
 
     @staticmethod

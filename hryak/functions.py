@@ -73,6 +73,106 @@ class Lava:
         return str(resp.json().get("status", "unknown")).lower()
 
 
+class Stripe:
+    """Stripe checkout, over the rest api directly.
+
+    No sdk on purpose. The official one is synchronous, and a blocking http call inside
+    the event loop stalls every command in every server until it returns - which is what
+    the requests-based Lava calls above already do, and is the one thing not worth
+    copying. aiohttp is already a dependency.
+
+    Stripe takes form encoding rather than json, with brackets for nesting. Only a handful
+    of keys are needed here, so they are written out flat rather than built by a generic
+    flattener nobody else would use.
+    """
+
+    API = 'https://api.stripe.com/v1'
+    # currencies stripe bills in units of 1, where the amount is not multiplied by 100.
+    # None of the three the shop offers is one, but a wrong guess here charges a hundred
+    # times too much, so it is written down rather than assumed
+    ZERO_DECIMAL = {'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG',
+                    'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'}
+    # checkout only accepts languages it has a translation for, and rejects the whole
+    # request for one it does not know. Ukrainian is not among them, so passing the bot's
+    # own language straight through would fail every uk purchase - 'auto' lets stripe pick
+    # from the browser instead, which is a better answer than an error
+    LOCALES = {'en', 'ru'}
+
+    @staticmethod
+    def to_minor_units(amount: float, currency: str) -> int:
+        """Money as stripe wants it: an integer of the smallest unit, so 4.99 -> 499.
+
+        Rounded, never truncated - int(4.99 * 100) is 498 in binary floating point, and
+        undercharging by a cent on every purchase is the sort of thing nobody notices for
+        a year.
+        """
+        if currency.upper() in Stripe.ZERO_DECIMAL:
+            return int(round(amount))
+        return int(round(amount * 100))
+
+    @staticmethod
+    async def _request(method: str, path: str, data: dict = None) -> dict:
+        """One call to stripe, with its error body kept.
+
+        Stripe explains what it rejected in the response body, the same way lava does, and
+        raise_for_status would throw that away.
+        """
+        headers = {'Authorization': f'Bearer {config.stripe_api_key}'}
+        timeout = aiohttp.ClientTimeout(total=30)
+        async with aiohttp.ClientSession(timeout=timeout) as session:
+            async with session.request(method, f'{Stripe.API}{path}',
+                                       headers=headers, data=data) as response:
+                body = await response.text()
+                if response.status >= 400:
+                    raise RuntimeError(
+                        f'stripe {response.status} for {method} {path}: {body[:500]}')
+                return json.loads(body)
+
+    @staticmethod
+    async def create_order(user_id: str, reward_type: str, amount: float,
+                           currency: str = 'USD', language: str = 'EN') -> dict:
+        """Opens a checkout session and hands back its id and the page to send them to.
+
+        The price is built per session rather than pointing at a product created on
+        stripe's side: the buyer types how many hollars they want, so there is no fixed
+        price to point at. Lava solves the same problem with its "price on request" mode.
+
+        The discord id rides in client_reference_id, which is what a paid session is
+        matched back to an order by - the same job lava's clientUtm.utm_content does.
+        """
+        product_name = config.stripe_donate_options.get(reward_type, reward_type)
+        data = {
+            'mode': 'payment',
+            'client_reference_id': str(user_id),
+            'line_items[0][quantity]': 1,
+            'line_items[0][price_data][currency]': currency.lower(),
+            'line_items[0][price_data][unit_amount]': Stripe.to_minor_units(amount, currency),
+            'line_items[0][price_data][product_data][name]': product_name,
+            'locale': language.lower() if language.lower() in Stripe.LOCALES else 'auto',
+            'success_url': config.stripe_success_url,
+            'cancel_url': config.stripe_cancel_url,
+        }
+        session = await Stripe._request('POST', '/checkout/sessions', data=data)
+        return {'invoice_id': session['id'], 'url': session.get('url')}
+
+    @staticmethod
+    async def get_status(session_id: str) -> str:
+        """Where a checkout session got to, in the words the order loop already knows.
+
+        payment_status is the one that matters - a session can read 'complete' while the
+        money is still not taken. 'paid' is the only answer that means the money arrived.
+
+        A session stripe has expired is reported as failed so the order is cleared out
+        rather than polled for the two further days the order timeout allows.
+        """
+        session = await Stripe._request('GET', f'/checkout/sessions/{session_id}')
+        if str(session.get('payment_status', '')).lower() == 'paid':
+            return 'success'
+        if str(session.get('status', '')).lower() == 'expired':
+            return 'failed'
+        return 'in_process'
+
+
 class Func:
 
     @staticmethod

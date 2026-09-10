@@ -19,6 +19,16 @@ temp_folder_path = None
 
 lava_api_key = None
 lava_donate_options = dict()
+stripe_api_key = None
+# where stripe sends the browser afterwards. Neither page is how the bot finds out the
+# payment happened - the order loop asks stripe directly - so these only decide what the
+# buyer looks at once they are done, and a plain landing page is enough
+stripe_success_url = 'https://discord.com/'
+stripe_cancel_url = 'https://discord.com/'
+# {reward_type: product name shown on the checkout page}. Unlike lava's offers these are
+# not objects created on stripe's side - the price is built per session, because the
+# amount is whatever the buyer typed
+stripe_donate_options = dict()
 
 users_schema = 'users'
 promocodes_schema = 'promo_codes'
@@ -500,10 +510,14 @@ currency_symbols = {
     'UAH': '₴ (UAH)'
 }
 
+# Which methods each language is offered, in menu order. Stripe is on 'en' only for now:
+# it cannot charge russian-issued cards, and whether it can present RUB or UAH at all
+# depends on the country the stripe account itself is registered in. Add it to the other
+# two once that is confirmed, rather than offering a method that will decline at checkout.
 payment_methods_for_languages = {
-    'uk': ['donatello'],
-    'ru': ['donatello'],
-    'en': ['donatello']
+    'uk': ['donatello', 'lava.top', 'stripe'],
+    'ru': ['lava.top', 'donatello', 'stripe'],
+    'en': ['stripe', 'lava.top', 'donatello']
 }
 
 fight_gifs = ['https://thumbsnap.com/i/3A83K3Ub.gif', 'https://thumbsnap.com/i/bKNDTHvr.gif',
