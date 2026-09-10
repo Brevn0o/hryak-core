@@ -1,6 +1,7 @@
 import json, random
 
 from .connection import Connection
+from .logs import Logs
 from .schema import user_id_column
 from ..functions import Func, Lava, Stripe
 from hryak import config
@@ -26,7 +27,10 @@ class Order:
     async def get_user_orders(user_id):
         result = await Connection.make_request(
             f"SELECT orders FROM {config.users_schema} WHERE {user_id_column()} = %s",
-            params=(user_id,),
+            # as a string: discord_id is a varchar, and comparing it against an int makes
+            # mysql coerce both to double, which past 15 digits stops being exact - two
+            # accounts close together then read and write each other's orders
+            params=(str(user_id),),
             commit=False,
             fetch=True,
         )
@@ -40,7 +44,7 @@ class Order:
         new_orders = json.dumps(new_orders, ensure_ascii=False)
         await Connection.make_request(
             f"UPDATE {config.users_schema} SET orders = %s WHERE {user_id_column()} = %s",
-            params=(new_orders, user_id)
+            params=(new_orders, str(user_id))
         )
 
     @staticmethod
@@ -53,6 +57,31 @@ class Order:
                             'currency': currency,
                             'timestamp': Func.generate_current_timestamp()}
         await Order.set_new_orders(user_id, orders)
+        # the row in users.orders is working state and is deleted the moment the order
+        # settles, either way - so without a log line here a paid order leaves nothing
+        # behind but the items it granted, and there is no way to ask what was sold, for
+        # how much, or through which provider
+        await Logs.add('order_created', user_id=user_id, order_id=order_id,
+                       platform=platform, amount=amount, currency=currency, items=items)
+
+    @staticmethod
+    async def log_settled(order_id: str, outcome: str, status: str = None):
+        """Records how an order ended, just before it is deleted.
+
+        Read from the order rather than passed in, so the log cannot disagree with what
+        was actually sold. Called while the row still exists - after the delete there is
+        nothing left to read.
+        """
+        order = await Order.get_order(order_id)
+        if order is None:
+            return
+        await Logs.add(f'order_{outcome}', user_id=await Order.get_user(order_id),
+                       order_id=order_id, platform=order.get('platform'),
+                       amount=order.get('amount'), currency=order.get('currency'),
+                       items=order.get('items'), status=status or order.get('status'),
+                       # how long the buyer took, which is the number that says whether a
+                       # provider is worth keeping
+                       seconds=Func.generate_current_timestamp() - int(order.get('timestamp') or 0))
 
     @staticmethod
     async def exists_in_db(order_id: str):
